@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnrbo0ooc5sfe"]
+
+[ext_resource type="PackedScene" uid="uid://cfk7psqok1jb4" path="res://Scenes/piece.tscn" id="1_sxdn8"]
+[ext_resource type="Texture2D" uid="uid://cltwto8wq5l7y" path="res://assets/potatoTile.PNG" id="2_ax16c"]
+
+[node name="potato_tile" instance=ExtResource("1_sxdn8")]
+
+[node name="tileSprite" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_ax16c")

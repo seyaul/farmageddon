@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctt5foow286mn"]
+
+[ext_resource type="PackedScene" uid="uid://cfk7psqok1jb4" path="res://Scenes/piece.tscn" id="1_wr33r"]
+[ext_resource type="Texture2D" uid="uid://cvocq0wr2p1ft" path="res://assets/cornTile.PNG" id="2_32brg"]
+
+[node name="corn_tile" instance=ExtResource("1_wr33r")]
+script = null
+
+[node name="tileSprite" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_32brg")

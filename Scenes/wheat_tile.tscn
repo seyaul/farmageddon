@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmmv2svc5slx7"]
+
+[ext_resource type="PackedScene" uid="uid://cfk7psqok1jb4" path="res://Scenes/piece.tscn" id="1_ov74b"]
+[ext_resource type="Texture2D" uid="uid://cxa7vcnweu73i" path="res://assets/wheatTile.PNG" id="2_ahpsj"]
+
+[node name="wheat_tile" instance=ExtResource("1_ov74b")]
+
+[node name="tileSprite" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_ahpsj")

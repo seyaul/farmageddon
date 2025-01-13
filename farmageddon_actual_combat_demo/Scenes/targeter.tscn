@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvoquutrmwve6"]
-
-[ext_resource type="Script" path="res://Scripts/targeter.gd" id="1_rodes"]
-
-[node name="Targeter" type="Node" node_paths=PackedStringArray("target")]
-script = ExtResource("1_rodes")
-target = NodePath("")

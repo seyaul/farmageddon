@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b71f4hh45kre5"]
+
+[ext_resource type="PackedScene" uid="uid://cippcxni3bdp3" path="res://Scenes/piece.tscn" id="1_wr33r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uqnx1"]
+load_path = "res://.godot/imported/cornTile.PNG-c443cade9d5647b46e38102d90fb5c6a.ctex"
+
+[node name="corn_tile" instance=ExtResource("1_wr33r")]
+script = null
+
+[node name="tileSprite" parent="." index="0"]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_uqnx1")

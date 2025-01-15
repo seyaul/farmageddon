@@ -2,13 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD:tempTitle.png.import
-uid="uid://2r55y2jrc6np"
-path="res://.godot/imported/tempTitle.png-e78f584cce5e7ffc70f1342d3dc11899.ctex"
-=======
-uid="uid://g8lf6pj7cly0"
+uid="uid://bu7esj0skjjna"
 path="res://.godot/imported/tempTitle.png-86955137330d4036152d86947e8bd1c3.ctex"
->>>>>>> lp/combat-demo:Sprites/tempTitle.png.import
 metadata={
 "vram_texture": false
 }

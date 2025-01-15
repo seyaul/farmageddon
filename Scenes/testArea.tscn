@@ -1,14 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://bbwfua8ajq1si"]
+[gd_scene load_steps=28 format=3 uid="uid://7dnfj04exdpa"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
-[ext_resource type="PackedScene" uid="uid://bvecct0njjkho" path="res://Scenes/targeter.tscn" id="1_mswu8"]
+[ext_resource type="PackedScene" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
 [ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_n7ckx"]
 [ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_q2p2a"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_4u8b2"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="6_aj3ae"]
-[ext_resource type="PackedScene" uid="uid://dpumwoyh5opmc" path="res://Scenes/gun.tscn" id="7_hvohm"]
-[ext_resource type="PackedScene" uid="uid://lk06gmcr5wxq" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
+[ext_resource type="PackedScene" path="res://Scenes/gun.tscn" id="7_hvohm"]
+[ext_resource type="PackedScene" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="12_er0hs"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="PackedScene" uid="uid://dlbdbus762atq" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
+[ext_resource type="PackedScene" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
 radius = 9.0

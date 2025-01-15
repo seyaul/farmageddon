@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dee8ap1680qou"]
+[gd_scene load_steps=3 format=3 uid="uid://dpumwoyh5opmc"]
 
 [ext_resource type="Texture2D" uid="uid://crogcar6g7r2k" path="res://Sprites/pixilart-drawing (1).png" id="1_qt86r"]
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="2_au2o8"]

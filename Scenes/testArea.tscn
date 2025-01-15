@@ -1,14 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://cf7t1vyx2233g"]
+[gd_scene load_steps=28 format=3 uid="uid://bbwfua8ajq1si"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
-[ext_resource type="PackedScene" uid="uid://cvoquutrmwve6" path="res://Scenes/targeter.tscn" id="1_mswu8"]
+[ext_resource type="PackedScene" uid="uid://bvecct0njjkho" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
 [ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_n7ckx"]
 [ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_q2p2a"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_4u8b2"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="6_aj3ae"]
-[ext_resource type="PackedScene" uid="uid://dee8ap1680qou" path="res://Scenes/gun.tscn" id="7_hvohm"]
-[ext_resource type="PackedScene" uid="uid://cygchmn4mho5p" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
+[ext_resource type="PackedScene" uid="uid://dpumwoyh5opmc" path="res://Scenes/gun.tscn" id="7_hvohm"]
+[ext_resource type="PackedScene" uid="uid://lk06gmcr5wxq" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="12_er0hs"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="PackedScene" uid="uid://b0i45n7sq1675" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
+[ext_resource type="PackedScene" uid="uid://dlbdbus762atq" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
 radius = 9.0
@@ -277,8 +277,10 @@ texture = ExtResource("13_abdpc")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Follower"]
 navigation_layers = 5
 avoidance_enabled = true
-radius = 116.06
-neighbor_distance = 8580.8
+radius = 111.01
+neighbor_distance = 10601.0
+time_horizon_agents = 0.0
+max_speed = 23332.3
 avoidance_mask = 5
 debug_enabled = true
 debug_use_custom = true
@@ -311,4 +313,57 @@ damage = 5.0
 melee_duration = 1e+08
 
 [node name="Health" type="Node" parent="Follower"]
+script = ExtResource("10_m1hln")
+
+[node name="Follower2" type="CharacterBody2D" parent="."]
+position = Vector2(656, 391)
+collision_layer = 12
+collision_priority = 10.0
+motion_mode = 1
+
+[node name="Collider" type="CollisionShape2D" parent="Follower2"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_skhiw")
+
+[node name="EnemySprite" type="Sprite2D" parent="Follower2"]
+texture = ExtResource("13_abdpc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Follower2"]
+navigation_layers = 5
+avoidance_enabled = true
+radius = 138.1
+neighbor_distance = 8580.8
+time_horizon_agents = 0.0
+avoidance_mask = 5
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 5.0
+
+[node name="EMovementController" type="Node" parent="Follower2" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Follow")
+
+[node name="Follow" type="Node" parent="Follower2/EMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("14_23un6")
+follow_target = NodePath("../../../Player")
+distance_til_attack = 300.0
+num_attacks = 1
+attack_cooldown = 200
+
+[node name="Lunge" type="Node" parent="Follower2/EMovementController"]
+script = ExtResource("15_l723w")
+phase_on_lunge = true
+max_distance = 300.0
+lunge_speed = 600.0
+
+[node name="MeleeWeapon" parent="Follower2" instance=ExtResource("7_xw0bk")]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+damage = 5.0
+melee_duration = 1e+08
+
+[node name="Health" type="Node" parent="Follower2"]
 script = ExtResource("10_m1hln")

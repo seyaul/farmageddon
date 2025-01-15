@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlbdbus762atq"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_av1sk"]
+[ext_resource type="Script" path="res://Scripts/explosion.gd" id="3_luskx"]
+[ext_resource type="PackedScene" uid="uid://uyr7gosswtgp" path="res://Scenes/fragment.tscn" id="4_ah5kr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
+
+[node name="Bullet" type="AnimatableBody2D"]
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 4
+sync_to_physics = false
+script = ExtResource("1_av1sk")
+bounces_til_despawn = 2
+life_span = 200
+max_range = 500
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(0.205, 0.205)
+shape = SubResource("CircleShape2D_m6n65")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(3, 1)
+
+[node name="Explosion" type="Node" parent="."]
+script = ExtResource("3_luskx")
+fragment = ExtResource("4_ah5kr")
+projectile_speed = 1000.0
+fragment_pattern = "Even"
+spread = 360.0

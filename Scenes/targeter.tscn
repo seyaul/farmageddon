@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvecct0njjkho"]
+
+[ext_resource type="Script" path="res://Scripts/targeter.gd" id="1_rodes"]
+
+[node name="Targeter" type="Node"]
+script = ExtResource("1_rodes")

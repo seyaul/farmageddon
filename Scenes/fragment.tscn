@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://uyr7gosswtgp"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_pkm3w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xamum"]
+
+[node name="Fragment" type="AnimatableBody2D"]
+sync_to_physics = false
+script = ExtResource("1_pkm3w")
+bounces_til_despawn = 2
+life_span = 500
+max_range = 500
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xamum")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

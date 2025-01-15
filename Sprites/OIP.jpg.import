@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnox1iwttxqcm"
-path="res://.godot/imported/whiteBG.png-5bef19ec0ea1592d3acb9b1b8a16731e.ctex"
+uid="uid://bx5cvgrwgsodl"
+path="res://.godot/imported/OIP.jpg-71e00266c6b8bb519fbdaed832ae4ac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://whiteBG.png"
-dest_files=["res://.godot/imported/whiteBG.png-5bef19ec0ea1592d3acb9b1b8a16731e.ctex"]
+source_file="res://Sprites/OIP.jpg"
+dest_files=["res://.godot/imported/OIP.jpg-71e00266c6b8bb519fbdaed832ae4ac3.ctex"]
 
 [params]
 

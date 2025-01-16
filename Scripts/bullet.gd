@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 		
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
+		print("collided")
 		_handle_collisions(collision)
 	
 

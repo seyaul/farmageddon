@@ -24,9 +24,8 @@ func Update(delta: float):
 	enemy.velocity = dir * speed * delta
 	enemy.move_and_slide()
 	curr_distance += (enemy.global_position - initial_position).length()
-	print(curr_distance)
 	if curr_distance >= max_strafe_distance:
-		emit_signal("state_transition", self, "FollowPlayer")
+		emit_signal("state_transition", self, "Follow")
 	initial_position = enemy.global_position 
 	
 func Exit():

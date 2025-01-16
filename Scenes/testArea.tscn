@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://egp61i4qaoru"]
+[gd_scene load_steps=29 format=3 uid="uid://egp61i4qaoru"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
+[ext_resource type="Script" path="res://Scenes/strafe_state.gd" id="18_bttjw"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
@@ -259,6 +260,8 @@ aggro_distance = 300.0
 [node name="FollowPlayer" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("14_23un6")
 follow_target = NodePath("../../../../../Player")
+speed = 10000.0
+bias = 0.1
 distance_til_attack = 200.0
 num_attacks = 2
 attack_cooldown = 200
@@ -274,7 +277,11 @@ script = ExtResource("17_y4wtn")
 speed = 10000.0
 snap_distance = 2.0
 
-[node name="Node" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+[node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("18_bttjw")
+follow_target = NodePath("../../../../../Player")
+strafe_angle = 80.0
+max_strafe_distance = 150.0
 
 [node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_xw0bk")]
 collision_layer = 0

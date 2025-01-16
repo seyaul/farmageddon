@@ -261,6 +261,7 @@ script = ExtResource("14_23un6")
 follow_target = NodePath("../../../../../Player")
 distance_til_attack = 300.0
 num_attacks = 1
+attack_cooldown = 200
 
 [node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("15_l723w")

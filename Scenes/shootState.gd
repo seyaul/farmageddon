@@ -1,5 +1,6 @@
 extends State
 
+# TODO: Change so that the shooter is continually repositioning while shooting at the player instead of them being in separate states.
 @export var time_shooting: int
 var enemy: CharacterBody2D
 var time: int

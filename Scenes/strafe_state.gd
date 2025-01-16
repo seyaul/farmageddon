@@ -15,7 +15,7 @@ func Enter():
 	guide = enemy.get_parent()
 	left_or_right = -1 if randf() < bias else 1
 	initial_position = enemy.global_position
-
+# TODO: FIx strafe to move independent of enemy rotation.
 func Update(delta: float):
 	enemy.look_at(follow_target.global_position)
 

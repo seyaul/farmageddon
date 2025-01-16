@@ -266,7 +266,6 @@ bias = 0.1
 action1 = "Lunge"
 action2 = "Strafe"
 distance_til_attack = 200.0
-num_attacks = 2
 attack_cooldown = 200
 
 [node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
@@ -297,6 +296,10 @@ script = ExtResource("10_m1hln")
 
 [node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 position = Vector2(-150, 0)
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../../../Player")
+offset_rotation = 180.0
 
 [node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 position = Vector2(43.8487, 350.065)
@@ -332,6 +335,7 @@ target = NodePath("../../../../Player")
 offset_rotation = 180.0
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("7_hvohm")]
+visible = false
 rotation = -1.5708
 bullet = ExtResource("18_sjfa6")
 fire_rate = 50
@@ -352,10 +356,9 @@ aggro_distance = 300.0
 [node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("14_23un6")
 follow_target = NodePath("../../../SmartPather/Node2D")
-speed = 10000.0
+speed = 15000.0
 bias = 0.1
-action1 = "Shoot"
-action2 = "Shoot"
+look_at_player = true
 distance_til_attack = 100.0
 num_attacks = 2
 attack_cooldown = 200

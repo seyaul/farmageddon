@@ -295,6 +295,9 @@ melee_duration = 1e+08
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
 script = ExtResource("10_m1hln")
 
+[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+position = Vector2(-150, 0)
+
 [node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 position = Vector2(43.8487, 350.065)
 rotation = -0.720474
@@ -348,7 +351,7 @@ aggro_distance = 300.0
 
 [node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("14_23un6")
-follow_target = NodePath("../../../SmartPather")
+follow_target = NodePath("../../../SmartPather/Node2D")
 speed = 10000.0
 bias = 0.1
 action1 = "Shoot"
@@ -359,6 +362,7 @@ attack_cooldown = 200
 
 [node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController"]
 script = ExtResource("20_4fwto")
+time_shooting = 100
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(367, -344)

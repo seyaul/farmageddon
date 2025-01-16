@@ -11,11 +11,9 @@ func _physics_process(delta: float) -> void:
 		emit_signal("shoot", "hold")
 	elif Input.is_action_just_released("shoot"):
 		emit_signal("shoot", "end")
-		
+
 	if Input.is_action_just_pressed("melee"):
 		emit_signal("melee")
 	
 	if Input.is_action_just_pressed("shockwave"):
 		emit_signal("shockwave")
-		
-	

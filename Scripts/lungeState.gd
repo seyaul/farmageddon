@@ -28,7 +28,7 @@ func Update(_delta: float):
 		# Use move_and_slide to move and detect collisions
 		enemy.move_and_slide()
 	else:
-		emit_signal("state_transition", self, "Follow")
+		emit_signal("state_transition", self, "FollowPlayer")
 
 func Exit():
 	phase(false)

@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://bejoofoxcivb7"
-=======
-uid="uid://f16edp8i3sig"
->>>>>>> main
-path="res://.godot/imported/tempTitle.png-86955137330d4036152d86947e8bd1c3.ctex"
+uid="uid://p8oe434ivbh6"
+path="res://.godot/imported/Screenshot 2025-01-11 at 10.23.31 PM.png-ba968714b6d4527ee3fa132fc2cd9392.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/tempTitle.png"
-dest_files=["res://.godot/imported/tempTitle.png-86955137330d4036152d86947e8bd1c3.ctex"]
+source_file="res://Sprites/Screenshot 2025-01-11 at 10.23.31 PM.png"
+dest_files=["res://.godot/imported/Screenshot 2025-01-11 at 10.23.31 PM.png-ba968714b6d4527ee3fa132fc2cd9392.ctex"]
 
 [params]
 

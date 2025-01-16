@@ -28,7 +28,8 @@ func Update(_delta: float):
 	var dir = Vector2(cos(enemy.global_rotation), sin(enemy.global_rotation)).normalized()
 	enemy.velocity = dir * speed
 	enemy.move_and_slide()
-	if enemy.position.distance_to(navigation.target_position) <= distance_til_attack and attacks > 0:
+	print(enemy.global_position.distance_to(navigation.target_position) <= distance_til_attack, attacks > 0)
+	if enemy.global_position.distance_to(navigation.target_position) <= distance_til_attack and attacks > 0:
 		emit_signal("state_transition", self, "Lunge")
 		attacks -= 1
 	

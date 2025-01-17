@@ -89,7 +89,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-56.7218, 98.6667, 56.7
 [node name="TestLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_bd7i7")]
-scale = Vector2(3.44077, 4.27317)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
@@ -114,7 +113,6 @@ position = Vector2(157.5, 55.5)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(3.44077, 4.27317)
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true

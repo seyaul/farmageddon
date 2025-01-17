@@ -6,6 +6,7 @@ func _ready() -> void:
 	$"../../../Player/Health".damage_taken.connect(handleSignal)
 	$"../../../Player/Health".healed.connect(handleSignal)
 	setHealthBar()
+	print(self.position)
 	
 func _process(delta: float) -> void:
 	pass

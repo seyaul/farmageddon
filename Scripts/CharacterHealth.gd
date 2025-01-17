@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount
+	emit_signal("damage_taken")
 	if current_health <= 0:
 		current_health = 0
 		die()
@@ -26,7 +27,7 @@ func take_damage(amount: float) -> void:
 
 func heal(amount: float) -> void:
 	current_health += amount
-	healed.emit()
+	emit_signal("healed")
 	if current_health > max_health:
 		current_health = max_health
 	print(character.name, " health:", current_health)

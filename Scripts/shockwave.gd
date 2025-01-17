@@ -30,7 +30,8 @@ func _physics_process(delta: float) -> void:
 		
 	time += 1
 	if time % shockwave_cooldown == 0 && shockwaves < max_shockwaves:
-		shockwaves += 1
+		# For testing purposes
+		shockwaves += 100
 	
 
 func create_shockwave() -> void:

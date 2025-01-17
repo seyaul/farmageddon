@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://7dnfj04exdpa"]
+[gd_scene load_steps=39 format=3 uid="uid://7dnfj04exdpa"]
 
+[ext_resource type="Script" path="res://Scenes/TestArea.cs" id="1_535xc"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
@@ -24,6 +25,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 [ext_resource type="Texture2D" uid="uid://b5fky8agaaejs" path="res://Sprites/static chicken.png" id="20_73ne1"]
 [ext_resource type="Texture2D" uid="uid://k863047ndtu6" path="res://Solaria Demo Tiles.png" id="20_y0q8v"]
+[ext_resource type="Script" path="res://Scenes/TempEnemyCounter.cs" id="26_hncjg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
 radius = 9.0
@@ -484,10 +486,13 @@ texture = ExtResource("20_y0q8v")
 [sub_resource type="TileSet" id="TileSet_jfies"]
 sources/0 = SubResource("TileSetAtlasSource_mdcoh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4iv7"]
+size = Vector2(2160, 1008)
+
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_535xc")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-z_index = 1
 collision_mask = 4
 collision_priority = 10.0
 motion_mode = 1
@@ -594,6 +599,7 @@ rotation = 0.720474
 
 [node name="Pather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 collision_layer = 12
+collision_mask = 3
 motion_mode = 1
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Pather"]
@@ -619,6 +625,7 @@ snap_distance = 2.0
 
 [node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 collision_layer = 12
+collision_mask = 3
 collision_priority = 10.0
 motion_mode = 1
 
@@ -683,6 +690,7 @@ script = ExtResource("10_m1hln")
 
 [node name="Shooter" type="CharacterBody2D" parent="."]
 collision_layer = 12
+collision_mask = 3
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("14_105eu")
@@ -736,19 +744,34 @@ layer_0/tile_data = PackedInt32Array(-262153, 720896, 13, -196617, 720896, 13, -
 
 [node name="Node2D" type="Node2D" parent="TileMap"]
 
-[node name="WorldCanvas" type="CanvasLayer" parent="."]
+[node name="UserInterfaceCanvas" type="CanvasLayer" parent="."]
 
-[node name="PlayerUI" type="Control" parent="WorldCanvas"]
+[node name="PlayerUI" type="Control" parent="UserInterfaceCanvas"]
+visibility_layer = 2
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthBarTest" type="ProgressBar" parent="WorldCanvas/PlayerUI"]
-offset_left = -472.0
-offset_top = -256.0
-offset_right = -296.0
-offset_bottom = -229.0
+[node name="HealthBarTest" type="ProgressBar" parent="UserInterfaceCanvas/PlayerUI"]
+z_index = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.87451, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.886275, 0, 0, 1)
 step = 1.0
-show_percentage = false
 script = ExtResource("13_jlygg")
+
+[node name="tempEnemyCounter" type="Area2D" parent="."]
+visible = false
+collision_layer = 3
+script = ExtResource("26_hncjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tempEnemyCounter"]
+shape = SubResource("RectangleShape2D_c4iv7")
+
+[connection signal="area_entered" from="tempEnemyCounter" to="tempEnemyCounter" method="_on_area_entered"]
+[connection signal="area_exited" from="tempEnemyCounter" to="tempEnemyCounter" method="_on_area_exited"]

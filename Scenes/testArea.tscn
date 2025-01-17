@@ -142,8 +142,9 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Gun" parent="Player" instance=ExtResource("7_hvohm")]
 bullet = ExtResource("18_sjfa6")
+projectile_speed = 30000.0
+automatic = false
 spread = 30.0
-bullets_per_fire = 3
 
 [node name="Melee" type="Node2D" parent="Player"]
 script = ExtResource("6_aj3ae")
@@ -338,7 +339,7 @@ offset_rotation = 180.0
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("7_hvohm")]
 rotation = -1.5708
 bullet = ExtResource("18_sjfa6")
-projectile_speed = 100000.0
+projectile_speed = 30000.0
 fire_rate = 50
 
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]

@@ -10,10 +10,10 @@ func Enter():
 	
 func Update(delta: float):
 	time += 1
-	enemy.emit_signal("shoot", "hold", delta)
-	enemy.emit_signal("shoot", "tap", delta)
-	if time >= time_shooting:
-		emit_signal("state_transition", self, "Neutral")
+	#enemy.emit_signal("shoot", "hold", delta)
+	#enemy.emit_signal("shoot", "tap", delta)
+	#if time >= time_shooting:
+	#	emit_signal("state_transition", self, "Neutral")
 
 func Exit():
 	time = 0

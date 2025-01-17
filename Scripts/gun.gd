@@ -16,7 +16,9 @@ var counting: bool = false
 var beam: Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_parent().shoot.connect(handle_signal)
+	var charbod = get_parent_characterbody2d()
+	charbod.shoot.connect(handle_signal)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
@@ -54,3 +56,11 @@ func fire() -> void:
 			add_child(beam)
 		else:
 			beam.apply_damage()
+
+func get_parent_characterbody2d() -> CharacterBody2D:
+	var current = get_parent()
+	while current:
+		if current is CharacterBody2D:
+			return current
+		current = current.get_parent()
+	return null

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1nyoq7yp78x8"
-path="res://.godot/imported/tempTitle.png-86955137330d4036152d86947e8bd1c3.ctex"
+uid="uid://b5fky8agaaejs"
+path="res://.godot/imported/static chicken.png-3a0e428a587629185c3265cdb0e73ca8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/tempTitle.png"
-dest_files=["res://.godot/imported/tempTitle.png-86955137330d4036152d86947e8bd1c3.ctex"]
+source_file="res://Sprites/static chicken.png"
+dest_files=["res://.godot/imported/static chicken.png-3a0e428a587629185c3265cdb0e73ca8.ctex"]
 
 [params]
 

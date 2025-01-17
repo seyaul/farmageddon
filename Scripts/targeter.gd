@@ -10,5 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	aimer.look_at(target.global_position)
-	aimer.rotation_degrees += offset_rotation
+	if target:
+		aimer.look_at(target.global_position)
+		aimer.rotation_degrees += offset_rotation
+	else:
+		push_error("no target set variable for targeter node")

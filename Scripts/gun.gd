@@ -1,5 +1,6 @@
 extends Sprite2D
 
+#NOTE: Interesting concept, really slow projectiles act as a trail of bullets left behind.
 # TODO: Refactor to determine bullet type dynamically.
 @export_enum("Discrete", "Continuous")
 var fire_type: String = "Discrete"
@@ -19,24 +20,24 @@ func _ready() -> void:
 	get_parent().shoot.connect(handle_signal)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if counting:
 		time += 1
 	
-func handle_signal(action: String) -> void:
+func handle_signal(action: String, delta) -> void:
 	if not automatic && action == "tap":
-		fire()
+		fire(delta)
 	elif automatic && action == "hold": 
 		counting = true
 		if time % fire_rate == 0 and is_instance_valid(bullet):
-			fire()
+			fire(delta)
 	elif automatic && action == "end":
 		if is_instance_valid(beam):
 			beam.queue_free()
 		counting = false
 		time = 0
 
-func fire() -> void:
+func fire(delta: float) -> void:
 	if fire_type == "Discrete":
 		for i in range(bullets_per_fire):
 			var projectile: AnimatableBody2D = bullet.instantiate()
@@ -44,7 +45,7 @@ func fire() -> void:
 			# TODO:Refactor this
 			projectile.rotation_degrees = (global_rotation_degrees - 90) + randf_range(-1 * spread, spread) 
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
-			projectile.constant_linear_velocity = direction * projectile_speed
+			projectile.constant_linear_velocity = direction * projectile_speed * delta
 			get_tree().current_scene.add_child(projectile)
 	elif fire_type == "Continuous":
 		if not is_instance_valid(beam):

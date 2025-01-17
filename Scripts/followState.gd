@@ -4,6 +4,7 @@ extends State
 @export var speed: float = 100
 @export var bias: float = 0.5
 @export var look_at_player: bool
+@export var max_deviation_distance: float
 # TODO: Refactor this
 @export var action1: String
 @export var action2: String
@@ -27,24 +28,26 @@ func Enter():
 	targeter = enemy.get_node("Targeter")
 	if targeter && not look_at_player:
 		targeter.disabled = true
-	
+
+# TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):
 	makepath()
-	
-	# NOTE: Manually telling where the parent to look at. Might be subject to change in the future.
 	if not look_at_player:
 		enemy.look_at(navigation.get_next_path_position())
+		
 	var dir = (navigation.get_next_path_position() - enemy.global_position).normalized()
-	enemy.velocity = dir * speed * delta
+	var distance_to_target = enemy.global_position.distance_to(navigation.target_position)
+	
+	if distance_to_target >= max_deviation_distance:
+		enemy.velocity = dir * speed * delta
+		
 	enemy.move_and_slide()
-	if enemy.global_position.distance_to(navigation.target_position) <= distance_til_attack and attacks > 0:
+	if distance_to_target <= distance_til_attack and attacks > 0:
 		if randf() < bias:
 			emit_signal("state_transition", self, action1)
 		else:
 			emit_signal("state_transition", self, action2)
 		attacks -= 1
-	enemy.emit_signal("shoot", "hold")
-	enemy.emit_signal("shoot", "tap")
 func makepath() -> void:
 	navigation.target_position = follow_target.global_position
 

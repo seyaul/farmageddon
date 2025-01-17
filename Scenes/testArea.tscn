@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://egp61i4qaoru"]
+[gd_scene load_steps=31 format=3 uid="uid://egp61i4qaoru"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://Scenes/strafe_state.gd" id="18_bttjw"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 [ext_resource type="Script" path="res://Scenes/shootState.gd" id="20_4fwto"]
+[ext_resource type="Script" path="res://Scenes/neutralState.gd" id="20_nwi2s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
 radius = 9.0
@@ -335,9 +336,9 @@ target = NodePath("../../../../Player")
 offset_rotation = 180.0
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("7_hvohm")]
-visible = false
 rotation = -1.5708
 bullet = ExtResource("18_sjfa6")
+projectile_speed = 100000.0
 fire_rate = 50
 
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]
@@ -354,16 +355,26 @@ can_aggro = true
 aggro_distance = 300.0
 
 [node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
+physics_interpolation_mode = 2
 script = ExtResource("14_23un6")
 follow_target = NodePath("../../../SmartPather/Node2D")
 speed = 15000.0
 bias = 0.1
 look_at_player = true
+max_deviation_distance = 75.0
 distance_til_attack = 100.0
-num_attacks = 2
 attack_cooldown = 200
 
-[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController"]
+[node name="EAttackController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Neutral")
+
+[node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("20_nwi2s")
+neutral_until_condition = true
+distance_til_attack = 200.0
+
+[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
 script = ExtResource("20_4fwto")
 time_shooting = 100
 

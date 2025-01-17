@@ -48,6 +48,3 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 			bounces_til_despawn -= 1
 		else:
 			queue_free()
-			
-			
-			

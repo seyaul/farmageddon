@@ -6,29 +6,26 @@ extends State
 @export var lunge_speed: float = 5 
 # TODO: Replace with timer.
 var enemy: CharacterBody2D
-var collider: CollisionShape2D
 var initial_position: Vector2
 var target_position: Vector2
  
 	
 func Enter():
 	enemy = get_parent().get_parent()
-	collider = enemy.get_node("Collider")
-	initial_position = enemy.position
-	target_position = enemy.position + enemy.velocity.normalized() * max_distance
+	initial_position = enemy.global_position
+	target_position = enemy.global_position + enemy.velocity.normalized() * max_distance
 	
 func Update(_delta: float):
-	if round(enemy.position) != round(target_position) and \
-		enemy.position.distance_to(initial_position) < max_distance:
+	if round(enemy.global_position) != round(target_position) and \
+		enemy.global_position.distance_to(initial_position) < max_distance:
 		if phase_on_lunge:
-			#collider.disabled = true
 			phase(true)
-		var direction = (target_position - enemy.position).normalized()
+		var direction = (target_position - enemy.global_position).normalized()
 		enemy.velocity = direction * lunge_speed
 		# Use move_and_slide to move and detect collisions
 		enemy.move_and_slide()
 	else:
-		emit_signal("state_transition", self, "FollowPlayer")
+		emit_signal("state_transition", self, "Follow")
 
 func Exit():
 	phase(false)

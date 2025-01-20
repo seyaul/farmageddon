@@ -27,6 +27,6 @@ func Update(delta: float):
 	if curr_distance >= max_strafe_distance:
 		emit_signal("state_transition", self, "Follow")
 	initial_position = enemy.global_position 
-	
+
 func Exit():
 	curr_distance = 0

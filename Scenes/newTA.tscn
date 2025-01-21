@@ -1,0 +1,799 @@
+[gd_scene load_steps=35 format=4 uid="uid://egp61i4qaoru"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
+[ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
+[ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_n7ckx"]
+[ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_q2p2a"]
+[ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_4u8b2"]
+[ext_resource type="Script" path="res://Scripts/melee.gd" id="6_aj3ae"]
+[ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
+[ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
+[ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
+[ext_resource type="Script" path="res://Scripts/shockwave.gd" id="12_er0hs"]
+[ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
+[ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
+[ext_resource type="Script" path="res://Scripts/followState.gd" id="14_23un6"]
+[ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
+[ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
+[ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
+[ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="18_bttjw"]
+[ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
+[ext_resource type="Script" path="res://Scripts/shootState.gd" id="20_4fwto"]
+[ext_resource type="Script" path="res://Scripts/neutralState.gd" id="20_nwi2s"]
+[ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
+[ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgkfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
+size = Vector2(101, 53)
+
+[sub_resource type="Curve2D" id="Curve2D_nhari"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 113, -257, 0, 0, 0, 0, 285, -106, 0, 0, 0, 0, 306, -249, 0, 0, 0, 0, 113, -257)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7bpo"]
+
+[sub_resource type="GDScript" id="GDScript_gn3mj"]
+script/source = "extends State
+
+@export var aggro_target: CharacterBody2D
+@export var speed: float = 0.1
+@export var should_reverse: bool = false
+@export var pause_time: float = 0
+@export var can_aggro: bool = false
+@export var aggro_distance: float = 600
+# Called when the node enters the scene tree for the first time.
+var enemy: CharacterBody2D
+var guide: PathFollow2D
+var backwards: bool = false
+var paused: bool = false
+var paused_for: float = 0
+
+func Enter():
+	enemy = get_parent().get_parent()
+	guide = enemy.get_parent()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func Update(delta: float) -> void:
+	if can_aggro and  enemy.global_position.distance_to(aggro_target.global_position) <= aggro_distance:
+		emit_signal(\"state_transition\", self, \"Follow\")
+	if guide.global_position - enemy.global_position != Vector2.ZERO:
+		emit_signal(\"state_transition\", self, \"Return\")
+		
+	if paused:
+		_pause_enemy()
+		return
+	_move_enemy(delta)
+	
+	
+
+func Exit() -> void:
+	pass
+
+func _move_enemy(delta: float) -> void:
+	if backwards:
+		guide.progress_ratio -= delta * speed
+		enemy.rotation_degrees += 180
+		if should_reverse and guide.progress_ratio <= .05:
+			backwards = not backwards
+			paused = pause_time > 0
+	else:
+		guide.progress_ratio += delta * speed
+		if should_reverse and guide.progress_ratio >= .95:
+			backwards = not backwards
+			paused = pause_time > 0
+
+func _pause_enemy() -> void:
+	paused_for += 1
+	if paused_for >= pause_time:
+		paused = false
+		paused_for = 0
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skhiw"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
+vertices = PackedVector2Array(46.8203, -89.8906, 46.7188, 88.9609, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 7.47656, -41.3594, -46.9219, -92.0938, 3.92188, -44.3516, -46.7266, 88.6797, 3.92188, 0.351563, 0.367188, -41.3594, -2.23438, -33.1797, -3.1875, -22, -2.23438, -10.8203, 0.367188, -2.64063)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6, 8), PackedInt32Array(5, 1, 9, 10), PackedInt32Array(7, 8, 11), PackedInt32Array(9, 7, 11, 12), PackedInt32Array(9, 12, 13), PackedInt32Array(9, 13, 14), PackedInt32Array(9, 14, 15), PackedInt32Array(9, 15, 10)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-56.7218, 98.6667, 56.7218, 99, 56.8278, -99.6667, -56.9338, -102.333)])
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n00rv"]
+texture = ExtResource("23_llv11")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+22:0/0 = 0
+23:0/0 = 0
+24:0/0 = 0
+25:0/0 = 0
+26:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+21:1/0 = 0
+22:1/0 = 0
+23:1/0 = 0
+24:1/0 = 0
+25:1/0 = 0
+26:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+21:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+24:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+20:3/0 = 0
+21:3/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+24:3/0 = 0
+25:3/0 = 0
+27:3/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+22:4/0 = 0
+23:4/0 = 0
+24:4/0 = 0
+27:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+20:5/0 = 0
+21:5/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:5/0 = 0
+25:5/0 = 0
+26:5/0 = 0
+27:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+25:6/0 = 0
+26:6/0 = 0
+27:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+24:7/0 = 0
+25:7/0 = 0
+26:7/0 = 0
+27:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+23:8/0 = 0
+24:8/0 = 0
+25:8/0 = 0
+26:8/0 = 0
+27:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+21:9/0 = 0
+23:9/0 = 0
+24:9/0 = 0
+25:9/0 = 0
+26:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+21:10/0 = 0
+22:10/0 = 0
+23:10/0 = 0
+24:10/0 = 0
+25:10/0 = 0
+26:10/0 = 0
+27:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+20:11/0 = 0
+22:11/0 = 0
+23:11/0 = 0
+24:11/0 = 0
+25:11/0 = 0
+26:11/0 = 0
+27:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+22:12/0 = 0
+23:12/0 = 0
+24:12/0 = 0
+25:12/0 = 0
+27:12/0 = 0
+0:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+0:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_78xdq"]
+sources/0 = SubResource("TileSetAtlasSource_n00rv")
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+z_index = 1
+collision_mask = 4
+collision_priority = 10.0
+motion_mode = 1
+script = ExtResource("1_m4e61")
+
+[node name="Collider" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_owlbq")
+debug_color = Color(1.2514e-06, 0.646022, 0.246912, 0.42)
+
+[node name="Targeter" parent="Player" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../Crosshairs")
+
+[node name="MoveController" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Player/MoveController"]
+script = ExtResource("3_n7ckx")
+
+[node name="Walk" type="Node" parent="Player/MoveController"]
+script = ExtResource("4_q2p2a")
+
+[node name="Dash" type="Node" parent="Player/MoveController"]
+script = ExtResource("5_4u8b2")
+phase_on_dash = true
+max_distance = 200.0
+dash_speed = 75000.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Gun" parent="Player" instance=ExtResource("7_hvohm")]
+bullet = ExtResource("18_sjfa6")
+projectile_speed = 30000.0
+automatic = false
+spread = 30.0
+
+[node name="Melee" type="Node2D" parent="Player"]
+script = ExtResource("6_aj3ae")
+melee_weapon = ExtResource("7_xw0bk")
+
+[node name="Health" type="Node" parent="Player"]
+script = ExtResource("10_m1hln")
+
+[node name="Shockwave" type="Area2D" parent="Player"]
+collision_mask = 12
+script = ExtResource("12_er0hs")
+damage = 20.0
+shockwave_duration = 0.1
+shockwave_radius = 20.0
+shockwave_strength = 10000.0
+max_shockwaves = 2
+shockwave_cooldown = 100
+
+[node name="Collider" type="CollisionShape2D" parent="Player/Shockwave"]
+shape = SubResource("CircleShape2D_kgkfl")
+
+[node name="Crosshairs" type="Node2D" parent="."]
+script = ExtResource("12_g3doo")
+
+[node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("13_abdpc")
+
+[node name="TestWall" type="StaticBody2D" parent="."]
+position = Vector2(1193, -418)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Collider" type="CollisionShape2D" parent="TestWall"]
+shape = SubResource("RectangleShape2D_4akdh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="EnemyPath" type="Path2D" parent="."]
+position = Vector2(85, -35)
+curve = SubResource("Curve2D_nhari")
+
+[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(113, -257)
+rotation = 0.720474
+
+[node name="Pather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+visible = false
+collision_layer = 12
+motion_mode = 1
+
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Pather"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_t7bpo")
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/Pather"]
+texture = ExtResource("13_abdpc")
+
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
+script = ExtResource("10_m1hln")
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
+script = ExtResource("2_t0tql")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
+script = SubResource("GDScript_gn3mj")
+
+[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
+script = ExtResource("17_y4wtn")
+speed = 10000.0
+snap_distance = 2.0
+
+[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+collision_layer = 12
+collision_priority = 10.0
+motion_mode = 1
+
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_skhiw")
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+texture = ExtResource("13_abdpc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+navigation_layers = 5
+avoidance_enabled = true
+radius = 111.01
+neighbor_distance = 10601.0
+time_horizon_agents = 0.0
+max_speed = 23332.3
+avoidance_mask = 5
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 5.0
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("FollowPath")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("aggro_target")]
+script = SubResource("GDScript_gn3mj")
+aggro_target = NodePath("../../../../../Player")
+can_aggro = true
+aggro_distance = 300.0
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("14_23un6")
+follow_target = NodePath("../../../../../Player")
+speed = 10000.0
+action1 = "Lunge"
+action2 = "Strafe"
+distance_til_attack = 200.0
+num_attacks = 1
+attack_cooldown = 200
+
+[node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("15_l723w")
+phase_on_lunge = true
+max_distance = 300.0
+lunge_speed = 600.0
+
+[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("17_y4wtn")
+speed = 10000.0
+snap_distance = 2.0
+
+[node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("18_bttjw")
+follow_target = NodePath("../../../../../Player")
+
+[node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_xw0bk")]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+damage = 5.0
+melee_duration = 1e+08
+
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
+script = ExtResource("10_m1hln")
+
+[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+position = Vector2(-150, 0)
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../../../Player")
+offset_rotation = 180.0
+
+[node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+position = Vector2(43.8487, 350.065)
+rotation = -0.720474
+collision_layer = 12
+collision_priority = 10.0
+motion_mode = 1
+script = ExtResource("14_105eu")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/Shooter"]
+navigation_layers = 5
+avoidance_enabled = true
+radius = 111.01
+neighbor_distance = 10601.0
+time_horizon_agents = 0.0
+max_speed = 23332.3
+avoidance_mask = 5
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 5.0
+
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Shooter"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_skhiw")
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+texture = ExtResource("13_abdpc")
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../../../Player")
+offset_rotation = 180.0
+
+[node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("7_hvohm")]
+rotation = -1.5708
+bullet = ExtResource("18_sjfa6")
+projectile_speed = 30000.0
+fire_rate = 50
+
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]
+script = ExtResource("10_m1hln")
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("FollowPath")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("aggro_target")]
+script = SubResource("GDScript_gn3mj")
+aggro_target = NodePath("../../../../../Player")
+can_aggro = true
+aggro_distance = 300.0
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
+physics_interpolation_mode = 2
+script = ExtResource("14_23un6")
+follow_target = NodePath("../../../SmartPather/Node2D")
+speed = 15000.0
+bias = 0.1
+look_at_player = true
+max_deviation_distance = 75.0
+distance_til_attack = 0.0
+
+[node name="EAttackController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Neutral")
+
+[node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("20_nwi2s")
+neutral_until_condition = true
+distance_til_attack = 200.0
+
+[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("20_4fwto")
+time_shooting = 100
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(367, -344)
+scale = Vector2(9.432, 3)
+navigation_polygon = SubResource("NavigationPolygon_hiv8k")
+navigation_layers = 5
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+position = Vector2(3.92281, -22)
+scale = Vector2(0.106022, 0.333333)
+radius = 67.06
+vertices = PackedVector2Array(-39, -41, 49, -36, 17, 51)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 5
+
+[node name="Background" type="Sprite2D" parent="NavigationRegion2D"]
+visible = false
+z_index = -1
+scale = Vector2(0.330365, 1)
+texture = ExtResource("11_k0a88")
+
+[node name="tempbgtiles" type="TileMapLayer" parent="."]
+show_behind_parent = true
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAAAP//AAALAA0AAAABAP//AAALAA0AAAACAP//AAALAA0AAAADAP//AAALAA0AAAADAP7/AAALAA0AAAAEAP7/AAALAA0AAAAFAP7/AAALAA0AAAAGAP7/AAALAA0AAAAHAP7/AAALAA0AAAAHAP//AAALAA0AAAAGAP//AAALAA0AAAAFAP//AAALAA0AAAAEAP//AAALAA0AAAAIAP//AAALAA0AAAAJAP//AAALAA0AAAAKAP//AAALAA0AAAALAP//AAALAA0AAAAMAP//AAALAA0AAAANAP//AAALAA0AAAAOAP//AAALAA0AAAAPAP//AAALAA0AAAAQAP//AAALAA0AAAARAP//AAALAA0AAAAAAAAAAAALAA0AAAAAAAEAAAALAA0AAAAAAAIAAAALAA0AAAAAAAMAAAALAA0AAAAAAAQAAAALAA0AAAAAAP7/AAALAA0AAAAAAP3/AAALAA0AAAAAAPz/AAALAA0AAAAAAPv/AAALAA0AAAAAAAUAAAALAA0AAAAAAAYAAAALAA0AAAAAAAcAAAALAA0AAAAAAAgAAAALAA0AAAAAAAkAAAALAA0AAAAAAPr/AAALAA0AAAAAAPn/AAALAA0AAAAAAPj/AAALAA0AAAAAAPf/AAALAA0AAAAAAPb/AAALAA0AAAD+////AAALAA0AAAD/////AAALAA0AAAD9////AAALAA0AAAD8////AAALAA0AAAD7////AAALAA0AAAD6////AAALAA0AAAD5////AAALAA0AAAD4////AAALAA0AAAD3////AAALAA0AAAD2////AAALAA0AAAD1////AAALAA0AAAD0////AAALAA0AAADz////AAALAA0AAADy////AAALAA0AAADx////AAALAA0AAADw////AAALAA0AAADv////AAALAA0AAADu////AAALAA0AAAD//wkAAAALAA0AAAD//wgAAAALAA0AAAD//wcAAAALAA0AAAD//wYAAAALAA0AAAD//wUAAAALAA0AAAD//wQAAAALAA0AAAD//wMAAAALAA0AAAD//wIAAAALAA0AAAD//wEAAAALAA0AAAD//wAAAAALAA0AAAD///7/AAALAA0AAAD///3/AAALAA0AAAD///z/AAALAA0AAAD///v/AAALAA0AAAD///r/AAALAA0AAAD///n/AAALAA0AAAD///j/AAALAA0AAAD///f/AAALAA0AAAD///b/AAALAA0AAADu/wAAAAALAA0AAADu/wEAAAALAA0AAADu/wIAAAALAA0AAADu/wMAAAALAA0AAADu/wQAAAALAA0AAADu/wUAAAALAA0AAADu/wYAAAALAA0AAADu/wcAAAALAA0AAADu/wgAAAALAA0AAADu/wkAAAALAA0AAADv/wkAAAALAA0AAADw/wkAAAALAA0AAADx/wkAAAALAA0AAADy/wkAAAALAA0AAADz/wkAAAALAA0AAAD0/wkAAAALAA0AAAD1/wkAAAALAA0AAAD2/wkAAAALAA0AAAD3/wkAAAALAA0AAAD4/wkAAAALAA0AAAD5/wkAAAALAA0AAAD6/wkAAAALAA0AAAD7/wkAAAALAA0AAAD8/wkAAAALAA0AAAD9/wkAAAALAA0AAAD+/wkAAAALAA0AAAABAAkAAAALAA0AAAACAAkAAAALAA0AAAADAAkAAAALAA0AAAAEAAkAAAALAA0AAAAFAAkAAAALAA0AAAAGAAkAAAALAA0AAAAHAAkAAAALAA0AAAAIAAkAAAALAA0AAAAJAAkAAAALAA0AAAAKAAkAAAALAA0AAAALAAkAAAALAA0AAAAMAAkAAAALAA0AAAANAAkAAAALAA0AAAAOAAkAAAALAA0AAAAPAAkAAAALAA0AAAAQAAkAAAALAA0AAAARAAkAAAALAA0AAAARAAgAAAALAA0AAAARAAcAAAALAA0AAAARAAYAAAALAA0AAAARAAUAAAALAA0AAAARAAQAAAALAA0AAAARAAMAAAALAA0AAAARAAIAAAALAA0AAAARAAEAAAALAA0AAAARAAAAAAALAA0AAAARAP7/AAALAA0AAAARAP3/AAALAA0AAAARAPz/AAALAA0AAAARAPv/AAALAA0AAAARAPr/AAALAA0AAAARAPn/AAALAA0AAAARAPj/AAALAA0AAAARAPf/AAALAA0AAAARAPb/AAALAA0AAAD9//b/AAALAA0AAAD+//b/AAALAA0AAAABAPb/AAALAA0AAAACAPb/AAALAA0AAAADAPb/AAALAA0AAAAEAPb/AAALAA0AAAAFAPb/AAALAA0AAAAGAPb/AAALAA0AAAAHAPb/AAALAA0AAAAIAPb/AAALAA0AAAAJAPb/AAALAA0AAAAKAPb/AAALAA0AAAALAPb/AAALAA0AAAAMAPb/AAALAA0AAAANAPb/AAALAA0AAAAOAPb/AAALAA0AAAAPAPb/AAALAA0AAAAQAPb/AAALAA0AAAD8//b/AAALAA0AAAD7//b/AAALAA0AAAD6//b/AAALAA0AAAD5//b/AAALAA0AAAD4//b/AAALAA0AAAD3//b/AAALAA0AAAD2//b/AAALAA0AAAD1//b/AAALAA0AAAD0//b/AAALAA0AAADz//b/AAALAA0AAADy//b/AAALAA0AAADx//b/AAALAA0AAADw//b/AAALAA0AAADv//b/AAALAA0AAADu//b/AAALAA0AAADu//7/AAALAA0AAADu//3/AAALAA0AAADu//z/AAALAA0AAADu//v/AAALAA0AAADu//r/AAALAA0AAADu//n/AAALAA0AAADu//j/AAALAA0AAADu//f/AAALAA0AAADv//f/AAALAA0AAADv//j/AAALAA0AAADv//n/AAALAA0AAADv//r/AAALAA0AAADv//v/AAALAA0AAADv//z/AAALAA0AAADv//3/AAALAA0AAADv//7/AAALAA0AAADv/wAAAAALAA0AAADv/wEAAAALAA0AAADv/wIAAAALAA0AAADv/wMAAAALAA0AAADv/wQAAAALAA0AAADv/wUAAAALAA0AAADv/wYAAAALAA0AAADv/wcAAAALAA0AAADv/wgAAAALAA0AAADw//f/AAALAA0AAADw//j/AAALAA0AAADw//n/AAALAA0AAADw//r/AAALAA0AAADw//v/AAALAA0AAADw//z/AAALAA0AAADw//3/AAALAA0AAADw//7/AAALAA0AAADw/wAAAAALAA0AAADw/wEAAAALAA0AAADw/wIAAAALAA0AAADw/wMAAAALAA0AAADw/wQAAAALAA0AAADw/wUAAAALAA0AAADw/wYAAAALAA0AAADw/wcAAAALAA0AAADw/wgAAAALAA0AAADx//f/AAALAA0AAADx//j/AAALAA0AAADx//n/AAALAA0AAADx//r/AAALAA0AAADx//v/AAALAA0AAADx//z/AAALAA0AAADx//3/AAALAA0AAADx//7/AAALAA0AAADx/wAAAAALAA0AAADx/wEAAAALAA0AAADx/wIAAAALAA0AAADx/wMAAAALAA0AAADx/wQAAAALAA0AAADx/wUAAAALAA0AAADx/wYAAAALAA0AAADx/wcAAAALAA0AAADx/wgAAAALAA0AAADy//f/AAALAA0AAADy//j/AAALAA0AAADy//n/AAALAA0AAADy//r/AAALAA0AAADy//v/AAALAA0AAADy//z/AAALAA0AAADy//3/AAALAA0AAADy//7/AAALAA0AAADy/wAAAAALAA0AAADy/wEAAAALAA0AAADy/wIAAAALAA0AAADy/wMAAAALAA0AAADy/wQAAAALAA0AAADy/wUAAAALAA0AAADy/wYAAAALAA0AAADy/wcAAAALAA0AAADy/wgAAAALAA0AAADz//f/AAALAA0AAADz//j/AAALAA0AAADz//n/AAALAA0AAADz//r/AAALAA0AAADz//v/AAALAA0AAADz//z/AAALAA0AAADz//3/AAALAA0AAADz//7/AAALAA0AAADz/wAAAAALAA0AAADz/wEAAAALAA0AAADz/wIAAAALAA0AAADz/wMAAAALAA0AAADz/wQAAAALAA0AAADz/wUAAAALAA0AAADz/wYAAAALAA0AAADz/wcAAAALAA0AAADz/wgAAAALAA0AAAD0//f/AAALAA0AAAD0//j/AAALAA0AAAD0//n/AAALAA0AAAD0//r/AAALAA0AAAD0//v/AAALAA0AAAD0//z/AAALAA0AAAD0//3/AAALAA0AAAD0//7/AAALAA0AAAD0/wAAAAALAA0AAAD0/wEAAAALAA0AAAD0/wIAAAALAA0AAAD0/wMAAAALAA0AAAD0/wQAAAALAA0AAAD0/wUAAAALAA0AAAD0/wYAAAALAA0AAAD0/wcAAAALAA0AAAD0/wgAAAALAA0AAAD1//f/AAALAA0AAAD1//j/AAALAA0AAAD1//n/AAALAA0AAAD1//r/AAALAA0AAAD1//v/AAALAA0AAAD1//z/AAALAA0AAAD1//3/AAALAA0AAAD1//7/AAALAA0AAAD1/wAAAAALAA0AAAD1/wEAAAALAA0AAAD1/wIAAAALAA0AAAD1/wMAAAALAA0AAAD1/wQAAAALAA0AAAD1/wUAAAALAA0AAAD1/wYAAAALAA0AAAD1/wcAAAALAA0AAAD1/wgAAAALAA0AAAD2//f/AAALAA0AAAD2//j/AAALAA0AAAD2//n/AAALAA0AAAD2//r/AAALAA0AAAD2//v/AAALAA0AAAD2//z/AAALAA0AAAD2//3/AAALAA0AAAD2//7/AAALAA0AAAD2/wAAAAALAA0AAAD2/wEAAAALAA0AAAD2/wIAAAALAA0AAAD2/wMAAAALAA0AAAD2/wQAAAALAA0AAAD2/wUAAAALAA0AAAD2/wYAAAALAA0AAAD2/wcAAAALAA0AAAD2/wgAAAALAA0AAAD3//f/AAALAA0AAAD3//j/AAALAA0AAAD3//n/AAALAA0AAAD3//r/AAALAA0AAAD3//v/AAALAA0AAAD3//z/AAALAA0AAAD3//3/AAALAA0AAAD3//7/AAALAA0AAAD3/wAAAAALAA0AAAD3/wEAAAALAA0AAAD3/wIAAAALAA0AAAD3/wMAAAALAA0AAAD3/wQAAAALAA0AAAD3/wUAAAALAA0AAAD3/wYAAAALAA0AAAD3/wcAAAALAA0AAAD3/wgAAAALAA0AAAD4//f/AAALAA0AAAD4//j/AAALAA0AAAD4//n/AAALAA0AAAD4//r/AAALAA0AAAD4//v/AAALAA0AAAD4//z/AAALAA0AAAD4//3/AAALAA0AAAD4//7/AAALAA0AAAD4/wAAAAALAA0AAAD4/wEAAAALAA0AAAD4/wIAAAALAA0AAAD4/wMAAAALAA0AAAD4/wQAAAALAA0AAAD4/wUAAAALAA0AAAD4/wYAAAALAA0AAAD4/wcAAAALAA0AAAD4/wgAAAALAA0AAAD5//f/AAALAA0AAAD5//j/AAALAA0AAAD5//n/AAALAA0AAAD5//r/AAALAA0AAAD5//v/AAALAA0AAAD5//z/AAALAA0AAAD5//3/AAALAA0AAAD5//7/AAALAA0AAAD5/wAAAAALAA0AAAD5/wEAAAALAA0AAAD5/wIAAAALAA0AAAD5/wMAAAALAA0AAAD5/wQAAAALAA0AAAD5/wUAAAALAA0AAAD5/wYAAAALAA0AAAD5/wcAAAALAA0AAAD5/wgAAAALAA0AAAD6//f/AAALAA0AAAD6//j/AAALAA0AAAD6//n/AAALAA0AAAD6//r/AAALAA0AAAD6//v/AAALAA0AAAD6//z/AAALAA0AAAD6//3/AAALAA0AAAD6//7/AAALAA0AAAD6/wAAAAALAA0AAAD6/wEAAAALAA0AAAD6/wIAAAALAA0AAAD6/wMAAAALAA0AAAD6/wQAAAALAA0AAAD6/wUAAAALAA0AAAD6/wYAAAALAA0AAAD6/wcAAAALAA0AAAD6/wgAAAALAA0AAAD7//f/AAALAA0AAAD7//j/AAALAA0AAAD7//n/AAALAA0AAAD7//r/AAALAA0AAAD7//v/AAALAA0AAAD7//z/AAALAA0AAAD7//3/AAALAA0AAAD7//7/AAALAA0AAAD7/wAAAAALAA0AAAD7/wEAAAALAA0AAAD7/wIAAAALAA0AAAD7/wMAAAALAA0AAAD7/wQAAAALAA0AAAD7/wUAAAALAA0AAAD7/wYAAAALAA0AAAD7/wcAAAALAA0AAAD7/wgAAAALAA0AAAD8//f/AAALAA0AAAD8//j/AAALAA0AAAD8//n/AAALAA0AAAD8//r/AAALAA0AAAD8//v/AAALAA0AAAD8//z/AAALAA0AAAD8//3/AAALAA0AAAD8//7/AAALAA0AAAD8/wAAAAALAA0AAAD8/wEAAAALAA0AAAD8/wIAAAALAA0AAAD8/wMAAAALAA0AAAD8/wQAAAALAA0AAAD8/wUAAAALAA0AAAD8/wYAAAALAA0AAAD8/wcAAAALAA0AAAD8/wgAAAALAA0AAAD9//f/AAALAA0AAAD9//j/AAALAA0AAAD9//n/AAALAA0AAAD9//r/AAALAA0AAAD9//v/AAALAA0AAAD9//z/AAALAA0AAAD9//3/AAALAA0AAAD9//7/AAALAA0AAAD9/wAAAAALAA0AAAD9/wEAAAALAA0AAAD9/wIAAAALAA0AAAD9/wMAAAALAA0AAAD9/wQAAAALAA0AAAD9/wUAAAALAA0AAAD9/wYAAAALAA0AAAD9/wcAAAALAA0AAAD9/wgAAAALAA0AAAD+//f/AAALAA0AAAD+//j/AAALAA0AAAD+//n/AAALAA0AAAD+//r/AAALAA0AAAD+//v/AAALAA0AAAD+//z/AAALAA0AAAD+//3/AAALAA0AAAD+//7/AAALAA0AAAD+/wAAAAALAA0AAAD+/wEAAAALAA0AAAD+/wIAAAALAA0AAAD+/wMAAAALAA0AAAD+/wQAAAALAA0AAAD+/wUAAAALAA0AAAD+/wYAAAALAA0AAAD+/wcAAAALAA0AAAD+/wgAAAALAA0AAAABAPf/AAALAA0AAAABAPj/AAALAA0AAAABAPn/AAALAA0AAAABAPr/AAALAA0AAAABAPv/AAALAA0AAAABAPz/AAALAA0AAAABAP3/AAALAA0AAAABAP7/AAALAA0AAAABAAAAAAALAA0AAAABAAEAAAALAA0AAAABAAIAAAALAA0AAAABAAMAAAALAA0AAAABAAQAAAALAA0AAAABAAUAAAALAA0AAAABAAYAAAALAA0AAAABAAcAAAALAA0AAAABAAgAAAALAA0AAAACAPf/AAALAA0AAAACAPj/AAALAA0AAAACAPn/AAALAA0AAAACAPr/AAALAA0AAAACAPv/AAALAA0AAAACAPz/AAALAA0AAAACAP3/AAALAA0AAAACAP7/AAALAA0AAAACAAAAAAALAA0AAAACAAEAAAALAA0AAAACAAIAAAALAA0AAAACAAMAAAALAA0AAAACAAQAAAALAA0AAAACAAUAAAALAA0AAAACAAYAAAALAA0AAAACAAcAAAALAA0AAAACAAgAAAALAA0AAAADAPf/AAALAA0AAAADAPj/AAALAA0AAAADAPn/AAALAA0AAAADAPr/AAALAA0AAAADAPv/AAALAA0AAAADAPz/AAALAA0AAAADAP3/AAALAA0AAAADAAAAAAALAA0AAAADAAEAAAALAA0AAAADAAIAAAALAA0AAAADAAMAAAALAA0AAAADAAQAAAALAA0AAAADAAUAAAALAA0AAAADAAYAAAALAA0AAAADAAcAAAALAA0AAAADAAgAAAALAA0AAAAEAPf/AAALAA0AAAAEAPj/AAALAA0AAAAEAPn/AAALAA0AAAAEAPr/AAALAA0AAAAEAPv/AAALAA0AAAAEAPz/AAALAA0AAAAEAP3/AAALAA0AAAAEAAAAAAALAA0AAAAEAAEAAAALAA0AAAAEAAIAAAALAA0AAAAEAAMAAAALAA0AAAAEAAQAAAALAA0AAAAEAAUAAAALAA0AAAAEAAYAAAALAA0AAAAEAAcAAAALAA0AAAAEAAgAAAALAA0AAAAFAPf/AAALAA0AAAAFAPj/AAALAA0AAAAFAPn/AAALAA0AAAAFAPr/AAALAA0AAAAFAPv/AAALAA0AAAAFAPz/AAALAA0AAAAFAP3/AAALAA0AAAAFAAAAAAALAA0AAAAFAAEAAAALAA0AAAAFAAIAAAALAA0AAAAFAAMAAAALAA0AAAAFAAQAAAALAA0AAAAFAAUAAAALAA0AAAAFAAYAAAALAA0AAAAFAAcAAAALAA0AAAAFAAgAAAALAA0AAAAGAPf/AAALAA0AAAAGAPj/AAALAA0AAAAGAPn/AAALAA0AAAAGAPr/AAALAA0AAAAGAPv/AAALAA0AAAAGAPz/AAALAA0AAAAGAP3/AAALAA0AAAAGAAAAAAALAA0AAAAGAAEAAAALAA0AAAAGAAIAAAALAA0AAAAGAAMAAAALAA0AAAAGAAQAAAALAA0AAAAGAAUAAAALAA0AAAAGAAYAAAALAA0AAAAGAAcAAAALAA0AAAAGAAgAAAALAA0AAAAHAPf/AAALAA0AAAAHAPj/AAALAA0AAAAHAPn/AAALAA0AAAAHAPr/AAALAA0AAAAHAPv/AAALAA0AAAAHAPz/AAALAA0AAAAHAP3/AAALAA0AAAAHAAAAAAALAA0AAAAHAAEAAAALAA0AAAAHAAIAAAALAA0AAAAHAAMAAAALAA0AAAAHAAQAAAALAA0AAAAHAAUAAAALAA0AAAAHAAYAAAALAA0AAAAHAAcAAAALAA0AAAAHAAgAAAALAA0AAAAIAPf/AAALAA0AAAAIAPj/AAALAA0AAAAIAPn/AAALAA0AAAAIAPr/AAALAA0AAAAIAPv/AAALAA0AAAAIAPz/AAALAA0AAAAIAP3/AAALAA0AAAAIAP7/AAALAA0AAAAIAAAAAAALAA0AAAAIAAEAAAALAA0AAAAIAAIAAAALAA0AAAAIAAMAAAALAA0AAAAIAAQAAAALAA0AAAAIAAUAAAALAA0AAAAIAAYAAAALAA0AAAAIAAcAAAALAA0AAAAIAAgAAAALAA0AAAAJAPf/AAALAA0AAAAJAPj/AAALAA0AAAAJAPn/AAALAA0AAAAJAPr/AAALAA0AAAAJAPv/AAALAA0AAAAJAPz/AAALAA0AAAAJAP3/AAALAA0AAAAJAAAAAAALAA0AAAAJAAEAAAALAA0AAAAJAAIAAAALAA0AAAAJAAMAAAALAA0AAAAJAAQAAAALAA0AAAAJAAUAAAALAA0AAAAJAAYAAAALAA0AAAAJAAcAAAALAA0AAAAJAAgAAAALAA0AAAAKAPf/AAALAA0AAAAKAPj/AAALAA0AAAAKAPn/AAALAA0AAAAKAPr/AAALAA0AAAAKAPv/AAALAA0AAAAKAPz/AAALAA0AAAAKAP3/AAALAA0AAAAKAP7/AAALAA0AAAAKAAAAAAALAA0AAAAKAAEAAAALAA0AAAAKAAIAAAALAA0AAAAKAAMAAAALAA0AAAAKAAQAAAALAA0AAAAKAAUAAAALAA0AAAAKAAYAAAALAA0AAAAKAAcAAAALAA0AAAAKAAgAAAALAA0AAAALAPf/AAALAA0AAAALAPj/AAALAA0AAAALAPn/AAALAA0AAAALAPr/AAALAA0AAAALAPv/AAALAA0AAAALAPz/AAALAA0AAAALAP3/AAALAA0AAAALAP7/AAALAA0AAAALAAAAAAALAA0AAAALAAEAAAALAA0AAAALAAIAAAALAA0AAAALAAMAAAALAA0AAAALAAQAAAALAA0AAAALAAUAAAALAA0AAAALAAYAAAALAA0AAAALAAcAAAALAA0AAAALAAgAAAALAA0AAAAMAPf/AAALAA0AAAAMAPj/AAALAA0AAAAMAPn/AAALAA0AAAAMAPr/AAALAA0AAAAMAPv/AAALAA0AAAAMAPz/AAALAA0AAAAMAP3/AAALAA0AAAAMAP7/AAALAA0AAAAMAAAAAAALAA0AAAAMAAEAAAALAA0AAAAMAAIAAAALAA0AAAAMAAMAAAALAA0AAAAMAAQAAAALAA0AAAAMAAUAAAALAA0AAAAMAAYAAAALAA0AAAAMAAcAAAALAA0AAAAMAAgAAAALAA0AAAANAPf/AAALAA0AAAANAPj/AAALAA0AAAANAPn/AAALAA0AAAANAPr/AAALAA0AAAANAPv/AAALAA0AAAANAPz/AAALAA0AAAANAP3/AAALAA0AAAANAP7/AAALAA0AAAANAAAAAAALAA0AAAANAAEAAAALAA0AAAANAAIAAAALAA0AAAANAAMAAAALAA0AAAANAAQAAAALAA0AAAANAAUAAAALAA0AAAANAAYAAAALAA0AAAANAAcAAAALAA0AAAANAAgAAAALAA0AAAAOAPf/AAALAA0AAAAOAPj/AAALAA0AAAAOAPn/AAALAA0AAAAOAPr/AAALAA0AAAAOAPv/AAALAA0AAAAOAPz/AAALAA0AAAAOAP3/AAALAA0AAAAOAP7/AAALAA0AAAAOAAAAAAALAA0AAAAOAAEAAAALAA0AAAAOAAIAAAALAA0AAAAOAAMAAAALAA0AAAAOAAQAAAALAA0AAAAOAAUAAAALAA0AAAAOAAYAAAALAA0AAAAOAAcAAAALAA0AAAAOAAgAAAALAA0AAAAPAPf/AAALAA0AAAAPAPj/AAALAA0AAAAPAPn/AAALAA0AAAAPAPr/AAALAA0AAAAPAPv/AAALAA0AAAAPAPz/AAALAA0AAAAPAP3/AAALAA0AAAAPAP7/AAALAA0AAAAPAAAAAAALAA0AAAAPAAEAAAALAA0AAAAPAAIAAAALAA0AAAAPAAMAAAALAA0AAAAPAAQAAAALAA0AAAAPAAUAAAALAA0AAAAPAAYAAAALAA0AAAAPAAcAAAALAA0AAAAPAAgAAAALAA0AAAAQAPf/AAALAA0AAAAQAPj/AAALAA0AAAAQAPn/AAALAA0AAAAQAPr/AAALAA0AAAAQAPv/AAALAA0AAAAQAPz/AAALAA0AAAAQAP3/AAALAA0AAAAQAP7/AAALAA0AAAAQAAAAAAALAA0AAAAQAAEAAAALAA0AAAAQAAIAAAALAA0AAAAQAAMAAAALAA0AAAAQAAQAAAALAA0AAAAQAAUAAAALAA0AAAAQAAYAAAALAA0AAAAQAAcAAAALAA0AAAAQAAgAAAALAA0AAAAJAP7/AAALAA0AAADt/wkAAAABAAcAAADt/wgAAAABAAcAAADt/wcAAAABAAcAAADt/wYAAAABAAcAAADt/wUAAAABAAcAAADt/wQAAAABAAcAAADt/wMAAAABAAcAAADt/wIAAAABAAcAAADt/wEAAAABAAcAAADt/wAAAAABAAcAAADt////AAABAAcAAADt//7/AAABAAcAAADt//3/AAABAAcAAADt//z/AAABAAcAAADt//v/AAABAAcAAADt//r/AAABAAcAAADt//n/AAABAAcAAADt//j/AAABAAcAAADt//f/AAABAAcAAADt//b/AAABAAcAAADt//X/AAABAAcAAADu//X/AAABAAcAAADv//X/AAABAAcAAADw//X/AAABAAcAAADx//X/AAABAAcAAADy//X/AAABAAcAAADz//X/AAABAAcAAAD0//X/AAABAAcAAAD1//X/AAABAAcAAAD2//X/AAABAAcAAAD3//X/AAABAAcAAAD4//X/AAABAAcAAAD5//X/AAABAAcAAAD6//X/AAABAAcAAAD7//X/AAABAAcAAAD8//X/AAABAAcAAAD9//X/AAABAAcAAAD+//X/AAABAAcAAAD///X/AAABAAcAAAAAAPX/AAABAAcAAAABAPX/AAABAAcAAAACAPX/AAABAAcAAAADAPX/AAABAAcAAAAEAPX/AAABAAcAAAAFAPX/AAABAAcAAAAGAPX/AAABAAcAAAAHAPX/AAABAAcAAAAIAPX/AAABAAcAAAAJAPX/AAABAAcAAAAKAPX/AAABAAcAAAALAPX/AAABAAcAAAAMAPX/AAABAAcAAAANAPX/AAABAAcAAAAOAPX/AAABAAcAAAAPAPX/AAABAAcAAAAQAPX/AAABAAcAAAARAPX/AAABAAcAAAASAPX/AAABAAcAAAASAPb/AAABAAcAAAASAPf/AAABAAcAAAASAPj/AAABAAcAAAASAPn/AAABAAcAAAASAPr/AAABAAcAAAASAPv/AAABAAcAAAASAPz/AAABAAcAAAASAP3/AAABAAcAAAASAP7/AAABAAcAAAASAP//AAABAAcAAAASAAAAAAABAAcAAAASAAEAAAABAAcAAAASAAIAAAABAAcAAAASAAMAAAABAAcAAAASAAQAAAABAAcAAAASAAUAAAABAAcAAAASAAYAAAABAAcAAAASAAcAAAABAAcAAAASAAgAAAABAAcAAAASAAkAAAABAAcAAAASAAoAAAABAAcAAADt/woAAAABAAcAAAA=")
+tile_set = SubResource("TileSet_78xdq")
+
+[node name="Node2D" type="Node2D" parent="tempbgtiles"]
+
+[node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="UserInterfaceLayer/PlayerUI"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 336.0
+offset_bottom = 51.0
+script = ExtResource("24_cp3x2")

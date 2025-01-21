@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="PackedScene" uid="uid://cbb55ui1lrnii" path="res://Scenes/player.tscn" id="17_ytj17"]
+[ext_resource type="PackedScene" uid="uid://dp1nh1k7um7xk" path="res://Scenes/player.tscn" id="17_ytj17"]
 [ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="18_bttjw"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 [ext_resource type="Script" path="res://Scripts/shootState.gd" id="20_4fwto"]

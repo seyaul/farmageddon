@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbb55ui1lrnii"]
+[gd_scene load_steps=19 format=3 uid="uid://dp1nh1k7um7xk"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -6,8 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
 [ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
-[ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="6_bxti4"]
-[ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="7_p43fw"]
+[ext_resource type="PackedScene" uid="uid://blqu2geqs7p1h" path="res://Scenes/weapons/pistol.tscn" id="8_oyd4g"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
@@ -117,12 +116,6 @@ dash_speed = 75000.0
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Gun" parent="." instance=ExtResource("6_bxti4")]
-bullet = ExtResource("7_p43fw")
-projectile_speed = 30000.0
-automatic = false
-spread = 30.0
-
 [node name="Melee" type="Node2D" parent="."]
 script = ExtResource("8_vyjy7")
 melee_weapon = ExtResource("9_mr22e")
@@ -142,3 +135,5 @@ shockwave_cooldown = 100
 
 [node name="Collider" type="CollisionShape2D" parent="Shockwave"]
 shape = SubResource("CircleShape2D_dqb8n")
+
+[node name="pistol" parent="." instance=ExtResource("8_oyd4g")]

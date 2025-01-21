@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqu2geqs7p1h"]
+
+[ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_6nw4q"]
+[ext_resource type="Script" path="res://Scripts/weaponScripts/pistol.gd" id="2_p6uyj"]
+[ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="3_204in"]
+
+[node name="pistol" instance=ExtResource("1_6nw4q")]
+script = ExtResource("2_p6uyj")
+bullet = ExtResource("3_204in")

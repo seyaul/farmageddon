@@ -286,6 +286,7 @@ script = ExtResource("18_bttjw")
 follow_target = NodePath("../../../../../Player")
 
 [node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_xw0bk")]
+position = Vector2(68.1062, -1.24084)
 collision_layer = 0
 collision_mask = 1
 monitorable = false

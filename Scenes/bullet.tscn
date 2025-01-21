@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlbdbus762atq"]
+[gd_scene load_steps=5 format=3 uid="uid://dll6vo86ekfw6"]
 
 [ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_av1sk"]
 [ext_resource type="Script" path="res://Scripts/explosion.gd" id="3_luskx"]
-[ext_resource type="PackedScene" uid="uid://uyr7gosswtgp" path="res://Scenes/fragment.tscn" id="4_ah5kr"]
+[ext_resource type="PackedScene" uid="uid://bp34iqvtmf0e" path="res://Scenes/fragment.tscn" id="4_ah5kr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
 
@@ -12,8 +12,7 @@ collision_layer = 2
 collision_mask = 4
 sync_to_physics = false
 script = ExtResource("1_av1sk")
-bounces_til_despawn = 2
-life_span = 200
+life_span = 400
 max_range = 500
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]

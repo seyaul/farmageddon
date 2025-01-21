@@ -1,19 +1,33 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbwfua8ajq1si"]
+[gd_scene load_steps=31 format=3 uid="uid://egp61i4qaoru"]
 
-[ext_resource type="PackedScene" uid="uid://cbb55ui1lrnii" path="res://Scenes/player.tscn" id="1_bd7i7"]
-[ext_resource type="PackedScene" uid="uid://bvecct0njjkho" path="res://Scenes/targeter.tscn" id="1_mswu8"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
-[ext_resource type="PackedScene" uid="uid://dpumwoyh5opmc" path="res://Scenes/gun.tscn" id="7_hvohm"]
-[ext_resource type="PackedScene" uid="uid://lk06gmcr5wxq" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
+[ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_n7ckx"]
+[ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_q2p2a"]
+[ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_4u8b2"]
+[ext_resource type="Script" path="res://Scripts/melee.gd" id="6_aj3ae"]
+[ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
+[ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
+[ext_resource type="Script" path="res://Scripts/shockwave.gd" id="12_er0hs"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
 [ext_resource type="Script" path="res://Scripts/followState.gd" id="14_23un6"]
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="PackedScene" uid="uid://dlbdbus762atq" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
+[ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="18_bttjw"]
+[ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
+[ext_resource type="Script" path="res://Scripts/shootState.gd" id="20_4fwto"]
+[ext_resource type="Script" path="res://Scripts/neutralState.gd" id="20_nwi2s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owlbq"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgkfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
 size = Vector2(101, 53)
@@ -29,9 +43,12 @@ point_count = 4
 [sub_resource type="GDScript" id="GDScript_gn3mj"]
 script/source = "extends State
 
+@export var aggro_target: CharacterBody2D
 @export var speed: float = 0.1
 @export var should_reverse: bool = false
 @export var pause_time: float = 0
+@export var can_aggro: bool = false
+@export var aggro_distance: float = 600
 # Called when the node enters the scene tree for the first time.
 var enemy: CharacterBody2D
 var guide: PathFollow2D
@@ -46,6 +63,8 @@ func Enter():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Update(delta: float) -> void:
+	if can_aggro and  enemy.global_position.distance_to(aggro_target.global_position) <= aggro_distance:
+		emit_signal(\"state_transition\", self, \"Follow\")
 	if guide.global_position - enemy.global_position != Vector2.ZERO:
 		emit_signal(\"state_transition\", self, \"Return\")
 		
@@ -88,13 +107,64 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-56.7218, 98.6667, 56.7
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_bd7i7")]
+[node name="Player" type="CharacterBody2D" parent="."]
+z_index = 1
+collision_mask = 4
+collision_priority = 10.0
+motion_mode = 1
+script = ExtResource("1_m4e61")
 
-[node name="Background" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(533, 300)
-scale = Vector2(3.116, 3)
-texture = ExtResource("11_k0a88")
+[node name="Collider" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_owlbq")
+debug_color = Color(1.2514e-06, 0.646022, 0.246912, 0.42)
+
+[node name="Targeter" parent="Player" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../Crosshairs")
+
+[node name="MoveController" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Player/MoveController"]
+script = ExtResource("3_n7ckx")
+
+[node name="Walk" type="Node" parent="Player/MoveController"]
+script = ExtResource("4_q2p2a")
+
+[node name="Dash" type="Node" parent="Player/MoveController"]
+script = ExtResource("5_4u8b2")
+phase_on_dash = true
+max_distance = 200.0
+dash_speed = 75000.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Gun" parent="Player" instance=ExtResource("7_hvohm")]
+bullet = ExtResource("18_sjfa6")
+projectile_speed = 30000.0
+automatic = false
+spread = 30.0
+
+[node name="Melee" type="Node2D" parent="Player"]
+script = ExtResource("6_aj3ae")
+melee_weapon = ExtResource("7_xw0bk")
+
+[node name="Health" type="Node" parent="Player"]
+script = ExtResource("10_m1hln")
+
+[node name="Shockwave" type="Area2D" parent="Player"]
+collision_mask = 12
+script = ExtResource("12_er0hs")
+damage = 20.0
+shockwave_duration = 0.1
+shockwave_radius = 20.0
+shockwave_strength = 10000.0
+max_shockwaves = 2
+shockwave_cooldown = 100
+
+[node name="Collider" type="CollisionShape2D" parent="Player/Shockwave"]
+shape = SubResource("CircleShape2D_kgkfl")
 
 [node name="Crosshairs" type="Node2D" parent="."]
 script = ExtResource("12_g3doo")
@@ -104,16 +174,14 @@ scale = Vector2(0.29, 0.29)
 texture = ExtResource("13_abdpc")
 
 [node name="TestWall" type="StaticBody2D" parent="."]
-position = Vector2(122, -135)
+position = Vector2(1193, -418)
 collision_layer = 5
 collision_mask = 5
 
 [node name="Collider" type="CollisionShape2D" parent="TestWall"]
-position = Vector2(157.5, 55.5)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -131,6 +199,7 @@ position = Vector2(113, -257)
 rotation = 0.720474
 
 [node name="Pather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+visible = false
 collision_layer = 12
 motion_mode = 1
 
@@ -144,9 +213,8 @@ texture = ExtResource("13_abdpc")
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
 script = ExtResource("10_m1hln")
 
-[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Pather" node_paths=PackedStringArray("initial_state")]
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
 script = ExtResource("2_t0tql")
-initial_state = NodePath("FollowPath")
 
 [node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
 script = SubResource("GDScript_gn3mj")
@@ -156,59 +224,19 @@ script = ExtResource("17_y4wtn")
 speed = 10000.0
 snap_distance = 2.0
 
-[node name="Shooter" type="CharacterBody2D" parent="."]
-collision_layer = 12
-collision_priority = 10.0
-motion_mode = 1
-script = ExtResource("14_105eu")
-
-[node name="Collider" type="CollisionShape2D" parent="Shooter"]
-scale = Vector2(6.24, 6.24)
-shape = SubResource("RectangleShape2D_skhiw")
-
-[node name="EnemySprite" type="Sprite2D" parent="Shooter"]
-texture = ExtResource("13_abdpc")
-
-[node name="Targeter" parent="Shooter" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
-target = NodePath("../../Crosshairs")
-offset_rotation = 180.0
-
-[node name="Gun" parent="Shooter" instance=ExtResource("7_hvohm")]
-bullet = ExtResource("18_sjfa6")
-fire_rate = 50
-
-[node name="Health" type="Node" parent="Shooter"]
-script = ExtResource("10_m1hln")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(533, 300)
-scale = Vector2(9.432, 3)
-navigation_polygon = SubResource("NavigationPolygon_hiv8k")
-navigation_layers = 5
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-position = Vector2(3.92281, -22)
-scale = Vector2(0.106022, 0.333333)
-radius = 67.06
-vertices = PackedVector2Array(-39, -41, 49, -36, 17, 51)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-avoidance_layers = 5
-
-[node name="Follower" type="CharacterBody2D" parent="."]
-position = Vector2(816, 150)
+[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 collision_layer = 12
 collision_priority = 10.0
 motion_mode = 1
 
-[node name="Collider" type="CollisionShape2D" parent="Follower"]
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 scale = Vector2(6.24, 6.24)
 shape = SubResource("RectangleShape2D_skhiw")
 
-[node name="EnemySprite" type="Sprite2D" parent="Follower"]
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 texture = ExtResource("13_abdpc")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Follower"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 navigation_layers = 5
 avoidance_enabled = true
 radius = 111.01
@@ -222,52 +250,73 @@ debug_path_custom_color = Color(0, 0, 1, 1)
 debug_path_custom_point_size = 10.0
 debug_path_custom_line_width = 5.0
 
-[node name="EMovementController" type="Node" parent="Follower" node_paths=PackedStringArray("initial_state")]
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_t0tql")
-initial_state = NodePath("Follow")
+initial_state = NodePath("FollowPath")
 
-[node name="Follow" type="Node" parent="Follower/EMovementController" node_paths=PackedStringArray("follow_target")]
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("aggro_target")]
+script = SubResource("GDScript_gn3mj")
+aggro_target = NodePath("../../../../../Player")
+can_aggro = true
+aggro_distance = 300.0
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("14_23un6")
-follow_target = NodePath("../../../Player")
-distance_til_attack = 300.0
+follow_target = NodePath("../../../../../Player")
+speed = 10000.0
+action1 = "Lunge"
+action2 = "Strafe"
+distance_til_attack = 200.0
 num_attacks = 1
 attack_cooldown = 200
 
-[node name="Lunge" type="Node" parent="Follower/EMovementController"]
+[node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("15_l723w")
 phase_on_lunge = true
 max_distance = 300.0
 lunge_speed = 600.0
 
-[node name="MeleeWeapon" parent="Follower" instance=ExtResource("7_xw0bk")]
+[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("17_y4wtn")
+speed = 10000.0
+snap_distance = 2.0
+
+[node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("18_bttjw")
+follow_target = NodePath("../../../../../Player")
+
+[node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_xw0bk")]
 collision_layer = 0
 collision_mask = 1
 monitorable = false
 damage = 5.0
 melee_duration = 1e+08
 
-[node name="Health" type="Node" parent="Follower"]
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
 script = ExtResource("10_m1hln")
 
-[node name="Follower2" type="CharacterBody2D" parent="."]
-position = Vector2(656, 391)
+[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+position = Vector2(-150, 0)
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../../../Player")
+offset_rotation = 180.0
+
+[node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+position = Vector2(43.8487, 350.065)
+rotation = -0.720474
 collision_layer = 12
 collision_priority = 10.0
 motion_mode = 1
+script = ExtResource("14_105eu")
 
-[node name="Collider" type="CollisionShape2D" parent="Follower2"]
-scale = Vector2(6.24, 6.24)
-shape = SubResource("RectangleShape2D_skhiw")
-
-[node name="EnemySprite" type="Sprite2D" parent="Follower2"]
-texture = ExtResource("13_abdpc")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Follower2"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/Shooter"]
 navigation_layers = 5
 avoidance_enabled = true
-radius = 138.1
-neighbor_distance = 8580.8
+radius = 111.01
+neighbor_distance = 10601.0
 time_horizon_agents = 0.0
+max_speed = 23332.3
 avoidance_mask = 5
 debug_enabled = true
 debug_use_custom = true
@@ -275,29 +324,75 @@ debug_path_custom_color = Color(0, 0, 1, 1)
 debug_path_custom_point_size = 10.0
 debug_path_custom_line_width = 5.0
 
-[node name="EMovementController" type="Node" parent="Follower2" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_t0tql")
-initial_state = NodePath("Follow")
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Shooter"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_skhiw")
 
-[node name="Follow" type="Node" parent="Follower2/EMovementController" node_paths=PackedStringArray("follow_target")]
-script = ExtResource("14_23un6")
-follow_target = NodePath("../../../Player")
-distance_til_attack = 300.0
-num_attacks = 1
-attack_cooldown = 200
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+texture = ExtResource("13_abdpc")
 
-[node name="Lunge" type="Node" parent="Follower2/EMovementController"]
-script = ExtResource("15_l723w")
-phase_on_lunge = true
-max_distance = 300.0
-lunge_speed = 600.0
+[node name="Targeter" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
+target = NodePath("../../../../Player")
+offset_rotation = 180.0
 
-[node name="MeleeWeapon" parent="Follower2" instance=ExtResource("7_xw0bk")]
-collision_layer = 0
-collision_mask = 1
-monitorable = false
-damage = 5.0
-melee_duration = 1e+08
+[node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("7_hvohm")]
+rotation = -1.5708
+bullet = ExtResource("18_sjfa6")
+projectile_speed = 30000.0
+fire_rate = 50
 
-[node name="Health" type="Node" parent="Follower2"]
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]
 script = ExtResource("10_m1hln")
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("FollowPath")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("aggro_target")]
+script = SubResource("GDScript_gn3mj")
+aggro_target = NodePath("../../../../../Player")
+can_aggro = true
+aggro_distance = 300.0
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
+physics_interpolation_mode = 2
+script = ExtResource("14_23un6")
+follow_target = NodePath("../../../SmartPather/Node2D")
+speed = 15000.0
+bias = 0.1
+look_at_player = true
+max_deviation_distance = 75.0
+distance_til_attack = 0.0
+
+[node name="EAttackController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t0tql")
+initial_state = NodePath("Neutral")
+
+[node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("20_nwi2s")
+neutral_until_condition = true
+distance_til_attack = 200.0
+
+[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("20_4fwto")
+time_shooting = 100
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(367, -344)
+scale = Vector2(9.432, 3)
+navigation_polygon = SubResource("NavigationPolygon_hiv8k")
+navigation_layers = 5
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+position = Vector2(3.92281, -22)
+scale = Vector2(0.106022, 0.333333)
+radius = 67.06
+vertices = PackedVector2Array(-39, -41, 49, -36, 17, 51)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 5
+
+[node name="Background" type="Sprite2D" parent="NavigationRegion2D"]
+z_index = -1
+scale = Vector2(0.330365, 1)
+texture = ExtResource("11_k0a88")

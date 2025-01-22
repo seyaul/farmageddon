@@ -49,7 +49,8 @@ func Update(delta: float):
 			emit_signal("state_transition", self, action2)
 		attacks -= 1
 func makepath() -> void:
-	navigation.target_position = follow_target.global_position
+	if(navigation and follow_target != null):
+		navigation.target_position = follow_target.global_position
 
 func Exit():
 	if targeter:

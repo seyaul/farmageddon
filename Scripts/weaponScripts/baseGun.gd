@@ -1,4 +1,6 @@
 extends Sprite2D
+
+# baseGun is the base class from which all guns that the player uses are inherited
 class_name baseGun
 
 #NOTE: Interesting concept, really slow projectiles act as a trail of bullets left behind.

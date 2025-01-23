@@ -1,5 +1,8 @@
 extends AnimatableBody2D
 
+# baseBullet is the base class from which all bullets that the player shoots are inherited
+class_name baseBullet
+
 # TODO: Fix sticky behavior
 @export_enum("Bouncy", "Sticky")
 var collision_behavior: String = "Bouncy"
@@ -38,7 +41,15 @@ func _physics_process(delta: float) -> void:
 	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
-	# print("detected")
+	print("detected")
+	
+	var collider = collision.get_collider()
+	var enemy_health = collider.get_node("Health")
+	
+	if enemy_health and enemy_health.has_method("take_damage"):
+		print("damaging enemy")
+		enemy_health.take_damage(10)  
+
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO
 	elif collision_behavior == "Bouncy":

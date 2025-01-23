@@ -3,6 +3,7 @@ class_name FiniteStateMachine
 
 
 @export var initial_state: State
+@export var animation : AnimationPlayer
 var states: Dictionary = {}
 var current_state: State
 # Called when the node enters the scene tree for the first time.

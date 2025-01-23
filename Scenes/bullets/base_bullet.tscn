@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3tixxhlwjl4x"]
+[gd_scene load_steps=3 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
-[ext_resource type="Script" path="res://Scripts/explosion.gd" id="2_b6314"]
-[ext_resource type="PackedScene" uid="uid://bp34iqvtmf0e" path="res://Scenes/fragment.tscn" id="3_yhtxb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
 
@@ -21,10 +19,3 @@ shape = SubResource("CircleShape2D_m6n65")
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
 position = Vector2(3, 1)
-
-[node name="Explosion" type="Node" parent="."]
-script = ExtResource("2_b6314")
-fragment = ExtResource("3_yhtxb")
-projectile_speed = 1000.0
-fragment_pattern = "Even"
-spread = 360.0

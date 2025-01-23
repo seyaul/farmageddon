@@ -53,8 +53,9 @@ func makepath() -> void:
 		navigation.target_position = follow_target.global_position
 
 func Exit():
-	if targeter:
-		targeter.disabled = false
+	#if targeter:
+		#targeter.disabled = false
+	print("Exited State")
 
 func _physics_process(delta: float) -> void:
 	time += 1

@@ -718,9 +718,11 @@ tile_set = SubResource("TileSet_78xdq")
 
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HealthBar" type="ProgressBar" parent="UserInterfaceLayer/PlayerUI"]
 layout_mode = 0
@@ -729,3 +731,13 @@ offset_top = 24.0
 offset_right = 336.0
 offset_bottom = 51.0
 script = ExtResource("24_cp3x2")
+
+[node name="Ammo" type="Label" parent="UserInterfaceLayer/PlayerUI"]
+clip_contents = true
+layout_mode = 0
+offset_left = 350.0
+offset_top = 27.0
+offset_right = 428.0
+offset_bottom = 50.0
+text = "Ammo: 10"
+horizontal_alignment = 1

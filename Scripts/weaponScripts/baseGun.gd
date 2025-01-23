@@ -3,6 +3,11 @@ extends Sprite2D
 # baseGun is the base class from which all guns that the player uses are inherited
 class_name baseGun
 
+# signal used to decrease the number of bullets in the mag in the player node
+signal bullet_fired
+# signal used to set the max ammo for the parent player node
+signal set_max_ammo
+
 #NOTE: Interesting concept, really slow projectiles act as a trail of bullets left behind.
 # TODO: Refactor to determine bullet type dynamically.
 @export_enum("Discrete", "Continuous")
@@ -51,6 +56,8 @@ func fire(delta: float) -> void:
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 			projectile.constant_linear_velocity = direction * projectile_speed * delta
 			get_tree().current_scene.add_child(projectile)
+			# Emit signal to reduce ammo
+			emit_signal("bullet_fired")
 	elif fire_type == "Continuous":
 		if not is_instance_valid(beam):
 			beam = bullet.instantiate()

@@ -5,14 +5,15 @@
 
 [node name="ExperimentalArea" type="Node2D"]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Snake" type="Node2D" parent="."]
+visible = false
 script = ExtResource("1_dgb70")
 num_segments = 10
 stiffness = 0.95
 distance = 20.0
 view_lines = true
 
-[node name="Legs" type="Node" parent="Node2D"]
+[node name="Legs" type="Node" parent="Snake"]
 script = ExtResource("2_qb7y7")
 segment = 1
 leg_distance = 50.0
@@ -20,7 +21,7 @@ leg_spread = 20.0
 speed = 4.0
 view_lines = true
 
-[node name="Legs2" type="Node" parent="Node2D"]
+[node name="Legs2" type="Node" parent="Snake"]
 script = ExtResource("2_qb7y7")
 segment = 7
 leg_distance = 50.0

@@ -40,7 +40,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print(leg1.position)
 	if snake.is_ready:
 		step_pos1 = snake.segments[segment].to_global(Vector2(cos(deg_to_rad(leg_spread)), sin(deg_to_rad(leg_spread))).normalized() * leg_distance)
 		step_pos2 = snake.segments[segment].to_global(Vector2(cos(deg_to_rad(-1 * leg_spread)), sin(deg_to_rad(-1 * leg_spread))).normalized() * leg_distance)

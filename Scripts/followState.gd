@@ -32,9 +32,9 @@ func Enter():
 # TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):
 	makepath()
-	if not look_at_player:
-		enemy.look_at(navigation.get_next_path_position())
-		
+	#if not look_at_player:
+		#enemy.look_at(navigation.get_next_path_position())
+	
 	var dir = (navigation.get_next_path_position() - enemy.global_position).normalized()
 	var distance_to_target = enemy.global_position.distance_to(navigation.target_position)
 	

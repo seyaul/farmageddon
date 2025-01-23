@@ -47,22 +47,33 @@ func handle_signal(action: String, delta) -> void:
 		time = 0
 
 func fire(delta: float) -> void:
+	# Get the mouse position in global coordinates
+	var mouse_position = get_global_mouse_position()
+	var direction_to_mouse = (mouse_position - global_position).normalized()
+	var base_rotation = direction_to_mouse.angle()
+
 	if fire_type == "Discrete":
 		for i in range(bullets_per_fire):
 			var projectile: AnimatableBody2D = bullet.instantiate()
 			projectile.position = global_position
-			# TODO:Refactor this
-			projectile.rotation_degrees = (global_rotation_degrees - 90) + randf_range(-1 * spread, spread) 
+
+			var spread_angle = randf_range(-1 * spread, spread)
+			projectile.rotation = base_rotation + deg_to_rad(spread_angle)
+
+			# Calculate the direction of the projectile
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 			projectile.constant_linear_velocity = direction * projectile_speed * delta
+
+			# Add projectile to the scene
 			get_tree().current_scene.add_child(projectile)
+
 			# Emit signal to reduce ammo
 			emit_signal("bullet_fired")
+
 	elif fire_type == "Continuous":
 		if not is_instance_valid(beam):
 			beam = bullet.instantiate()
-			beam.rotation_degrees = 0 
-			# TODO: Refactor this
+			beam.rotation = base_rotation
 			add_child(beam)
 		else:
 			beam.apply_damage()

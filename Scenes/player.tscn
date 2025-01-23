@@ -95,6 +95,7 @@ shape = SubResource("CapsuleShape2D_v1535")
 debug_color = Color(1.2514e-06, 0.646022, 0.246912, 0.42)
 
 [node name="Targeter" parent="." instance=ExtResource("1_f2wt3")]
+disabled = true
 
 [node name="MoveController" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation")]
 script = ExtResource("2_4t6rf")

@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name Rope
 
 @export var ropeLength: float = 30
 @export var constrain: float = 1	# distance between points
@@ -7,6 +7,8 @@ extends Node2D
 @export var dampening: float = 0.9
 @export var startPin: bool = true
 @export var endPin: bool = true
+@export var start: Node2D
+@export var end: Node2D
 
 var line2D: Line2D
 
@@ -46,6 +48,10 @@ func _unhandled_input(event:InputEvent)->void:
 			set_last(get_global_mouse_position())
 
 func _physics_process(delta)->void:
+	if start:
+		set_start(start.global_position)
+	if end:
+		set_last(end.global_position)
 	update_points(delta)
 	update_constrain()
 	
@@ -60,8 +66,9 @@ func set_start(p:Vector2)->void:
 	posPrev[0] = p
 
 func set_last(p:Vector2)->void:
-	pos[pointCount-1] = p
-	posPrev[pointCount-1] = p
+	if pos != []:
+		pos[pointCount-1] = p
+		posPrev[pointCount-1] = p
 
 func update_points(delta)->void:
 	for i in range (pointCount):

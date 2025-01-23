@@ -1,45 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://xa5hj8l5aso"]
+[gd_scene load_steps=5 format=3 uid="uid://xa5hj8l5aso"]
 
-[ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="1_0q8jr"]
 [ext_resource type="Script" path="res://Scenes/nucleus.gd" id="1_6m2ry"]
-[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_ydfsk"]
-[ext_resource type="Script" path="res://Scenes/string.gd" id="4_vknb3"]
+[ext_resource type="PackedScene" uid="uid://bktr04ojl06im" path="res://Scenes/rope.tscn" id="2_mpde1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mibb2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dimos"]
-size = Vector2(168, 23)
+size = Vector2(35, 18.5)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Nucleus" type="RigidBody2D" parent="."]
+[node name="Nucleus" type="Node2D" parent="."]
 position = Vector2(421, 84)
-gravity_scale = 0.0
 script = ExtResource("1_6m2ry")
-
-[node name="Targeter" parent="Nucleus" node_paths=PackedStringArray("target") instance=ExtResource("2_ydfsk")]
-target = NodePath("../../Target")
+rope = ExtResource("2_mpde1")
+num_tentacles = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nucleus"]
 shape = SubResource("CircleShape2D_mibb2")
 
-[node name="RayCast2D" type="RayCast2D" parent="Nucleus"]
-target_position = Vector2(1000, 0)
-
 [node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(419, 170)
+position = Vector2(636, 94)
+rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 shape = SubResource("RectangleShape2D_dimos")
 
-[node name="Target" type="Node2D" parent="."]
-script = ExtResource("1_0q8jr")
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(640, 192)
+rotation = 1.5708
 
-[node name="String" type="Node2D" parent="."]
-position = Vector2(176, 57)
-script = ExtResource("4_vknb3")
-ropeLength = 60.0
-constrain = 3.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource("RectangleShape2D_dimos")
 
-[node name="Line2D" type="Line2D" parent="String"]
-width = 1.0
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(646, 289)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+shape = SubResource("RectangleShape2D_dimos")

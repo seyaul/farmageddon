@@ -6,7 +6,6 @@
 [node name="ExperimentalArea" type="Node2D"]
 
 [node name="Snake" type="Node2D" parent="."]
-visible = false
 script = ExtResource("1_dgb70")
 num_segments = 10
 stiffness = 0.95

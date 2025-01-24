@@ -36,12 +36,7 @@ func init_position()->void:
 	position = Vector2.ZERO
 
 func _unhandled_input(event:InputEvent)->void:
-	if event is InputEventMouseMotion:
-		if Input.is_action_pressed("click"):	#Move start point
-			set_start(get_global_mouse_position())
-		if Input.is_action_pressed("right_click"):	#Move end point
-			set_last(get_global_mouse_position())
-	elif event is InputEventMouseButton && event.is_pressed():
+	if event is InputEventMouseButton && event.is_pressed():
 		if event.button_index == 1:
 			set_start(get_global_mouse_position())
 		elif event.button_index == 2:

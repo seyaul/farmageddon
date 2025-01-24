@@ -15,15 +15,15 @@ view_lines = true
 [node name="Legs" type="Node" parent="Snake"]
 script = ExtResource("2_qb7y7")
 segment = 1
-leg_distance = 50.0
-leg_spread = 20.0
-speed = 4.0
+leg_distance = 100.0
+leg_spread = 30.0
+speed = 15.0
 view_lines = true
 
 [node name="Legs2" type="Node" parent="Snake"]
 script = ExtResource("2_qb7y7")
 segment = 7
-leg_distance = 50.0
-leg_spread = 20.0
-speed = 4.0
+leg_distance = 100.0
+leg_spread = 30.0
+speed = 15.0
 view_lines = true

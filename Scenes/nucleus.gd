@@ -1,24 +1,24 @@
-extends Node2D
+extends RigidBody2D
 
 @export var rope: PackedScene
 @export var num_tentacles: int
+@export var tentacle_spread: float
+@export_range(0,1)
+var tentacle_frequency: float
+@export var tentacle_strength: float
+
 
 var tentacles: Array[Rope]
-var rays: Array[RayCast2D]
-
+var ray: RayCast2D
+var i: int = 0
 func _ready() -> void:
 	tentacles_factory()
-	rays_factory()
+	ray = get_node("RayCast2D")
 	
 func _physics_process(delta: float) -> void:
-	make_head_follow_mouse()
-	shoot_tentacles()
-
-# TODO: Refactor mousefollower to replace this.
-func make_head_follow_mouse() -> void:
-	var mouse_position := get_global_mouse_position()
-	position = mouse_position
-	look_at(mouse_position)
+	var interval = randf_range(0, 1)
+	if interval <= tentacle_frequency:
+		shoot_tentacles()
 
 func tentacles_factory() -> void:
 	for i in range(num_tentacles):
@@ -26,15 +26,10 @@ func tentacles_factory() -> void:
 		tentacle.start = self
 		get_tree().current_scene.add_child.call_deferred(tentacle)
 		tentacles.append(tentacle)
-
-func rays_factory() -> void:
-	for i in range(num_tentacles):
-		var ray: RayCast2D = RayCast2D.new()
-		add_child.call_deferred(ray)
-		ray.target_position = Vector2(1000, 0)
-		rays.append(ray)
 		
 func shoot_tentacles() -> void:
-	for i in range(num_tentacles):
-		var point: Vector2 = rays[i].get_collision_point()
-		tentacles[i].set_last(point)
+	ray.rotation_degrees = randf_range(-tentacle_spread/2, tentacle_spread/2)
+	var point: Vector2 = ray.get_collision_point()
+	tentacles[i].set_last(point)
+	i = (i + 1) % num_tentacles
+	apply_central_impulse((point - global_position).normalized() * tentacle_strength)

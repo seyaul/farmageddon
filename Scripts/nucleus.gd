@@ -6,6 +6,8 @@ extends RigidBody2D
 @export_range(0,1)
 var tentacle_frequency: float
 @export var tentacle_strength: float
+@export_enum("Random", "Cycle")
+var selection_type: String
 
 
 var tentacles: Array[Rope]
@@ -30,6 +32,9 @@ func tentacles_factory() -> void:
 func shoot_tentacles() -> void:
 	ray.rotation_degrees = randf_range(-tentacle_spread/2, tentacle_spread/2)
 	var point: Vector2 = ray.get_collision_point()
-	tentacles[i].set_last(point)
-	i = (i + 1) % num_tentacles
+	if selection_type == "Random":
+		tentacles[randi_range(0, tentacles.size() - 1)].set_last(point)
+	elif selection_type == "Cycle":
+		tentacles[i].set_last(point)
+		i = (i + 1) % num_tentacles
 	apply_central_impulse((point - global_position).normalized() * tentacle_strength)

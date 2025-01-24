@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctlif3ekflyje"]
 
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
-[ext_resource type="Script" path="res://Scenes/legs.gd" id="2_qb7y7"]
+[ext_resource type="Script" path="res://Scripts/legs.gd" id="2_qb7y7"]
 
 [node name="ExperimentalArea" type="Node2D"]
 

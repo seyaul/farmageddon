@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://xa5hj8l5aso"]
 
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="1_0q8jr"]
-[ext_resource type="Script" path="res://Scenes/nucleus.gd" id="1_6m2ry"]
+[ext_resource type="Script" path="res://Scripts/nucleus.gd" id="1_6m2ry"]
 [ext_resource type="PackedScene" uid="uid://bktr04ojl06im" path="res://Scenes/rope.tscn" id="2_mpde1"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_ydfsk"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="10_ionte"]
@@ -18,10 +18,11 @@ position = Vector2(438, 138)
 gravity_scale = 0.0
 script = ExtResource("1_6m2ry")
 rope = ExtResource("2_mpde1")
-num_tentacles = 5
-tentacle_spread = 20.0
+num_tentacles = 6
+tentacle_spread = 30.0
 tentacle_frequency = 0.3
 tentacle_strength = 300.0
+selection_type = "Random"
 
 [node name="Targeter" parent="Nucleus" node_paths=PackedStringArray("target") instance=ExtResource("2_ydfsk")]
 target = NodePath("../../Crosshairs")

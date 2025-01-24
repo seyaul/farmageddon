@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=14 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -11,63 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="11_4pwex"]
-[ext_resource type="Texture2D" uid="uid://bxc4jasivtxkw" path="res://Sprites/players blue x2.png" id="13_220vg"]
-
-[sub_resource type="Animation" id="Animation_oiism"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_wwmae"]
-resource_name = "idle"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_iun06"]
-resource_name = "run"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [24, 27, 26, 27]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hd5kx"]
-_data = {
-"RESET": SubResource("Animation_oiism"),
-"idle": SubResource("Animation_wwmae"),
-"run": SubResource("Animation_iun06")
-}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v1535"]
 radius = 9.0
@@ -77,18 +20,6 @@ height = 26.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jvk8e")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -33)
-scale = Vector2(2, 2)
-texture = ExtResource("13_220vg")
-hframes = 8
-vframes = 13
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_hd5kx")
-}
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_v1535")
@@ -100,7 +31,7 @@ disabled = true
 [node name="MoveController" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation")]
 script = ExtResource("2_4t6rf")
 initial_state = NodePath("Idle")
-animation = NodePath("../AnimationPlayer")
+animation = NodePath("")
 
 [node name="Idle" type="Node" parent="MoveController"]
 script = ExtResource("3_vyege")

@@ -137,4 +137,4 @@ shockwave_cooldown = 100
 [node name="Collider" type="CollisionShape2D" parent="Shockwave"]
 shape = SubResource("CircleShape2D_dqb8n")
 
-[node name="pistol" parent="." instance=ExtResource("8_oyd4g")]
+[node name="gun" parent="." instance=ExtResource("8_oyd4g")]

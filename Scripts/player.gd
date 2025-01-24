@@ -15,7 +15,7 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
-	var gun = $pistol
+	var gun = $gun
 	gun.bullet_fired.connect(_on_bullet_fired)
 
 func _physics_process(delta: float) -> void:

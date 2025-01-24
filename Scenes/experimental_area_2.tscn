@@ -18,11 +18,11 @@ position = Vector2(438, 138)
 gravity_scale = 0.0
 script = ExtResource("1_6m2ry")
 rope = ExtResource("2_mpde1")
-num_tentacles = 6
-tentacle_spread = 30.0
+num_tentacles = 5
+tentacle_spread = 10.0
 tentacle_frequency = 0.3
 tentacle_strength = 300.0
-selection_type = "Random"
+selection_type = "Cycle"
 
 [node name="Targeter" parent="Nucleus" node_paths=PackedStringArray("target") instance=ExtResource("2_ydfsk")]
 target = NodePath("../../Crosshairs")
@@ -31,6 +31,7 @@ target = NodePath("../../Crosshairs")
 shape = SubResource("CircleShape2D_mibb2")
 
 [node name="RayCast2D" type="RayCast2D" parent="Nucleus"]
+visible = false
 target_position = Vector2(10000, 0)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Nucleus"]

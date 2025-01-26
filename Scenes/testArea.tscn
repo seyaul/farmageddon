@@ -1,7 +1,8 @@
-[gd_scene load_steps=47 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=48 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
+[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_15dxa"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
@@ -583,7 +584,7 @@ vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.344, 11.0312, -22,
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-161.047, 325.333, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
 
-[sub_resource type="LabelSettings" id="LabelSettings_0ufmo"]
+[sub_resource type="LabelSettings" id="LabelSettings_cynuk"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -593,8 +594,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-161.047, 325.333, 82.3
 script = ExtResource("12_g3doo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
-scale = Vector2(0.29, 0.29)
-texture = ExtResource("13_abdpc")
+scale = Vector2(0.0995835, 0.084772)
+texture = ExtResource("3_15dxa")
 
 [node name="TestWall" type="StaticBody2D" parent="."]
 position = Vector2(1193, -418)
@@ -869,5 +870,5 @@ offset_top = 27.0
 offset_right = 428.0
 offset_bottom = 50.0
 text = "Ammo: 10"
-label_settings = SubResource("LabelSettings_0ufmo")
+label_settings = SubResource("LabelSettings_cynuk")
 horizontal_alignment = 1

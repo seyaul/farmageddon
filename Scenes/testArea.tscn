@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=47 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
@@ -583,6 +583,8 @@ vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.344, 11.0312, -22,
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-161.047, 325.333, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
 
+[sub_resource type="LabelSettings" id="LabelSettings_0ufmo"]
+
 [node name="TestLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("19_48ier")]
@@ -867,4 +869,5 @@ offset_top = 27.0
 offset_right = 428.0
 offset_bottom = 50.0
 text = "Ammo: 10"
+label_settings = SubResource("LabelSettings_0ufmo")
 horizontal_alignment = 1

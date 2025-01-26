@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 func reload():
 	emit_signal("disable_shooting")
+	ammo_bar.label_settings.font_color = Color.RED
 	ammo_bar.text = "Reloading"
 	await get_tree().create_timer(2).timeout
 	ammo = max_ammo
@@ -52,6 +53,8 @@ func _on_bullet_fired() -> void:
 
 func update_ammo_bar(new_ammo: int):
 	if new_ammo == 0:
+		ammo_bar.label_settings.font_color = Color.RED
 		ammo_bar.text = "No ammo left, press R to reload"
 		return
 	ammo_bar.text = "Ammo " + str(new_ammo)
+	ammo_bar.label_settings.font_color = Color.WHITE

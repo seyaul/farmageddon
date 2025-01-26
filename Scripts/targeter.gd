@@ -17,6 +17,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if not disabled:
+		#print(target, " target in targeter.gd")
 		dist = target.global_position - aimer.global_position
 		if abs(dist.x) > abs(dist.y):
 			if dist.x >= 0:

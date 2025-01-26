@@ -1,0 +1,215 @@
+[gd_scene load_steps=29 format=3 uid="uid://b6iembv0iwkkk"]
+
+[ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
+[ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
+[ext_resource type="Script" path="res://Scripts/followState.gd" id="3_51yba"]
+[ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
+[ext_resource type="Script" path="res://Scripts/repath.gd" id="5_3di07"]
+[ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="6_ur5l3"]
+[ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_riaty"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="8_yeokn"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="9_k6tbs"]
+[ext_resource type="Texture2D" uid="uid://c6f40dap2vb5a" path="res://Sprites/chicken_sprites/chicken back.png" id="10_ud1xo"]
+[ext_resource type="Texture2D" uid="uid://x0ub8hqevrdu" path="res://Sprites/chicken_sprites/chicken front.png" id="11_qvium"]
+[ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="12_qhifi"]
+[ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="13_ri64m"]
+
+[sub_resource type="Curve2D" id="Curve2D_5geu8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 113, -257, 0, 0, 0, 0, 285, -106, 0, 0, 0, 0, 306, -249, 0, 0, 0, 0, 113, -257)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0q2d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3odw"]
+atlas = ExtResource("10_ud1xo")
+region = Rect2(9, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bae3"]
+atlas = ExtResource("10_ud1xo")
+region = Rect2(76, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpl3b"]
+atlas = ExtResource("10_ud1xo")
+region = Rect2(143, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3men"]
+atlas = ExtResource("11_qvium")
+region = Rect2(5, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6csp"]
+atlas = ExtResource("11_qvium")
+region = Rect2(72, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t88lj"]
+atlas = ExtResource("11_qvium")
+region = Rect2(139, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqq48"]
+atlas = ExtResource("12_qhifi")
+region = Rect2(0, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa7in"]
+atlas = ExtResource("12_qhifi")
+region = Rect2(67, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv7pg"]
+atlas = ExtResource("12_qhifi")
+region = Rect2(134, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieugv"]
+atlas = ExtResource("13_ri64m")
+region = Rect2(5, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_giuef"]
+atlas = ExtResource("13_ri64m")
+region = Rect2(72, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xifoc"]
+atlas = ExtResource("13_ri64m")
+region = Rect2(139, 3, 49, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pggo2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3odw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bae3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpl3b")
+}],
+"loop": true,
+"name": &"backFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3men")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6csp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t88lj")
+}],
+"loop": true,
+"name": &"frontFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqq48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa7in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv7pg")
+}],
+"loop": true,
+"name": &"leftFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieugv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_giuef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xifoc")
+}],
+"loop": true,
+"name": &"rightFacingWalk",
+"speed": 5.0
+}]
+
+[node name="smartPather" type="Node2D"]
+
+[node name="EnemyPath" type="Path2D" parent="."]
+position = Vector2(85, -35)
+curve = SubResource("Curve2D_5geu8")
+
+[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(113, -257)
+rotation = 0.720474
+
+[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+collision_layer = 12
+collision_priority = 10.0
+motion_mode = 1
+
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_w0q2d")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+navigation_layers = 5
+avoidance_enabled = true
+radius = 111.01
+neighbor_distance = 10601.0
+time_horizon_agents = 0.0
+max_speed = 23332.3
+avoidance_mask = 5
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 5.0
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_f4cnc")
+initial_state = NodePath("Follow")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("2_t0fbs")
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("3_51yba")
+speed = 10000.0
+look_at_player = true
+action1 = "Lunge"
+action2 = "Lunge"
+distance_til_attack = 200.0
+num_attacks = 1
+attack_cooldown = 200
+
+[node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("4_dqm7w")
+phase_on_lunge = true
+max_distance = 300.0
+lunge_speed = 600.0
+
+[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("5_3di07")
+speed = 10000.0
+snap_distance = 2.0
+
+[node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("6_ur5l3")
+
+[node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_riaty")]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+damage = 5.0
+melee_duration = 1e+08
+
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
+script = ExtResource("8_yeokn")
+
+[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+position = Vector2(-150, 0)
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
+offset_rotation = 180.0
+
+[node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+rotation = -0.71733
+scale = Vector2(2.4, 2.4)
+sprite_frames = SubResource("SpriteFrames_pggo2")
+animation = &"backFacingWalk"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://egp61i4qaoru"]
+[gd_scene load_steps=32 format=3 uid="uid://egp61i4qaoru"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m4e61"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="6_aj3ae"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
+[ext_resource type="PackedScene" uid="uid://bdn7hps68h0is" path="res://Scenes/beam.tscn" id="8_7tnaf"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="12_er0hs"]
@@ -141,10 +142,11 @@ dash_speed = 75000.0
 remote_path = NodePath("../../Camera2D")
 
 [node name="Gun" parent="Player" instance=ExtResource("7_hvohm")]
-bullet = ExtResource("18_sjfa6")
+fire_type = "Continuous"
+bullet = ExtResource("8_7tnaf")
 projectile_speed = 30000.0
-automatic = false
 spread = 30.0
+bullets_per_fire = 6
 
 [node name="Melee" type="Node2D" parent="Player"]
 script = ExtResource("6_aj3ae")

@@ -16,10 +16,9 @@ var step_pos1: Vector2
 var step_pos2: Vector2
 
 var moving: bool = false
-var active_leg: int = 1  # 1 for leg1, 2 for leg2
+@export var active_leg: int = 1  # 1 for leg1, 2 for leg2
 var p1: float = 0
 var p2: float = 0
-
 @export var view_lines: bool
 @export var line_width: float = 1
 

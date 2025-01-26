@@ -20,10 +20,28 @@ leg_spread = 20.0
 speed = 5.0
 view_lines = true
 
-[node name="Legs2" type="Node" parent="Snake"]
+[node name="Legs3" type="Node" parent="Snake"]
+script = ExtResource("2_qb7y7")
+segment = 3
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 5.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs5" type="Node" parent="Snake"]
+script = ExtResource("2_qb7y7")
+segment = 5
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 5.0
+view_lines = true
+
+[node name="Legs7" type="Node" parent="Snake"]
 script = ExtResource("2_qb7y7")
 segment = 7
 leg_distance = 60.0
 leg_spread = 20.0
 speed = 5.0
+active_leg = 2
 view_lines = true

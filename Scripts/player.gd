@@ -31,15 +31,6 @@ func _physics_process(delta: float) -> void:
 		emit_signal("melee")
 	if Input.is_action_just_pressed("shockwave"):
 		emit_signal("shockwave")
-	if Input.is_action_just_pressed("move_down"):
-		animation.play("frontFacingWalk")
-	elif Input.is_action_just_pressed("move_up"):
-		animation.play("backFacingWalk")
-	elif Input.is_action_just_pressed("move_left"):
-		animation.play("leftFacingWalk")
-	elif Input.is_action_just_pressed("move_right"):
-		animation.play("rightFacingWalk")
-	
 
 	if Input.is_action_just_pressed("reload"):
 		reload()

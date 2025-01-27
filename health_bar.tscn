@@ -1,197 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://cygwvk1v3feuj"]
+[gd_scene load_steps=4 format=3 uid="uid://cygwvk1v3feuj"]
 
 [ext_resource type="Script" path="res://health_bar.gd" id="1_ra2bk"]
-[ext_resource type="Texture2D" uid="uid://dcqrjlggdk2w6" path="res://Sprites/Fuel Gauge.png" id="1_yoi7h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5xbr"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6spo5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ajfy0"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_78xb2"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rnv5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oaha5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pqnm5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_un4dx"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7l55m"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(96, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lvfe3"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(128, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rja0"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eftgs"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(32, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mqod8"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glcd1"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(96, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_17slc"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(128, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrsgj"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vkyjo"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(32, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hdat1"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(64, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7y63c"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvxlo"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(128, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4fswx"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tvu8h"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(32, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_80ng5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(64, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kv8c5"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(96, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1jwg"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(128, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0jwx8"]
-atlas = ExtResource("1_yoi7h")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pvgc5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5xbr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6spo5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ajfy0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_78xb2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rnv5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oaha5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pqnm5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_un4dx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7l55m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lvfe3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8rja0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eftgs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mqod8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glcd1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_17slc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xrsgj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vkyjo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hdat1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7y63c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvxlo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4fswx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tvu8h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_80ng5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kv8c5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e1jwg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0jwx8")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://cktligyrmgorm" path="res://Sprites/Black_Fuel_Gauge.png" id="3_rewod"]
+[ext_resource type="Texture2D" uid="uid://c8ogcvh1gldrh" path="res://Sprites/Fuel Gauge-Notch.png" id="4_ir1au"]
 
 [node name="HealthBar" type="MarginContainer"]
 offset_right = 100.0
@@ -200,10 +11,18 @@ pivot_offset = Vector2(154, 44)
 script = ExtResource("1_ra2bk")
 health = 100.0
 animation_speed = 3.0
+vibration_range = 1
+vibration_speed = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 5
+[node name="Heat_Gauge" type="Sprite2D" parent="."]
+texture_filter = 3
 position = Vector2(104, 104)
 scale = Vector2(6.475, 6.475)
-sprite_frames = SubResource("SpriteFrames_pvgc5")
-frame = 1
+texture = ExtResource("3_rewod")
+
+[node name="Needle" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(107, 104)
+rotation = 1.22697
+scale = Vector2(6.475, 6.475)
+texture = ExtResource("4_ir1au")

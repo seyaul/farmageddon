@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
+[ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
 [ext_resource type="PackedScene" uid="uid://ch8sblcgx4rnm" path="res://Scenes/player.tscn" id="19_48ier"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
@@ -1087,8 +1088,8 @@ offset_bottom = 26.0
 
 [node name="TestWall" type="StaticBody2D" parent="walls"]
 position = Vector2(1193, -418)
-collision_layer = 5
-collision_mask = 5
+collision_layer = 15
+collision_mask = 15
 
 [node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
 position = Vector2(-33, 416.75)
@@ -1105,3 +1106,6 @@ shape = SubResource("RectangleShape2D_pk34s")
 [node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
 position = Vector2(-1209, 1042)
 shape = SubResource("RectangleShape2D_pk34s")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_iwkse")

@@ -7,13 +7,15 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.numRuns += 1
+	var music = get_node("AudioStreamPlayer")
+	music.play()
 	for i in range(30):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
 		#enemy_instance.print_tree() (GOATED FUNCTION)
 		if chicken_instance and bull_instance is Node2D:
-			chicken_instance.position = Vector2(randf_range(-1,1)* 850, randf_range(-1,1) * 300)
-			bull_instance.position = Vector2(randf_range(-1,1)* 850, randf_range(-1,1) * 300)
+			chicken_instance.position = Vector2(randf_range(-1,1)* 700, randf_range(-1,1) * 300)
+			bull_instance.position = Vector2(randf_range(-1,1)* 700, randf_range(-1,1) * 300)
 			var targeterNodeChicken = bull_instance.get_node("EnemyPath/EnemyGuide/SmartPather/Targeter")
 			var followNodeChicken = bull_instance.get_node("EnemyPath/EnemyGuide/SmartPather/EMovementController/Follow")
 			var targeterNodeBull = chicken_instance.get_node("EnemyPath/EnemyGuide/Shooter/Targeter")

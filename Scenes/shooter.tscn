@@ -137,6 +137,7 @@ animations = [{
 curve = SubResource("Curve2D_kv3oi")
 
 [node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(113, -257)
 rotation = 0.720474
 
 [node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]

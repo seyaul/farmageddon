@@ -202,6 +202,7 @@ melee_duration = 1e+08
 script = ExtResource("8_yeokn")
 
 [node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+position = Vector2(-150, 0)
 
 [node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
 offset_rotation = 180.0

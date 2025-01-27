@@ -1,9 +1,12 @@
-[gd_scene load_steps=47 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=63 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
-[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_15dxa"]
+[ext_resource type="Texture2D" uid="uid://cvn3eg0wbunhm" path="res://Sprites/player_sprites/tractor back.png" id="2_vp2pu"]
+[ext_resource type="Texture2D" uid="uid://b64wx5twutooy" path="res://Sprites/player_sprites/tractor front.png" id="3_icigb"]
+[ext_resource type="Texture2D" uid="uid://xtnnbr73fiae" path="res://Sprites/player_sprites/tractor left.png" id="4_a7c5a"]
+[ext_resource type="Texture2D" uid="uid://bj3hl2wo7wccb" path="res://Sprites/player_sprites/tractor right.png" id="5_h7rj6"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
@@ -24,6 +27,113 @@
 [ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="24_ptp05"]
 [ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="25_466ib"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qqn0"]
+atlas = ExtResource("2_vp2pu")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejtpq"]
+atlas = ExtResource("2_vp2pu")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2lo3"]
+atlas = ExtResource("2_vp2pu")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey4qx"]
+atlas = ExtResource("3_icigb")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7frj"]
+atlas = ExtResource("3_icigb")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vubqg"]
+atlas = ExtResource("3_icigb")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhau6"]
+atlas = ExtResource("4_a7c5a")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck1ey"]
+atlas = ExtResource("4_a7c5a")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pug44"]
+atlas = ExtResource("4_a7c5a")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78l3k"]
+atlas = ExtResource("5_h7rj6")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghupv"]
+atlas = ExtResource("5_h7rj6")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie160"]
+atlas = ExtResource("5_h7rj6")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xy541"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qqn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejtpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2lo3")
+}],
+"loop": true,
+"name": &"backFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey4qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7frj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vubqg")
+}],
+"loop": true,
+"name": &"frontFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhau6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck1ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pug44")
+}],
+"loop": true,
+"name": &"leftFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78l3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghupv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie160")
+}],
+"loop": true,
+"name": &"rightFacingWalk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
 size = Vector2(101, 53)
@@ -583,19 +693,25 @@ vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0312, -22,
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
 
-[sub_resource type="LabelSettings" id="LabelSettings_cynuk"]
+[sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
 
 [node name="Player" parent="." instance=ExtResource("19_48ier")]
+visible = false
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xy541")
+animation = &"rightFacingWalk"
 
 [node name="Crosshairs" type="Node2D" parent="."]
 script = ExtResource("12_g3doo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
-scale = Vector2(0.0995835, 0.084772)
-texture = ExtResource("3_15dxa")
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("13_abdpc")
 
 [node name="TestWall" type="StaticBody2D" parent="."]
 position = Vector2(1193, -418)
@@ -786,7 +902,7 @@ offset_top = 27.0
 offset_right = 428.0
 offset_bottom = 50.0
 text = "Ammo: 10"
-label_settings = SubResource("LabelSettings_cynuk")
+label_settings = SubResource("LabelSettings_tiuqs")
 horizontal_alignment = 1
 
 [connection signal="died" from="EnemyPath/EnemyGuide/Shooter/Health" to="." method="_on_health_died"]

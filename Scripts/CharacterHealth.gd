@@ -33,4 +33,5 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print(character.name, " died!")
+	died.emit()
 	character.queue_free()

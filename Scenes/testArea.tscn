@@ -699,7 +699,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3
 script = ExtResource("1_36u1n")
 
 [node name="Player" parent="." instance=ExtResource("19_48ier")]
-visible = false
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player"]
 scale = Vector2(3, 3)

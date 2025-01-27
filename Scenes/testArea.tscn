@@ -1,19 +1,17 @@
-[gd_scene load_steps=48 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=47 format=4 uid="uid://dbrhfubmgwcq5"]
 
+[ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_15dxa"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="7_hvohm"]
-[ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_xw0bk"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
 [ext_resource type="Script" path="res://Scripts/followState.gd" id="14_23un6"]
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="14_105eu"]
-[ext_resource type="Script" path="res://Scripts/lungeState.gd" id="15_l723w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="18_bttjw"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="18_sjfa6"]
 [ext_resource type="PackedScene" uid="uid://ch8sblcgx4rnm" path="res://Scenes/player.tscn" id="19_48ier"]
 [ext_resource type="Script" path="res://Scripts/shootState.gd" id="20_4fwto"]
@@ -25,6 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="24_jtuc3"]
 [ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="24_ptp05"]
 [ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="25_466ib"]
+[ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
 size = Vector2(101, 53)
@@ -580,13 +579,14 @@ texture = ExtResource("23_llv11")
 sources/0 = SubResource("TileSetAtlasSource_n00rv")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.344, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 3.92188, 0.351562, -151.047, 315.344, 7.47656, -41.3594, -151.047, -86.1016, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
+vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 3.92188, 0.351562, -150.953, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-161.047, 325.333, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_cynuk"]
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_36u1n")
 
 [node name="Player" parent="." instance=ExtResource("19_48ier")]
 
@@ -650,92 +650,6 @@ script = ExtResource("17_y4wtn")
 speed = 10000.0
 snap_distance = 2.0
 
-[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
-collision_layer = 12
-collision_priority = 10.0
-motion_mode = 1
-
-[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-scale = Vector2(6.24, 6.24)
-shape = SubResource("RectangleShape2D_skhiw")
-
-[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-visible = false
-texture = ExtResource("13_abdpc")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-navigation_layers = 5
-avoidance_enabled = true
-radius = 111.01
-neighbor_distance = 10601.0
-time_horizon_agents = 0.0
-max_speed = 23332.3
-avoidance_mask = 5
-debug_use_custom = true
-debug_path_custom_color = Color(0, 0, 1, 1)
-debug_path_custom_point_size = 10.0
-debug_path_custom_line_width = 5.0
-
-[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_t0tql")
-initial_state = NodePath("Follow")
-
-[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("aggro_target")]
-script = ExtResource("24_jtuc3")
-aggro_target = NodePath("../../../../../Player")
-
-[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
-script = ExtResource("14_23un6")
-follow_target = NodePath("../../../../../Player")
-speed = 10000.0
-look_at_player = true
-action1 = "Lunge"
-action2 = "Lunge"
-distance_til_attack = 200.0
-num_attacks = 1
-attack_cooldown = 200
-
-[node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
-script = ExtResource("15_l723w")
-phase_on_lunge = true
-max_distance = 300.0
-lunge_speed = 600.0
-
-[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
-script = ExtResource("17_y4wtn")
-speed = 10000.0
-snap_distance = 2.0
-
-[node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController" node_paths=PackedStringArray("follow_target")]
-script = ExtResource("18_bttjw")
-follow_target = NodePath("../../../../../Player")
-
-[node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_xw0bk")]
-collision_layer = 0
-collision_mask = 1
-monitorable = false
-damage = 5.0
-melee_duration = 1e+08
-
-[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
-script = ExtResource("10_m1hln")
-
-[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(-150, 0)
-
-[node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" node_paths=PackedStringArray("target") instance=ExtResource("1_mswu8")]
-target = NodePath("../../../../Player")
-offset_rotation = 180.0
-
-[node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(-6.01845e-06, -6.89908e-06)
-rotation = -0.71733
-scale = Vector2(2.4, 2.4)
-sprite_frames = SubResource("SpriteFrames_8karc")
-animation = &"backFacingWalk"
-frame = 2
-frame_progress = 0.39788
-
 [node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
 position = Vector2(43.8487, 350.065)
 rotation = -0.720474
@@ -751,7 +665,6 @@ neighbor_distance = 10601.0
 time_horizon_agents = 0.0
 max_speed = 23332.3
 avoidance_mask = 5
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 0, 1, 1)
 debug_path_custom_point_size = 10.0
@@ -824,12 +737,15 @@ tile_set = SubResource("TileSet_78xdq")
 [node name="Node2D" type="Node2D" parent="tempbgtiles"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+z_index = 1
 position = Vector2(367, -344)
 scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
+script = ExtResource("27_1laov")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+visible = false
 position = Vector2(3.92281, -22)
 scale = Vector2(0.106022, 0.333333)
 radius = 67.06
@@ -872,3 +788,5 @@ offset_bottom = 50.0
 text = "Ammo: 10"
 label_settings = SubResource("LabelSettings_cynuk")
 horizontal_alignment = 1
+
+[connection signal="died" from="EnemyPath/EnemyGuide/Shooter/Health" to="." method="_on_health_died"]

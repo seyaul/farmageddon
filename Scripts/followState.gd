@@ -25,7 +25,9 @@ var time: int
 func Enter():
 	enemy = get_parent().get_parent()
 	navigation = enemy.get_node("NavigationAgent2D")
+	#print(navigation)
 	targeter = enemy.get_node("Targeter")
+	#print(targeter)
 	if targeter && not look_at_player:
 		targeter.disabled = true
 

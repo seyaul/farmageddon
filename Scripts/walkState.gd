@@ -23,14 +23,15 @@ func Update(_delta: float):
 	if Input.is_action_pressed("move_down"):
 		direction.y += 1
 
-	if direction.x == 1:
-		mc.animation.play("rightFacingWalk")
-	elif direction.x == -1:
-		mc.animation.play("leftFacingWalk")
-	elif direction.y == 1:
-		mc.animation.play("frontFacingWalk")
-	elif direction.y == -1:
-		mc.animation.play("backFacingWalk")
+	if mc.animation:
+		if direction.x == 1:
+			mc.animation.play("rightFacingWalk")
+		elif direction.x == -1:
+			mc.animation.play("leftFacingWalk")
+		elif direction.y == 1:
+			mc.animation.play("frontFacingWalk")
+		elif direction.y == -1:
+			mc.animation.play("backFacingWalk")
 	character.move_and_slide()
 	
 	if direction != Vector2.ZERO:

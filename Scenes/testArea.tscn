@@ -787,5 +787,3 @@ offset_bottom = 50.0
 text = "Ammo: 10"
 label_settings = SubResource("LabelSettings_tiuqs")
 horizontal_alignment = 1
-
-[connection signal="died" from="EnemyPath/EnemyGuide/Shooter/Health" to="." method="_on_health_died"]

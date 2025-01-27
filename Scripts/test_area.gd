@@ -31,5 +31,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-		if Global.enemyCount == 0:
+		if Global.enemyCount < 0:
 			get_tree().change_scene_to_file("res://Scenes/Map.tscn")

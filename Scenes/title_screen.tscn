@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkqg5oxyd33m1"]
+[gd_scene load_steps=7 format=3 uid="uid://bkqg5oxyd33m1"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_jkwuf"]
 [ext_resource type="Texture2D" uid="uid://xt7ni05fn3p" path="res://Sprites/play only (3).png" id="2_ov175"]
 [ext_resource type="Texture2D" uid="uid://c02tuahrhu715" path="res://Sprites/Screenshot 2025-01-27 at 2.00.17 AM.png" id="3_a8g00"]
 [ext_resource type="Texture2D" uid="uid://blng3b73snt52" path="res://Sprites/Screenshot 2025-01-27 at 1.58.25 AM.png" id="4_jtm1o"]
 [ext_resource type="Texture2D" uid="uid://bw7kplolpkvxu" path="res://Sprites/Screenshot 2025-01-27 at 1.59.26 AM.png" id="5_ggvn1"]
+[ext_resource type="AudioStream" uid="uid://bmd2ih60gwxiy" path="res://audio/startscreen.mp3" id="6_ks3sl"]
 
 [node name="TitleScreen" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -41,5 +42,8 @@ offset_bottom = 688.667
 texture_normal = ExtResource("3_a8g00")
 texture_pressed = ExtResource("4_jtm1o")
 texture_hover = ExtResource("5_ggvn1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ks3sl")
 
 [connection signal="pressed" from="Control/CanvasLayer/CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]

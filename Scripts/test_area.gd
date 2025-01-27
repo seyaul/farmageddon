@@ -9,7 +9,7 @@ func _ready() -> void:
 	Global.numRuns += 1
 	var music = get_node("AudioStreamPlayer")
 	music.play()
-	for i in range(30):
+	for i in range(50):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
 		#enemy_instance.print_tree() (GOATED FUNCTION)

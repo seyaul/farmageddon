@@ -1,7 +1,7 @@
 extends State
 
 @export var follow_target: Node2D
-@export var speed: float = 100
+@export var speed: float = 25
 @export var bias: float = 0.5
 @export var look_at_player: bool
 @export var max_deviation_distance: float

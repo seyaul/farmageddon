@@ -28,9 +28,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("scroll_up"):
-		camera_2d.position.y -= SCROLL_SPEED
+		camera_2d.position.y -= SCROLL_SPEED * 1000
 	elif event.is_action_pressed("scroll_down"):
-		camera_2d.position.y += SCROLL_SPEED
+		camera_2d.position.y += SCROLL_SPEED * 1000
 
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
 		

@@ -8,6 +8,7 @@ signal died
 
 var character: CharacterBody2D
 func _ready() -> void:
+	Global.incrementEnemyCount()
 	current_health = max_health
 	character = get_parent()
 	
@@ -33,5 +34,5 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print(character.name, " died!")
-	died.emit()
+	Global.decrementEnemyCount()
 	character.queue_free()

@@ -14,7 +14,7 @@ const ICONS := {
 	Room.Type.BOSS: [preload("res://Sprites/vampire_v1_1.png"), Vector2(1.25, 1.25)]
 }
 
-@onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
+@onready var sprite_2d: TextureButton = $Visuals/TextureButton
 @onready var line_2d: Line2D = $Visuals/Line2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -35,8 +35,8 @@ func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
 	line_2d.rotation_degrees = randi_range(0, 360)
-	sprite_2d.texture = ICONS[room.type][0]
-	sprite_2d.scale = ICONS[room.type][1]
+	#sprite_2d.texture = ICONS[room.type][0]
+	#sprite_2d.scale = ICONS[room.type][1]
 
 
 func show_selected() -> void:
@@ -49,9 +49,26 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 	room.selected = true
 	clicked.emit(room)
+	print("selected")
 	animation_player.play("Select")
 
 
-# Called by the AnimationPLayer when the "Select" animation finishes
+# Called by the AnimationPlayer when the "Select" animation finishes
 func _on_map_room_selected() -> void:
 	selected.emit(room)
+	get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+	print("selected")
+
+
+func _on_selected(room: Room) -> void:
+	selected.emit(room)
+	get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+	print("selected")
+
+
+func _on_texture_button_pressed() -> void:
+	room.selected = true
+	#clicked.emit(room)
+	get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+	print("selected")
+	animation_player.play("Select")

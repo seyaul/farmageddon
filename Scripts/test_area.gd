@@ -2,9 +2,11 @@ extends Node2D
 
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
+@export var enemyCount: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	enemyCount = 60
 	for i in range(30):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
@@ -29,4 +31,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if(enemyCount == 0):
+		#get_tree().change_scene_to_file("placeholder")
+		pass
+
+
+func _on_health_died() -> void:
+	enemyCount -= 1
+	print(enemyCount)

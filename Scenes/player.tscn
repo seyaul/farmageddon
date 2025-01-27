@@ -28,10 +28,9 @@ debug_color = Color(1.2514e-06, 0.646022, 0.246912, 0.42)
 [node name="Targeter" parent="." instance=ExtResource("1_f2wt3")]
 disabled = true
 
-[node name="MoveController" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation")]
+[node name="MoveController" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_4t6rf")
 initial_state = NodePath("Idle")
-animation = NodePath("")
 
 [node name="Idle" type="Node" parent="MoveController"]
 script = ExtResource("3_vyege")

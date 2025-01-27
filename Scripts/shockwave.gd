@@ -5,8 +5,10 @@ extends Area2D
 @export var shockwave_radius: float
 @export var shockwave_strength: float
 @export var shockwave_falloff: bool
-@export var max_shockwaves: int = 1
-@export var shockwave_cooldown: int = 1
+#@export var max_shockwaves: int = 1
+#@export var shockwave_cooldown: int = 1
+@export var max_shockwaves: int = 100
+@export var shockwave_cooldown: int = 0.1
 
 var collider: CollisionShape2D
 var shockwaves: int

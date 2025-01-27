@@ -4,6 +4,7 @@ extends Node
 var current_health: float
 signal damage_taken
 signal healed
+signal died
 
 var character: CharacterBody2D
 func _ready() -> void:

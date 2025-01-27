@@ -3,6 +3,7 @@ extends Node
 @export var max_health: float = 100
 var current_health: float
 signal damage_taken
+signal character_died
 signal healed
 
 var character: CharacterBody2D
@@ -32,4 +33,6 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print(character.name, " died!")
+	character_died.emit() #may not need this, just being safe
+	emit_signal("character_died", self)
 	character.queue_free()

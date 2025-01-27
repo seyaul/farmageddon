@@ -49,9 +49,16 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 	room.selected = true
 	clicked.emit(room)
+	print("selected")
 	animation_player.play("Select")
 
 
-# Called by the AnimationPLayer when the "Select" animation finishes
+# Called by the AnimationPlayer when the "Select" animation finishes
 func _on_map_room_selected() -> void:
 	selected.emit(room)
+	get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+	print("selected")
+
+
+func _on_selected(room: Room) -> void:
+	pass # Replace with function body.

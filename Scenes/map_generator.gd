@@ -1,3 +1,4 @@
+
 class_name MapGenerator
 extends Node
 
@@ -44,20 +45,29 @@ func _generate_initial_grid() -> Array[Array]:
 	
 	for i in FLOORS:
 		var adjacent_rooms: Array[Room]= []
-		
-		for j in MAP_WIDTH:
-			var current_room := Room.new()
+		if i == 0:
+			# Create a single room in the middle of the map width
+			var single_room := Room.new()
 			var offset := Vector2(randf(), randf()) * PLACEMENT_RANDOMNESS
-			current_room.position = Vector2(j * X_DIST, i * -Y_DIST) + offset
-			current_room.row = i
-			current_room.column = j
-			current_room.next_rooms = []
+			single_room.position = Vector2(floor(MAP_WIDTH * 0.5) * X_DIST, i * -Y_DIST) + offset
+			single_room.row = i
+			single_room.column = floor(MAP_WIDTH * 0.5)
+			single_room.next_rooms = []
+			adjacent_rooms.append(single_room)
+		else:
+			for j in MAP_WIDTH:
+				var current_room := Room.new()
+				var offset := Vector2(randf(), randf()) * PLACEMENT_RANDOMNESS
+				current_room.position = Vector2(j * X_DIST, i * -Y_DIST) + offset
+				current_room.row = i
+				current_room.column = j
+				current_room.next_rooms = []
 			
 			# Boss room has a non-random Y
-			if i == FLOORS - 1:
-				current_room.position.y = (i + 1) * -Y_DIST
+				if i == FLOORS - 1:
+					current_room.position.y = (i + 1) * -Y_DIST
 			
-			adjacent_rooms.append(current_room)
+				adjacent_rooms.append(current_room)
 			
 		result.append(adjacent_rooms)
 
@@ -83,17 +93,24 @@ func _get_random_starting_points() -> Array[int]:
 
 
 func _setup_connection(i: int, j: int) -> int:
-	var next_room: Room = null
-	var current_room := map_data[i][j] as Room
+	if i == 0:
+		# Special case: if on the first floor, connect to all rooms on the second floor
+		var first_room := map_data[0][0] as Room
+		var next_room := map_data[1][floor(MAP_WIDTH * 0.5)] as Room
+		first_room.next_rooms.append(next_room)
+		return first_room.column
+	else:
+		var next_room: Room = null
+		var current_room := map_data[i][j] as Room
 	
-	# Call existing path method to check if paths would cross
-	while not next_room or _would_cross_existing_path(i, j, next_room):
-		var random_j := clampi(randi_range(j - 1, j + 1), 0, MAP_WIDTH - 1)
-		next_room = map_data[i + 1][random_j]
+		# Call existing path method to check if paths would cross
+		while not next_room or _would_cross_existing_path(i, j, next_room):
+			var random_j := clampi(randi_range(j - 1, j + 1), 0, MAP_WIDTH - 1)
+			next_room = map_data[i + 1][random_j]
 		
-	current_room.next_rooms.append(next_room)
+		current_room.next_rooms.append(next_room)
 	
-	return next_room.column
+		return next_room.column
 
 
 func _would_cross_existing_path(i: int, j: int, room: Room) -> bool:
@@ -145,9 +162,8 @@ func _setup_random_room_weights() -> void:
 
 func _setup_room_types() -> void:
 	# Every room on the first floor is a monster room
-	for room: Room in map_data[0]:
-		if room.next_rooms.size() > 0:
-				room.type = Room.Type.MONSTER
+	if map_data[0].size() > 0:
+		map_data[0][0].type = Room.Type.MONSTER
 				
 	# Every room on the sixth floor is a treasure room
 	for room: Room in map_data[5]:
@@ -197,22 +213,28 @@ func _set_room_randomly(room_to_set: Room) -> void:
 
 func _room_has_parent_of_type(room: Room, type: Room.Type) -> bool:
 	var parents: Array[Room] = []
-	# Safeguards for the leftmost parent
-	if room.column > 0 and room.row > 0:
-		var parent_candidate := map_data[room.row - 1][room.column - 1] as Room
-		if parent_candidate.next_rooms.has(room):
-			parents.append(parent_candidate)
-	# Safeguards for the bottom row
-	if room.row > 0:
-		var parent_candidate := map_data[room.row - 1][room.column] as Room
-		if parent_candidate.next_rooms.has(room):
-			parents.append(parent_candidate)
-	# Safeguards for the rightmost parent
-	if room.column < MAP_WIDTH-1 and room.row > 0:
-		var parent_candidate := map_data[room.row - 1][room.column + 1] as Room
-		if parent_candidate.next_rooms.has(room):
-			parents.append(parent_candidate)
 	
+	# Ensure map_data has enough rows and columns before accessing
+	if room.row > 0 and room.row - 1 < map_data.size():
+		# Safeguard for the leftmost parent
+		if room.column > 0 and room.column - 1 < map_data[room.row - 1].size():
+			var parent_candidate := map_data[room.row - 1][room.column - 1] as Room
+			if parent_candidate.next_rooms.has(room):
+				parents.append(parent_candidate)
+		
+		# Safeguard for the parent directly above
+		if room.column < map_data[room.row - 1].size():
+			var parent_candidate := map_data[room.row - 1][room.column] as Room
+			if parent_candidate.next_rooms.has(room):
+				parents.append(parent_candidate)
+		
+		# Safeguard for the rightmost parent
+		if room.column + 1 < map_data[room.row - 1].size():
+			var parent_candidate := map_data[room.row - 1][room.column + 1] as Room
+			if parent_candidate.next_rooms.has(room):
+				parents.append(parent_candidate)
+	
+	# Check if any parent matches the desired type
 	for parent: Room in parents:
 		if parent.type == type:
 			return true

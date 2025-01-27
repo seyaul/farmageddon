@@ -100,7 +100,15 @@ width = 2.0
 default_color = Color(0.594877, 0.629716, 0.713622, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+visible = false
 texture = ExtResource("2_rpiir")
+
+[node name="TextureButton" type="TextureButton" parent="Visuals"]
+offset_left = -8.47606
+offset_top = -8.47606
+offset_right = 31.5239
+offset_bottom = 31.5239
+texture_normal = ExtResource("2_rpiir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v6l8v")
@@ -111,4 +119,6 @@ libraries = {
 }
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="selected" from="." to="." method="_on_selected"]
+[connection signal="pressed" from="Visuals/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_map_room_selected"]

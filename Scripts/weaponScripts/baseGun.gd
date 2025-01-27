@@ -19,6 +19,7 @@ var fire_type: String = "Discrete"
 @export var spread: float = 0
 @export var bullets_per_fire: int = 1
 @export var magazine_size: int = 10
+var active_shooting: bool = true
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -27,6 +28,8 @@ var beam: Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().shoot.connect(handle_signal)
+	get_parent().disable_shooting.connect(disable_shooting_handler)
+	get_parent().enable_shooting.connect(enable_shooting_handler)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -47,6 +50,8 @@ func handle_signal(action: String, delta) -> void:
 		time = 0
 
 func fire(delta: float) -> void:
+	if !active_shooting:
+		return
 	# Get the mouse position in global coordinates
 	var mouse_position = get_global_mouse_position()
 	var direction_to_mouse = (mouse_position - global_position).normalized()
@@ -77,3 +82,9 @@ func fire(delta: float) -> void:
 			add_child(beam)
 		else:
 			beam.apply_damage()
+
+func disable_shooting_handler():
+	active_shooting = false
+
+func enable_shooting_handler():
+	active_shooting = true

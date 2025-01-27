@@ -49,10 +49,11 @@ func create_shockwave() -> void:
 func _on_body_entered(body) -> void:
 	apply_damage(body)
 		
-func apply_damage(body) -> void:   
-	var health = body.get_node("Health")
-	if is_instance_valid(health):
-		health.take_damage(damage)
+func apply_damage(body) -> void:  
+	if body.has_node("Health"): 
+		var health = body.get_node("Health")
+		if is_instance_valid(health):
+			health.take_damage(damage)
 		
 func push_away(bodies) -> void:
 	for body in bodies:

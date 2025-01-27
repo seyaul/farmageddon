@@ -6,13 +6,14 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.numRuns += 1
 	for i in range(30):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
 		#enemy_instance.print_tree() (GOATED FUNCTION)
 		if chicken_instance and bull_instance is Node2D:
-			chicken_instance.position = Vector2(randf_range(-1,1)* 1000, randf_range(-1,1) * 500)
-			bull_instance.position = Vector2(randf_range(-1,1)* 1000, randf_range(-1,1) * 500)
+			chicken_instance.position = Vector2(randf_range(-1,1)* 850, randf_range(-1,1) * 300)
+			bull_instance.position = Vector2(randf_range(-1,1)* 850, randf_range(-1,1) * 300)
 			var targeterNodeChicken = bull_instance.get_node("EnemyPath/EnemyGuide/SmartPather/Targeter")
 			var followNodeChicken = bull_instance.get_node("EnemyPath/EnemyGuide/SmartPather/EMovementController/Follow")
 			var targeterNodeBull = chicken_instance.get_node("EnemyPath/EnemyGuide/Shooter/Targeter")
@@ -31,5 +32,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-		if Global.enemyCount < 0:
+		# There is two left over in the player and the pather. However, whenever you restart the 
+		# game, another 2 is left over. 
+		if Global.enemyCount == 2 * Global.numRuns:
 			get_tree().change_scene_to_file("res://Scenes/Map.tscn")

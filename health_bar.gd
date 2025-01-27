@@ -46,8 +46,8 @@ func setHealthBar():
 
 func update_rotation(delta: float) -> void:
 	var health_fraction = curr_health / health
-	print(curr_health, " curr health")
-	print(health_fraction, " health fraction")
+	#print(curr_health, " curr health")
+	#print(health_fraction, " health fraction")
 	var target_rotation = lerp(initial_rotation, final_rotation, health_fraction)
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation, rotation_smooth_speed * delta)
 

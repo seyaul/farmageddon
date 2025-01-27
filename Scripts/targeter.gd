@@ -10,7 +10,7 @@ var dist: Vector2
 func _ready() -> void:
 	aimer = get_parent()
 	# Better way to do this? Bad coding practice
-	if(aimer.get_node("EnemySprite2") != null):
+	if aimer.has_node("EnemySprite2"):
 		animatedSprite = aimer.get_node("EnemySprite2")
 	
 
@@ -18,17 +18,20 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not disabled:
 		#print(target, " target in targeter.gd")
-		dist = target.global_position - aimer.global_position
-		if abs(dist.x) > abs(dist.y):
-			if dist.x >= 0:
-				animatedSprite.play("rightFacingWalk")
-			else:
-				animatedSprite.play("leftFacingWalk")
-		elif abs(dist.x) < abs(dist.y):
-			if dist.y >= 0:
-				animatedSprite.play("frontFacingWalk")
-			else: 
-				animatedSprite.play("backFacingWalk")
+		if is_instance_valid(target) and is_instance_valid(aimer):
+			dist = target.global_position - aimer.global_position
+			if abs(dist.x) > abs(dist.y):
+				if dist.x >= 0:
+					animatedSprite.play("rightFacingWalk")
+				else:
+					animatedSprite.play("leftFacingWalk")
+			elif abs(dist.x) < abs(dist.y):
+				if dist.y >= 0:
+					animatedSprite.play("frontFacingWalk")
+				else: 
+					animatedSprite.play("backFacingWalk")
+		elif !is_instance_valid(target):
+			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 			
 		#aimer.look_at(target.global_position)
 		#aimer.rotation_degrees += offset_rotation

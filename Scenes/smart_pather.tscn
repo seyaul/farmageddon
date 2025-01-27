@@ -132,7 +132,6 @@ animations = [{
 [node name="smartPather" type="Node2D"]
 
 [node name="EnemyPath" type="Path2D" parent="."]
-position = Vector2(85, -35)
 curve = SubResource("Curve2D_5geu8")
 
 [node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
@@ -196,14 +195,13 @@ script = ExtResource("6_ur5l3")
 collision_layer = 0
 collision_mask = 1
 monitorable = false
-damage = 5.0
+damage = 1.0
 melee_duration = 1e+08
 
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
 script = ExtResource("8_yeokn")
 
 [node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(-150, 0)
 
 [node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
 offset_rotation = 180.0

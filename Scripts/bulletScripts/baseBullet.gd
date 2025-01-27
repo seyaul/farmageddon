@@ -44,11 +44,11 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 	print("detected")
 	
 	var collider = collision.get_collider()
-	var enemy_health = collider.get_node("Health")
-	
-	if enemy_health and enemy_health.has_method("take_damage"):
-		print("damaging enemy")
-		enemy_health.take_damage(20)  
+	if collider.has_node("Health"):
+		var enemy_health = collider.get_node("Health")
+		if enemy_health and enemy_health.has_method("take_damage"):
+			print("damaging enemy")
+			enemy_health.take_damage(20)  
 
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO

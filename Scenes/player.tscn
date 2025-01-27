@@ -219,6 +219,6 @@ shape = SubResource("CircleShape2D_dqb8n")
 texture = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_b65cd")
 animation = &"leftFacingIdle"

@@ -13,8 +13,9 @@ func _ready() -> void:
 	character = get_parent()
 	
 func _physics_process(delta: float) -> void:
-	if current_health <= 0:
-		die()
+	#if current_health <= 0:
+		#die()
+	pass
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount

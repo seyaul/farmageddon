@@ -20,9 +20,13 @@ func _ready() -> void:
 	curr_health = health
 	sprite.rotation_degrees = initial_rotation
 	change_health.connect(set_curr_health)
+	$"../../../Player/Health".damage_taken.connect(handleSignal)
+	$"../../../Player/Health".healed.connect(handleSignal)
+	setHealthBar()
 
 func _physics_process(delta: float) -> void:
 	update_rotation(delta)
+	
 	
 	time += 1
 	vibrate()
@@ -34,18 +38,26 @@ func vibrate() -> void:
 		sprite.rotation_degrees += vibration_range
 		vibration_range = -vibration_range
 
+func handleSignal() -> void: 
+	setHealthBar()
+
+func setHealthBar():
+	curr_health = $"../../../Player/Health".current_health
+
 func update_rotation(delta: float) -> void:
 	var health_fraction = curr_health / health
-	var target_rotation = lerp(initial_rotation, final_rotation, 1.0 - health_fraction)
+	print(curr_health, " curr health")
+	print(health_fraction, " health fraction")
+	var target_rotation = lerp(initial_rotation, final_rotation, health_fraction)
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation, rotation_smooth_speed * delta)
 
 func set_curr_health(change_in_health: float) -> void:
 	curr_health = clamp(curr_health + change_in_health, 0, health)
 
-# TODO: Feel free to comment this out. This is just for debugging purposes
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.pressed:
-			emit_signal("change_health", -20)
-		if event.button_index == 2 and event.pressed:
-			emit_signal("change_health", 20)
+## TODO: Feel free to comment this out. This is just for debugging purposes
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton:
+		#if event.button_index == 1 and event.pressed:
+			#emit_signal("change_health", -20)
+		#if event.button_index == 2 and event.pressed:
+			#emit_signal("change_health", 20)

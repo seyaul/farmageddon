@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=47 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_mswu8"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://x0ub8hqevrdu" path="res://Sprites/chicken_sprites/chicken front.png" id="23_yvamx"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="24_jtuc3"]
+[ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="24_ptp05"]
 [ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="25_466ib"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
@@ -770,6 +771,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HealthBar" type="ProgressBar" parent="UserInterfaceLayer/PlayerUI"]
+visible = false
 layout_mode = 0
 offset_left = 48.0
 offset_top = 24.0
@@ -787,3 +789,10 @@ offset_bottom = 50.0
 text = "Ammo: 10"
 label_settings = SubResource("LabelSettings_tiuqs")
 horizontal_alignment = 1
+
+[node name="Node2D" parent="UserInterfaceLayer/PlayerUI" instance=ExtResource("24_o64g5")]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 26.0
+offset_right = 52.0
+offset_bottom = 26.0

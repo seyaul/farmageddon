@@ -1,7 +1,7 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 15
+const SCROLL_SPEED := 150
 const MAP_ROOM = preload("res://Scenes/room.tscn")
 const MAP_LINE = preload("res://Scenes/line.tscn")
 
@@ -10,6 +10,7 @@ const MAP_LINE = preload("res://Scenes/line.tscn")
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
+var scroll_direction = 0
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -22,17 +23,35 @@ func _ready() -> void:
 	generate_new_map()
 	unlock_floor(0)
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not visible:
-		return
+func _process(delta):
+	# Check for continuous pressing of the keys or scroll buttons
+	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
+		scroll_direction = -1
+	elif Input.is_action_pressed("scroll_down") or Input.is_action_pressed("move_down"):
+		scroll_direction = 1
+	else:
+		scroll_direction = 0
 	
-	if event.is_action_pressed("scroll_up"):
-		camera_2d.position.y -= SCROLL_SPEED * 1000
-	elif event.is_action_pressed("scroll_down"):
-		camera_2d.position.y += SCROLL_SPEED * 1000
-
+	if scroll_direction != 0:
+		camera_2d.position.y += scroll_direction * SCROLL_SPEED * delta
+	
+	# Clamp the camera position
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
+#func _unhandled_input(event: InputEvent) -> void:
+	#if not visible:
+		#return
+	#
+	#var scroll_direction = 0
+	#
+	#if event.is_action_pressed("scroll_up") or event.is_action_pressed("move_up"):
+		#scroll_direction = -1
+	#elif event.is_action_pressed("scroll_down") or event.is_action_pressed("move_down"):
+		#scroll_direction = 1
+	#
+	#if scroll_direction != 0:
+		#camera_2d.position.y += scroll_direction * SCROLL_SPEED * get_process_delta_time()
+	#
+	#camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
 		
 func generate_new_map() -> void:
 	floors_climbed = 0

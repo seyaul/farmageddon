@@ -22,6 +22,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="farmageddon"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
+
 [input]
 
 move_up={

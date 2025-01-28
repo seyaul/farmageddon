@@ -1227,7 +1227,6 @@ var _last_delete_time := 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(stiffness)
 	# Needed in case texture changes
 	if Engine.is_editor_hint():
 		if texture != _last_texture:

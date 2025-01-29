@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 [autoload]
 
 Global="*res://global.gd"
+GameState="*res://Scripts/game_state.gd"
 
 [display]
 

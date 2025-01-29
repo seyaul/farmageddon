@@ -3,19 +3,17 @@ extends Node
 @export var max_health: float = 100
 var current_health: float
 signal damage_taken
+signal character_died
 signal healed
-signal died
 
 var character: CharacterBody2D
 func _ready() -> void:
-	Global.incrementEnemyCount()
 	current_health = max_health
 	character = get_parent()
 	
 func _physics_process(delta: float) -> void:
-	#if current_health <= 0:
-		#die()
-	pass
+	if current_health <= 0:
+		die()
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount
@@ -35,5 +33,6 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print(character.name, " died!")
-	Global.decrementEnemyCount()
+	character_died.emit() #may not need this, just being safe
+	emit_signal("character_died", self)
 	character.queue_free()

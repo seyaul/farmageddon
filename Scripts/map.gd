@@ -1,7 +1,7 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 150
+const SCROLL_SPEED := 15
 const MAP_ROOM = preload("res://Scenes/room.tscn")
 const MAP_LINE = preload("res://Scenes/line.tscn")
 
@@ -10,7 +10,6 @@ const MAP_LINE = preload("res://Scenes/line.tscn")
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
-var scroll_direction = 0
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -20,52 +19,58 @@ var camera_edge_y: float
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
 	
-	generate_new_map()
-	unlock_floor(0)
-
-func _process(delta):
-	# Check for continuous pressing of the keys or scroll buttons
-	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
-		scroll_direction = -1
-	elif Input.is_action_pressed("scroll_down") or Input.is_action_pressed("move_down"):
-		scroll_direction = 1
+	if GameState.returning_from_stage:
+		print("Returning to the same map...")
+		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
 	else:
-		scroll_direction = 0
+		generate_new_map()
+		unlock_floor(0)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
 	
-	if scroll_direction != 0:
-		camera_2d.position.y += scroll_direction * SCROLL_SPEED * delta
-	
-	# Clamp the camera position
+	if event.is_action_pressed("scroll_up"):
+		camera_2d.position.y -= SCROLL_SPEED
+	elif event.is_action_pressed("scroll_down"):
+		camera_2d.position.y += SCROLL_SPEED
+
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
-#func _unhandled_input(event: InputEvent) -> void:
-	#if not visible:
-		#return
-	#
-	#var scroll_direction = 0
-	#
-	#if event.is_action_pressed("scroll_up") or event.is_action_pressed("move_up"):
-		#scroll_direction = -1
-	#elif event.is_action_pressed("scroll_down") or event.is_action_pressed("move_down"):
-		#scroll_direction = 1
-	#
-	#if scroll_direction != 0:
-		#camera_2d.position.y += scroll_direction * SCROLL_SPEED * get_process_delta_time()
-	#
-	#camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
 		
 func generate_new_map() -> void:
 	floors_climbed = 0
 	map_data = map_generator.generate_map()
 	create_map()
+	last_room = map_data[0][0]
+	unlock_floor(0)
 	
 func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room) -> void:
 	floors_climbed = floors_completed
 	map_data = map
 	last_room = last_room_climbed
+	GameState.restore_room_states()
 	create_map()
 	
+	for map_room: RoomBackend in rooms.get_children():
+		var key = map_room.room.get_key()
+		print("Room Key:", key, 
+			  "Selected:", GameState.room_states.get(key, {}).get("selected", false), 
+			  "Available:", map_room.available)
+		if key in GameState.room_states:
+			if GameState.room_states[key]["selected"]:
+				map_room.available = false
+				map_room.animation_player.stop()
+				map_room.show_selected()
+			elif last_room and last_room.next_rooms.has(map_room.room):
+				map_room.available = true
+				map_room.animation_player.play("Highlight")
+			else:
+				map_room.available = false
+				map_room.animation_player.stop()
+	
 	if floors_climbed > 0:
-		unlock_next_rooms()
+		unlock_next_rooms(last_room_climbed)
 	else:
 		unlock_floor()
 
@@ -88,12 +93,18 @@ func unlock_floor(which_floor: int = floors_climbed) -> void:
 	for map_room: RoomBackend in rooms.get_children():
 		if map_room.room.row == which_floor:
 			map_room.available = true
+			map_room.animation_player.play("Highlight")
+			print("new floor unlocked!")
 
 
-func unlock_next_rooms() -> void:
+func unlock_next_rooms(from_room: Room) -> void:
 	for map_room: RoomBackend in rooms.get_children():
-		if last_room.next_rooms.has(map_room.room):
+		if last_room.next_rooms.has(map_room.room) || from_room.next_rooms.has(map_room.room):
 			map_room.available = true
+			map_room.animation_player.play("Highlight")
+			print("new room unlocked!", map_room.room)
+		else:
+			map_room.available = false
 
 func show_map() -> void:
 	show()
@@ -109,6 +120,8 @@ func _spawn_room(room: Room) -> void:
 	var new_map_room := MAP_ROOM.instantiate() as RoomBackend
 	rooms.add_child(new_map_room)
 	new_map_room.room = room
+	new_map_room.map_data = map_data
+	new_map_room.floors_climbed = floors_climbed
 	new_map_room.clicked.connect(_on_map_room_clicked)
 	new_map_room.selected.connect(_on_map_room_selected)
 	_connect_lines(room)
@@ -132,7 +145,13 @@ func _on_map_room_clicked(room: Room) -> void:
 		if map_room.room.row == room.row:
 			map_room.available = false
 
+	var key = room.get_key()
+	if key in GameState.room_states:
+		GameState.room_states[key]["selected"] = true
+	unlock_next_rooms(room)
+
 
 func _on_map_room_selected(room: Room) -> void:
 	last_room = room
 	floors_climbed += 1
+	_on_map_room_clicked(room)

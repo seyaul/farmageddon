@@ -14,4 +14,7 @@ func _init():
 	next_rooms = []
 
 func _to_string() -> String:
-	return "%s (%s)" % [column, Type.keys()[type][0]]
+	return "%d,%d" % [row, column]
+
+func get_key() -> String:
+	return "%d,%d" % [row, column]

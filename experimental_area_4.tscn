@@ -34,11 +34,13 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_mdfcs")
 
 [node name="Crosshairs" type="Node2D" parent="."]
-script = ExtResource("1_52v1r")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.29, 0.29)
 texture = ExtResource("2_6x06k")
+
+[node name="FollowMouse" type="Node" parent="Crosshairs"]
+script = ExtResource("1_52v1r")
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2(956, 38)
@@ -57,29 +59,46 @@ drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 
-[node name="Snake" type="Node2D" parent="."]
+[node name="Snake" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(671, 1028)
 script = ExtResource("3_7a57f")
+target = NodePath("../Crosshairs")
 interact_with_environment = true
 num_segments = 10
 stiffness = 0.1
 distance = 5.0
 view_lines = true
+connect_head = true
 
-[node name="Snake2" type="Node2D" parent="."]
+[node name="Snake2" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(1271, 983)
 script = ExtResource("3_7a57f")
+target = NodePath("../Crosshairs")
 interact_with_environment = true
 num_segments = 15
 stiffness = 0.15
 distance = 5.0
 view_lines = true
+connect_head = true
 
-[node name="Snake3" type="Node2D" parent="."]
+[node name="Snake3" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(1271, 983)
 script = ExtResource("3_7a57f")
+target = NodePath("../Crosshairs")
 interact_with_environment = true
 num_segments = 10
 stiffness = 0.1
 distance = 5.0
 view_lines = true
+connect_head = true
+
+[node name="Snake4" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(1271, 983)
+script = ExtResource("3_7a57f")
+target = NodePath("../Crosshairs")
+interact_with_environment = true
+num_segments = 10
+stiffness = 0.1
+distance = 5.0
+view_lines = true
+connect_head = true

@@ -2,6 +2,7 @@ extends Node2D
 
 
 # TODO: Add way to manually tweak size of each point.
+@export var target: Node2D
 @export var interact_with_environment: bool = false
 @export var num_segments: int = 1
 @export_range(0.0,1.0)
@@ -12,6 +13,7 @@ var is_ready: bool
 
 @export var distance: float
 @export var view_lines: bool
+@export var connect_head: bool
 @export var line_width: float = 1
 
 var line: Line2D
@@ -29,7 +31,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	make_head_follow_mouse()
+	make_head_follow_target()
 	make_segments_follow_each_other()
 	
 	if view_lines:
@@ -40,7 +42,7 @@ func segment_factory() -> Node2D:
 	if interact_with_environment:
 		node = RigidBody2D.new()
 		node.gravity_scale = 0
-		node.position = position
+		node.global_position = global_position
 	else:
 		node = Node2D.new()
 	var collider: CollisionShape2D = CollisionShape2D.new()
@@ -56,30 +58,30 @@ func segments_factory() -> void:
 		segments.append(segment)
 
 # TODO: Copied this from mouefollower, change this or mousefollower later.
-func make_head_follow_mouse() -> void:
-	var mouse_position := get_global_mouse_position()
-	idk = -idk
-	position = mouse_position
-	look_at(mouse_position)
+func make_head_follow_target() -> void:
+	global_position = target.global_position
+	look_at(target.global_position)
 
 func make_segments_follow_each_other() -> void:
-	segments[0].position = segments[0].position.lerp(position, stiffness)
-	segments[0].look_at(position)
+	segments[0].position = segments[0].position.lerp(global_position, stiffness)
+	segments[0].look_at(global_position)
 	# Each subsequent point follows the one before it
 	for i in range(1, segments.size()):
 		var current_node = segments[i]
 		var prev_node = segments[i - 1]
 
 		# Calculate the desired position based on the previous node
-		var direction = (current_node.position - prev_node.position).normalized()
+		var direction = (current_node.global_position - prev_node.global_position).normalized()
 		var desired_position = prev_node.position + direction * distance
 
 		# Smoothly move towards the desired position
-		current_node.position = current_node.position.lerp(desired_position, stiffness)
-		current_node.look_at(prev_node.position)
+		current_node.global_position = current_node.global_position.lerp(desired_position, stiffness)
+		current_node.look_at(prev_node.global_position)
 		
 func draw_lines() -> void:
 	line.clear_points()
 	for i in range(segments.size()):
 		var current_node = segments[i]
-		line.add_point(current_node.position)
+		line.add_point(current_node.global_position)
+	if connect_head:
+		line.add_point(global_position, 0)

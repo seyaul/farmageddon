@@ -59,11 +59,13 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_dimos")
 
 [node name="Crosshairs" type="Node2D" parent="."]
-script = ExtResource("1_0q8jr")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.29, 0.29)
 texture = ExtResource("10_ionte")
+
+[node name="FollowMouse" type="Node" parent="Crosshairs"]
+script = ExtResource("1_0q8jr")
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2(956, 38)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=26 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
-[ext_resource type="PackedScene" uid="uid://ch8sblcgx4rnm" path="res://Scenes/player.tscn" id="19_48ier"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://actual_health_bar.tscn" id="24_o64g5"]
@@ -958,8 +957,6 @@ size = Vector2(2250, 90)
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
 
-[node name="Player" parent="." instance=ExtResource("19_48ier")]
-
 [node name="Crosshairs" type="Node2D" parent="."]
 script = ExtResource("12_g3doo")
 
@@ -1001,9 +998,8 @@ script = ExtResource("10_m1hln")
 [node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
 script = ExtResource("2_t0tql")
 
-[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController" node_paths=PackedStringArray("aggro_target")]
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
 script = SubResource("GDScript_gn3mj")
-aggro_target = NodePath("../../../../../Player")
 
 [node name="Return" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
 script = ExtResource("17_y4wtn")
@@ -1050,6 +1046,7 @@ texture = ExtResource("11_k0a88")
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1077,7 +1074,7 @@ text = "Ammo: 10"
 label_settings = SubResource("LabelSettings_tiuqs")
 horizontal_alignment = 1
 
-[node name="Node2D" parent="UserInterfaceLayer/PlayerUI" instance=ExtResource("24_o64g5")]
+[node name="healthGauge" parent="UserInterfaceLayer/PlayerUI" instance=ExtResource("24_o64g5")]
 layout_mode = 0
 offset_left = 52.0
 offset_top = 26.0
@@ -1109,3 +1106,4 @@ shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_iwkse")
+parameters/looping = true

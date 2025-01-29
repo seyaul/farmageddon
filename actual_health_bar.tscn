@@ -6,10 +6,6 @@
 
 [node name="Node2D" type="MarginContainer"]
 script = ExtResource("1_nv7to")
-health = 100.0
-animation_speed = 3.0
-vibration_range = 1
-vibration_speed = 2
 
 [node name="HP_Gauge" type="Sprite2D" parent="."]
 texture_filter = 3

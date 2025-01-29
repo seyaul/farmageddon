@@ -45,5 +45,6 @@ texture_hover = ExtResource("5_ggvn1")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ks3sl")
+parameters/looping = true
 
 [connection signal="pressed" from="Control/CanvasLayer/CanvasLayer/TextureButton" to="." method="_on_texture_button_pressed"]

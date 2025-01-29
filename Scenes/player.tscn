@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=40 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -19,6 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://bbrl7im6kg8fl" path="res://Sprites/player_sprites/tractor front idle.png" id="15_vngbk"]
 [ext_resource type="Texture2D" uid="uid://dos76yt8kg513" path="res://Sprites/player_sprites/tractor left idle.png" id="16_tc7yx"]
 [ext_resource type="Texture2D" uid="uid://c1h46sj10gq4d" path="res://Sprites/player_sprites/tractor right idle.png" id="18_yrumx"]
+[ext_resource type="Script" path="res://Scripts/way_point_R.gd" id="20_kebbd"]
+[ext_resource type="Texture2D" uid="uid://dsry7buicqluw" path="res://Sprites/coin_1.png" id="21_wyjhk"]
+[ext_resource type="Script" path="res://Scripts/way_point_L.gd" id="22_ts6tn"]
+[ext_resource type="Script" path="res://Scripts/way_point_3.gd" id="23_8m0tm"]
+[ext_resource type="Script" path="res://Scripts/way_point_4.gd" id="24_qr5vi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v1535"]
 radius = 9.0
@@ -222,3 +227,27 @@ texture = null
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_b65cd")
 animation = &"leftFacingIdle"
+
+[node name="wayPoint1" type="Node2D" parent="."]
+script = ExtResource("20_kebbd")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint1"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint2" type="Node2D" parent="."]
+script = ExtResource("22_ts6tn")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint2"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint3" type="Node2D" parent="."]
+script = ExtResource("23_8m0tm")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint3"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint4" type="Node2D" parent="."]
+script = ExtResource("24_qr5vi")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint4"]
+texture = ExtResource("21_wyjhk")

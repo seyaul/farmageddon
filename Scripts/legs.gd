@@ -40,8 +40,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if snake.is_ready:
-		step_pos1 = snake.segments[segment].to_global(Vector2(cos(deg_to_rad(leg_spread)), sin(deg_to_rad(leg_spread))).normalized() * leg_distance)
-		step_pos2 = snake.segments[segment].to_global(Vector2(cos(deg_to_rad(-1 * leg_spread)), sin(deg_to_rad(-1 * leg_spread))).normalized() * leg_distance)
+		step_pos1 = snake.segments[segment].to_global(Vector2(1,0).rotated(deg_to_rad(leg_spread)) * leg_distance)
+		step_pos2 = snake.segments[segment].to_global(Vector2(1,0).rotated(deg_to_rad(-leg_spread)) * leg_distance)
 
 		# Only allow the active leg to start moving
 		if active_leg == 1 and leg1.position.distance_to(step_pos1) > leg_distance and not moving:

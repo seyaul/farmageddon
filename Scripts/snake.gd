@@ -2,6 +2,7 @@ extends Node2D
 
 
 # TODO: Add way to manually tweak size of each point.
+@export var interact_with_environment: bool = false
 @export var num_segments: int = 1
 @export_range(0.0,1.0)
 var stiffness: float
@@ -14,6 +15,8 @@ var is_ready: bool
 @export var line_width: float = 1
 
 var line: Line2D
+
+var idk: int = 1
 
 func _ready() -> void:
 	segments_factory()
@@ -33,10 +36,17 @@ func _physics_process(_delta: float) -> void:
 		draw_lines()
 
 func segment_factory() -> Node2D:
-	var node: Node2D = Node2D.new()
+	var node
+	if interact_with_environment:
+		node = RigidBody2D.new()
+		node.gravity_scale = 0
+		node.position = position
+	else:
+		node = Node2D.new()
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CircleShape2D.new()
 	node.add_child(collider)
+	
 	return node
 	
 func segments_factory() -> void:
@@ -48,9 +58,10 @@ func segments_factory() -> void:
 # TODO: Copied this from mouefollower, change this or mousefollower later.
 func make_head_follow_mouse() -> void:
 	var mouse_position := get_global_mouse_position()
+	idk = -idk
 	position = mouse_position
 	look_at(mouse_position)
-	
+
 func make_segments_follow_each_other() -> void:
 	segments[0].position = segments[0].position.lerp(position, stiffness)
 	segments[0].look_at(position)

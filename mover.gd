@@ -1,6 +1,6 @@
 extends Node
 
-@export var move_frequency: int = 5
+@export var move_frequency: int = 1
 @export var bones_per_move: int = 10
 @export var speed: float = 1500
 var parent: SoftBody2D

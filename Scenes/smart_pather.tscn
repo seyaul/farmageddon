@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=30 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
+[ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
@@ -140,10 +141,11 @@ position = Vector2(113, -257)
 rotation = 0.720474
 
 [node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
-collision_layer = 4
+collision_layer = 12
 collision_mask = 3
 collision_priority = 10.0
 motion_mode = 1
+script = ExtResource("1_sxhn3")
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 position = Vector2(4.92413, 6.34744)

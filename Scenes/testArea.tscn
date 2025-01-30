@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
+[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
@@ -10,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
-[ext_resource type="PackedScene" path="res://actual_health_bar.tscn" id="24_o64g5"]
+[ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="25_ysweh"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 
@@ -961,8 +962,8 @@ script = ExtResource("1_36u1n")
 script = ExtResource("12_g3doo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
-scale = Vector2(0.29, 0.29)
-texture = ExtResource("13_abdpc")
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_gmgqf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

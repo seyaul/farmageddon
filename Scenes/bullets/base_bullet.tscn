@@ -11,6 +11,7 @@ collision_layer = 2
 collision_mask = 4
 sync_to_physics = false
 script = ExtResource("1_rp1mo")
+collision_behavior = "Simple"
 life_span = 200
 max_range = 500
 

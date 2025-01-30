@@ -24,6 +24,9 @@ var room: Room : set = set_room
 var map_data: Array
 var floors_climbed: int
 
+func _ready() -> void:
+	print("RoomBackend script initialized")
+
 func set_available(new_value: bool) -> void:
 	available = new_value
 	texture_button.disabled = not new_value

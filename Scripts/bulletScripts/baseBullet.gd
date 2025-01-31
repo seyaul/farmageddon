@@ -4,7 +4,7 @@ extends AnimatableBody2D
 class_name baseBullet
 
 # TODO: Fix sticky behavior
-@export_enum("Bouncy", "Sticky")
+@export_enum("Simple", "Bouncy", "Sticky", "Penetrate")
 var collision_behavior: String = "Bouncy"
 
 @export var bounces_til_despawn: int = 1
@@ -41,14 +41,16 @@ func _physics_process(delta: float) -> void:
 	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
-	print("detected")
 	
 	var collider = collision.get_collider()
-	if collider.has_node("Health"):
-		var enemy_health = collider.get_node("Health")
-		if enemy_health and enemy_health.has_method("take_damage"):
-			print("damaging enemy")
-			enemy_health.take_damage(20)  
+	# if collider.has_node("Health"):
+	# 	var enemy_health = collider.get_node("Health")
+	# 	if enemy_health and enemy_health.has_method("take_damage"):
+	# 		print("damaging enemy")
+	# 		enemy_health.take_damage(20)  
+	if collider.has_method("take_damage"):
+		print("damaging enemy")
+		collider.take_damage(20)  
 
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO
@@ -59,3 +61,7 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 			bounces_til_despawn -= 1
 		else:
 			queue_free()
+	elif collision_behavior == "Simple":
+		queue_free()
+	
+	

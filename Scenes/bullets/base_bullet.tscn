@@ -8,11 +8,14 @@
 [node name="baseBullet" type="AnimatableBody2D"]
 scale = Vector2(5, 5)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 sync_to_physics = false
 script = ExtResource("1_rp1mo")
+collision_behavior = "Simple"
+bounces_til_despawn = null
 life_span = 200
 max_range = 500
+safe_margin = null
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(0.205, 0.205)

@@ -30,6 +30,8 @@ func _ready() -> void:
 	get_parent().shoot.connect(handle_signal)
 	get_parent().disable_shooting.connect(disable_shooting_handler)
 	get_parent().enable_shooting.connect(enable_shooting_handler)
+	get_parent().max_ammo = magazine_size
+	get_parent().ammo = magazine_size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

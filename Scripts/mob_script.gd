@@ -36,6 +36,8 @@ func flash_red():
 	healthBar.visible = true
 	sprite.modulate = flash_color
 	flash_timer = get_tree().create_timer(flash_duration)
+	if hb_timer:
+		hb_timer.timeout.disconnect(_on_hb_timeout)
 	hb_timer = get_tree().create_timer(hb_timer_duration)
 	flash_timer.timeout.connect(_on_flash_timeout)
 	hb_timer.timeout.connect(_on_hb_timeout)
@@ -48,9 +50,7 @@ func _on_flash_timeout():
 	flash_timer.timeout.disconnect(_on_flash_timeout)
 	
 func _on_hb_timeout():
-	print("timed out, mob_script")
 	healthBar.visible = false
-	print(healthBar.z_index , " healthbar z index mob_script")
 
 	
 	

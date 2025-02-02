@@ -38,7 +38,8 @@ func heal(amount: float) -> void:
 func die() -> void:
 	if character.name == "Player":
 		await get_tree().create_timer(0.68).timeout
-		get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
+		if(get_tree() != null):
+			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 	else: 
 		Global.decrementEnemyCount()
 		character.queue_free()

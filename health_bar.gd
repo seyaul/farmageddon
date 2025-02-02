@@ -43,7 +43,6 @@ func handleSignal() -> void:
 
 func setHealthBar():
 	curr_health = Global.playerHealthNode.current_health
-	print(curr_health, "checking current health bar amt, health_bar.gd")
 
 func update_rotation(delta: float) -> void:
 	var health_fraction = curr_health / health

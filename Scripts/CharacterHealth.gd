@@ -20,13 +20,13 @@ func _physics_process(delta: float) -> void:
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount
-	damage_taken.emit()
 	if current_health <= 0:
 		current_health = 0
 		die()
 	else:
 		#print(character.name, " health:", current_health)
 		pass
+	damage_taken.emit()
 
 func heal(amount: float) -> void:
 	healed.emit()
@@ -36,8 +36,9 @@ func heal(amount: float) -> void:
 	#print(character.name, " health:", current_health)
 
 func die() -> void:
-	if has_node("../Player"):
-		pass
+	if character.name == "Player":
+		await get_tree().create_timer(0.68).timeout
+		get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 	else: 
 		Global.decrementEnemyCount()
 		character.queue_free()

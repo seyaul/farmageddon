@@ -41,6 +41,8 @@ func _process(delta: float) -> void:
 		if Global.enemyCount <= 0:
 			Global.playerCurrHealth = Global.playerHealthNode.current_health
 			print(Global.playerCurrHealth)
+			# replace this with a check that spawns in reward and waits for the player to choose their reward
+			await get_tree().create_timer(0.5).timeout
 			get_tree().change_scene_to_file("res://Scenes/Map.tscn")
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:

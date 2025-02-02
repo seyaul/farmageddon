@@ -16,10 +16,10 @@ var floors_climbed: int
 var last_room: Room
 var camera_edge_y: float
 var scroll_direction: int
-
+var camera_y_pos : int
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
-	
+	# transition to this checking if it is within a Global group of rooms 
 	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)

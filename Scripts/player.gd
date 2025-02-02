@@ -5,6 +5,7 @@ signal melee
 signal shockwave
 signal disable_shooting
 signal enable_shooting
+signal god_mode_debug
 
 var ammo: int = 10
 var max_ammo: int = 10
@@ -34,6 +35,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("reload"):
 		reload()
+
 
 func reload():
 	emit_signal("disable_shooting")

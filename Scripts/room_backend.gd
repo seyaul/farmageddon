@@ -88,7 +88,10 @@ func _on_texture_button_pressed() -> void:
 	show_selected()  
 	clicked.emit(room)
 	print("clicked")
-	
+	if Global.newGame:
+		Global.emit_signal("newGameStarted")
+	else: 
+		Global.emit_signal("gameStarted")
 	var key = room.get_key()
 	if not GameState.room_states.has(key):
 		GameState.room_states[key] = {"selected": false}

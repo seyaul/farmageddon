@@ -8,12 +8,16 @@ signal healed
 
 var character: CharacterBody2D
 func _ready() -> void:
-	current_health = max_health
 	character = get_parent()
+	if character.name != "Player": #if it is a mob 
+		current_health = max_health
+	else: # if it is the player and it isn't new game
+		print("this should be running, characterHealth.gd")
+		current_health = Global.playerHealth
+	
 	
 func _physics_process(delta: float) -> void:
-	if current_health <= 0:
-		die()
+	pass
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount
@@ -22,17 +26,19 @@ func take_damage(amount: float) -> void:
 		current_health = 0
 		die()
 	else:
-		print(character.name, " health:", current_health)
+		#print(character.name, " health:", current_health)
+		pass
 
 func heal(amount: float) -> void:
 	healed.emit()
 	current_health += amount
 	if current_health > max_health:
 		current_health = max_health
-	print(character.name, " health:", current_health)
+	#print(character.name, " health:", current_health)
 
 func die() -> void:
-	print(character.name, " died!")
-	character_died.emit() #may not need this, just being safe
-	emit_signal("character_died", self)
-	character.queue_free()
+	if has_node("../Player"):
+		pass
+	else: 
+		Global.decrementEnemyCount()
+		character.queue_free()

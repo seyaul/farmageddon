@@ -18,7 +18,7 @@ var time: int
 func _ready() -> void:
 	sprite = get_node("Needle")
 	curr_health = Global.playerHealth
-	print(curr_health)
+	print(curr_health, " checking curr health in healthbar..gd")
 	sprite.rotation_degrees = initial_rotation
 	#change_health.connect(set_curr_health)
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
@@ -37,11 +37,12 @@ func vibrate() -> void:
 		vibration_range = -vibration_range
 
 func handleSignal() -> void: 
-	print("handleSignal actual_health_bar")
+	#print("handleSignal actual_health_bar")
 	setHealthBar()
 
 func setHealthBar():
 	curr_health = Global.playerHealthNode.current_health
+	print(curr_health, "checking current health bar amt, health_bar.gd")
 
 func update_rotation(delta: float) -> void:
 	var health_fraction = curr_health / health

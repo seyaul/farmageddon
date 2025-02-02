@@ -15,6 +15,7 @@ func _ready() -> void:
 	health = $Health
 	flash_timer = get_tree().create_timer(flash_duration)
 	flash_timer.timeout.connect(_on_flash_timeout)
+	Global.incrementEnemyCount()
 
 func take_damage(amount: int):
 	# Trigger damage reaction (flashing red)

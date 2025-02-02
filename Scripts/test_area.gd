@@ -11,9 +11,9 @@ func _ready() -> void:
 	Global.numRuns += 1
 	var music = get_node("AudioStreamPlayer")
 	music.play()
-	player_instance = player_scene.instantiate()
+	player_instance = Global.playerInstance
 	add_child(player_instance)
-	player_instance.print_tree()
+	#player_instance.print_tree()
 	for i in range(20):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()

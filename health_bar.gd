@@ -5,7 +5,7 @@ signal change_health
 @export var animation_speed: float = 1.0
 @export var vibration_range: int
 @export var vibration_speed: int
-@export var initial_rotation: float = 63.4
+@export var initial_rotation: float
 @export var final_rotation: float = -63.4
 @export var rotation_smooth_speed: float = 5.0
 
@@ -19,7 +19,8 @@ func _ready() -> void:
 	sprite = get_node("Needle")
 	curr_health = Global.playerHealth
 	print(curr_health, " checking curr health in healthbar..gd")
-	sprite.rotation_degrees = initial_rotation
+	var health_fraction = curr_health / health
+	sprite.rotation_degrees = lerp(final_rotation, initial_rotation, health_fraction)
 	#change_health.connect(set_curr_health)
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)

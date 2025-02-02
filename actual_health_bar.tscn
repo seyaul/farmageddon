@@ -9,6 +9,7 @@ script = ExtResource("1_nv7to")
 health = 100.0
 vibration_range = 3
 vibration_speed = 2
+initial_rotation = 63.4
 
 [node name="HP_Gauge" type="Sprite2D" parent="."]
 texture_filter = 3

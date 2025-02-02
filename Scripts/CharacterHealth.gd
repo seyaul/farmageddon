@@ -12,7 +12,6 @@ func _ready() -> void:
 	if character.name != "Player": #if it is a mob 
 		current_health = max_health
 	else: # if it is the player and it isn't new game
-		print("this should be running, characterHealth.gd")
 		current_health = Global.playerHealth
 	
 	

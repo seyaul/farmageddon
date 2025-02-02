@@ -19,7 +19,7 @@ var camera_edge_y: float
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
 	
-	if GameState.returning_from_stage:
+	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
 	else:

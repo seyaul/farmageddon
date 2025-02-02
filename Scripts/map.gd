@@ -1,7 +1,7 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 15
+const SCROLL_SPEED := 100
 const MAP_ROOM = preload("res://Scenes/room.tscn")
 const MAP_LINE = preload("res://Scenes/line.tscn")
 
@@ -15,6 +15,7 @@ var map_data: Array[Array]
 var floors_climbed: int
 var last_room: Room
 var camera_edge_y: float
+var scroll_direction: int
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
@@ -26,6 +27,18 @@ func _ready() -> void:
 		generate_new_map()
 		unlock_floor(0)
 
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
+		scroll_direction = -1
+	elif Input.is_action_pressed("scroll_down") or Input.is_action_pressed("move_down"):
+		scroll_direction = 1
+	else:
+		scroll_direction = 0
+	if scroll_direction != 0:
+		camera_2d.position.y += scroll_direction * SCROLL_SPEED * delta
+
+	# Clamp the camera position
+	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:

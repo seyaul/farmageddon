@@ -141,6 +141,7 @@ bg_color = Color(0.953713, 0, 0.0626329, 1)
 bg_color = Color(0.11902, 0.725002, 0, 1)
 
 [node name="Shooter" type="Node2D"]
+scale = Vector2(0.3, 0.3)
 
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_kv3oi")
@@ -223,11 +224,11 @@ scale = Vector2(2.4, 2.4)
 sprite_frames = SubResource("SpriteFrames_54st3")
 animation = &"backFacingWalk"
 
-[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter"]
-offset_left = -56.9998
-offset_top = 66.9998
-offset_right = 59.0002
-offset_bottom = 93.9998
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter/EnemySprite2"]
+offset_left = -23.7499
+offset_top = 27.9166
+offset_right = 92.2501
+offset_bottom = 54.9166
 scale = Vector2(1.00186, 0.937574)
 theme = SubResource("Theme_nmayp")
 theme_override_styles/background = SubResource("StyleBoxFlat_hvnme")

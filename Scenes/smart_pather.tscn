@@ -141,6 +141,7 @@ bg_color = Color(0.953713, 0, 0.0626329, 1)
 bg_color = Color(0.11902, 0.725002, 0, 1)
 
 [node name="smartPather" type="Node2D"]
+scale = Vector2(0.3, 0.3)
 
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_5geu8")
@@ -228,12 +229,12 @@ scale = Vector2(2.4, 2.4)
 sprite_frames = SubResource("SpriteFrames_pggo2")
 animation = &"rightFacingWalk"
 
-[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather"]
-offset_left = -5.0
-offset_top = 71.0
-offset_right = 94.0
-offset_bottom = 98.0
-rotation = -0.724312
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
+offset_left = -21.0173
+offset_top = 20.9234
+offset_right = 77.9827
+offset_bottom = 47.9234
+rotation = -6.28319
 theme = SubResource("Theme_syseu")
 theme_override_styles/background = SubResource("StyleBoxFlat_vw1ml")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6e355")

@@ -15,8 +15,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player: 
-		time += delta * oscillationSpeed
-		var newPos = Vector2(base_pos.x + abs(sin(time)) * oscillationMagnitude, 0)
-		self.position = newPos
+	#if player: 
+		#time += delta * oscillationSpeed
+		#var newPos = Vector2(base_pos.x + abs(sin(time)) * oscillationMagnitude, 0)
+		#self.position = newPos
+	pass
 		

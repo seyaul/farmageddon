@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://3qaokffdofi"]
+
+[ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_0wtkk"]
+[ext_resource type="Script" path="res://Scripts/weaponScripts/flamethrower.gd" id="2_0xoen"]
+[ext_resource type="Texture2D" uid="uid://crogcar6g7r2k" path="res://Sprites/pixilart-drawing (1).png" id="3_mi35r"]
+
+[sub_resource type="Curve" id="Curve_xgg7o"]
+max_value = 25.0
+_data = [Vector2(0, 0.274725), 0.0, 19.7224, 0, 0, Vector2(0.685484, 1.0989), 0.0, 0.0, 0, 0, Vector2(1, 6.04396), 15.7227, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_3mta6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.802198), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_eg4ga"]
+offsets = PackedFloat32Array(0, 0.1875, 0.375, 0.541667, 0.697917, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.968627, 0, 1, 1, 0.486275, 0.113725, 1, 1, 0.290196, 0, 1, 0.921569, 0.12549, 0.12549, 1, 0, 0.12549, 0.12549, 1)
+
+[node name="flamethrower" instance=ExtResource("1_0wtkk")]
+rotation = 0.0
+script = ExtResource("2_0xoen")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="0"]
+scale = Vector2(3, 3)
+amount = 250
+local_coords = true
+spread = 3.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+damping_max = 25.0
+damping_curve = SubResource("Curve_xgg7o")
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_3mta6")
+color_ramp = SubResource("Gradient_eg4ga")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+scale = Vector2(2, 2)
+texture = ExtResource("3_mi35r")

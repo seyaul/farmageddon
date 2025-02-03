@@ -17,8 +17,10 @@ func save_map_state(data: Array, floors: int, last: Room) -> void:
 		for room in floor:
 			var key = room.get_key()
 			room_states[key] = {
-				"selected": room.selected if room.selected != null else false  # default to false if not set
+				"selected": room.selected if room.selected != null else false,  # default to false if not set
+				"available": false  # available key made for debugging purposes 
 				}
+			
 
 func restore_room_states() -> void:
 	for floor in map_data:

@@ -171,6 +171,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
 script = ExtResource("1_jvk8e")
 
 [node name="Collider" type="CollisionShape2D" parent="."]

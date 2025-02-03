@@ -11,6 +11,7 @@ var ammo: int = 10
 var max_ammo: int = 10
 var ammo_bar: Label
 var animation: AnimatedSprite2D
+var speed_modifier: float
 
 func _ready() -> void:
 	# TODO: Find better way to reference nodes within the same scene as the player?
@@ -20,6 +21,7 @@ func _ready() -> void:
 	var gun = $gun
 	gun.bullet_fired.connect(_on_bullet_fired)
 	animation = get_node("AnimatedSprite2D")
+	
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):

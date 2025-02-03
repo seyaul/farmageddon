@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cly33r37xa2x7"]
+[gd_scene load_steps=35 format=3 uid="uid://cly33r37xa2x7"]
 
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_ym43u"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_7w27w"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://x0ub8hqevrdu" path="res://Sprites/chicken_sprites/chicken front.png" id="13_bnorg"]
 [ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="14_xeoot"]
 [ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="15_iw1un"]
+[ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="16_oxrbs"]
 
 [sub_resource type="Curve2D" id="Curve2D_kv3oi"]
 _data = {
@@ -131,7 +132,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Theme" id="Theme_nmayp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvnme"]
+bg_color = Color(0.953713, 0, 0.0626329, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bxlp"]
+bg_color = Color(0.11902, 0.725002, 0, 1)
+
 [node name="Shooter" type="Node2D"]
+scale = Vector2(0.3, 0.3)
 
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_kv3oi")
@@ -213,3 +223,15 @@ time_shooting = 100
 scale = Vector2(2.4, 2.4)
 sprite_frames = SubResource("SpriteFrames_54st3")
 animation = &"backFacingWalk"
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter/EnemySprite2"]
+offset_left = -23.7499
+offset_top = 27.9166
+offset_right = 92.2501
+offset_bottom = 54.9166
+scale = Vector2(1.00186, 0.937574)
+theme = SubResource("Theme_nmayp")
+theme_override_styles/background = SubResource("StyleBoxFlat_hvnme")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3bxlp")
+show_percentage = false
+script = ExtResource("16_oxrbs")

@@ -49,7 +49,7 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 	# 		print("damaging enemy")
 	# 		enemy_health.take_damage(20)  
 	if collider.has_method("take_damage"):
-		print("damaging enemy")
+		#print("damaging enemy")
 		collider.take_damage(20)  
 
 	if collision_behavior == "Sticky":

@@ -1,7 +1,7 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 15
+const SCROLL_SPEED := 100
 const MAP_ROOM = preload("res://Scenes/room.tscn")
 const MAP_LINE = preload("res://Scenes/line.tscn")
 
@@ -15,17 +15,30 @@ var map_data: Array[Array]
 var floors_climbed: int
 var last_room: Room
 var camera_edge_y: float
-
+var scroll_direction: int
+var camera_y_pos : int
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
-	
-	if GameState.returning_from_stage:
+	# transition to this checking if it is within a Global group of rooms 
+	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
 	else:
 		generate_new_map()
 		unlock_floor(0)
 
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
+		scroll_direction = -1
+	elif Input.is_action_pressed("scroll_down") or Input.is_action_pressed("move_down"):
+		scroll_direction = 1
+	else:
+		scroll_direction = 0
+	if scroll_direction != 0:
+		camera_2d.position.y += scroll_direction * SCROLL_SPEED * delta
+
+	# Clamp the camera position
+	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
@@ -54,9 +67,11 @@ func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room)
 	
 	for map_room: RoomBackend in rooms.get_children():
 		var key = map_room.room.get_key()
-		print("Room Key:", key, 
-			  "Selected:", GameState.room_states.get(key, {}).get("selected", false), 
-			  "Available:", map_room.available)
+		# debugging
+		#if not GameState.room_states.has(key):
+			#GameState.room_states[key] = {"selected": false, "available": false}
+		print("Loading room:", key, "Selected:", GameState.room_states[key]["selected"], "Available:", GameState.room_states[key]["available"])
+		
 		if key in GameState.room_states:
 			if GameState.room_states[key]["selected"]:
 				map_room.available = false
@@ -64,6 +79,7 @@ func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room)
 				map_room.show_selected()
 			elif last_room and last_room.next_rooms.has(map_room.room):
 				map_room.available = true
+				GameState.room_states[key]["available"] = true
 				map_room.animation_player.play("Highlight")
 			else:
 				map_room.available = false
@@ -91,6 +107,15 @@ func create_map() -> void:
 
 func unlock_floor(which_floor: int = floors_climbed) -> void:
 	for map_room: RoomBackend in rooms.get_children():
+		var key = map_room.room.get_key()
+		if not GameState.room_states.has(key):
+			GameState.room_states[key] = {"selected": false, "available": false}
+		
+		if GameState.room_states[key]["selected"]:
+			map_room.available = false
+			map_room.animation_player.stop()  
+			continue  
+		
 		if map_room.room.row == which_floor:
 			map_room.available = true
 			map_room.animation_player.play("Highlight")

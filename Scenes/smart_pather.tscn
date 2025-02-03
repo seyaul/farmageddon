@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=34 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ea5fxks1ppem" path="res://Sprites/cow_sprites/cow front.png" id="11_622el"]
 [ext_resource type="Texture2D" uid="uid://e0ed84wmkgkw" path="res://Sprites/cow_sprites/cow left.png" id="12_3tk1y"]
 [ext_resource type="Texture2D" uid="uid://s6bb5b4xxw0a" path="res://Sprites/cow_sprites/cow right.png" id="13_ostc6"]
+[ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="15_8jqyx"]
 
 [sub_resource type="Curve2D" id="Curve2D_5geu8"]
 _data = {
@@ -131,7 +132,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Theme" id="Theme_syseu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw1ml"]
+bg_color = Color(0.953713, 0, 0.0626329, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6e355"]
+bg_color = Color(0.11902, 0.725002, 0, 1)
+
 [node name="smartPather" type="Node2D"]
+scale = Vector2(0.3, 0.3)
 
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_5geu8")
@@ -218,3 +228,15 @@ rotation = -0.71733
 scale = Vector2(2.4, 2.4)
 sprite_frames = SubResource("SpriteFrames_pggo2")
 animation = &"rightFacingWalk"
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
+offset_left = -21.0173
+offset_top = 20.9234
+offset_right = 77.9827
+offset_bottom = 47.9234
+rotation = -6.28319
+theme = SubResource("Theme_syseu")
+theme_override_styles/background = SubResource("StyleBoxFlat_vw1ml")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6e355")
+show_percentage = false
+script = ExtResource("15_8jqyx")

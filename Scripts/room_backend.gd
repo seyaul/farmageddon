@@ -30,8 +30,8 @@ func set_available(new_value: bool) -> void:
 
 	if available:
 		animation_player.play("Highlight")
-	elif not room.selected:
-		animation_player.play("RESET")
+	else: 
+		animation_player.stop()
 
 
 func set_room(new_data: Room) -> void:
@@ -81,16 +81,32 @@ func _on_texture_button_pressed() -> void:
 	
 	room.selected = true
 	available = false  
-	animation_player.stop()
-	show_selected()  
+	#show_selected()  
 	clicked.emit(room)
-	print("clicked")
+	print("clicked", room.get_key())
 	
+	# logging if the map has been generated because it is a new game/existing game
+	if Global.newGame:
+		Global.emit_signal("newGameStarted")
+	else: 
+		Global.emit_signal("gameStarted")
 	var key = room.get_key()
-	if not GameState.room_states.has(key):
-		GameState.room_states[key] = {"selected": false}
-	GameState.room_states[key]["selected"] = true
+	print("Accessing room state for key:", key)
+
 	
+	if not GameState.room_states.has(key):
+		GameState.room_states[key] = {"selected": false, "available": true}
+		print("Key does not exist in room_states, initializing...")
+	else: 
+		print("Key exists in room_states:", GameState.room_states[key])
+		print("heres what the actual available value is: ", available)
+	
+	GameState.room_states[key]["selected"] = true
+	GameState.room_states[key]["available"] = false # see if this makes it not available after it has been selected 
+	animation_player.stop()
+	texture_button.disabled = true 
+
+
 	animation_player.play("Select")
 	selected.emit(room) #kinda a safeguard
 	

@@ -1047,7 +1047,6 @@ texture = ExtResource("11_k0a88")
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1081,6 +1080,7 @@ offset_left = 52.0
 offset_top = 26.0
 offset_right = 52.0
 offset_bottom = 26.0
+vibration_range = 2
 
 [node name="walls" type="Node2D" parent="."]
 

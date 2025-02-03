@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
-@export var player_scene = preload("res://Scenes/player.tscn")
+#@export var player_scene = preload("res://Scenes/player.tscn")
 var player_instance
 #@onready var enemies = get_tree().get_nodes_in_group("enemies")
 
@@ -11,10 +11,10 @@ func _ready() -> void:
 	Global.numRuns += 1
 	var music = get_node("AudioStreamPlayer")
 	music.play()
-	player_instance = player_scene.instantiate()
+	player_instance = Global.playerInstance
 	add_child(player_instance)
-	player_instance.print_tree()
-	for i in range(20):
+	#player_instance.print_tree()
+	for i in range(60):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -32,16 +32,18 @@ func _ready() -> void:
 				print("Node not found")
 		add_child(chicken_instance)
 		add_child(bull_instance)
-	#print(enemies.size())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-		# There is two left over in the player and the pather. However, whenever you restart the 
-		# game, another 2 is left over. 
-		if Global.enemyCount == 4 * Global.numRuns:
+		# Slight unidentifiable bug where sometimes the enemy count dips below 0. If anyone 
+		# has insight on this issue, lmk
+		if Global.enemyCount <= 0:
+			Global.playerCurrHealth = Global.playerHealthNode.current_health
+			print(Global.playerCurrHealth)
+			# replace this with a check that spawns in reward and waits for the player to choose their reward
+			await get_tree().create_timer(0.5).timeout
 			get_tree().change_scene_to_file("res://Scenes/Map.tscn")
-			
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
 	var rand_target_det = randi_range(0,4)

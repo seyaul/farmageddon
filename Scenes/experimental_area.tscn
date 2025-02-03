@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctlif3ekflyje"]
+[gd_scene load_steps=5 format=3 uid="uid://chsd8wglte8qm"]
 
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
 [ext_resource type="Script" path="res://Scripts/legs.gd" id="2_qb7y7"]

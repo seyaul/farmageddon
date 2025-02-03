@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3tixxhlwjl4x"]
+
+[ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
+[ext_resource type="Texture2D" uid="uid://cor4jlf368sod" path="res://Sprites/pea_bullet.png" id="2_qob4r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
+
+[node name="baseBullet" type="AnimatableBody2D"]
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 12
+sync_to_physics = false
+script = ExtResource("1_rp1mo")
+collision_behavior = "Simple"
+bounces_til_despawn = null
+life_span = 200
+max_range = 500
+safe_margin = null
+
+[node name="BulletHitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(0.205, 0.205)
+shape = SubResource("CircleShape2D_m6n65")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.027, 0.027)
+texture = ExtResource("2_qob4r")

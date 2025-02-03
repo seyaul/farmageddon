@@ -2,15 +2,21 @@ extends Node
 
 @export var max_health: float = 100
 var current_health: float
+signal damage_taken
+signal character_died
+signal healed
 
 var character: CharacterBody2D
 func _ready() -> void:
-	current_health = max_health
 	character = get_parent()
+	if character.name != "Player": #if it is a mob 
+		current_health = max_health
+	else: # if it is the player and it isn't new game
+		current_health = Global.playerHealth
+	
 	
 func _physics_process(delta: float) -> void:
-	if current_health <= 0:
-		die()
+	pass
 	
 func take_damage(amount: float) -> void:
 	current_health -= amount
@@ -18,14 +24,22 @@ func take_damage(amount: float) -> void:
 		current_health = 0
 		die()
 	else:
-		print(character.name, " health:", current_health)
+		#print(character.name, " health:", current_health)
+		pass
+	damage_taken.emit()
 
 func heal(amount: float) -> void:
+	healed.emit()
 	current_health += amount
 	if current_health > max_health:
 		current_health = max_health
-	print(character.name, " health:", current_health)
+	#print(character.name, " health:", current_health)
 
 func die() -> void:
-	print(character.name, " died!")
-	character.queue_free()
+	if character.name == "Player":
+		await get_tree().create_timer(0.68).timeout
+		if(get_tree() != null):
+			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
+	else: 
+		Global.decrementEnemyCount()
+		character.queue_free()

@@ -3,15 +3,20 @@ class_name FiniteStateMachine
 
 
 @export var initial_state: State
+@export var animation: AnimatedSprite2D
 var states: Dictionary = {}
 var current_state: State
+var previous_move_vector: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_transition.connect(change_state)
-		
+		if child is WalkState:
+			child.set_prev_movement_vector.connect(set_previous_move_vector)
+
 	if initial_state:
 		initial_state.Enter()
 		current_state  = initial_state
@@ -57,3 +62,9 @@ func force_change_state(source_state: State, new_state_name:String):
 		
 	new_state.Enter()
 	current_state = new_state
+
+func set_previous_move_vector(source_state: State, movement_vector: Vector2):
+	if source_state.name != "Walk":
+		print("error: set_previous_move_vector should only be called on signal from the walk state")
+		return
+	previous_move_vector = movement_vector

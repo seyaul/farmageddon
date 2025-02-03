@@ -1,0 +1,237 @@
+[gd_scene load_steps=35 format=3 uid="uid://cly33r37xa2x7"]
+
+[ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_ym43u"]
+[ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_7w27w"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="3_qbpuf"]
+[ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="4_31r26"]
+[ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="5_7uijm"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="6_3xo06"]
+[ext_resource type="Script" path="res://Scripts/fsm.gd" id="7_u2m1h"]
+[ext_resource type="Script" path="res://Scripts/follow_path.gd" id="8_yayn1"]
+[ext_resource type="Script" path="res://Scripts/followState.gd" id="9_2u5i6"]
+[ext_resource type="Script" path="res://Scripts/neutralState.gd" id="10_ayck4"]
+[ext_resource type="Script" path="res://Scripts/shootState.gd" id="11_0tivv"]
+[ext_resource type="Texture2D" uid="uid://c6f40dap2vb5a" path="res://Sprites/chicken_sprites/chicken back.png" id="12_xmp3s"]
+[ext_resource type="Texture2D" uid="uid://x0ub8hqevrdu" path="res://Sprites/chicken_sprites/chicken front.png" id="13_bnorg"]
+[ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="14_xeoot"]
+[ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="15_iw1un"]
+[ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="16_oxrbs"]
+
+[sub_resource type="Curve2D" id="Curve2D_kv3oi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 113, -257, 0, 0, 0, 0, 285, -106, 0, 0, 0, 0, 306, -249, 0, 0, 0, 0, 113, -257)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5b2wx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3odw"]
+atlas = ExtResource("12_xmp3s")
+region = Rect2(9, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bae3"]
+atlas = ExtResource("12_xmp3s")
+region = Rect2(76, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpl3b"]
+atlas = ExtResource("12_xmp3s")
+region = Rect2(143, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3men"]
+atlas = ExtResource("13_bnorg")
+region = Rect2(5, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6csp"]
+atlas = ExtResource("13_bnorg")
+region = Rect2(72, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t88lj"]
+atlas = ExtResource("13_bnorg")
+region = Rect2(139, 3, 52, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqq48"]
+atlas = ExtResource("14_xeoot")
+region = Rect2(0, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa7in"]
+atlas = ExtResource("14_xeoot")
+region = Rect2(67, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv7pg"]
+atlas = ExtResource("14_xeoot")
+region = Rect2(134, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieugv"]
+atlas = ExtResource("15_iw1un")
+region = Rect2(5, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_giuef"]
+atlas = ExtResource("15_iw1un")
+region = Rect2(72, 3, 49, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xifoc"]
+atlas = ExtResource("15_iw1un")
+region = Rect2(139, 3, 49, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_54st3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3odw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bae3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpl3b")
+}],
+"loop": true,
+"name": &"backFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3men")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6csp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t88lj")
+}],
+"loop": true,
+"name": &"frontFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqq48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa7in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv7pg")
+}],
+"loop": true,
+"name": &"leftFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieugv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_giuef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xifoc")
+}],
+"loop": true,
+"name": &"rightFacingWalk",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_nmayp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvnme"]
+bg_color = Color(0.953713, 0, 0.0626329, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bxlp"]
+bg_color = Color(0.11902, 0.725002, 0, 1)
+
+[node name="Shooter" type="Node2D"]
+scale = Vector2(0.3, 0.3)
+
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_kv3oi")
+
+[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(113, -257)
+rotation = 0.720474
+
+[node name="Shooter" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+position = Vector2(43.8487, 350.065)
+rotation = -0.720474
+collision_layer = 12
+collision_priority = 10.0
+motion_mode = 1
+script = ExtResource("1_ym43u")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/Shooter"]
+navigation_layers = 5
+radius = 111.01
+neighbor_distance = 10601.0
+time_horizon_agents = 0.0
+max_speed = 23332.3
+avoidance_mask = 5
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 5.0
+
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Shooter"]
+scale = Vector2(6.24, 6.24)
+shape = SubResource("RectangleShape2D_5b2wx")
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+visible = false
+texture = ExtResource("2_7w27w")
+
+[node name="Targeter" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("3_qbpuf")]
+offset_rotation = 180.0
+
+[node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("4_31r26")]
+rotation = -1.5708
+bullet = ExtResource("5_7uijm")
+projectile_speed = 30000.0
+fire_rate = 50
+
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]
+script = ExtResource("6_3xo06")
+
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_u2m1h")
+initial_state = NodePath("Follow")
+
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController"]
+script = ExtResource("8_yayn1")
+
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController"]
+physics_interpolation_mode = 2
+script = ExtResource("9_2u5i6")
+speed = 5000.0
+bias = 0.1
+look_at_player = true
+max_deviation_distance = 75.0
+distance_til_attack = 0.0
+
+[node name="EAttackController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_u2m1h")
+initial_state = NodePath("Neutral")
+
+[node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("10_ayck4")
+neutral_until_condition = true
+distance_til_attack = 200.0
+
+[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
+script = ExtResource("11_0tivv")
+time_shooting = 100
+
+[node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+scale = Vector2(2.4, 2.4)
+sprite_frames = SubResource("SpriteFrames_54st3")
+animation = &"backFacingWalk"
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter/EnemySprite2"]
+offset_left = -23.7499
+offset_top = 27.9166
+offset_right = 92.2501
+offset_bottom = 54.9166
+scale = Vector2(1.00186, 0.937574)
+theme = SubResource("Theme_nmayp")
+theme_override_styles/background = SubResource("StyleBoxFlat_hvnme")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3bxlp")
+show_percentage = false
+script = ExtResource("16_oxrbs")

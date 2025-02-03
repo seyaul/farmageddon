@@ -5,19 +5,25 @@ extends Area2D
 @export var shockwave_radius: float
 @export var shockwave_strength: float
 @export var shockwave_falloff: bool
-@export var max_shockwaves: int = 1
-@export var shockwave_cooldown: int = 1
+#@export var max_shockwaves: int = 1
+#@export var shockwave_cooldown: int = 1
+@export var max_shockwaves: int = 100
+@export var shockwave_cooldown: int = 0.1
 
 var collider: CollisionShape2D
 var shockwaves: int
 var time: int = 0
 
+signal god_mode_debug
+
 func _ready() -> void:
 	monitoring = false
 	collider = get_child(0)
 	body_entered.connect(_on_body_entered)
+	self.connect("god_mode_debug", Callable(self, "_god_mode"))
 	get_parent().shockwave.connect(create_shockwave)
 	shockwaves = max_shockwaves
+	
 	
 	
 func _physics_process(delta: float) -> void:
@@ -31,7 +37,8 @@ func _physics_process(delta: float) -> void:
 	time += 1
 	if time % shockwave_cooldown == 0 && shockwaves < max_shockwaves:
 		shockwaves += 1
-	
+	if Input.is_action_just_pressed("god_mode_debug"):
+		emit_signal("god_mode_debug")
 
 func create_shockwave() -> void:
 	if shockwaves > 0:
@@ -47,10 +54,11 @@ func create_shockwave() -> void:
 func _on_body_entered(body) -> void:
 	apply_damage(body)
 		
-func apply_damage(body) -> void:   
-	var health = body.get_node("Health")
-	if is_instance_valid(health):
-		health.take_damage(damage)
+func apply_damage(body) -> void:  
+	if body.has_node("Health"): 
+		var health = body.get_node("Health")
+		if is_instance_valid(health):
+			health.take_damage(damage)
 		
 func push_away(bodies) -> void:
 	for body in bodies:
@@ -62,3 +70,9 @@ func push_away(bodies) -> void:
 				strength *= max(0, 1 - (distance / shockwave_radius))  # Linear falloff
 			body.velocity = direction * strength
 			body.move_and_slide()
+			
+func _god_mode():
+	print("god mode activated")
+	self.damage = 100
+	self.shockwave_duration = 1000
+	self.shockwave_radius = 100000

@@ -12,7 +12,7 @@ collision_layer = 2
 collision_mask = 4
 sync_to_physics = false
 script = ExtResource("1_av1sk")
-life_span = 400
+life_span = 200
 max_range = 500
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]

@@ -1,0 +1,253 @@
+[gd_scene load_steps=40 format=3 uid="uid://ch8sblcgx4rnm"]
+
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
+[ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_4t6rf"]
+[ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
+[ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
+[ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
+[ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
+[ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
+[ext_resource type="PackedScene" uid="uid://cc3d15pykpd4c" path="res://Scenes/weapons/AKorn47.tscn" id="11_2blxc"]
+[ext_resource type="Script" path="res://Scripts/shockwave.gd" id="11_4pwex"]
+[ext_resource type="Texture2D" uid="uid://cvn3eg0wbunhm" path="res://Sprites/player_sprites/tractor back.png" id="12_a0rts"]
+[ext_resource type="Texture2D" uid="uid://cnk56kxhwu607" path="res://Sprites/player_sprites/tractor back idle.png" id="12_tpqsb"]
+[ext_resource type="Texture2D" uid="uid://b64wx5twutooy" path="res://Sprites/player_sprites/tractor front.png" id="13_dv553"]
+[ext_resource type="Texture2D" uid="uid://xtnnbr73fiae" path="res://Sprites/player_sprites/tractor left.png" id="14_dddph"]
+[ext_resource type="Texture2D" uid="uid://bj3hl2wo7wccb" path="res://Sprites/player_sprites/tractor right.png" id="15_u1o1w"]
+[ext_resource type="Texture2D" uid="uid://bbrl7im6kg8fl" path="res://Sprites/player_sprites/tractor front idle.png" id="15_vngbk"]
+[ext_resource type="Texture2D" uid="uid://dos76yt8kg513" path="res://Sprites/player_sprites/tractor left idle.png" id="16_tc7yx"]
+[ext_resource type="Texture2D" uid="uid://c1h46sj10gq4d" path="res://Sprites/player_sprites/tractor right idle.png" id="18_yrumx"]
+[ext_resource type="Script" path="res://Scripts/way_point_R.gd" id="20_kebbd"]
+[ext_resource type="Texture2D" uid="uid://dsry7buicqluw" path="res://Sprites/coin_1.png" id="21_wyjhk"]
+[ext_resource type="Script" path="res://Scripts/way_point_L.gd" id="22_ts6tn"]
+[ext_resource type="Script" path="res://Scripts/way_point_3.gd" id="23_8m0tm"]
+[ext_resource type="Script" path="res://Scripts/way_point_4.gd" id="24_qr5vi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v1535"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqb8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qqn0"]
+atlas = ExtResource("12_a0rts")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejtpq"]
+atlas = ExtResource("12_a0rts")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2lo3"]
+atlas = ExtResource("12_a0rts")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey4qx"]
+atlas = ExtResource("13_dv553")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7frj"]
+atlas = ExtResource("13_dv553")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vubqg"]
+atlas = ExtResource("13_dv553")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhau6"]
+atlas = ExtResource("14_dddph")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck1ey"]
+atlas = ExtResource("14_dddph")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pug44"]
+atlas = ExtResource("14_dddph")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78l3k"]
+atlas = ExtResource("15_u1o1w")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghupv"]
+atlas = ExtResource("15_u1o1w")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie160"]
+atlas = ExtResource("15_u1o1w")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b65cd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_tpqsb")
+}],
+"loop": true,
+"name": &"backFacingIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qqn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejtpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2lo3")
+}],
+"loop": true,
+"name": &"backFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_vngbk")
+}],
+"loop": true,
+"name": &"frontFacingIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey4qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7frj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vubqg")
+}],
+"loop": true,
+"name": &"frontFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_tc7yx")
+}],
+"loop": true,
+"name": &"leftFacingIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhau6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck1ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pug44")
+}],
+"loop": true,
+"name": &"leftFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_yrumx")
+}],
+"loop": true,
+"name": &"rightFacingIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78l3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghupv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie160")
+}],
+"loop": true,
+"name": &"rightFacingWalk",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_jvk8e")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_v1535")
+debug_color = Color(1.2514e-06, 0.646022, 0.246912, 0.42)
+
+[node name="Targeter" parent="." instance=ExtResource("1_f2wt3")]
+disabled = true
+
+[node name="MoveController" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation")]
+script = ExtResource("2_4t6rf")
+initial_state = NodePath("Idle")
+animation = NodePath("../AnimatedSprite2D")
+
+[node name="Idle" type="Node" parent="MoveController"]
+script = ExtResource("3_vyege")
+
+[node name="Walk" type="Node" parent="MoveController"]
+script = ExtResource("4_kjumt")
+
+[node name="Dash" type="Node" parent="MoveController"]
+script = ExtResource("5_fslrm")
+phase_on_dash = true
+max_distance = 200.0
+dash_speed = 75000.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Melee" type="Node2D" parent="."]
+script = ExtResource("8_vyjy7")
+melee_weapon = ExtResource("9_mr22e")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("10_8j6e3")
+
+[node name="Shockwave" type="Area2D" parent="."]
+collision_mask = 12
+script = ExtResource("11_4pwex")
+damage = 20.0
+shockwave_duration = 0.1
+shockwave_radius = 20.0
+shockwave_strength = 10000.0
+max_shockwaves = 2
+shockwave_cooldown = 100
+
+[node name="Collider" type="CollisionShape2D" parent="Shockwave"]
+shape = SubResource("CircleShape2D_dqb8n")
+
+[node name="gun" parent="." instance=ExtResource("11_2blxc")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_b65cd")
+animation = &"leftFacingIdle"
+
+[node name="wayPoint1" type="Node2D" parent="."]
+script = ExtResource("20_kebbd")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint1"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint2" type="Node2D" parent="."]
+script = ExtResource("22_ts6tn")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint2"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint3" type="Node2D" parent="."]
+script = ExtResource("23_8m0tm")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint3"]
+texture = ExtResource("21_wyjhk")
+
+[node name="wayPoint4" type="Node2D" parent="."]
+script = ExtResource("24_qr5vi")
+
+[node name="testsprite" type="Sprite2D" parent="wayPoint4"]
+texture = ExtResource("21_wyjhk")

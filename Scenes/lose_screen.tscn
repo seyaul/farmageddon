@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b38iafldu3vsm"]
+
+[ext_resource type="Texture2D" uid="uid://dm75qv84mboai" path="res://Sprites/you_lose.jpeg" id="1_pq7re"]
+[ext_resource type="Script" path="res://Scripts/replay_button.gd" id="2_gb5my"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1156.0
+offset_bottom = 668.0
+texture = ExtResource("1_pq7re")
+
+[node name="ReplayButton" type="Button" parent="CanvasLayer"]
+offset_left = 491.0
+offset_top = 512.0
+offset_right = 674.0
+offset_bottom = 589.0
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+script = ExtResource("2_gb5my")
+
+[connection signal="pressed" from="CanvasLayer/ReplayButton" to="CanvasLayer/ReplayButton" method="_on_pressed"]

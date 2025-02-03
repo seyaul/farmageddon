@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp1rotoudsjne"]
+
+[ext_resource type="Texture2D" uid="uid://c6vkkytbkmbxq" path="res://Sprites/line.png" id="1_y5igh"]
+
+[node name="Line" type="Line2D"]
+texture_repeat = 2
+texture = ExtResource("1_y5igh")
+texture_mode = 1

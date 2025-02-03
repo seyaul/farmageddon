@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://conr5ggj1qu7n"]
+
+[ext_resource type="Script" path="res://Scripts/weaponScripts/baseGun.gd" id="2_gphj1"]
+
+[node name="baseGun" type="Sprite2D"]
+rotation = 1.5708
+offset = Vector2(1.845, -9.615)
+script = ExtResource("2_gphj1")

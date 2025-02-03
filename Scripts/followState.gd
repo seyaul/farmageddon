@@ -1,7 +1,7 @@
 extends State
 
 @export var follow_target: Node2D
-@export var speed: float = 100
+@export var speed: float = 25
 @export var bias: float = 0.5
 @export var look_at_player: bool
 @export var max_deviation_distance: float
@@ -25,16 +25,18 @@ var time: int
 func Enter():
 	enemy = get_parent().get_parent()
 	navigation = enemy.get_node("NavigationAgent2D")
+	#print(navigation)
 	targeter = enemy.get_node("Targeter")
+	#print(targeter)
 	if targeter && not look_at_player:
 		targeter.disabled = true
 
 # TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):
 	makepath()
-	if not look_at_player:
-		enemy.look_at(navigation.get_next_path_position())
-		
+	#if not look_at_player:
+		#enemy.look_at(navigation.get_next_path_position())
+	
 	var dir = (navigation.get_next_path_position() - enemy.global_position).normalized()
 	var distance_to_target = enemy.global_position.distance_to(navigation.target_position)
 	
@@ -49,7 +51,8 @@ func Update(delta: float):
 			emit_signal("state_transition", self, action2)
 		attacks -= 1
 func makepath() -> void:
-	navigation.target_position = follow_target.global_position
+	if(navigation and follow_target != null):
+		navigation.target_position = follow_target.global_position
 
 func Exit():
 	if targeter:

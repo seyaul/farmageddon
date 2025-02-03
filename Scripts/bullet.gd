@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
-	print("detected")
+	# print("detected")
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO
 	elif collision_behavior == "Bouncy":

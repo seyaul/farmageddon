@@ -1,8 +1,7 @@
 extends Node2D
-
+class_name Snake
 
 # TODO: Add way to manually tweak size of each point.
-@export var target: Node2D
 @export var interact_with_environment: bool = false
 @export var num_segments: int = 1
 @export_range(0.0,1.0)
@@ -31,7 +30,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	make_head_follow_target()
 	make_segments_follow_each_other()
 	
 	if view_lines:
@@ -58,9 +56,7 @@ func segments_factory() -> void:
 		segments.append(segment)
 
 # TODO: Copied this from mouefollower, change this or mousefollower later.
-func make_head_follow_target() -> void:
-	global_position = target.global_position
-	look_at(target.global_position)
+
 
 func make_segments_follow_each_other() -> void:
 	segments[0].position = segments[0].position.lerp(global_position, stiffness)

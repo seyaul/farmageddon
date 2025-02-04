@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=29 format=4 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="Script" path="res://Scripts/centipede.gd" id="1_352ld"]
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scenes/randomStateJunction.gd" id="10_5y0sw"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="10_bkqhs"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="15_yfnpp"]
+[ext_resource type="Script" path="res://Scenes/surround_state.gd" id="16_7w3qe"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="16_5350e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4cb7"]
@@ -887,7 +888,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3
 
 [sub_resource type="Curve2D" id="Curve2D_gyk8w"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 405, 61, 0, 0, 0, 0, 459, 68, 0, 0, 0, 0, 501, 84, 0, 0, 0, 0, 546, 115, 0, 0, 0, 0, 576, 156, 0, 0, 0, 0, 601, 208, 0, 0, 0, 0, 606, 263, 0, 0, 0, 0, 599, 315, 0, 0, 0, 0, 575, 364, 0, 0, 0, 0, 547, 405, 0, 0, 0, 0, 507, 436, 0, 0, 0, 0, 459, 456, 0, 0, 0, 0, 404, 465, 0, 0, 0, 0, 353, 451, 0, 0, 0, 0, 305, 435, 0, 0, 0, 0, 265, 404, 0, 0, 0, 0, 233, 364, 0, 0, 0, 0, 211, 313, 0, 0, 0, 0, 203, 263, 0, 0, 0, 0, 210, 209, 0, 0, 0, 0, 230, 161, 0, 0, 0, 0, 262, 123, 0, 0, 0, 0, 301, 88, 0, 0, 0, 0, 349, 67, 0, 0, 0, 0, 405, 61)
+"points": PackedVector2Array(0, 0, 0, 0, 1, -200, 0, 0, 0, 0, 51, -195, 0, 0, 0, 0, 100, -176, 0, 0, 0, 0, 142, -146, 0, 0, 0, 0, 175, -101, 0, 0, 0, 0, 193, -52, 0, 0, 0, 0, 200, -1, 0, 0, 0, 0, 193, 50, 0, 0, 0, 0, 174, 97, 0, 0, 0, 0, 142, 141, 0, 0, 0, 0, 104, 172, 0, 0, 0, 0, 53, 195, 0, 0, 0, 0, -3, 201, 0, 0, 0, 0, -52, 193, 0, 0, 0, 0, -101, 174, 0, 0, 0, 0, -143, 143, 0, 0, 0, 0, -175, 101, 0, 0, 0, 0, -193, 50, 0, 0, 0, 0, -201, -1, 0, 0, 0, 0, -196, -55, 0, 0, 0, 0, -175, -103, 0, 0, 0, 0, -144, -142, 0, 0, 0, 0, -104, -176, 0, 0, 0, 0, -55, -193, 0, 0, 0, 0, 1, -200)
 }
 point_count = 25
 
@@ -945,8 +946,8 @@ texture = ExtResource("10_bkqhs")
 curve = SubResource("Curve2D_gyk8w")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(405, 61)
-rotation = 0.128911
+position = Vector2(1, -200)
+rotation = 0.0996687
 
 [node name="Centipede" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
 position = Vector2(84, 68)
@@ -1002,7 +1003,7 @@ segment_with_gun = 3
 
 [node name="SnakeMovementController" type="Node" parent="Path2D/PathFollow2D/Centipede" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aia4q")
-initial_state = NodePath("Return")
+initial_state = NodePath("Follow")
 
 [node name="Follow" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("7_1eh23")
@@ -1012,14 +1013,16 @@ look_at_player = true
 action = "Random"
 distance_til_attack = 10000.0
 num_attacks = 1
-attack_cooldown = 1000
+attack_cooldown = 250
 
 [node name="FollowPath" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
 script = ExtResource("15_yfnpp")
 speed = 0.9
 time_following = 250
 
-[node name="Surround" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
+[node name="Surround" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController" node_paths=PackedStringArray("target")]
+script = ExtResource("16_7w3qe")
+target = NodePath("../../../../../Crosshairs")
 
 [node name="Return" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
 script = ExtResource("16_5350e")
@@ -1028,7 +1031,7 @@ snap_distance = 10.0
 
 [node name="Random" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
 script = ExtResource("10_5y0sw")
-options = Array[String](["Return"])
+options = Array[String](["Surround", "FollowPath"])
 
 [node name="SnakeAttackController" type="Node" parent="Path2D/PathFollow2D/Centipede"]
 script = ExtResource("3_aia4q")
@@ -1048,6 +1051,15 @@ navigation_layers = 5
 target = NodePath("../../../../Crosshairs")
 
 [node name="Reference" type="CollisionShape2D" parent="."]
-position = Vector2(406, 262)
 scale = Vector2(20, 20)
 shape = SubResource("CircleShape2D_b2ioh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.665, 0.665)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1

@@ -24,9 +24,8 @@ var time: int
 func Enter():
 	enemy = get_parent().get_parent()
 	navigation = enemy.get_node("NavigationAgent2D")
-	#print(navigation)
 	targeter = enemy.get_node("Targeter")
-	#print(targeter)
+	attacks = 0
 	if targeter && not look_at_player:
 		targeter.disabled = true
 
@@ -44,6 +43,7 @@ func Update(delta: float):
 	if distance_to_target <= distance_til_attack and attacks > 0:
 		emit_signal("state_transition", self, action)
 		attacks -= 1
+		
 func makepath() -> void:
 	if(navigation and follow_target != null):
 		navigation.target_position = follow_target.global_position

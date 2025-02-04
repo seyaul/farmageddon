@@ -5,6 +5,7 @@ var floors_climbed: int = 0
 var last_room: Room = null
 var returning_from_stage: bool = false
 var room_states: Dictionary = {}  #all of the states go here mwah
+var player_died := false
 
 func save_map_state(data: Array, floors: int, last: Room) -> void:
 	map_data = data
@@ -18,7 +19,7 @@ func save_map_state(data: Array, floors: int, last: Room) -> void:
 			var key = room.get_key()
 			room_states[key] = {
 				"selected": room.selected if room.selected != null else false,  # default to false if not set
-				"available": false  # available key made for debugging purposes 
+				"available": false  
 				}
 			
 
@@ -28,6 +29,12 @@ func restore_room_states() -> void:
 			var key = room.get_key()
 			if key in room_states:
 				room.selected = room_states[key]["selected"]
+				
+	if player_died:
+		var first_room_key = map_data[0][0].get_key()
+		if first_room_key in room_states:
+			room_states[first_room_key]["selected"] = false
+			room_states[first_room_key]["available"] = true
 
 
 func reset_map_state() -> void:
@@ -36,3 +43,11 @@ func reset_map_state() -> void:
 	last_room = null
 	returning_from_stage = false
 	room_states.clear()
+	player_died = true
+	
+	for key in room_states.keys():
+		if key == "0,3":  
+			room_states[key]["selected"] = false
+			room_states[key]["available"] = true
+		else:
+			room_states[key]["available"] = false

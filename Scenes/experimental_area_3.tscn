@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_kdo0e"]
 [ext_resource type="Texture2D" uid="uid://js2fn6rmudsk" path="res://test.png" id="3_qvp8h"]
 [ext_resource type="Script" path="res://addons/softbody2d/softbody2d.gd" id="3_xpxuc"]
-[ext_resource type="Script" path="res://blobber.gd" id="4_sk36p"]
-[ext_resource type="Script" path="res://generic_leg.gd" id="6_v7hwf"]
+[ext_resource type="Script" path="res://Scripts/blobber.gd" id="4_sk36p"]
+[ext_resource type="Script" path="res://Scripts/generic_leg.gd" id="6_v7hwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58xnx"]
 size = Vector2(1420, 121.125)

@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	if counting:
 		time += 1
 	
-func handle_signal(action: String, delta) -> void:
+func handle_signal(action: String, delta: float) -> void:
 	if not automatic && action == "tap":
 		fire(delta)
 	elif automatic && action == "hold": 

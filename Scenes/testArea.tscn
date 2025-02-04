@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
-[ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://actual_health_bar.tscn" id="24_o64g5"]
+[ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="25_ysweh"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 

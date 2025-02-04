@@ -212,6 +212,7 @@ initial_state = NodePath("Neutral")
 
 [node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EAttackController"]
 script = ExtResource("10_ayck4")
+attack_state = "Shoot"
 neutral_until_condition = true
 distance_til_attack = 200.0
 

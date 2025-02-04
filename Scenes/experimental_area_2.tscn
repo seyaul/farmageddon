@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmuch3e43xynq"]
+
+[ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="1_0q8jr"]
+[ext_resource type="Script" path="res://Scripts/nucleus.gd" id="1_6m2ry"]
+[ext_resource type="PackedScene" path="res://Scenes/rope.tscn" id="2_mpde1"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_ydfsk"]
+[ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="10_ionte"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mibb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dimos"]
+size = Vector2(1420, 121.125)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Nucleus" type="RigidBody2D" parent="."]
+position = Vector2(438, 138)
+gravity_scale = 0.0
+script = ExtResource("1_6m2ry")
+rope = ExtResource("2_mpde1")
+num_tentacles = 5
+tentacle_spread = 10.0
+tentacle_frequency = 0.3
+tentacle_strength = 300.0
+selection_type = "Cycle"
+
+[node name="Targeter" parent="Nucleus" node_paths=PackedStringArray("target") instance=ExtResource("2_ydfsk")]
+target = NodePath("../../Crosshairs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nucleus"]
+shape = SubResource("CircleShape2D_mibb2")
+
+[node name="RayCast2D" type="RayCast2D" parent="Nucleus"]
+visible = false
+target_position = Vector2(10000, 0)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Nucleus"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="EnemySprite2" type="AnimatedSprite2D" parent="Nucleus"]
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(1557, 619)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(70, -56.4375)
+shape = SubResource("RectangleShape2D_dimos")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(967, 1388)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource("RectangleShape2D_dimos")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(295, 705)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+shape = SubResource("RectangleShape2D_dimos")
+
+[node name="Crosshairs" type="Node2D" parent="."]
+
+[node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("10_ionte")
+
+[node name="FollowMouse" type="Node" parent="Crosshairs"]
+script = ExtResource("1_0q8jr")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+position = Vector2(956, 38)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+shape = SubResource("RectangleShape2D_dimos")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(438, 138)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1

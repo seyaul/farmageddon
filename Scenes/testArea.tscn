@@ -959,11 +959,13 @@ size = Vector2(2250, 90)
 script = ExtResource("1_36u1n")
 
 [node name="Crosshairs" type="Node2D" parent="."]
-script = ExtResource("12_g3doo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("3_gmgqf")
+
+[node name="MouseFollower" type="Node" parent="Crosshairs"]
+script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

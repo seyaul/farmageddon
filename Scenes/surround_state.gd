@@ -7,10 +7,11 @@ func Enter():
 	var followPathState = fsm.get_node("FollowPath")
 	followPathState.attach_position_to = target
 	followPathState.backwards = true
+	print("hello??")
 	
 	
 func Update(_delta: float):
-	emit_signal("state_transition", self, "Return")
+	emit_signal("state_transition", self, "FollowPath")
 
 func Exit():
 	pass

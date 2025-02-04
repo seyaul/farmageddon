@@ -25,9 +25,10 @@ func Enter():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Update(delta: float) -> void:
 	time += 1
+	print(is_instance_valid(attach_position_to), attach_position_to)
 	if is_instance_valid(attach_position_to):
 		path.global_position = attach_position_to.global_position
-		print()
+		print("Bruh")
 	if guide.global_position - enemy.global_position != Vector2.ZERO:
 		emit_signal("state_transition", self, "Return")
 	if paused:
@@ -35,12 +36,13 @@ func Update(delta: float) -> void:
 		return
 	_move_enemy(delta)
 	if time >= time_following:
+		attach_position_to = null
+		backwards = false
+		path.global_position = Vector2.ZERO
 		emit_signal("state_transition", self, "Follow")
+		
 
 func Exit() -> void:
-	attach_position_to = null
-	backwards = false
-	path.global_position = Vector2.ZERO
 	time = 0
 
 func _move_enemy(delta: float) -> void:

@@ -1026,7 +1026,7 @@ target = NodePath("../../../../../Crosshairs")
 
 [node name="Return" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
 script = ExtResource("16_5350e")
-speed = 100000.0
+speed = 50000.0
 snap_distance = 10.0
 
 [node name="Random" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]

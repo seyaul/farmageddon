@@ -2,7 +2,6 @@ extends State
 
 @export var follow_target: Node2D
 @export var speed: float = 25
-@export var bias: float = 0.5
 @export var look_at_player: bool
 @export var max_deviation_distance: float
 # TODO: Refactor this
@@ -12,6 +11,7 @@ var navigation: NavigationAgent2D
 var enemy: CharacterBody2D
 var targeter: Node
 # TODO: Move to a global state
+@export var start_with_attacks: bool
 @export var distance_til_attack: float = 150
 @export var num_attacks: int = 0
 @export var attack_cooldown: int = 1
@@ -25,7 +25,7 @@ func Enter():
 	enemy = get_parent().get_parent()
 	navigation = enemy.get_node("NavigationAgent2D")
 	targeter = enemy.get_node("Targeter")
-	attacks = 0
+	attacks = num_attacks if start_with_attacks else 0
 	if targeter && not look_at_player:
 		targeter.disabled = true
 

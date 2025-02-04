@@ -8,5 +8,5 @@ rotation = 1.5708
 texture = ExtResource("1_qt86r")
 offset = Vector2(1.845, -9.615)
 script = ExtResource("2_au2o8")
-automatic = true
+projectile_speed = 100000.0
 fire_rate = 10

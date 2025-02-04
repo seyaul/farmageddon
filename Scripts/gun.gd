@@ -40,7 +40,6 @@ func handle_signal(action: String, delta) -> void:
 func fire(delta: float) -> void:
 	if fire_type == "Discrete":
 		for i in range(bullets_per_fire):
-			print("hello?")
 			var projectile: AnimatableBody2D = bullet.instantiate()
 			projectile.position = global_position
 			# TODO:Refactor this

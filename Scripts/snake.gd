@@ -8,7 +8,6 @@ class_name Snake
 var stiffness: float
 
 var segments: Array[Node2D] = []
-var is_ready: bool
 
 @export var distance: float
 @export var view_lines: bool
@@ -25,7 +24,6 @@ func _ready() -> void:
 		line = Line2D.new()
 		line.width = line_width
 		get_tree().current_scene.add_child.call_deferred(line)
-	is_ready = true
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

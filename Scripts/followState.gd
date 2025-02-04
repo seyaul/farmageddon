@@ -6,8 +6,7 @@ extends State
 @export var look_at_player: bool
 @export var max_deviation_distance: float
 # TODO: Refactor this
-@export var action1: String
-@export var action2: String
+@export var action: String
 
 var navigation: NavigationAgent2D
 var enemy: CharacterBody2D
@@ -43,10 +42,7 @@ func Update(delta: float):
 		
 	enemy.move_and_slide()
 	if distance_to_target <= distance_til_attack and attacks > 0:
-		if randf() < bias:
-			emit_signal("state_transition", self, action1)
-		else:
-			emit_signal("state_transition", self, action2)
+		emit_signal("state_transition", self, action)
 		attacks -= 1
 func makepath() -> void:
 	if(navigation and follow_target != null):

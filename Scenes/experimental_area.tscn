@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=28 format=4 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="Script" path="res://Scripts/centipede.gd" id="1_352ld"]
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://Scripts/neutralState.gd" id="9_qendw"]
 [ext_resource type="Script" path="res://Scenes/randomStateJunction.gd" id="10_5y0sw"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="10_bkqhs"]
+[ext_resource type="Script" path="res://Scripts/follow_path.gd" id="15_yfnpp"]
+[ext_resource type="Script" path="res://Scripts/repath.gd" id="16_5350e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4cb7"]
 texture = ExtResource("7_vm6rj")
@@ -883,95 +885,15 @@ vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22,
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
 
+[sub_resource type="Curve2D" id="Curve2D_gyk8w"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 405, 61, 0, 0, 0, 0, 459, 68, 0, 0, 0, 0, 501, 84, 0, 0, 0, 0, 546, 115, 0, 0, 0, 0, 576, 156, 0, 0, 0, 0, 601, 208, 0, 0, 0, 0, 606, 263, 0, 0, 0, 0, 599, 315, 0, 0, 0, 0, 575, 364, 0, 0, 0, 0, 547, 405, 0, 0, 0, 0, 507, 436, 0, 0, 0, 0, 459, 456, 0, 0, 0, 0, 404, 465, 0, 0, 0, 0, 353, 451, 0, 0, 0, 0, 305, 435, 0, 0, 0, 0, 265, 404, 0, 0, 0, 0, 233, 364, 0, 0, 0, 0, 211, 313, 0, 0, 0, 0, 203, 263, 0, 0, 0, 0, 210, 209, 0, 0, 0, 0, 230, 161, 0, 0, 0, 0, 262, 123, 0, 0, 0, 0, 301, 88, 0, 0, 0, 0, 349, 67, 0, 0, 0, 0, 405, 61)
+}
+point_count = 25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2ioh"]
+
 [node name="ExperimentalArea" type="Node2D"]
-
-[node name="Centipede" type="CharacterBody2D" parent="."]
-position = Vector2(84, 68)
-script = ExtResource("1_352ld")
-
-[node name="CentipedeBody" type="Node2D" parent="Centipede"]
-script = ExtResource("1_dgb70")
-num_segments = 15
-stiffness = 0.95
-distance = 20.0
-view_lines = true
-
-[node name="Legs" type="Node" parent="Centipede/CentipedeBody"]
-script = ExtResource("2_qb7y7")
-segment = 1
-leg_distance = 60.0
-leg_spread = 20.0
-speed = 5.0
-view_lines = true
-
-[node name="Legs3" type="Node" parent="Centipede/CentipedeBody"]
-script = ExtResource("2_qb7y7")
-segment = 3
-leg_distance = 60.0
-leg_spread = 20.0
-speed = 5.0
-active_leg = 2
-view_lines = true
-
-[node name="Legs5" type="Node" parent="Centipede/CentipedeBody"]
-script = ExtResource("2_qb7y7")
-segment = 5
-leg_distance = 60.0
-leg_spread = 20.0
-speed = 5.0
-view_lines = true
-
-[node name="Legs7" type="Node" parent="Centipede/CentipedeBody"]
-script = ExtResource("2_qb7y7")
-segment = 7
-leg_distance = 60.0
-leg_spread = 20.0
-speed = 5.0
-active_leg = 2
-view_lines = true
-
-[node name="Snake_Guns" type="Node" parent="Centipede/CentipedeBody"]
-script = ExtResource("6_7qxi2")
-gun = ExtResource("2_i7aow")
-bullet = ExtResource("6_l3up4")
-
-[node name="SnakeMovementController" type="Node" parent="Centipede" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_aia4q")
-initial_state = NodePath("Follow")
-
-[node name="Follow" type="Node" parent="Centipede/SnakeMovementController" node_paths=PackedStringArray("follow_target")]
-script = ExtResource("7_1eh23")
-follow_target = NodePath("../../../Crosshairs")
-speed = 100000.0
-look_at_player = true
-max_deviation_distance = 50.0
-action1 = "Coil"
-action2 = "Surround"
-
-[node name="Coil" type="Node" parent="Centipede/SnakeMovementController"]
-
-[node name="Surround" type="Node" parent="Centipede/SnakeMovementController"]
-
-[node name="SnakeAttackController" type="Node" parent="Centipede"]
-script = ExtResource("3_aia4q")
-
-[node name="Neutral" type="Node" parent="Centipede/SnakeAttackController"]
-script = ExtResource("9_qendw")
-attack_state = "Random"
-
-[node name="FireLeftGuns" type="Node" parent="Centipede/SnakeAttackController"]
-
-[node name="FireFrontGuns" type="Node" parent="Centipede/SnakeAttackController"]
-
-[node name="Random" type="Node" parent="Centipede/SnakeAttackController"]
-script = ExtResource("10_5y0sw")
-options = Array[String](["FireLeftGuns", "FireFrontGuns"])
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Centipede"]
-navigation_layers = 5
-
-[node name="Targeter" parent="Centipede" node_paths=PackedStringArray("target") instance=ExtResource("2_enxoq")]
-target = NodePath("../../Crosshairs")
 
 [node name="Crosshairs" type="Node2D" parent="."]
 
@@ -1018,3 +940,114 @@ visible = false
 z_index = -1
 scale = Vector2(0.330365, 1)
 texture = ExtResource("10_bkqhs")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gyk8w")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(405, 61)
+rotation = 0.128911
+
+[node name="Centipede" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+position = Vector2(84, 68)
+script = ExtResource("1_352ld")
+
+[node name="CentipedeBody" type="Node2D" parent="Path2D/PathFollow2D/Centipede"]
+script = ExtResource("1_dgb70")
+interact_with_environment = true
+num_segments = 45
+stiffness = 0.95
+distance = 20.0
+view_lines = true
+
+[node name="Legs" type="Node" parent="Path2D/PathFollow2D/Centipede/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 1
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs3" type="Node" parent="Path2D/PathFollow2D/Centipede/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 3
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs5" type="Node" parent="Path2D/PathFollow2D/Centipede/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 5
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs7" type="Node" parent="Path2D/PathFollow2D/Centipede/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 7
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Snake_Guns" type="Node" parent="Path2D/PathFollow2D/Centipede/CentipedeBody"]
+script = ExtResource("6_7qxi2")
+gun = ExtResource("2_i7aow")
+bullet = ExtResource("6_l3up4")
+segment_with_gun = 3
+
+[node name="SnakeMovementController" type="Node" parent="Path2D/PathFollow2D/Centipede" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_aia4q")
+initial_state = NodePath("Return")
+
+[node name="Follow" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("7_1eh23")
+follow_target = NodePath("../../../../../Crosshairs")
+speed = 100000.0
+look_at_player = true
+action = "Random"
+distance_til_attack = 10000.0
+num_attacks = 1
+attack_cooldown = 1000
+
+[node name="FollowPath" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
+script = ExtResource("15_yfnpp")
+speed = 0.9
+time_following = 250
+
+[node name="Surround" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
+
+[node name="Return" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
+script = ExtResource("16_5350e")
+speed = 100000.0
+snap_distance = 10.0
+
+[node name="Random" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeMovementController"]
+script = ExtResource("10_5y0sw")
+options = Array[String](["Return"])
+
+[node name="SnakeAttackController" type="Node" parent="Path2D/PathFollow2D/Centipede"]
+script = ExtResource("3_aia4q")
+
+[node name="Neutral" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeAttackController"]
+script = ExtResource("9_qendw")
+attack_state = "Random"
+
+[node name="FireLeftGuns" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeAttackController"]
+
+[node name="FireFrontGuns" type="Node" parent="Path2D/PathFollow2D/Centipede/SnakeAttackController"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Path2D/PathFollow2D/Centipede"]
+navigation_layers = 5
+
+[node name="Targeter" parent="Path2D/PathFollow2D/Centipede" node_paths=PackedStringArray("target") instance=ExtResource("2_enxoq")]
+target = NodePath("../../../../Crosshairs")
+
+[node name="Reference" type="CollisionShape2D" parent="."]
+position = Vector2(406, 262)
+scale = Vector2(20, 20)
+shape = SubResource("CircleShape2D_b2ioh")

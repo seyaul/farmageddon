@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 class_name Snake
 
 # TODO: Add way to manually tweak size of each point.
@@ -29,7 +29,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	make_segments_follow_each_other()
-	
+	print(rotation_degrees)
 	if view_lines:
 		draw_lines()
 

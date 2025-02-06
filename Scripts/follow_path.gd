@@ -26,15 +26,17 @@ func Enter():
 func Update(delta: float) -> void:
 	time += 1
 	print(is_instance_valid(attach_position_to), attach_position_to)
+	#Attaches path position to a node if it is present.
 	if is_instance_valid(attach_position_to):
 		path.global_position = attach_position_to.global_position
-		print("Bruh")
+	# In case enemy deviates from path by accident, return back to path.
 	if guide.global_position - enemy.global_position != Vector2.ZERO:
 		emit_signal("state_transition", self, "Return")
 	if paused:
 		_pause_enemy()
 		return
 	_move_enemy(delta)
+	# Reinitializes state when it is no longer following the path.
 	if time >= time_following:
 		attach_position_to = null
 		backwards = false

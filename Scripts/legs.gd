@@ -6,7 +6,7 @@ extends Node
 @export var speed: float
 
 
-var snake: Node2D
+var snake: Snake
 var leg1: Node2D
 var leg2: Node2D
 

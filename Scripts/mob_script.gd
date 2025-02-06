@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 signal shoot
+signal knocked_back
+
 @export var flash_duration: float = 0.2  # Duration of red flash
 var hb_timer_duration: float = 1.5
 var normal_color: Color = Color(1, 1, 1)  # Default color (normal)
@@ -30,6 +32,9 @@ func take_damage(amount: int):
 	flash_red()
 	# decrease health
 	health.take_damage(amount)
+
+func apply_knockback(force: Vector2):
+	emit_signal("knocked_back", force)
 
 func flash_red():
 	sprite.z_index = 100

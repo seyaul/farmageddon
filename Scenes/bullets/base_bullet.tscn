@@ -1,21 +1,83 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3tixxhlwjl4x"]
+[gd_scene load_steps=13 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
-[ext_resource type="Texture2D" uid="uid://cor4jlf368sod" path="res://Sprites/pea_bullet.png" id="2_qob4r"]
+[ext_resource type="Texture2D" uid="uid://dp62u8ugkme7a" path="res://Sprites/Bullet 24x24 Free Part 3A.png" id="3_so4dp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr7g7"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpl34"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht6ir"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d18c5"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1dlb"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuro6"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip871"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjh05"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i0vis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr7g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpl34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht6ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d18c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1dlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuro6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip871")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjh05")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
 [node name="baseBullet" type="AnimatableBody2D"]
-scale = Vector2(5, 5)
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 12
 sync_to_physics = false
 script = ExtResource("1_rp1mo")
 collision_behavior = "Simple"
-bounces_til_despawn = null
 life_span = 200
 max_range = 500
-safe_margin = null
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(0.205, 0.205)
@@ -23,4 +85,8 @@ shape = SubResource("CircleShape2D_m6n65")
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.027, 0.027)
-texture = ExtResource("2_qob4r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_i0vis")
+frame_progress = 0.914568

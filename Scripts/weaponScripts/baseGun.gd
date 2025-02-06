@@ -13,13 +13,14 @@ signal set_max_ammo
 @export_enum("Discrete", "Continuous")
 var fire_type: String = "Discrete"
 @export var bullet: PackedScene
-@export var projectile_speed: float = 300 
+@export var projectile_speed: float = 400 
 @export var automatic: bool = false
 @export var fire_rate: int = 20
 @export var spread: float = 0
 @export var bullets_per_fire: int = 1
 @export var magazine_size: int = 10
 var active_shooting: bool = true
+var audio_player: AudioStreamPlayer2D
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -32,6 +33,7 @@ func _ready() -> void:
 	get_parent().enable_shooting.connect(enable_shooting_handler)
 	get_parent().max_ammo = magazine_size
 	get_parent().ammo = magazine_size
+	audio_player = $GunshotSound
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -61,6 +63,9 @@ func fire(delta: float) -> void:
 
 	if fire_type == "Discrete":
 		for i in range(bullets_per_fire):
+			if audio_player:
+				audio_player.pitch_scale = randf_range(0.9, 1.1)
+				audio_player.play()
 			var projectile: AnimatableBody2D = bullet.instantiate()
 			projectile.position = global_position
 

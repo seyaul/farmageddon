@@ -7,9 +7,13 @@ class_name FiniteStateMachine
 var states: Dictionary = {}
 var current_state: State
 var previous_move_vector: Vector2
+var parent: CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	parent = get_parent()
+	if parent.is_in_group("mobs"):
+		parent.knocked_back.connect(set_knockback_vector)
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -68,3 +72,9 @@ func set_previous_move_vector(source_state: State, movement_vector: Vector2):
 		print("error: set_previous_move_vector should only be called on signal from the walk state")
 		return
 	previous_move_vector = movement_vector
+
+func set_knockback_vector(force: Vector2):
+	for child in get_children():
+		if child is KnockedBackState:
+			child.knockback_velocity = force
+	change_state(current_state, "KnockedBack")

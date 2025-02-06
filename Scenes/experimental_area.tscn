@@ -1005,8 +1005,9 @@ initial_state = NodePath("Follow")
 [node name="Follow" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("7_1eh23")
 follow_target = NodePath("../../../../../Crosshairs")
-speed = 100000.0
+speed = 40000.0
 look_at_player = true
+max_deviation_distance = 150.0
 action = "Random"
 distance_til_attack = 10000.0
 num_attacks = 1

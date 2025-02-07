@@ -10,6 +10,7 @@ const MAP_LINE = preload("res://Scenes/line.tscn")
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var campfire_popup = preload("res://Scenes/CampfireRoom.tscn").instantiate()
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -20,6 +21,12 @@ var camera_y_pos : int
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
+	
+	# campfire node/signal stuff
+	add_child(campfire_popup)
+	campfire_popup.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
+	Global.connect("campfire_selected", Callable(self, "_on_campfire_selected"))
+
 	# transition to this checking if it is within a Global group of rooms 
 	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
@@ -192,10 +199,26 @@ func _on_map_room_clicked(room: Room) -> void:
 	var key = room.get_key()
 	if key in GameState.room_states:
 		GameState.room_states[key]["selected"] = true
+		
+	# campfire room stuff
+	if room.type == Room.Type.CAMPFIRE:
+		campfire_popup.show_popup()
+		print("campfire room clicked")
+		
 	unlock_next_rooms(room)
-
 
 func _on_map_room_selected(room: Room) -> void:
 	last_room = room
 	floors_climbed += 1
 	_on_map_room_clicked(room)
+	
+
+
+func _on_campfire_selected() -> void:
+	print("campfire popup triggered from global signal")
+	campfire_popup.show_popup()
+
+func _on_heal_accepted() -> void:
+	print("updating player health.")
+	Global.player_health = Global.max_health 
+	print("player health is now: ", Global.player_health)

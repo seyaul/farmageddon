@@ -7,6 +7,7 @@ var player_scene = preload("res://Scenes/player.tscn")
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
+signal campfire_selected
 
 # WIP variables
 var newGame : bool = true

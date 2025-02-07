@@ -9,9 +9,9 @@ signal healed
 var character: CharacterBody2D
 func _ready() -> void:
 	character = get_parent()
-	if character.name != "Player": #if it is a mob 
+	if character.name != "Player":  
 		current_health = max_health
-	else: # if it is the player and it isn't new game
+	else: 
 		current_health = Global.playerHealth
 	
 	

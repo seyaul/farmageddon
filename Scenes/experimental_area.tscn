@@ -1018,6 +1018,7 @@ attack_cooldown = 250
 script = ExtResource("15_yfnpp")
 speed = 0.9
 time_following = 250
+slide_speed = 1.0
 
 [node name="Surround" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController" node_paths=PackedStringArray("target")]
 script = ExtResource("16_7w3qe")

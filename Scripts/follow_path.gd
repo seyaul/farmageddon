@@ -6,6 +6,7 @@ extends State
 @export var pause_time: float = 0
 @export var time_following: int
 @export var attach_position_to: Node2D
+@export var slide_speed: float
 # Called when the node enters the scene tree for the first time.
 var enemy: CharacterBody2D
 var guide: PathFollow2D
@@ -27,7 +28,7 @@ func Update(delta: float) -> void:
 	time += 1
 	#Attaches path position to a node if it is present.
 	if is_instance_valid(attach_position_to):
-		path.global_position = attach_position_to.global_position
+		path.global_position = path.global_position.lerp(attach_position_to.global_position, slide_speed * delta)
 	# In case enemy deviates from path by accident, return back to path.
 	if guide.global_position - enemy.global_position != Vector2.ZERO:
 		emit_signal("state_transition", self, "Return")

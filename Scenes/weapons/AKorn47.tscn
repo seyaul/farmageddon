@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc3d15pykpd4c"]
+[gd_scene load_steps=4 format=3 uid="uid://cc3d15pykpd4c"]
 
 [ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_s23ph"]
 [ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="2_8pqak"]
+[ext_resource type="AudioStream" uid="uid://nnxe02kjoa4p" path="res://audio/effects/andrew's_gunshot.wav" id="3_2xtba"]
 
 [node name="AKorn47" instance=ExtResource("1_s23ph")]
 bullet = ExtResource("2_8pqak")
-projectile_speed = 50000.0
+projectile_speed = 70000.0
 automatic = true
 fire_rate = 10
 magazine_size = 50
+
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="0"]
+stream = ExtResource("3_2xtba")
+volume_db = -8.914

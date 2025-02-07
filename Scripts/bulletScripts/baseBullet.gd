@@ -26,6 +26,10 @@ func _ready() -> void:
 	initial_position = position
 	if name == "Fragment":
 		print("spawned")
+	var animated_sprite = $AnimatedSprite2D
+	if animated_sprite:
+		animated_sprite.play("default")
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

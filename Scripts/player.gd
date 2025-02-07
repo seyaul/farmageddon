@@ -7,6 +7,8 @@ signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
 
+@export var gun_scene: PackedScene
+
 var ammo: int = 10
 var max_ammo: int = 10
 var ammo_bar: Label
@@ -14,6 +16,8 @@ var animation: AnimatedSprite2D
 var speed_modifier: float
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
+var gun: baseGun
+
 # Tractor dimensions TODO: possibly set these by grabbing the collision shapes from the scene
 const TRACTOR_WIDTH: float = 220
 const TRACTOR_HEIGHT: float = 160
@@ -24,14 +28,17 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
-	var gun = $gun
+	if gun_scene:
+		equip_new_gun(gun_scene.instantiate())
+	else:
+		print("Error, no gun equiped in player scene")
 	gun.bullet_fired.connect(_on_bullet_fired)
 	animation = get_node("AnimatedSprite2D")
 	hitbox = get_node("Hitbox")
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
 	elif Input.is_action_pressed("shoot"):
 		emit_signal("shoot", "hold", delta)
@@ -102,3 +109,9 @@ func update_hitbox(direction: Vector2):
 		hitbox.position = Vector2(0, TRACTOR_HEIGHT / 2 + HITBOX_EXTENSION)
 		hitbox_shape.shape.extents = Vector2(TRACTOR_WIDTH / 2, HITBOX_EXTENSION)
 		hitbox.rotation_degrees = 0
+
+func equip_new_gun(new_gun: baseGun):
+	if gun:
+		gun.queue_free()  
+	gun = new_gun
+	add_child(gun)

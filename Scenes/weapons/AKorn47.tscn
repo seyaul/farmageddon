@@ -6,7 +6,7 @@
 
 [node name="AKorn47" instance=ExtResource("1_s23ph")]
 bullet = ExtResource("2_8pqak")
-projectile_speed = 50000.0
+projectile_speed = 70000.0
 automatic = true
 fire_rate = 10
 magazine_size = 50

@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_4t6rf"]
+[ext_resource type="PackedScene" uid="uid://3qaokffdofi" path="res://Scenes/weapons/flamethrower.tscn" id="2_5ggte"]
 [ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
 [ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
-[ext_resource type="PackedScene" uid="uid://cc3d15pykpd4c" path="res://Scenes/weapons/AKorn47.tscn" id="11_2blxc"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="11_4pwex"]
 [ext_resource type="Texture2D" uid="uid://cvn3eg0wbunhm" path="res://Sprites/player_sprites/tractor back.png" id="12_a0rts"]
 [ext_resource type="Texture2D" uid="uid://cnk56kxhwu607" path="res://Sprites/player_sprites/tractor back idle.png" id="12_tpqsb"]
@@ -176,6 +176,7 @@ size = Vector2(2, 160)
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_jvk8e")
+gun_scene = ExtResource("2_5ggte")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")
@@ -223,8 +224,6 @@ shockwave_cooldown = 100
 
 [node name="Collider" type="CollisionShape2D" parent="Shockwave"]
 shape = SubResource("CircleShape2D_dqb8n")
-
-[node name="gun" parent="." instance=ExtResource("11_2blxc")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -23.3333)

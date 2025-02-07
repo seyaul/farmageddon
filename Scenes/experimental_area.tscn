@@ -1045,13 +1045,19 @@ trigger_attack_with_state = {
 
 [node name="FireLeftGuns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/AttackController"]
 script = ExtResource("19_l68r2")
+trigger_attack_with_state = {
+"Follow": "FireFrontGuns",
+"FollowPath": "FireLeftGuns"
+}
 side_shooting = "Left"
-time_shooting = 250
 
 [node name="FireFrontGuns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/AttackController"]
 script = ExtResource("19_l68r2")
+trigger_attack_with_state = {
+"Follow": "FireFrontGuns",
+"FollowPath": "FireLeftGuns"
+}
 side_shooting = "Front"
-time_shooting = 250
 
 [node name="Targeter" parent="Path2D/PathFollow2D/CentipedeBody" node_paths=PackedStringArray("target") instance=ExtResource("2_enxoq")]
 target = NodePath("../../../../Crosshairs")

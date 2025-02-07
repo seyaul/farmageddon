@@ -1,33 +1,34 @@
 extends State
 
+#TODO: Refactor or make a new state machine stuff.
+@export var trigger_attack_with_state: Dictionary
+var mfsm: FiniteStateMachine
+
 @export_enum("Front", "Left", "Right")
 var side_shooting: String
-@export var time_shooting: int
 
 var snake: Snake
 var guns: Node
-var time: int
 
 func Enter():
 	pass
-	
+
 func Update(delta: float):
-	time += 1
-	
 	if guns.guns_connected:
 		shoot_guns(delta)
-	print(time)
-	if time >= time_shooting:
-		emit_signal("state_transition", self, "Neutral")
+	if is_instance_valid(mfsm.current_state) and \
+	trigger_attack_with_state.has(mfsm.current_state.name) and \
+	trigger_attack_with_state[mfsm.current_state.name] != name:
+		emit_signal("state_transition", self, trigger_attack_with_state[mfsm.current_state.name])
 
 func Exit():
-	time = 0
 	for i in range(1, snake.num_segments, guns.segments_with_gun):
 		var segment = snake.segments[i]
 		segment.emit_signal("shoot", 0, "end", 0)
 		segment.emit_signal("shoot", 1, "end", 0)
 
 func _ready() -> void:
+	mfsm = get_parent().get_parent().get_node("MovementController")
 	snake = get_parent().get_parent()
 	guns = snake.get_node("Snake_Guns")
 	

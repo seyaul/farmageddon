@@ -2,7 +2,7 @@ extends baseGun
 
 @export var flames_cutoff_delay: float = 0.2
 @export var damage_interval: float = 0.1  # Time between damage ticks
-@export var flame_damage: float = 5  # Damage per tick
+@export var flame_damage: float = 10  # Damage per tick
 
 var time_since_last_shot: float = 0
 var flames: CPUParticles2D
@@ -40,12 +40,20 @@ func _process(delta: float) -> void:
 	print(damage_timer.get_time_left())
 	var mouse_position = get_global_mouse_position()
 	var direction_to_mouse = (mouse_position - global_position).normalized()
-	self.rotation = direction_to_mouse.angle()
+	flames.direction = Vector2(cos(direction_to_mouse.angle()), sin(direction_to_mouse.angle()))
+	damage_area.rotation = direction_to_mouse.angle()
 	
 	if active_shooting:
 		time_since_last_shot += delta
 		if time_since_last_shot >= flames_cutoff_delay:
 			stop_firing()
+
+func handle_signal(action: String, delta) -> void:
+	if action == "hold":
+		fire(delta)
+	elif action == "end":
+		stop_firing()
+
 
 func fire(delta: float) -> void:
 	if !active_shooting:
@@ -54,6 +62,7 @@ func fire(delta: float) -> void:
 		return
 	
 	start_firing()
+	audio_player.play()
 	time_since_last_shot = 0
 
 func start_firing() -> void:

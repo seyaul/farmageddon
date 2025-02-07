@@ -33,7 +33,7 @@ func _ready() -> void:
 	get_parent().enable_shooting.connect(enable_shooting_handler)
 	get_parent().max_ammo = magazine_size
 	get_parent().ammo = magazine_size
-	audio_player = $GunshotSound
+	audio_player = $ShootingSound
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

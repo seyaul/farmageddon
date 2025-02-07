@@ -38,7 +38,7 @@ func _ready() -> void:
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
 	elif Input.is_action_pressed("shoot"):
 		emit_signal("shoot", "hold", delta)

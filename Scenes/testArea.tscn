@@ -1,86 +1,15 @@
-[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=20 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
-[ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_t0tql"]
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
-[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_m1hln"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
-[ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="13_abdpc"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
-[ext_resource type="Script" path="res://Scripts/repath.gd" id="17_y4wtn"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="25_ysweh"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
-
-[sub_resource type="Curve2D" id="Curve2D_nhari"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 113, -257, 0, 0, 0, 0, 285, -106, 0, 0, 0, 0, 306, -249, 0, 0, 0, 0, 113, -257)
-}
-point_count = 4
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7bpo"]
-
-[sub_resource type="GDScript" id="GDScript_gn3mj"]
-script/source = "extends State
-
-@export var aggro_target: CharacterBody2D
-@export var speed: float = 0.1
-@export var should_reverse: bool = false
-@export var pause_time: float = 0
-@export var can_aggro: bool = false
-@export var aggro_distance: float = 600
-# Called when the node enters the scene tree for the first time.
-var enemy: CharacterBody2D
-var guide: PathFollow2D
-var backwards: bool = false
-var paused: bool = false
-var paused_for: float = 0
-var animation: AnimatedSprite2D
-
-func Enter():
-	enemy = get_parent().get_parent()
-	guide = enemy.get_parent()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func Update(delta: float) -> void:
-	if can_aggro and  enemy.global_position.distance_to(aggro_target.global_position) <= aggro_distance:
-		emit_signal(\"state_transition\", self, \"Follow\")
-	if guide.global_position - enemy.global_position != Vector2.ZERO:
-		emit_signal(\"state_transition\", self, \"Return\")
-		
-	if paused:
-		_pause_enemy()
-		return
-	_move_enemy(delta)
-	
-	
-
-func Exit() -> void:
-	pass
-
-func _move_enemy(delta: float) -> void:
-	if backwards:
-		guide.progress_ratio -= delta * speed
-		enemy.rotation_degrees += 180
-		if should_reverse and guide.progress_ratio <= .05:
-			backwards = not backwards
-			paused = pause_time > 0
-	else:
-		guide.progress_ratio += delta * speed
-		if should_reverse and guide.progress_ratio >= .95:
-			backwards = not backwards
-			paused = pause_time > 0
-
-func _pause_enemy() -> void:
-	paused_for += 1
-	if paused_for >= pause_time:
-		paused = false
-		paused_for = 0
-"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n00rv"]
 texture = ExtResource("23_llv11")
@@ -975,39 +904,6 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
-
-[node name="EnemyPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_nhari")
-
-[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
-position = Vector2(113, -257)
-rotation = 0.720474
-
-[node name="Pather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
-visible = false
-collision_layer = 12
-motion_mode = 1
-
-[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Pather"]
-scale = Vector2(6.24, 6.24)
-shape = SubResource("RectangleShape2D_t7bpo")
-
-[node name="EnemySprite" type="Sprite2D" parent="EnemyPath/EnemyGuide/Pather"]
-texture = ExtResource("13_abdpc")
-
-[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
-script = ExtResource("10_m1hln")
-
-[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Pather"]
-script = ExtResource("2_t0tql")
-
-[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
-script = SubResource("GDScript_gn3mj")
-
-[node name="Return" type="Node" parent="EnemyPath/EnemyGuide/Pather/EMovementController"]
-script = ExtResource("17_y4wtn")
-speed = 10000.0
-snap_distance = 2.0
 
 [node name="terrainLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://3qaokffdofi"]
+[gd_scene load_steps=9 format=3 uid="uid://3qaokffdofi"]
 
 [ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_0wtkk"]
 [ext_resource type="Script" path="res://Scripts/weaponScripts/flamethrower.gd" id="2_0xoen"]
 [ext_resource type="Texture2D" uid="uid://crogcar6g7r2k" path="res://Sprites/pixilart-drawing (1).png" id="3_mi35r"]
+[ext_resource type="AudioStream" uid="uid://chb6r8mxetl3v" path="res://audio/effects/andrew's_flamethrower.wav" id="4_fe43h"]
 
 [sub_resource type="Curve" id="Curve_xgg7o"]
 max_value = 25.0
-_data = [Vector2(0, 0.274725), 0.0, 19.7224, 0, 0, Vector2(0.685484, 1.0989), 0.0, 0.0, 0, 0, Vector2(1, 6.04396), 15.7227, 0.0, 1, 0]
+_data = [Vector2(0, 0.274725), 0.0, 19.7224, 0, 0, Vector2(0.685484, 1.0989), 0.0, 0.0, 0, 0, Vector2(1, 25), 75.9933, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_3mta6"]
@@ -14,31 +15,32 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.802198), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_eg4ga"]
-offsets = PackedFloat32Array(0, 0.1875, 0.375, 0.541667, 0.697917, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.968627, 0, 1, 1, 0.486275, 0.113725, 1, 1, 0.290196, 0, 1, 0.921569, 0.12549, 0.12549, 1, 0, 0.12549, 0.12549, 1)
+offsets = PackedFloat32Array(0, 0.1875, 0.375, 0.541667, 0.697917)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.968627, 0, 1, 1, 0.486275, 0.113725, 1, 1, 0.290196, 0, 1, 0.921569, 0.12549, 0.12549, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66qcs"]
 size = Vector2(573, 43)
 
 [node name="flamethrower" instance=ExtResource("1_0wtkk")]
+z_index = 1
 rotation = 0.0
 script = ExtResource("2_0xoen")
 flames_cutoff_delay = 0.2
 damage_interval = 0.1
-flame_damage = 2.5
+flame_damage = 10.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="0"]
 visibility_layer = 513
-scale = Vector2(8, 8)
+scale = Vector2(5, 5)
 amount = 250
 local_coords = true
 spread = 3.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-damping_max = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+damping_max = 50.0
 damping_curve = SubResource("Curve_xgg7o")
-scale_amount_max = 2.9
+scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_3mta6")
 color_ramp = SubResource("Gradient_eg4ga")
 
@@ -51,5 +53,9 @@ collision_layer = 2
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" index="0"]
+visible = false
 position = Vector2(276.5, -2.5)
 shape = SubResource("RectangleShape2D_66qcs")
+
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("4_fe43h")

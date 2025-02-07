@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_4t6rf"]
-[ext_resource type="PackedScene" uid="uid://3qaokffdofi" path="res://Scenes/weapons/flamethrower.tscn" id="2_5ggte"]
+[ext_resource type="PackedScene" uid="uid://cc3d15pykpd4c" path="res://Scenes/weapons/AKorn47.tscn" id="2_ypx2k"]
 [ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
 [ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
@@ -176,7 +176,7 @@ size = Vector2(2, 160)
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_jvk8e")
-gun_scene = ExtResource("2_5ggte")
+gun_scene = ExtResource("2_ypx2k")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")

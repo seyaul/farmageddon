@@ -25,7 +25,6 @@ func Enter():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Update(delta: float) -> void:
 	time += 1
-	print(is_instance_valid(attach_position_to), attach_position_to)
 	#Attaches path position to a node if it is present.
 	if is_instance_valid(attach_position_to):
 		path.global_position = attach_position_to.global_position

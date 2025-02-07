@@ -16,13 +16,16 @@ func Update(delta: float):
 	
 	if guns.guns_connected:
 		shoot_guns(delta)
-	
+	print(time)
 	if time >= time_shooting:
 		emit_signal("state_transition", self, "Neutral")
-	
 
 func Exit():
 	time = 0
+	for i in range(1, snake.num_segments, guns.segments_with_gun):
+		var segment = snake.segments[i]
+		segment.emit_signal("shoot", 0, "end", 0)
+		segment.emit_signal("shoot", 1, "end", 0)
 
 func _ready() -> void:
 	snake = get_parent().get_parent()
@@ -32,14 +35,15 @@ func _ready() -> void:
 func shoot_guns(delta: float) -> void:
 	if side_shooting == "Front":
 		var segment = snake.segments[0]
-		segment.lgun.fire(delta)
-		segment.rgun.fire(delta)
-	for i in range(snake.num_segments):
-		if i % guns.segments_with_gun == 0:
+		segment.emit_signal("shoot", 0, "hold", delta)
+		segment.emit_signal("shoot", 1, "hold", delta)
+	var parity: bool = true
+	for i in range(1, snake.num_segments, guns.segments_with_gun):
+		if parity:
 			var segment = snake.segments[i]
-			if (time % 10 == 0 and i % 2 == 0) or (time % 5 == 0 and i % 2 != 0):
-				if side_shooting == "Left":
-					segment.lgun.fire(delta)
-				elif  side_shooting == "Right":
-					segment.rgun.fire(delta)
-					
+			if side_shooting == "Left":
+				segment.emit_signal("shoot", 0, "hold", delta)
+			elif  side_shooting == "Right":
+				segment.emit_signal("shoot", 1, "hold", delta)
+		parity = not parity
+	

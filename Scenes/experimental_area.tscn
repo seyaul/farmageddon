@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="7_vm6rj"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="8_ooqc3"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="9_hfs7c"]
-[ext_resource type="Script" path="res://Scenes/randomStateJunction.gd" id="10_5y0sw"]
+[ext_resource type="Script" path="res://Scripts/randomStateJunction.gd" id="10_5y0sw"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="10_bkqhs"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="15_yfnpp"]
 [ext_resource type="Script" path="res://Scenes/surround_state.gd" id="16_7w3qe"]
@@ -997,6 +997,7 @@ view_lines = true
 script = ExtResource("6_7qxi2")
 gun = ExtResource("2_i7aow")
 bullet = ExtResource("6_l3up4")
+segments_with_gun = 2
 
 [node name="MovementController" type="Node" parent="Path2D/PathFollow2D/CentipedeBody" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aia4q")
@@ -1059,6 +1060,7 @@ target = NodePath("../../../../Crosshairs")
 navigation_layers = 5
 
 [node name="Reference" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(20, 20)
 shape = SubResource("CircleShape2D_b2ioh")
 

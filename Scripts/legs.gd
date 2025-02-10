@@ -6,7 +6,7 @@ extends Node
 @export var speed: float
 
 
-var snake: Node2D
+var snake: Snake
 var leg1: Node2D
 var leg2: Node2D
 
@@ -24,6 +24,8 @@ var p2: float = 0
 
 var line: Line2D
 
+var parent_ready: bool
+
 func _ready() -> void:
 	snake = get_parent()
 	leg1 = snake.segment_factory()
@@ -34,12 +36,13 @@ func _ready() -> void:
 		get_tree().current_scene.add_child.call_deferred(line)
 	get_tree().current_scene.add_child.call_deferred(leg1)
 	get_tree().current_scene.add_child.call_deferred(leg2)
-	
-	
+	snake.ready.connect(_set_ready)
 
+func _set_ready() -> void:
+	parent_ready = true
 
 func _physics_process(delta: float) -> void:
-	if snake.is_ready:
+	if parent_ready:
 		step_pos1 = snake.segments[segment].to_global(Vector2(1,0).rotated(deg_to_rad(leg_spread)) * leg_distance)
 		step_pos2 = snake.segments[segment].to_global(Vector2(1,0).rotated(deg_to_rad(-leg_spread)) * leg_distance)
 

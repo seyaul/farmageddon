@@ -20,9 +20,8 @@ func Update(delta: float):
 	var dir = Vector2(cos(enemy.global_rotation), sin(enemy.global_rotation)).normalized()
 	enemy.velocity = dir * speed * delta
 	enemy.move_and_slide()
-	
 	if (enemy.global_position - guide.global_position).length() <= snap_distance:
-		emit_signal("state_transition", self, "Follow")
+		emit_signal("state_transition", self, "FollowPath")
 
 func Exit():
 	enemy.global_position = guide.global_position

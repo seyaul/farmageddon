@@ -1,5 +1,6 @@
 extends Node
 
+@export var play_animations: bool
 @export var target: Node2D
 @export var offset_rotation: float
 @export var disabled: bool
@@ -18,23 +19,24 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not disabled:
 		#print(target, " target in targeter.gd")
-		if is_instance_valid(target) and is_instance_valid(aimer):
-			dist = target.global_position - aimer.global_position
-			# if abs(dist.x) > abs(dist.y):
-			# 	if dist.x >= 0:
-			# 		animatedSprite.play("rightFacingWalk")
-			# 	else:
-			# 		animatedSprite.play("leftFacingWalk")
-			# elif abs(dist.x) < abs(dist.y):
-			# 	if dist.y >= 0:
-			# 		animatedSprite.play("frontFacingWalk")
-			# 	else: 
-			# 		animatedSprite.play("backFacingWalk")
-			aimer.rotation = dist.angle() 
-			animatedSprite.play("walk")
-		elif !is_instance_valid(target):
-			#get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
-			pass
-			
-		#aimer.look_at(target.global_position)
-		#aimer.rotation_degrees += offset_rotation
+		if play_animations:
+			if is_instance_valid(target) and is_instance_valid(aimer):
+				dist = target.global_position - aimer.global_position
+				if abs(dist.x) > abs(dist.y):
+					if dist.x >= 0:
+						animatedSprite.play("rightFacingWalk")
+					else:
+						animatedSprite.play("leftFacingWalk")
+				elif abs(dist.x) < abs(dist.y):
+					if dist.y >= 0:
+						animatedSprite.play("frontFacingWalk")
+					else: 
+						animatedSprite.play("backFacingWalk")
+			elif !is_instance_valid(target):
+				#get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
+				pass
+		else:
+			if animatedSprite:
+				animatedSprite.play("walk")
+			aimer.look_at(target.global_position)
+			aimer.rotation_degrees += offset_rotation

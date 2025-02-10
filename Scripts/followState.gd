@@ -2,17 +2,16 @@ extends State
 
 @export var follow_target: Node2D
 @export var speed: float = 25
-@export var bias: float = 0.5
 @export var look_at_player: bool
 @export var max_deviation_distance: float
 # TODO: Refactor this
-@export var action1: String
-@export var action2: String
+@export var action: String
 
 var navigation: NavigationAgent2D
 var enemy: CharacterBody2D
 var targeter: Node
 # TODO: Move to a global state
+@export var start_with_attacks: bool
 @export var distance_til_attack: float = 150
 @export var num_attacks: int = 0
 @export var attack_cooldown: int = 1
@@ -25,17 +24,14 @@ var time: int
 func Enter():
 	enemy = get_parent().get_parent()
 	navigation = enemy.get_node("NavigationAgent2D")
-	#print(navigation)
 	targeter = enemy.get_node("Targeter")
-	#print(targeter)
+	attacks = num_attacks if start_with_attacks else 0
 	if targeter && not look_at_player:
 		targeter.disabled = true
 
 # TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):
 	makepath()
-	#if not look_at_player:
-		#enemy.look_at(navigation.get_next_path_position())
 	
 	var dir = (navigation.get_next_path_position() - enemy.global_position).normalized()
 	var distance_to_target = enemy.global_position.distance_to(navigation.target_position)
@@ -45,15 +41,13 @@ func Update(delta: float):
 		
 	enemy.move_and_slide()
 	if distance_to_target <= distance_til_attack and attacks > 0:
-		if randf() < bias:
-			emit_signal("state_transition", self, action1)
-		else:
-			emit_signal("state_transition", self, action2)
+		emit_signal("state_transition", self, action)
 		attacks -= 1
+		
 func makepath() -> void:
 	if(navigation and follow_target != null):
 		navigation.target_position = follow_target.global_position
-
+	
 func Exit():
 	if targeter:
 		targeter.disabled = false

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6hkocg0m1554"]
+
+[ext_resource type="Texture2D" uid="uid://b2u4qxuv3qc4o" path="res://Sprites/new_bull_sprites/bull_corpse.png" id="1_pde87"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_pde87")

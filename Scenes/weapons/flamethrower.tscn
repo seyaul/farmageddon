@@ -6,8 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://chb6r8mxetl3v" path="res://audio/effects/andrew's_flamethrower.wav" id="4_fe43h"]
 
 [sub_resource type="Curve" id="Curve_xgg7o"]
-max_value = 25.0
-_data = [Vector2(0, 0.274725), 0.0, 19.7224, 0, 0, Vector2(0.685484, 1.0989), 0.0, 0.0, 0, 0, Vector2(1, 25), 75.9933, 0.0, 1, 0]
+max_value = 250.0
+_data = [Vector2(0, 0.274725), 0.0, 19.7224, 0, 0, Vector2(0.664, 7.41727), 0.0, 0.0, 0, 0, Vector2(1, 250), 721.973, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_3mta6"]
@@ -15,15 +15,15 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.802198), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_eg4ga"]
-offsets = PackedFloat32Array(0, 0.1875, 0.375, 0.541667, 0.697917)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.968627, 0, 1, 1, 0.486275, 0.113725, 1, 1, 0.290196, 0, 1, 0.921569, 0.12549, 0.12549, 1)
+offsets = PackedFloat32Array(0, 0.1875, 0.375, 0.541667, 0.6875, 0.848958)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.968627, 0, 1, 1, 0.486275, 0.113725, 1, 1, 0.290196, 0, 1, 0.921569, 0.12549, 0.12549, 1, 0.921569, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66qcs"]
 size = Vector2(573, 43)
 
 [node name="flamethrower" instance=ExtResource("1_0wtkk")]
 z_index = 1
-rotation = 0.0
+rotation = -1.5708
 script = ExtResource("2_0xoen")
 flames_cutoff_delay = 0.2
 damage_interval = 0.1

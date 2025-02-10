@@ -61,27 +61,13 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	print("clicked")
 	animation_player.play("Select")
 
-
-# Called by the AnimationPlayer when the "Select" animation finishes
-#func _on_map_room_selected() -> void:
-	#selected.emit(room)
-	#get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
-	#print("selected")
-#
-#
-#func _on_selected(room: Room) -> void:
-	#selected.emit(room)
-	#get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
-	#print("selected")
-
-
 func _on_texture_button_pressed() -> void:
 	if not available:
 		return
 	
 	room.selected = true
 	available = false  
-	#show_selected()  
+  
 	clicked.emit(room)
 	print("clicked", room.get_key())
 	
@@ -91,18 +77,13 @@ func _on_texture_button_pressed() -> void:
 	else: 
 		Global.emit_signal("gameStarted")
 	var key = room.get_key()
-	print("Accessing room state for key:", key)
 
 	
 	if not GameState.room_states.has(key):
 		GameState.room_states[key] = {"selected": false, "available": true}
-		print("Key does not exist in room_states, initializing...")
-	else: 
-		print("Key exists in room_states:", GameState.room_states[key])
-		print("heres what the actual available value is: ", available)
-	
+
 	GameState.room_states[key]["selected"] = true
-	GameState.room_states[key]["available"] = false # see if this makes it not available after it has been selected 
+	GameState.room_states[key]["available"] = false  
 	animation_player.stop()
 	texture_button.disabled = true 
 
@@ -110,6 +91,10 @@ func _on_texture_button_pressed() -> void:
 	animation_player.play("Select")
 	selected.emit(room) #kinda a safeguard
 	
-	GameState.save_map_state(map_data, floors_climbed, room)
-	get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
-	print("selected")
+	if room.type == Room.Type.CAMPFIRE:
+		Global.emit_signal("campfire_selected")
+		print("campfire selected")
+	else:
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+		print("selected")

@@ -7,21 +7,35 @@ signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
 
+@export var gun_scene: PackedScene
+
 var ammo: int = 10
 var max_ammo: int = 10
 var ammo_bar: Label
 var animation: AnimatedSprite2D
 var speed_modifier: float
+var hitbox: Area2D
+var hitbox_shape: CollisionShape2D
+var gun: baseGun
+
+# Tractor dimensions TODO: possibly set these by grabbing the collision shapes from the scene
+const TRACTOR_WIDTH: float = 220
+const TRACTOR_HEIGHT: float = 160
+const HITBOX_EXTENSION: float = 2  # How far the hitbox extends forward
 
 func _ready() -> void:
 	# TODO: Find better way to reference nodes within the same scene as the player?
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
-	var gun = $gun
+	if gun_scene:
+		equip_new_gun(gun_scene.instantiate())
+	else:
+		print("Error, no gun equiped in player scene")
 	gun.bullet_fired.connect(_on_bullet_fired)
 	animation = get_node("AnimatedSprite2D")
-	
+	hitbox = get_node("Hitbox")
+	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
@@ -37,6 +51,21 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("reload"):
 		reload()
+
+	# Added for the front facing knockback hitbox
+	var direction := Vector2.ZERO
+
+	if Input.is_action_pressed("move_up"):
+		direction = Vector2.UP
+	elif Input.is_action_pressed("move_down"):
+		direction = Vector2.DOWN
+	elif Input.is_action_pressed("move_left"):
+		direction = Vector2.LEFT
+	elif Input.is_action_pressed("move_right"):
+		direction = Vector2.RIGHT
+
+	if direction != Vector2.ZERO:
+		update_hitbox(direction)
 
 
 func reload():
@@ -62,3 +91,27 @@ func update_ammo_bar(new_ammo: int):
 		return
 	ammo_bar.text = "Ammo " + str(new_ammo)
 	ammo_bar.label_settings.font_color = Color.WHITE
+
+func update_hitbox(direction: Vector2):
+	if direction == Vector2.RIGHT:
+		hitbox.position = Vector2(TRACTOR_WIDTH / 2 + HITBOX_EXTENSION, 0)
+		hitbox_shape.shape.extents = Vector2(HITBOX_EXTENSION, TRACTOR_HEIGHT / 2)
+		hitbox.rotation_degrees = 0
+	elif direction == Vector2.LEFT:
+		hitbox.position = Vector2(-TRACTOR_WIDTH / 2 - HITBOX_EXTENSION, 0)
+		hitbox_shape.shape.extents = Vector2(HITBOX_EXTENSION, TRACTOR_HEIGHT / 2)
+		hitbox.rotation_degrees = 0
+	elif direction == Vector2.UP:
+		hitbox.position = Vector2(0, -TRACTOR_HEIGHT / 2 - HITBOX_EXTENSION)
+		hitbox_shape.shape.extents = Vector2(TRACTOR_WIDTH / 2, HITBOX_EXTENSION)
+		hitbox.rotation_degrees = 0
+	elif direction == Vector2.DOWN:
+		hitbox.position = Vector2(0, TRACTOR_HEIGHT / 2 + HITBOX_EXTENSION)
+		hitbox_shape.shape.extents = Vector2(TRACTOR_WIDTH / 2, HITBOX_EXTENSION)
+		hitbox.rotation_degrees = 0
+
+func equip_new_gun(new_gun: baseGun):
+	if gun:
+		gun.queue_free()  
+	gun = new_gun
+	add_child(gun)

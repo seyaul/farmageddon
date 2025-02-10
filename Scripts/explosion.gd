@@ -23,7 +23,6 @@ func explode() -> void:
 			projectile.rotation_degrees = (container.global_rotation_degrees - 90) + randf_range(-1 * spread, spread)
 		else:
 			projectile.rotation_degrees = (container.global_rotation_degrees - 90) + float(i + 1) / float(num_bullets) * spread
-			print(float(i + 1) / float(num_bullets) * spread)
 		var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 		projectile.constant_linear_velocity = direction * projectile_speed
 		get_tree().current_scene.call_deferred("add_child", projectile)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=35 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="5_3di07"]
 [ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="6_ur5l3"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_riaty"]
+[ext_resource type="Script" path="res://Scripts/knockedBack.gd" id="8_fxl72"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="8_yeokn"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="9_k6tbs"]
 [ext_resource type="Texture2D" uid="uid://fkpp5tekafg2" path="res://Sprites/cow_sprites/cow back.png" id="10_mr0u1"]
@@ -150,7 +151,7 @@ curve = SubResource("Curve2D_5geu8")
 position = Vector2(113, -257)
 rotation = 0.720474
 
-[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide"]
+[node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide" groups=["mobs"]]
 collision_layer = 12
 collision_mask = 3
 collision_priority = 10.0
@@ -204,6 +205,9 @@ snap_distance = 2.0
 
 [node name="Strafe" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("6_ur5l3")
+
+[node name="KnockedBack" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("8_fxl72")
 
 [node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_riaty")]
 collision_layer = 0

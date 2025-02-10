@@ -1,5 +1,6 @@
 extends State
 
+@export var attack_state: String
 @export var neutral_until_condition: bool
 @export var distance_til_attack: float
 var enemy: CharacterBody2D
@@ -13,7 +14,7 @@ func Update(_delta: float):
 	if neutral_until_condition and \
 	enemy.global_position.distance_to(navigation.target_position) <= distance_til_attack or \
 	not neutral_until_condition:
-		emit_signal("state_transition", self, "Shoot")
+		emit_signal("state_transition", self, attack_state)
 	
 func Exit():
 	pass

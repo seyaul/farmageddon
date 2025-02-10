@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtupp2sk57uqh"]
 
-[ext_resource type="Script" path="res://Scenes/map_generator.gd" id="1_6hnbq"]
+[ext_resource type="Script" path="res://Scripts/map_generator.gd" id="1_6hnbq"]
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_nryy1"]
 
 [sub_resource type="Gradient" id="Gradient_ki201"]

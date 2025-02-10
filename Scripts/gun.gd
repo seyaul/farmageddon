@@ -12,6 +12,7 @@ var fire_type: String = "Discrete"
 @export var bullets_per_fire: int = 1
 
 # TODO: Replace with timer?
+var id: int = 0
 var time: int = 0
 var counting: bool = false
 var beam: Line2D
@@ -24,18 +25,19 @@ func _physics_process(delta: float) -> void:
 	if counting:
 		time += 1
 	
-func handle_signal(action: String, delta) -> void:
-	if not automatic && action == "tap":
-		fire(delta)
-	elif automatic && action == "hold": 
-		counting = true
-		if time % fire_rate == 0 and is_instance_valid(bullet):
+func handle_signal(gun_id: int, action: String, delta: float) -> void:
+	if gun_id == id:
+		if not automatic && action == "tap":
 			fire(delta)
-	elif automatic && action == "end":
-		if is_instance_valid(beam):
-			beam.queue_free()
-		counting = false
-		time = 0
+		elif automatic && action == "hold": 
+			counting = true
+			if time % fire_rate == 0 and is_instance_valid(bullet):
+				fire(delta)
+		elif automatic && action == "end":
+			if is_instance_valid(beam):
+				beam.queue_free()
+			counting = false
+			time = 0
 
 func fire(delta: float) -> void:
 	if fire_type == "Discrete":

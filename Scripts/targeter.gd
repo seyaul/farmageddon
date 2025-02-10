@@ -20,16 +20,18 @@ func _physics_process(_delta: float) -> void:
 		#print(target, " target in targeter.gd")
 		if is_instance_valid(target) and is_instance_valid(aimer):
 			dist = target.global_position - aimer.global_position
-			if abs(dist.x) > abs(dist.y):
-				if dist.x >= 0:
-					animatedSprite.play("rightFacingWalk")
-				else:
-					animatedSprite.play("leftFacingWalk")
-			elif abs(dist.x) < abs(dist.y):
-				if dist.y >= 0:
-					animatedSprite.play("frontFacingWalk")
-				else: 
-					animatedSprite.play("backFacingWalk")
+			# if abs(dist.x) > abs(dist.y):
+			# 	if dist.x >= 0:
+			# 		animatedSprite.play("rightFacingWalk")
+			# 	else:
+			# 		animatedSprite.play("leftFacingWalk")
+			# elif abs(dist.x) < abs(dist.y):
+			# 	if dist.y >= 0:
+			# 		animatedSprite.play("frontFacingWalk")
+			# 	else: 
+			# 		animatedSprite.play("backFacingWalk")
+			aimer.rotation = dist.angle() 
+			animatedSprite.play("walk")
 		elif !is_instance_valid(target):
 			#get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 			pass

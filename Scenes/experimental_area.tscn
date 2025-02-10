@@ -993,6 +993,142 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
+[node name="Legs9" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 9
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs11" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 11
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs13" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 13
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs15" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 15
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs17" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 17
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs19" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 19
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs21" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 21
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs23" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 23
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs25" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 25
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs27" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 27
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs29" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 29
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs31" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 31
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs33" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 33
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs35" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 35
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
+[node name="Legs37" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 37
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+view_lines = true
+
+[node name="Legs39" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+script = ExtResource("2_qb7y7")
+segment = 39
+leg_distance = 60.0
+leg_spread = 20.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+
 [node name="Snake_Guns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
 script = ExtResource("6_7qxi2")
 gun = ExtResource("2_i7aow")
@@ -1012,12 +1148,12 @@ max_deviation_distance = 150.0
 action = "Random"
 distance_til_attack = 10000.0
 num_attacks = 1
-attack_cooldown = 250
+attack_cooldown = 400
 
 [node name="FollowPath" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController"]
 script = ExtResource("15_yfnpp")
 speed = 0.9
-time_following = 250
+time_following = 400
 slide_speed = 1.0
 
 [node name="Surround" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController" node_paths=PackedStringArray("target")]

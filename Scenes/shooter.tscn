@@ -193,7 +193,6 @@ visible = false
 texture = ExtResource("2_7w27w")
 
 [node name="Targeter" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("3_qbpuf")]
-offset_rotation = 180.0
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("4_31r26")]
 rotation = -1.5708

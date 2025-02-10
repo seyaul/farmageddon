@@ -6,6 +6,7 @@ signal shockwave
 signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
+signal update_heat
 
 var ammo: int = 10
 var max_ammo: int = 10
@@ -17,6 +18,7 @@ func _ready() -> void:
 	# TODO: Find better way to reference nodes within the same scene as the player?
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
+	# TODO: get rid of UI ammo implementation backend
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
 	var gun = $gun
 	gun.bullet_fired.connect(_on_bullet_fired)
@@ -26,6 +28,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
+		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
 		emit_signal("shoot", "hold", delta)
 	elif Input.is_action_just_released("shoot"):
@@ -51,7 +54,7 @@ func reload():
 
 func _on_bullet_fired() -> void:
 	ammo -= 1
-	update_ammo_bar(ammo)
+	#update_ammo_bar(ammo)
 	if ammo == 0:
 		emit_signal("disable_shooting")
 

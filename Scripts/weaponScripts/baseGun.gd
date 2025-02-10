@@ -28,11 +28,11 @@ var counting: bool = false
 var beam: Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_parent().shoot.connect(handle_signal)
-	get_parent().disable_shooting.connect(disable_shooting_handler)
-	get_parent().enable_shooting.connect(enable_shooting_handler)
-	get_parent().max_ammo = magazine_size
-	get_parent().ammo = magazine_size
+	get_parent().get_parent().shoot.connect(handle_signal)
+	get_parent().get_parent().disable_shooting.connect(disable_shooting_handler)
+	get_parent().get_parent().enable_shooting.connect(enable_shooting_handler)
+	get_parent().get_parent().max_ammo = magazine_size
+	get_parent().get_parent().ammo = magazine_size
 	audio_player = $ShootingSound
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

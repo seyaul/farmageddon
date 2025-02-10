@@ -4,6 +4,7 @@ extends Node
 var current_health: float
 signal damage_taken
 signal character_died
+signal mob_died
 signal healed
 
 var character: CharacterBody2D
@@ -40,6 +41,7 @@ func die() -> void:
 		await get_tree().create_timer(0.68).timeout
 		if(get_tree() != null):
 			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
-	else: 
+	else:
+		mob_died.emit()
 		Global.decrementEnemyCount()
 		character.queue_free()

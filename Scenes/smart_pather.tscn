@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=41 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
@@ -16,6 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://e0ed84wmkgkw" path="res://Sprites/cow_sprites/cow left.png" id="12_3tk1y"]
 [ext_resource type="Texture2D" uid="uid://s6bb5b4xxw0a" path="res://Sprites/cow_sprites/cow right.png" id="13_ostc6"]
 [ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="15_8jqyx"]
+[ext_resource type="Texture2D" uid="uid://dxdfulj7g4bv0" path="res://Sprites/new_bull_sprites/bull0.png" id="16_r10xf"]
+[ext_resource type="Texture2D" uid="uid://coq33jbdo5g3t" path="res://Sprites/new_bull_sprites/bull1.png" id="17_s0rnj"]
+[ext_resource type="Texture2D" uid="uid://cig4sc3sy7mb4" path="res://Sprites/new_bull_sprites/bull2.png" id="18_0m3lv"]
+[ext_resource type="Texture2D" uid="uid://bjcjybgdbndb3" path="res://Sprites/new_bull_sprites/bull3.png" id="19_5fg5f"]
+[ext_resource type="Texture2D" uid="uid://c1jbh7rnno2h" path="res://Sprites/new_bull_sprites/bull4.png" id="20_4yjt2"]
 
 [sub_resource type="Curve2D" id="Curve2D_5geu8"]
 _data = {
@@ -131,6 +137,35 @@ animations = [{
 "loop": true,
 "name": &"rightFacingWalk",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_r10xf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s0rnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_0m3lv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s0rnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r10xf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5fg5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_4yjt2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5fg5f")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
 }]
 
 [sub_resource type="Theme" id="Theme_syseu"]
@@ -157,6 +192,7 @@ collision_mask = 3
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_sxhn3")
+corpse_scene = ExtResource("2_sjynd")
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 position = Vector2(4.92413, 6.34744)
@@ -188,6 +224,7 @@ script = ExtResource("2_t0fbs")
 script = ExtResource("3_51yba")
 speed = 5000.0
 look_at_player = true
+action = "Lunge"
 distance_til_attack = 200.0
 num_attacks = 1
 attack_cooldown = 200
@@ -223,20 +260,20 @@ script = ExtResource("8_yeokn")
 position = Vector2(-150, 0)
 
 [node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
-offset_rotation = 180.0
 
 [node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-rotation = -0.71733
-scale = Vector2(2.4, 2.4)
+rotation = -1.5708
+scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"rightFacingWalk"
+animation = &"walk"
+frame_progress = 0.592526
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
-offset_left = -21.0173
-offset_top = 20.9234
-offset_right = 77.9827
-offset_bottom = 47.9234
-rotation = -6.28319
+offset_left = -40.8098
+offset_top = -46.743
+offset_right = 58.1902
+offset_bottom = -19.743
+rotation = -4.66527
 theme = SubResource("Theme_syseu")
 theme_override_styles/background = SubResource("StyleBoxFlat_vw1ml")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6e355")

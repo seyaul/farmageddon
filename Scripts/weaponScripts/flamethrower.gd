@@ -12,6 +12,7 @@ var targets = []
 
 func _ready() -> void:
 	super._ready()
+	
 
 	flames = $CPUParticles2D
 	flames.emitting = false

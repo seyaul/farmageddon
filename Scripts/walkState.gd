@@ -27,7 +27,7 @@ func Update(_delta: float):
         direction = direction.normalized()
         character.velocity = direction * speed
         character.rotation = direction.angle()  # Rotate in movement direction
-        emit_signal("set_prev_movement_vector", self, direction)
+        # emit_signal("set_prev_movement_vector", self, direction)
     else:
         character.velocity = Vector2.ZERO
     

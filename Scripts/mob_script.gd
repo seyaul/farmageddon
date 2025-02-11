@@ -35,7 +35,7 @@ func _ready() -> void:
 	speed_modifier = randf_range(-1,1) * 2
 	var follow_node = $EMovementController/Follow
 	follow_node.speed += speed_modifier
-	# health.mob_died.connect(die)
+	health.mob_died.connect(die)
 	setup_fire_timer()
 
 func take_damage(amount: int):
@@ -99,8 +99,11 @@ func _on_hb_timeout():
 	healthBar.visible = false
 
 func die():
+	print("die")
 	if corpse_scene:
-			var corpse_instance = corpse_scene.instantiate()
-			corpse_instance.global_position = global_position
-			# :( refactor this bs
-			get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
+		print("corpse")
+		var corpse_instance = corpse_scene.instantiate()
+		corpse_instance.global_position = global_position
+		corpse_instance.rotation = rotation
+		# :( refactor this bs
+		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)

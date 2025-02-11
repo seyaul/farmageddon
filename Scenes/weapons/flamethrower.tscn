@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://3qaokffdofi"]
+[gd_scene load_steps=8 format=3 uid="uid://3qaokffdofi"]
 
 [ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_0wtkk"]
 [ext_resource type="Script" path="res://Scripts/weaponScripts/flamethrower.gd" id="2_0xoen"]
-[ext_resource type="Texture2D" uid="uid://crogcar6g7r2k" path="res://Sprites/pixilart-drawing (1).png" id="3_mi35r"]
 [ext_resource type="AudioStream" uid="uid://chb6r8mxetl3v" path="res://audio/effects/andrew's_flamethrower.wav" id="4_fe43h"]
 
 [sub_resource type="Curve" id="Curve_xgg7o"]
@@ -44,11 +43,7 @@ scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_3mta6")
 color_ramp = SubResource("Gradient_eg4ga")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
-scale = Vector2(2, 2)
-texture = ExtResource("3_mi35r")
-
-[node name="DamageArea" type="Area2D" parent="." index="2"]
+[node name="DamageArea" type="Area2D" parent="." index="1"]
 collision_layer = 2
 collision_mask = 12
 
@@ -57,5 +52,5 @@ visible = false
 position = Vector2(276.5, -2.5)
 shape = SubResource("RectangleShape2D_66qcs")
 
-[node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="3"]
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource("4_fe43h")

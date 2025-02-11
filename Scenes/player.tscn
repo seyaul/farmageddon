@@ -30,7 +30,7 @@ size = Vector2(220, 160)
 size = Vector2(2, 160)
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_jvk8e")
 gun_scene = ExtResource("2_trre0")
 

@@ -16,7 +16,7 @@ func _ready() -> void:
 
 	flames = $CPUParticles2D
 	flames.emitting = false
-
+	fire_type = "continuous"
 	damage_area = $DamageArea 
 	damage_area.body_entered.connect(_on_body_entered)
 	damage_area.body_exited.connect(_on_body_exited)

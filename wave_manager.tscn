@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://uvd8mgouvmdx"]
+
+[ext_resource type="Script" path="res://Scripts/wave_manager.gd" id="1_ldbtt"]
+
+[node name="WaveManager" type="Node"]
+script = ExtResource("1_ldbtt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

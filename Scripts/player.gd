@@ -6,6 +6,7 @@ signal shockwave
 signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
+signal update_heat
 
 @export var gun_scene: PackedScene
 
@@ -33,15 +34,18 @@ func _ready() -> void:
 	else:
 		print("Error, no gun equiped in player scene")
 	gun.bullet_fired.connect(_on_bullet_fired)
-	animation = get_node("AnimatedSprite2D")
+	if has_node("AnimatedSprite2D"):
+		animation = get_node("AnimatedSprite2D")
 	hitbox = get_node("Hitbox")
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
+		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
 		emit_signal("shoot", "hold", delta)
+		emit_signal("update_heat")
 	elif Input.is_action_just_released("shoot"):
 		emit_signal("shoot", "end", delta)
 	if Input.is_action_just_pressed("melee"):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=4 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=30 format=4 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
+[ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="2_7boqh"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_enxoq"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="2_i7aow"]
 [ext_resource type="Script" path="res://Scripts/legs.gd" id="2_qb7y7"]
@@ -901,6 +902,13 @@ point_count = 25
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.29, 0.29)
 texture = ExtResource("4_7o3d4")
+
+[node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
+
+[node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_7boqh")
 
 [node name="FollowMouse" type="Node" parent="Crosshairs"]
 script = ExtResource("3_4kwib")

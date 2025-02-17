@@ -93,7 +93,7 @@ func flash_red():
 func _on_flash_timeout():
 	sprite.modulate = normal_color
 	sprite.z_index = 1
-	flash_timer.timeout.disconnect(_on_flash_timeout)
+	#flash_timer.timeout.disconnect(_on_flash_timeout)
 	
 func _on_hb_timeout():
 	healthBar.visible = false

@@ -81,24 +81,28 @@ shockwave_cooldown = 100
 shape = SubResource("CircleShape2D_dqb8n")
 
 [node name="wayPoint1" type="Node2D" parent="."]
+visible = false
 script = ExtResource("20_kebbd")
 
 [node name="testsprite" type="Sprite2D" parent="wayPoint1"]
 texture = ExtResource("21_wyjhk")
 
 [node name="wayPoint2" type="Node2D" parent="."]
+visible = false
 script = ExtResource("22_ts6tn")
 
 [node name="testsprite" type="Sprite2D" parent="wayPoint2"]
 texture = ExtResource("21_wyjhk")
 
 [node name="wayPoint3" type="Node2D" parent="."]
+visible = false
 script = ExtResource("23_8m0tm")
 
 [node name="testsprite" type="Sprite2D" parent="wayPoint3"]
 texture = ExtResource("21_wyjhk")
 
 [node name="wayPoint4" type="Node2D" parent="."]
+visible = false
 script = ExtResource("24_qr5vi")
 
 [node name="testsprite" type="Sprite2D" parent="wayPoint4"]

@@ -1,5 +1,8 @@
 extends State
 
+# These signals are used to temporarily disble the rotation of the bull during a lunge
+signal disable_targeter
+signal enable_targeter
 # TODO: possibly refactor dashstate script to replace since they are similar.
 @export var phase_on_lunge: bool = false
 @export var max_distance: float = 500
@@ -19,6 +22,7 @@ func Enter():
 	target_position = enemy.global_position + enemy.velocity.normalized() * max_distance
 	lunge_timer = get_tree().create_timer(timeout)
 	lunge_timer.timeout.connect(_on_lunge_timeout)
+	emit_signal("disable_targeter")
 	
 func Update(_delta: float):
 	if round(enemy.global_position) != round(target_position) and \
@@ -33,6 +37,7 @@ func Update(_delta: float):
 		emit_signal("state_transition", self, "Follow")
 
 func Exit():
+	emit_signal("enable_targeter")
 	phase(false)
 	if lunge_timer and lunge_timer.timeout.is_connected(_on_lunge_timeout):
 		lunge_timer.timeout.disconnect(_on_lunge_timeout)

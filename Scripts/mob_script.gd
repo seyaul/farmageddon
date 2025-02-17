@@ -20,6 +20,7 @@ var healthBar: Node
 var fire_timer: Timer
 var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
+var targeter: Node
 
 @export var corpse_scene: PackedScene
 
@@ -34,6 +35,11 @@ func _ready() -> void:
 	Global.incrementEnemyCount()
 	speed_modifier = randf_range(-1,1) * 2
 	var follow_node = $EMovementController/Follow
+	var lunge_node = $EMovementController/Lunge
+	targeter = $Targeter
+	if lunge_node && targeter:
+		lunge_node.disable_targeter.connect(disable_targeter_handler)
+		lunge_node.enable_targeter.connect(enable_targeter_handler)
 	follow_node.speed += speed_modifier
 	health.mob_died.connect(die)
 	setup_fire_timer()
@@ -99,12 +105,16 @@ func _on_hb_timeout():
 	healthBar.visible = false
 
 func die():
-	print("die")
 	if corpse_scene:
-		print("corpse")
 		var corpse_instance = corpse_scene.instantiate()
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)
 		# :( refactor this bs
 		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
+
+func disable_targeter_handler():
+	targeter.disabled = true
+
+func enable_targeter_handler():
+	targeter.disabled = false

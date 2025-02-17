@@ -36,5 +36,7 @@ func _physics_process(_delta: float) -> void:
 				#get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 				pass
 		else:
+			if animatedSprite:
+				animatedSprite.play("walk")
 			aimer.look_at(target.global_position)
 			aimer.rotation_degrees += offset_rotation

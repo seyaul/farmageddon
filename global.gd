@@ -25,9 +25,9 @@ signal newGameStarted
 func _ready() -> void:
 	#numRuns = 0
 	#enemyCount = 0
-	#playerInstance = player_scene.instantiate()
-	#playerHealthNode = playerInstance.get_node("./Health")
-	#playerHealth = playerHealthNode.max_health
+	playerInstance = player_scene.instantiate()
+	playerHealthNode = playerInstance.get_node("./Health")
+	playerHealth = playerHealthNode.max_health
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
 	#emit_signal("newGameStarted")

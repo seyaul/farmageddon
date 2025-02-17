@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cly33r37xa2x7"]
+[gd_scene load_steps=38 format=3 uid="uid://cly33r37xa2x7"]
 
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_ym43u"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_7w27w"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://r0rfl08wv4uh" path="res://Sprites/chicken_sprites/chicken left.png" id="14_xeoot"]
 [ext_resource type="Texture2D" uid="uid://cus0iffm1wxdv" path="res://Sprites/chicken_sprites/chicken right.png" id="15_iw1un"]
 [ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="16_oxrbs"]
+[ext_resource type="Texture2D" uid="uid://btjhtswgcgpl0" path="res://Sprites/new_chicken_sprites/chicken2.png" id="17_ne4uh"]
+[ext_resource type="Texture2D" uid="uid://csj48vngxks2w" path="res://Sprites/new_chicken_sprites/chicken1.png" id="18_yiom2"]
 
 [sub_resource type="Curve2D" id="Curve2D_kv3oi"]
 _data = {
@@ -131,6 +133,17 @@ animations = [{
 "loop": true,
 "name": &"rightFacingWalk",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_ne4uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_yiom2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
 }]
 
 [sub_resource type="Theme" id="Theme_nmayp"]
@@ -180,7 +193,6 @@ visible = false
 texture = ExtResource("2_7w27w")
 
 [node name="Targeter" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("3_qbpuf")]
-offset_rotation = 180.0
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("4_31r26")]
 rotation = -1.5708
@@ -224,11 +236,14 @@ script = ExtResource("11_0tivv")
 time_shooting = 100
 
 [node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+rotation = -1.5708
 scale = Vector2(2.4, 2.4)
 sprite_frames = SubResource("SpriteFrames_54st3")
-animation = &"backFacingWalk"
+animation = &"walk"
+frame_progress = 0.834853
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter/EnemySprite2"]
+visible = false
 offset_left = -23.7499
 offset_top = 27.9166
 offset_right = 92.2501

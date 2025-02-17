@@ -37,11 +37,10 @@ func _ready() -> void:
 	automatic = false
 
 func _process(delta: float) -> void:
-	print(damage_timer.get_time_left())
-	var mouse_position = get_global_mouse_position()
-	var direction_to_mouse = (mouse_position - global_position).normalized()
-	flames.direction = Vector2(cos(direction_to_mouse.angle()), sin(direction_to_mouse.angle()))
-	damage_area.rotation = direction_to_mouse.angle()
+	# var mouse_position = get_global_mouse_position()
+	# var direction_to_mouse = (mouse_position - global_position).normalized()
+	# flames.direction = Vector2(cos(direction_to_mouse.angle()), sin(direction_to_mouse.angle()))
+	# damage_area.rotation = direction_to_mouse.angle()
 	
 	if active_shooting:
 		time_since_last_shot += delta
@@ -86,7 +85,7 @@ func _on_body_exited(body: Node2D) -> void:
 	targets.erase(body)
 
 func apply_damage() -> void:
-	print("applying_damage")
 	for target in targets:
 		if is_instance_valid(target):
+			target.add_fire(1)
 			target.take_damage(flame_damage)

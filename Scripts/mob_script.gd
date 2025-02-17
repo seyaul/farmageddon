@@ -14,6 +14,15 @@ var health: Node
 var speed_modifier: float
 var healthBar: Node
 
+@export var max_fire_level: int = 3
+@export var fire_decay_rate: float = 1
+@export var damage_per_fire_tick: int = 5
+var fire_timer: Timer
+var on_fire: bool
+var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
+
+@export var corpse_scene: PackedScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite = $EnemySprite2
@@ -26,12 +35,44 @@ func _ready() -> void:
 	speed_modifier = randf_range(-1,1) * 2
 	var follow_node = $EMovementController/Follow
 	follow_node.speed += speed_modifier
+	# health.mob_died.connect(die)
+	setup_fire_timer()
 
 func take_damage(amount: int):
 	# Trigger damage reaction (flashing red)
 	flash_red()
 	# decrease health
 	health.take_damage(amount)
+
+func setup_fire_timer():
+	# Timer to apply damage over time
+	fire_timer = Timer.new()
+	fire_timer.wait_time = fire_decay_rate
+	fire_timer.autostart = false
+	fire_timer.one_shot = false
+	fire_timer.paused = false
+	fire_timer.timeout.connect(fire_ticker)
+	add_child(fire_timer)
+
+func add_fire(levels_to_add: int):
+	# print("fire level", fire_level)
+	if levels_to_add == max_fire_level:
+		return
+	elif levels_to_add + fire_level > max_fire_level:
+		fire_level = max_fire_level
+	else:
+		fire_level += levels_to_add
+
+func fire_ticker(): 
+	print("fire ticker")
+	if fire_level == 0:
+		#turn off fire animation
+		return
+	take_damage(fire_level*damage_per_fire_tick)
+	fire_level -= 1
+	
+	
+
 
 func apply_knockback(force: Vector2):
 	emit_signal("knocked_back", force)
@@ -57,7 +98,9 @@ func _on_flash_timeout():
 func _on_hb_timeout():
 	healthBar.visible = false
 
-	
-	
-
-	
+func die():
+	if corpse_scene:
+			var corpse_instance = corpse_scene.instantiate()
+			corpse_instance.global_position = global_position
+			# :( refactor this bs
+			get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)

@@ -1,8 +1,8 @@
 extends baseGun
 
 @export var flames_cutoff_delay: float = 0.2
-@export var damage_interval: float = 0.1  # Time between damage ticks
-@export var flame_damage: float = 10  # Damage per tick
+@export var damage_interval: float = 0.05  # Time between damage ticks
+@export var flame_damage: float = 3  # Damage per tick
 
 var time_since_last_shot: float = 0
 var flames: CPUParticles2D
@@ -62,13 +62,14 @@ func fire(delta: float) -> void:
 		return
 	
 	start_firing()
-	audio_player.play()
 	time_since_last_shot = 0
 
 func start_firing() -> void:
 	flames.emitting = true
 	damage_area.set_collision_mask_value(3, true)
 	damage_area.set_collision_mask_value(4, true)
+	if !audio_player.playing:
+		audio_player.play()
 	if damage_timer.is_stopped():
 		damage_timer.start()  
 
@@ -76,6 +77,7 @@ func stop_firing() -> void:
 	flames.emitting = false
 	damage_area.set_collision_mask_value(3, false)
 	damage_area.set_collision_mask_value(4, false)
+	audio_player.stop()
 	damage_timer.stop()
 
 func _on_body_entered(body: Node2D) -> void:

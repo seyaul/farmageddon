@@ -25,8 +25,8 @@ z_index = 1
 rotation = -1.5708
 script = ExtResource("2_0xoen")
 flames_cutoff_delay = 0.2
-damage_interval = 0.1
-flame_damage = 10.0
+damage_interval = 0.05
+flame_damage = 3.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="0"]
 visibility_layer = 513

@@ -7,7 +7,10 @@ signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
 
-@export var gun_scene: PackedScene
+@export var active_weapons: Array = ["AKorn47", "flamethrower"]  # Array showing which weapons to equip
+var weapons_directory = "res://Scenes/weapons/"
+var gun_scene_array: Array = []  # Array to hold instances of the guns
+var current_gun_index: int = 0  # Index of the current active gun in gun_array
 
 var ammo: int = 10
 var max_ammo: int = 10
@@ -28,11 +31,13 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
-	if gun_scene:
-		equip_new_gun(gun_scene.instantiate())
+	setup_weapons()
+	if len(gun_scene_array) > 0:
+		equip_new_gun(gun_scene_array[current_gun_index].instantiate())
 	else:
 		print("Error, no gun equiped in player scene")
-	gun.bullet_fired.connect(_on_bullet_fired)
+	# This is commented out to be removed later when we no longer use magazine ammo
+	# gun.bullet_fired.connect(_on_bullet_fired)
 	animation = get_node("AnimatedSprite2D")
 	hitbox = get_node("Hitbox")
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
@@ -49,6 +54,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shockwave"):
 		emit_signal("shockwave")
 
+	if Input.is_action_just_pressed("switch_weapon"):
+		iterate_weapon()
 	if Input.is_action_just_pressed("reload"):
 		reload()
 
@@ -82,4 +89,16 @@ func equip_new_gun(new_gun: baseGun):
 		gun.queue_free()  
 	gun = new_gun
 	$Turret.add_child(gun)
-	gun.position = Vector2(0, -115)
+	gun.position = Vector2(0, -115) # y = -115
+
+func setup_weapons():
+	for weapon_name in active_weapons:
+		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
+		gun_scene_array.append(weapon_scene)
+
+func iterate_weapon():
+	if current_gun_index == len(gun_scene_array) - 1:
+		current_gun_index = 0
+	else:
+		current_gun_index += 1
+	equip_new_gun(gun_scene_array[current_gun_index].instantiate())

@@ -29,7 +29,8 @@ damage_interval = 0.05
 flame_damage = 3.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="0"]
-visibility_layer = 513
+z_index = 100
+z_as_relative = false
 scale = Vector2(5, 5)
 amount = 250
 local_coords = true

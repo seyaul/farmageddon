@@ -104,3 +104,10 @@ func iterate_weapon():
 	else:
 		current_gun_index += 1
 	equip_new_gun(gun_scene_array[current_gun_index].instantiate())
+
+	# Later on we can change the actual sprite for the turret here to make it look nicer
+	if gun.name == "flamethrower":
+		$Turret/Sprite2D.modulate = Color(1, 0.3, 0.3)
+	else:
+		$Turret/Sprite2D.modulate = Color(1, 1, 1)
+	

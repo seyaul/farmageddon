@@ -76,15 +76,11 @@ func fire_ticker():
 		return
 	take_damage(fire_level*damage_per_fire_tick)
 	fire_level -= 1
-	
-	
-
 
 func apply_knockback(force: Vector2):
 	emit_signal("knocked_back", force)
 
 func flash_red():
-	sprite.z_index = 100
 	healthBar.visible = true
 	sprite.modulate = flash_color
 	flash_timer = get_tree().create_timer(flash_duration)
@@ -107,6 +103,13 @@ func _on_hb_timeout():
 func die():
 	if corpse_scene:
 		var corpse_instance = corpse_scene.instantiate()
+		if name == "Shooter":
+			corpse_instance.texture = load("res://Sprites/new_chicken_sprites/corpse + blood.png")
+			corpse_instance.scale = Vector2(0.125, 0.125)
+		elif name == "SmartPather":
+			corpse_instance.texture = load("res://Sprites/new_bull_sprites/bull_corpse.png")
+			corpse_instance.scale = Vector2(0.25, 0.25)
+
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)

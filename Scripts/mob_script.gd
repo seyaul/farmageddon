@@ -104,6 +104,7 @@ func die():
 		print("corpse")
 		var corpse_instance = corpse_scene.instantiate()
 		corpse_instance.global_position = global_position
-		corpse_instance.rotation = rotation
+		# Need to figure out why this works
+		corpse_instance.rotation = global_rotation - deg_to_rad(90)
 		# :( refactor this bs
 		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)

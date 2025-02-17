@@ -196,7 +196,6 @@ corpse_scene = ExtResource("2_sjynd")
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
 position = Vector2(4.92413, 6.34744)
-rotation = 0.837758
 scale = Vector2(6.24, 6.24)
 shape = SubResource("RectangleShape2D_w0q2d")
 
@@ -273,7 +272,6 @@ offset_left = -40.8098
 offset_top = -46.743
 offset_right = 58.1902
 offset_bottom = -19.743
-rotation = -4.66527
 theme = SubResource("Theme_syseu")
 theme_override_styles/background = SubResource("StyleBoxFlat_vw1ml")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6e355")

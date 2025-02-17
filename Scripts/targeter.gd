@@ -40,3 +40,4 @@ func _physics_process(_delta: float) -> void:
 				animatedSprite.play("walk")
 			aimer.look_at(target.global_position)
 			aimer.rotation_degrees += offset_rotation
+			print(aimer.rotation_degrees)

@@ -14,7 +14,7 @@ func _ready() -> void:
 	player_instance = Global.playerInstance
 	add_child(player_instance)
 	#player_instance.print_tree()
-	for i in range(10):
+	for i in range(1):
 		var chicken_instance = enemy_chicken_scene.instantiate()
 		var bull_instance = enemy_bull_scene.instantiate()
 		#enemy_instance.print_tree() (GOATED FUNCTION)

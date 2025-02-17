@@ -56,8 +56,10 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("switch_weapon"):
 		iterate_weapon()
-	if Input.is_action_just_pressed("reload"):
-		reload()
+	
+	# This will be removed later when reloading is removed
+	# if Input.is_action_just_pressed("reload"):
+	# 	reload()
 
 
 func reload():

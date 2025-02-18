@@ -1,5 +1,6 @@
-[gd_scene load_steps=29 format=4 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=30 format=4 uid="uid://cfte2bglhtfoe"]
 
+[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_bd3un"]
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_enxoq"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="2_i7aow"]
@@ -20,6 +21,7 @@
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="16_5350e"]
 [ext_resource type="Script" path="res://Scripts/bossNeutralState.gd" id="18_enwim"]
 [ext_resource type="Script" path="res://Scripts/fireGuns.gd" id="19_l68r2"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="22_r856w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4cb7"]
 texture = ExtResource("7_vm6rj")
@@ -892,9 +894,11 @@ _data = {
 }
 point_count = 25
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_b2ioh"]
-
 [node name="ExperimentalArea" type="Node2D"]
+
+[node name="BossHealthBar" parent="." node_paths=PackedStringArray("health_node") instance=ExtResource("1_bd3un")]
+z_index = 4
+health_node = NodePath("../Path2D/PathFollow2D/Boss/Health")
 
 [node name="Crosshairs" type="Node2D" parent="."]
 
@@ -949,7 +953,7 @@ curve = SubResource("Curve2D_gyk8w")
 position = Vector2(1, -200)
 rotation = 0.0996687
 
-[node name="CentipedeBody" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+[node name="Boss" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
 position = Vector2(84, 68)
 script = ExtResource("1_dgb70")
 interact_with_environment = true
@@ -959,7 +963,7 @@ distance = 20.0
 view_lines = true
 connect_head = true
 
-[node name="Legs" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 1
 leg_distance = 60.0
@@ -967,7 +971,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs3" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs3" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 3
 leg_distance = 60.0
@@ -976,7 +980,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs5" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs5" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 5
 leg_distance = 60.0
@@ -984,7 +988,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs7" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs7" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 7
 leg_distance = 60.0
@@ -993,7 +997,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs9" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs9" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 9
 leg_distance = 60.0
@@ -1001,7 +1005,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs11" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs11" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 11
 leg_distance = 60.0
@@ -1010,7 +1014,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs13" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs13" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 13
 leg_distance = 60.0
@@ -1018,7 +1022,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs15" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs15" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 15
 leg_distance = 60.0
@@ -1027,7 +1031,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs17" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs17" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 17
 leg_distance = 60.0
@@ -1035,7 +1039,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs19" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs19" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 19
 leg_distance = 60.0
@@ -1044,7 +1048,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs21" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs21" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 21
 leg_distance = 60.0
@@ -1052,7 +1056,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs23" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs23" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 23
 leg_distance = 60.0
@@ -1061,7 +1065,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs25" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs25" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 25
 leg_distance = 60.0
@@ -1069,7 +1073,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs27" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs27" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 27
 leg_distance = 60.0
@@ -1078,7 +1082,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs29" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs29" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 29
 leg_distance = 60.0
@@ -1086,7 +1090,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs31" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs31" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 31
 leg_distance = 60.0
@@ -1095,7 +1099,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs33" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs33" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 33
 leg_distance = 60.0
@@ -1103,7 +1107,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs35" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs35" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 35
 leg_distance = 60.0
@@ -1112,7 +1116,7 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Legs37" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs37" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 37
 leg_distance = 60.0
@@ -1120,7 +1124,7 @@ leg_spread = 20.0
 speed = 10.0
 view_lines = true
 
-[node name="Legs39" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Legs39" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 segment = 39
 leg_distance = 60.0
@@ -1129,17 +1133,17 @@ speed = 10.0
 active_leg = 2
 view_lines = true
 
-[node name="Snake_Guns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="Snake_Guns" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("6_7qxi2")
 gun = ExtResource("2_i7aow")
 bullet = ExtResource("6_l3up4")
 segments_with_gun = 2
 
-[node name="MovementController" type="Node" parent="Path2D/PathFollow2D/CentipedeBody" node_paths=PackedStringArray("initial_state")]
+[node name="MovementController" type="Node" parent="Path2D/PathFollow2D/Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aia4q")
 initial_state = NodePath("Follow")
 
-[node name="Follow" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="Path2D/PathFollow2D/Boss/MovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("7_1eh23")
 follow_target = NodePath("../../../../../Crosshairs")
 speed = 40000.0
@@ -1150,37 +1154,37 @@ distance_til_attack = 10000.0
 num_attacks = 1
 attack_cooldown = 400
 
-[node name="FollowPath" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController"]
+[node name="FollowPath" type="Node" parent="Path2D/PathFollow2D/Boss/MovementController"]
 script = ExtResource("15_yfnpp")
 speed = 0.9
 time_following = 400
 slide_speed = 1.0
 
-[node name="Surround" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController" node_paths=PackedStringArray("target")]
+[node name="Surround" type="Node" parent="Path2D/PathFollow2D/Boss/MovementController" node_paths=PackedStringArray("target")]
 script = ExtResource("16_7w3qe")
 target = NodePath("../../../../../Crosshairs")
 
-[node name="Return" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController"]
+[node name="Return" type="Node" parent="Path2D/PathFollow2D/Boss/MovementController"]
 script = ExtResource("16_5350e")
 speed = 50000.0
 snap_distance = 10.0
 
-[node name="Random" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/MovementController"]
+[node name="Random" type="Node" parent="Path2D/PathFollow2D/Boss/MovementController"]
 script = ExtResource("10_5y0sw")
 options = Array[String](["Surround", "FollowPath"])
 
-[node name="AttackController" type="Node" parent="Path2D/PathFollow2D/CentipedeBody" node_paths=PackedStringArray("initial_state")]
+[node name="AttackController" type="Node" parent="Path2D/PathFollow2D/Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aia4q")
 initial_state = NodePath("Neutral")
 
-[node name="Neutral" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/AttackController"]
+[node name="Neutral" type="Node" parent="Path2D/PathFollow2D/Boss/AttackController"]
 script = ExtResource("18_enwim")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
 "FollowPath": "FireLeftGuns"
 }
 
-[node name="FireLeftGuns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/AttackController"]
+[node name="FireLeftGuns" type="Node" parent="Path2D/PathFollow2D/Boss/AttackController"]
 script = ExtResource("19_l68r2")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -1188,7 +1192,7 @@ trigger_attack_with_state = {
 }
 side_shooting = "Left"
 
-[node name="FireFrontGuns" type="Node" parent="Path2D/PathFollow2D/CentipedeBody/AttackController"]
+[node name="FireFrontGuns" type="Node" parent="Path2D/PathFollow2D/Boss/AttackController"]
 script = ExtResource("19_l68r2")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -1196,19 +1200,16 @@ trigger_attack_with_state = {
 }
 side_shooting = "Front"
 
-[node name="Targeter" parent="Path2D/PathFollow2D/CentipedeBody" node_paths=PackedStringArray("target") instance=ExtResource("2_enxoq")]
+[node name="Targeter" parent="Path2D/PathFollow2D/Boss" node_paths=PackedStringArray("target") instance=ExtResource("2_enxoq")]
 target = NodePath("../../../../Crosshairs")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Path2D/PathFollow2D/CentipedeBody"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Path2D/PathFollow2D/Boss"]
 navigation_layers = 5
 
-[node name="Reference" type="CollisionShape2D" parent="."]
-visible = false
-scale = Vector2(20, 20)
-shape = SubResource("CircleShape2D_b2ioh")
+[node name="Health" type="Node" parent="Path2D/PathFollow2D/Boss"]
+script = ExtResource("22_r856w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.665, 0.665)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true

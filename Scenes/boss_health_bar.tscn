@@ -38,4 +38,4 @@ offset_bottom = -59.615
 grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(52, 55)
-text = "PIG Boss"
+text = "Old Major"

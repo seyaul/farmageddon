@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
 [ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="12_wli8w"]
 [ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="13_iv5bc"]
-[ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://wave_manager.tscn" id="14_cx7gw"]
+[ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://Scenes/wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
-[ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://wave_notifier.tscn" id="15_j1wly"]
+[ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
@@ -895,6 +895,7 @@ size = Vector2(3387, 90)
 script = ExtResource("1_36u1n")
 
 [node name="Crosshairs" type="Node2D" parent="."]
+z_index = 101
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
@@ -913,7 +914,7 @@ fill_mode = 4
 texture_under = ExtResource("3_0r380")
 texture_progress = ExtResource("3_0r380")
 tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
-tint_progress = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
+tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
@@ -921,7 +922,6 @@ script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
-position_smoothing_speed = 100.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.1
@@ -967,6 +967,8 @@ scale = Vector2(0.330365, 1)
 texture = ExtResource("11_k0a88")
 
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
+
+[node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
 layout_mode = 3
@@ -1040,7 +1042,7 @@ layout_mode = 2
 texture = ExtResource("13_iv5bc")
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
-process_mode = 3
+visible = false
 
 [node name="walls" type="Node2D" parent="."]
 
@@ -1070,7 +1072,3 @@ stream = ExtResource("14_iwkse")
 parameters/looping = true
 
 [node name="WaveManager" parent="." instance=ExtResource("14_cx7gw")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="WaveNotifier" parent="CanvasLayer" instance=ExtResource("15_j1wly")]

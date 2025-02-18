@@ -3,16 +3,25 @@ extends Node
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 var player_instance
-@export var num_enemies : int = 60 # number of enemies to spawn, probably len(list_enemies)
+@export var num_enemies : int = 16 # number of enemies to spawn, probably len(list_enemies)
 var list_enemies : Array # list of a mapping of enemies to how many of that enemy to spawn
 @export var stage_type : String # variable that tracks what kind of stage we are on 
 @export var stage_difficulty_cost : float # variable to determin the list of enemies
 @export var num_waves : int = 3
-@export var spawn_interval : int = 5 
+#@export var spawn_interval : int = 5 
 # ask groupmates if there is a way to set these exported variables from the map scene
-var intervals_passed : int = 0
+#var intervals_passed : int = 0
 var waves_completed : int = 0
 var all_enemies_spawned : bool = false
+
+var spawn_timer : float
+
+# This is a variable to cap the number of enemies on screen at one instance.
+# This would be tracked by checking the global enemy count in a while loop 
+# and then prohibiting the spawning of eenemies. the timer starting would also need
+# to go into this while loop. This would have to be dynamically adjusted based 
+# on the level's difficulty. 
+var max_enemies_on_screen : int = 15
 
 signal wave_changed
 
@@ -53,11 +62,13 @@ func target_manager(targeterNode: Node, followNode: Node) -> void:
 # Currently this function only works for the smartpather due to some niche
 # situation with getting the targeter/follower node
 func spawn_on_timer(enemy_scene_type):
-	intervals_passed += 1
-	for i in int(num_enemies / spawn_interval) :
+	#intervals_passed += 1
+	#for i in int(num_enemies / spawn_interval) :
+	for i in range(0, num_enemies):
+		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
 		#var chicken_instance = enemy_chicken_scene.instantiate()
-		#var bull_instance = enemy_bull_scene.instantiate()
+		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
 		if enemy_instance is Node2D:
 			var rand_wall_choose = randi_range(0,1)
@@ -69,11 +80,12 @@ func spawn_on_timer(enemy_scene_type):
 				1: # top/bottom walls
 					enemy_instance.position = Vector2(randf_range(-1,1) * 1650, 
 					rand_orientation[randi() % rand_orientation.size()]  * 1150)
-			#chicken_instance.position = Vector2(randf_range(-1,1)* 700, randf_range(-1,1) * 300)
-			#bull_instance.position = Vector2(randf_range(-1,1)* 700, randf_range(-1,1) * 300)
-			
 			# Currently needing to figure out how to do this as a shared function for all types of scenes 
 			# that are passed in as an input
+			# I think I figured out how to do this. Make a string variable that keeps 
+			# track of the name of the node, maybe as an export variable, and then
+			# combine it together to get the full string name. Then, get the 
+			# node accordingly. 
 			var targeterNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/Targeter")
 			var followNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/EMovementController/Follow")
 			if targeterNode and followNode:
@@ -81,12 +93,23 @@ func spawn_on_timer(enemy_scene_type):
 			else:
 				print("Node not found")
 		add_child(enemy_instance)
+		await $Timer.timeout
+		if Global.enemyCount == max_enemies_on_screen:
+			while !(Global.enemyCount < max_enemies_on_screen):
+				print("Checking if max cap fulfilled wavemanager.gd")
+				Global.enemyCount = Global.get_enemy_count()
+				await get_tree().create_timer(2).timeout
+		$Timer.start(spawn_timer)
+	all_enemies_spawned = true
+		
 
 func _on_timer_timeout() -> void:
-	if intervals_passed < spawn_interval:
-		spawn_on_timer(enemy_bull_scene)
-	else:
-		all_enemies_spawned = true
+	#if intervals_passed < spawn_interval:
+		#spawn_on_timer(enemy_bull_scene)
+	#else:
+		#all_enemies_spawned = true
+	#spawn_on_timer(enemy_bull_scene)
+	pass
 	
 
 func _process(delta: float) -> void:
@@ -102,8 +125,8 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://Scenes/Map.tscn")
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:
-		intervals_passed = 0
+		#intervals_passed = 0
 		waves_completed += 1
 		all_enemies_spawned = false
 		spawn_on_timer(enemy_bull_scene)
-		emit_signal("wave_changed") # ???
+		emit_signal("wave_changed")

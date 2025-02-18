@@ -1,6 +1,7 @@
 extends Node
 
 @export var max_health: float = 100
+@export var player_max_health : int = 10
 var current_health: float
 signal damage_taken
 signal character_died

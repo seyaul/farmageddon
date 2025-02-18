@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="3_0r380"]
@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
-[ext_resource type="PackedScene" path="res://pause_menu.tscn" id="12_wli8w"]
-[ext_resource type="PackedScene" path="res://wave_manager.tscn" id="14_cx7gw"]
+[ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="12_wli8w"]
+[ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="13_iv5bc"]
+[ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
-[ext_resource type="PackedScene" path="res://wave_notifier.tscn" id="15_j1wly"]
+[ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
@@ -1007,12 +1008,36 @@ vibration_range = 2
 
 [node name="heartContainer" type="HBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 362.0
+offset_bottom = 114.0
 script = ExtResource("12_o36nh")
 
 [node name="TextureRect" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/heartContainer"]
+texture_filter = 1
 layout_mode = 2
+texture = ExtResource("13_iv5bc")
+
+[node name="TextureRect2" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_iv5bc")
+
+[node name="TextureRect3" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_iv5bc")
+
+[node name="TextureRect4" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_iv5bc")
+
+[node name="TextureRect5" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_iv5bc")
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 process_mode = 3

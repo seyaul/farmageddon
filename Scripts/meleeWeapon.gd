@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var damage: float = 0
+@export var damage: float
 # NOTE: Only here for debugging. 
 @export var melee_duration: float = 100
 # TODO: Replace with timer?

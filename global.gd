@@ -27,7 +27,7 @@ func _ready() -> void:
 	#enemyCount = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerHealth = playerHealthNode.max_health
+	playerHealth = playerHealthNode.player_max_health
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
 	#emit_signal("newGameStarted")
@@ -60,6 +60,13 @@ func _new_game_started():
 	enemyCount = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerHealth = playerHealthNode.max_health
+	playerHealth = playerHealthNode.player_max_health
 	print(playerHealth, "Player health in global.gd")
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	

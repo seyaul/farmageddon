@@ -1,9 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3tixxhlwjl4x"]
+[gd_scene load_steps=17 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
+[ext_resource type="Texture2D" uid="uid://c55hntbdb67gm" path="res://pixilart-sprite.png" id="2_3cnvi"]
 [ext_resource type="Texture2D" uid="uid://dp62u8ugkme7a" path="res://Sprites/Bullet 24x24 Free Part 3A.png" id="3_so4dp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro4nf"]
+atlas = ExtResource("2_3cnvi")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oob4q"]
+atlas = ExtResource("2_3cnvi")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2prm"]
+atlas = ExtResource("2_3cnvi")
+region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xr7g7"]
 atlas = ExtResource("3_so4dp")
@@ -41,6 +54,20 @@ region = Rect2(168, 0, 24, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ro4nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oob4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2prm")
+}],
+"loop": true,
+"name": &"centipede_boss",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xr7g7")
 }, {
 "duration": 1.0,
@@ -70,7 +97,7 @@ animations = [{
 }]
 
 [node name="baseBullet" type="AnimatableBody2D"]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 12
 sync_to_physics = false
@@ -89,4 +116,3 @@ scale = Vector2(0.027, 0.027)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_i0vis")
-frame_progress = 0.914568

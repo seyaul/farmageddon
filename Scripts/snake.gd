@@ -3,6 +3,8 @@ class_name Snake
 
 # TODO: Add way to manually tweak size of each point.
 # TODO: Make head stop tweaking out or something idk.
+# TODO: Separate texturing of snake from this script.
+@export var texture: Texture2D
 @export var interact_with_environment: bool = false
 @export var num_segments: int = 1
 @export_range(0.0,1.0)
@@ -42,9 +44,11 @@ func segment_factory() -> Node2D:
 	else:
 		node = Node2D.new()
 	var collider: CollisionShape2D = CollisionShape2D.new()
+	var sprite: Sprite2D = Sprite2D.new()
 	collider.shape = CircleShape2D.new()
+	sprite.texture = texture
 	node.add_child(collider)
-	
+	node.add_child(sprite)
 	return node
 	
 func segments_factory() -> void:
@@ -52,9 +56,6 @@ func segments_factory() -> void:
 		var segment = segment_factory()
 		get_tree().current_scene.add_child.call_deferred(segment)
 		segments.append(segment)
-
-# TODO: Copied this from mouefollower, change this or mousefollower later.
-
 
 func make_segments_follow_each_other() -> void:
 	segments[0].position = segments[0].position.lerp(global_position, stiffness)

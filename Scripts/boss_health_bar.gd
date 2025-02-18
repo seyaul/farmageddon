@@ -9,8 +9,7 @@ func _ready() -> void:
 	health_node.ready.connect(handleSignal)
 
 func setHealthBar() -> void:
-	#value = health_node.current_health
-	value = 50
+	value = health_node.current_health
 	
 func handleSignal() -> void: 
 	setHealthBar()

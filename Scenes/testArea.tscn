@@ -870,7 +870,6 @@ texture = ExtResource("25_ysweh")
 [sub_resource type="TileSet" id="TileSet_hg8tn"]
 sources/0 = SubResource("TileSetAtlasSource_qbql2")
 sources/2 = SubResource("TileSetAtlasSource_cp02l")
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
 vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 3.92188, 0.351562, -150.953, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwtv1whav3rh7"
-path="res://.godot/imported/healing-pixilart (4).png-29f51086dacac50300ce09c58697c94c.ctex"
+uid="uid://25nrhoxmok3k"
+path="res://.godot/imported/healing.png 22-49-12-599.png-5a62d699f3fa1e672574420423101e70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/healing-pixilart (4).png"
-dest_files=["res://.godot/imported/healing-pixilart (4).png-29f51086dacac50300ce09c58697c94c.ctex"]
+source_file="res://healing.png 22-49-12-599.png"
+dest_files=["res://.godot/imported/healing.png 22-49-12-599.png-5a62d699f3fa1e672574420423101e70.ctex"]
 
 [params]
 

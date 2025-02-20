@@ -28,7 +28,7 @@ func _ready() -> void:
 		print("spawned")
 	var animated_sprite = $AnimatedSprite2D
 	if animated_sprite:
-		animated_sprite.play("default")
+		animated_sprite.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

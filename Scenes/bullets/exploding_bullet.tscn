@@ -9,5 +9,5 @@ explosion_radius = 50.0
 explosion_damage = 20
 explosion_effect_scene = null
 
-[node name="AnimatedSprite2D" parent="." index="2"]
-scale = Vector2(0.2, 0.2)
+[node name="AnimatedSprite2D" parent="." index="1"]
+animation = &"rocket_bullet"

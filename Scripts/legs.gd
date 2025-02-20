@@ -2,8 +2,10 @@ extends Node
 
 @export var texture: Texture2D
 @export var segment: int
-@export var leg_distance: float
+@export var leg_length: float
 @export var leg_spread: float
+@export var leg_distance: float
+@export var reposition_distance: float
 @export var speed: float
 
 
@@ -48,10 +50,10 @@ func _physics_process(delta: float) -> void:
 		step_pos2 = snake.segments[segment].to_global(Vector2(1,0).rotated(deg_to_rad(-leg_spread)) * leg_distance)
 
 		# Only allow the active leg to start moving
-		if active_leg == 1 and leg1.position.distance_to(step_pos1) > leg_distance and not moving:
+		if active_leg == 1 and leg1.position.distance_to(step_pos1) > reposition_distance and not moving:
 			start_pos1 = leg1.position
 			moving = true
-		if active_leg == 2 and leg2.position.distance_to(step_pos2) > leg_distance and not moving:
+		if active_leg == 2 and leg2.position.distance_to(step_pos2) > reposition_distance and not moving:
 			start_pos2 = leg2.position
 			moving = true
 

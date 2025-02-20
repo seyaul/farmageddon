@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=35 format=4 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_bd3un"]
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
@@ -18,9 +18,11 @@
 [ext_resource type="Script" path="res://Scripts/randomStateJunction.gd" id="10_5y0sw"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="10_bkqhs"]
 [ext_resource type="Texture2D" uid="uid://y2sfvptv3iiq" path="res://test_hand.png" id="11_vcn3m"]
+[ext_resource type="Script" path="res://Scenes/snake_texture.gd" id="14_gel5c"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="15_yfnpp"]
 [ext_resource type="Script" path="res://Scenes/surround_state.gd" id="16_7w3qe"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="16_5350e"]
+[ext_resource type="Texture2D" uid="uid://bn763rt1qk4sw" path="res://segment tail.png" id="16_ndtet"]
 [ext_resource type="Script" path="res://Scripts/bossNeutralState.gd" id="18_enwim"]
 [ext_resource type="Script" path="res://Scripts/fireGuns.gd" id="19_l68r2"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="22_r856w"]
@@ -959,19 +961,19 @@ rotation = 0.0996687
 
 [node name="Boss" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
 script = ExtResource("1_dgb70")
-texture = ExtResource("9_q6cul")
 interact_with_environment = true
 num_segments = 40
 stiffness = 0.9
-distance = 20.0
+distance = 40.0
 connect_head = true
 
 [node name="Legs" type="Node" parent="Path2D/PathFollow2D/Boss"]
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 1
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -979,8 +981,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 3
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -989,8 +992,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 5
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -998,8 +1002,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 7
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1008,8 +1013,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 9
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1017,8 +1023,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 11
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1027,8 +1034,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 13
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1036,8 +1044,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 15
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1046,8 +1055,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 17
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1055,8 +1065,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 19
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1065,8 +1076,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 21
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1074,8 +1086,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 23
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1084,8 +1097,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 25
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1093,8 +1107,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 27
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1103,8 +1118,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 29
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1112,8 +1128,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 31
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1122,8 +1139,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 33
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1131,8 +1149,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 35
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1141,8 +1160,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 37
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 view_lines = true
 
@@ -1150,8 +1170,9 @@ view_lines = true
 script = ExtResource("2_qb7y7")
 texture = ExtResource("11_vcn3m")
 segment = 39
-leg_distance = 60.0
-leg_spread = 20.0
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
 speed = 10.0
 active_leg = 2
 view_lines = true
@@ -1161,6 +1182,19 @@ script = ExtResource("6_7qxi2")
 gun = ExtResource("2_i7aow")
 bullet = ExtResource("6_l3up4")
 segments_with_gun = 2
+front_gun_projectile_speed = 80000.0
+side_gun_projectile_speed = 30000.0
+
+[node name="Snake_Texture1" type="Node" parent="Path2D/PathFollow2D/Boss"]
+script = ExtResource("14_gel5c")
+texture = ExtResource("9_q6cul")
+segments_with_texture = "Even"
+
+[node name="Snake_Texture2" type="Node" parent="Path2D/PathFollow2D/Boss"]
+script = ExtResource("14_gel5c")
+texture = ExtResource("16_ndtet")
+segments_with_texture = "Odd"
+x_offset = 80.0
 
 [node name="MovementController" type="Node" parent="Path2D/PathFollow2D/Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aia4q")
@@ -1233,6 +1267,7 @@ navigation_layers = 5
 script = ExtResource("22_r856w")
 
 [node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Boss"]
+z_index = 50
 rotation = 1.5708
 scale = Vector2(0.495, 0.495)
 texture = ExtResource("23_mp3u4")

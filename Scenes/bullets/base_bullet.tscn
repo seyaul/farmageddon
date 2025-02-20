@@ -1,21 +1,21 @@
 [gd_scene load_steps=17 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
-[ext_resource type="Texture2D" uid="uid://c55hntbdb67gm" path="res://pixilart-sprite.png" id="2_3cnvi"]
+[ext_resource type="Texture2D" uid="uid://db0jp3uwhbi8l" path="res://Boss-Projectile-2.png" id="2_mowie"]
 [ext_resource type="Texture2D" uid="uid://dp62u8ugkme7a" path="res://Sprites/Bullet 24x24 Free Part 3A.png" id="3_so4dp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ro4nf"]
-atlas = ExtResource("2_3cnvi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fifa"]
+atlas = ExtResource("2_mowie")
 region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oob4q"]
-atlas = ExtResource("2_3cnvi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_po26u"]
+atlas = ExtResource("2_mowie")
 region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2prm"]
-atlas = ExtResource("2_3cnvi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsda5"]
+atlas = ExtResource("2_mowie")
 region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xr7g7"]
@@ -54,17 +54,17 @@ region = Rect2(168, 0, 24, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ro4nf")
+"texture": SubResource("AtlasTexture_6fifa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oob4q")
+"texture": SubResource("AtlasTexture_po26u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2prm")
+"texture": SubResource("AtlasTexture_rsda5")
 }],
 "loop": true,
 "name": &"centipede_boss",
-"speed": 8.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -104,7 +104,7 @@ sync_to_physics = false
 script = ExtResource("1_rp1mo")
 collision_behavior = "Simple"
 life_span = 200
-max_range = 500
+max_range = 10000
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(0.205, 0.205)
@@ -115,4 +115,8 @@ scale = Vector2(0.027, 0.027)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_i0vis")
+animation = &"centipede_boss"
+frame = 2
+frame_progress = 0.43457

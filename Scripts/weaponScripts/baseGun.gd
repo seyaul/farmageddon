@@ -21,6 +21,7 @@ var fire_type: String = "Discrete"
 @export var magazine_size: int = 10
 var active_shooting: bool = true
 var audio_player: AudioStreamPlayer2D
+var muzzle_particles: CPUParticles2D
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -34,6 +35,7 @@ func _ready() -> void:
 	get_parent().get_parent().max_ammo = magazine_size
 	get_parent().get_parent().ammo = magazine_size
 	audio_player = $ShootingSound
+	muzzle_particles = $MuzzleParticles
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -54,6 +56,7 @@ func handle_signal(action: String, delta) -> void:
 		time = 0
 
 func fire(delta: float) -> void:
+	muzzle_particles.emitting = true
 	if !active_shooting:
 		return
 	# Get the mouse position in global coordinates

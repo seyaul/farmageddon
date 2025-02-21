@@ -10,10 +10,12 @@ var collision_behavior: String = "Bouncy"
 @export var bounces_til_despawn: int = 1
 # WARNING: Too many bullets in the scene causes lag.
 @export var life_span: int = 100
-@export var max_range: int = 100
+@export var max_range: int = 300
 # WARNING: Slow moving objects won't be detected for collisions with a low safe margin.
 # NOTE: Higher safe margin is used for preventing multi-collisions and penetration for fast moving objects.
 @export var safe_margin: float = 1
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var hit_sound: AudioStreamPlayer2D = $HitSound
 
 var curr_collisions: int = 0
 #TODO: Replace with timer?
@@ -26,7 +28,6 @@ func _ready() -> void:
 	initial_position = position
 	if name == "Fragment":
 		print("spawned")
-	var animated_sprite = $AnimatedSprite2D
 	if animated_sprite:
 		animated_sprite.play()
 
@@ -35,9 +36,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	time += 1
 	if time >= life_span:
-		queue_free()
+		kill_bullet()
 	if initial_position.distance_to(position) >= max_range:
-		constant_linear_velocity = Vector2.ZERO
+		kill_bullet()
+		# constant_linear_velocity = Vector2.ZERO
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
 		_handle_collisions(collision)
@@ -45,7 +47,10 @@ func _physics_process(delta: float) -> void:
 	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
-	
+
+	print(hit_sound)
+	hit_sound.play()
+	print("played hit sound")
 	var collider = collision.get_collider()
 	# if collider.has_node("Health"):
 	# 	var enemy_health = collider.get_node("Health")
@@ -69,3 +74,5 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 		queue_free()
 	
 	
+func kill_bullet():
+	queue_free()

@@ -23,4 +23,4 @@ func _on_wave_changed():
 	curr_wave += 1
 	$WaveNotificationText.text = "Wave " + str(curr_wave) + "/" + str(max_waves)
 	$WaveNotificationText.visible = true
-	$Timer.start
+	$Timer.start(3) 

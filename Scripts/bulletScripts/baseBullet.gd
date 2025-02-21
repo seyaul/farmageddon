@@ -15,7 +15,8 @@ var collision_behavior: String = "Bouncy"
 # NOTE: Higher safe margin is used for preventing multi-collisions and penetration for fast moving objects.
 @export var safe_margin: float = 1
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var hit_sound: AudioStreamPlayer2D = $HitSound
+@onready var hit_sound: AudioStreamPlayer = $HitSound
+var active: bool = true
 
 var curr_collisions: int = 0
 #TODO: Replace with timer?
@@ -34,6 +35,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if !active:
+		print("pass")
+		return
 	time += 1
 	if time >= life_span:
 		kill_bullet()
@@ -48,17 +52,9 @@ func _physics_process(delta: float) -> void:
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 
-	print(hit_sound)
-	hit_sound.play()
-	print("played hit sound")
+	hit_sound.play()	
 	var collider = collision.get_collider()
-	# if collider.has_node("Health"):
-	# 	var enemy_health = collider.get_node("Health")
-	# 	if enemy_health and enemy_health.has_method("take_damage"):
-	# 		print("damaging enemy")
-	# 		enemy_health.take_damage(20)  
 	if collider.has_method("take_damage"):
-		#print("damaging enemy")
 		collider.take_damage(20)  
 
 	if collision_behavior == "Sticky":
@@ -69,10 +65,14 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 			constant_linear_velocity = constant_linear_velocity.bounce(collision.get_normal())
 			bounces_til_despawn -= 1
 		else:
-			queue_free()
+			kill_bullet()
 	elif collision_behavior == "Simple":
-		queue_free()
+		kill_bullet()
 	
 	
 func kill_bullet():
+	print("killing_bullet")
+	active = false
+	sync_to_physics = false
+	await get_tree().create_timer(hit_sound.stream.get_length()).timeout
 	queue_free()

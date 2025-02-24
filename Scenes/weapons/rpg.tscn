@@ -6,11 +6,5 @@
 
 [node name="rpg" instance=ExtResource("1_six75")]
 script = ExtResource("2_vfyoy")
-fire_type = "Discrete"
 bullet = ExtResource("2_wg1to")
 projectile_speed = 300.0
-automatic = false
-fire_rate = 20
-spread = 0.0
-bullets_per_fire = 1
-magazine_size = 10

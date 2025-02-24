@@ -3,6 +3,8 @@ extends Node
 var enemyCount: int
 var numRuns : int
 var playerHealth : int
+var playerGold : int
+var playerExp : int
 var player_scene = preload("res://Scenes/player.tscn")
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
@@ -28,6 +30,8 @@ func _ready() -> void:
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health
+	playerGold = 0
+	playerExp = 0
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
 	#emit_signal("newGameStarted")

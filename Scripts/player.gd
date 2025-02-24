@@ -8,7 +8,7 @@ signal enable_shooting
 signal god_mode_debug
 signal update_heat
 
-@export var active_weapons: Array = ["AKorn47", "flamethrower"]  # Array showing which weapons to equip
+@export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
@@ -94,7 +94,7 @@ func equip_new_gun(new_gun: baseGun):
 	if gun:
 		gun.queue_free()  
 	gun = new_gun
-	$Turret.add_child(gun)
+	$Turret.add_child(gun)	
 	gun.position = Vector2(0, -115) # y = -115
 
 func setup_weapons():

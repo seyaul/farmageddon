@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://c6hkocg0m1554"]
-
-[node name="Sprite2D" type="Sprite2D"]
-z_as_relative = false
-scale = Vector2(0.25, 0.25)

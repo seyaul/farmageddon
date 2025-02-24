@@ -40,10 +40,12 @@ func _ready() -> void:
 	if lunge_node && targeter:
 		lunge_node.disable_targeter.connect(disable_targeter_handler)
 		lunge_node.enable_targeter.connect(enable_targeter_handler)
-	if lunge_node && lunge_node.pre_lunge_animation:
-		lunge_node.pre_lunge.connect(play_pre_lunge)
+	if lunge_node:
+		lunge_node.play_pre_lunge_animation.connect(play_pre_lunge)
+	if follow_node:
+		follow_node.play_walk_animation.connect(play_walk)
 	if sprite:
-			sprite.play("walk")
+		sprite.play("walk")
 	follow_node.speed += speed_modifier
 	health.mob_died.connect(die)
 	setup_fire_timer()
@@ -124,5 +126,9 @@ func enable_targeter_handler():
 	targeter.disabled = false
 
 func play_pre_lunge():
-	return
-	
+	print("in_play_pre_lunge")
+	sprite.play("pre_lunge")
+
+func play_walk():
+	print("in_play_walk")
+	sprite.play("walk")	

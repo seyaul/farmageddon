@@ -128,6 +128,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kt7lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tplax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa2fb")
+}],
+"loop": true,
+"name": &"leftFacingWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("15_6bvsy")
 }, {
 "duration": 1.0,
@@ -172,23 +186,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_15hjw")
 }],
-"loop": true,
-"name": &"head_and_smoke",
-"speed": 9.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kt7lt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tplax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pa2fb")
-}],
-"loop": true,
-"name": &"leftFacingWalk",
-"speed": 5.0
+"loop": false,
+"name": &"pre_lunge",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -299,7 +299,6 @@ script = ExtResource("4_dqm7w")
 phase_on_lunge = true
 max_distance = 300.0
 lunge_speed = 600.0
-pre_lunge_animation = true
 
 [node name="Return" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("5_3di07")
@@ -331,8 +330,9 @@ position = Vector2(-150, 0)
 rotation = -1.5708
 scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"head_and_smoke"
-frame_progress = 0.177864
+animation = &"pre_lunge"
+frame = 14
+frame_progress = 1.0
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
 offset_left = -40.8098

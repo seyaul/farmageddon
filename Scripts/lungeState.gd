@@ -3,10 +3,12 @@ extends State
 # These signals are used to temporarily disble the rotation of the bull during a lunge
 signal disable_targeter
 signal enable_targeter
+signal pre_lunge
 # TODO: possibly refactor dashstate script to replace since they are similar.
 @export var phase_on_lunge: bool = false
 @export var max_distance: float = 500
 @export var lunge_speed: float = 5 
+@export var pre_lunge_animation: bool = false
 # The enemy will exit lunge state after timout seconds
 @export var timeout: float = 1
 # TODO: Replace with timer.
@@ -27,6 +29,7 @@ func Enter():
 func Update(_delta: float):
 	if round(enemy.global_position) != round(target_position) and \
 		enemy.global_position.distance_to(initial_position) < max_distance:
+		emit_signal("pre_lunge")
 		if phase_on_lunge:
 			phase(true)
 		var direction = (target_position - enemy.global_position).normalized()

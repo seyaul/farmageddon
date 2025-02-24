@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvn3eg0wbunhm"
-path="res://.godot/imported/tractor back.png-7a158499d6d407ff892f3e6ba9b40e2f.ctex"
+uid="uid://bhjk6rxtgyfk2"
+path="res://.godot/imported/gun cockpit farmer.png-6e73d0e127893aca5c5db78546a6fb40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player_sprites/tractor back.png"
-dest_files=["res://.godot/imported/tractor back.png-7a158499d6d407ff892f3e6ba9b40e2f.ctex"]
+source_file="res://Sprites/player_sprites/gun cockpit farmer.png"
+dest_files=["res://.godot/imported/gun cockpit farmer.png-6e73d0e127893aca5c5db78546a6fb40.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgdf84tx5m7ye"
-path="res://.godot/imported/no cockpit.png-50a2dc693372b4e6e63e6795f113c819.ctex"
+uid="uid://d2ygfh8y1obhv"
+path="res://.godot/imported/pixil-frame-4.png-12b1409e793fb65f306370a67f99b7ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_player_sprites/no cockpit.png"
-dest_files=["res://.godot/imported/no cockpit.png-50a2dc693372b4e6e63e6795f113c819.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-4.png"
+dest_files=["res://.godot/imported/pixil-frame-4.png-12b1409e793fb65f306370a67f99b7ce.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhjk6rxtgyfk2"
-path="res://.godot/imported/gun cockpit farmer.png-8b29ecb196bd7681289292630311316c.ctex"
+uid="uid://cy02ms6nuby8t"
+path="res://.godot/imported/pixil-frame-14.png-9e595a0c90ef174f9d58cb1daf36c76a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_player_sprites/gun cockpit farmer.png"
-dest_files=["res://.godot/imported/gun cockpit farmer.png-8b29ecb196bd7681289292630311316c.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-14.png"
+dest_files=["res://.godot/imported/pixil-frame-14.png-9e595a0c90ef174f9d58cb1daf36c76a.ctex"]
 
 [params]
 

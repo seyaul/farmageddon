@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xtnnbr73fiae"
-path="res://.godot/imported/tractor left.png-fcf425111f1d7e9a67eff071a7847b21.ctex"
+uid="uid://dt4c76vnhb7v1"
+path="res://.godot/imported/pixil-frame-3.png-46924276a12d64173103691dda3f6add.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player_sprites/tractor left.png"
-dest_files=["res://.godot/imported/tractor left.png-fcf425111f1d7e9a67eff071a7847b21.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-3.png"
+dest_files=["res://.godot/imported/pixil-frame-3.png-46924276a12d64173103691dda3f6add.ctex"]
 
 [params]
 

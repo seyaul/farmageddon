@@ -1,5 +1,7 @@
 extends State
 
+signal play_walk_animation
+
 @export var follow_target: Node2D
 @export var speed: float = 25
 @export var look_at_player: bool
@@ -28,6 +30,7 @@ func Enter():
 	attacks = num_attacks if start_with_attacks else 0
 	if targeter && not look_at_player:
 		targeter.disabled = true
+	emit_signal("play_walk_animation")
 
 # TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):

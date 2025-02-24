@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbrl7im6kg8fl"
-path="res://.godot/imported/tractor front idle.png-faea44f31dea8f5f184cf1c3c9aa5a29.ctex"
+uid="uid://bs12yghiev088"
+path="res://.godot/imported/pixil-frame-6.png-63e93f7bacde9aa464b4e7e157ded044.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/player_sprites/tractor front idle.png"
-dest_files=["res://.godot/imported/tractor front idle.png-faea44f31dea8f5f184cf1c3c9aa5a29.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-6.png"
+dest_files=["res://.godot/imported/pixil-frame-6.png-63e93f7bacde9aa464b4e7e157ded044.ctex"]
 
 [params]
 

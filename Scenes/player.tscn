@@ -16,9 +16,9 @@
 [ext_resource type="Script" path="res://Scripts/way_point_3.gd" id="23_8m0tm"]
 [ext_resource type="Script" path="res://Scripts/way_point_4.gd" id="24_qr5vi"]
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="25_3v1om"]
-[ext_resource type="Texture2D" uid="uid://cgdf84tx5m7ye" path="res://Sprites/new_player_sprites/no cockpit.png" id="26_hefpf"]
+[ext_resource type="Texture2D" uid="uid://cgdf84tx5m7ye" path="res://Sprites/player_sprites/no cockpit.png" id="26_hefpf"]
 [ext_resource type="Script" path="res://Scripts/turret.gd" id="27_0c222"]
-[ext_resource type="Texture2D" uid="uid://bhjk6rxtgyfk2" path="res://Sprites/new_player_sprites/gun cockpit farmer.png" id="27_p72jf"]
+[ext_resource type="Texture2D" uid="uid://bhjk6rxtgyfk2" path="res://Sprites/player_sprites/gun cockpit farmer.png" id="27_p72jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65iyo"]
 size = Vector2(220, 160)

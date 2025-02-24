@@ -40,6 +40,12 @@ func _ready() -> void:
 	if lunge_node && targeter:
 		lunge_node.disable_targeter.connect(disable_targeter_handler)
 		lunge_node.enable_targeter.connect(enable_targeter_handler)
+	if lunge_node:
+		lunge_node.play_pre_lunge_animation.connect(play_pre_lunge)
+	if follow_node:
+		follow_node.play_walk_animation.connect(play_walk)
+	if sprite:
+		sprite.play("walk")
 	follow_node.speed += speed_modifier
 	health.mob_died.connect(die)
 	setup_fire_timer()
@@ -105,13 +111,8 @@ func die():
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":
 			corpse_instance.init("res://Sprites/new_chicken_sprites/corpse + blood.png", 0.125)
-			# corpse_instance.texture = load("res://Sprites/new_chicken_sprites/corpse + blood.png")
-			# corpse_instance.scale = Vector2(0.125, 0.125)
 		elif name == "SmartPather":
 			corpse_instance.init("res://Sprites/new_bull_sprites/bull_corpse.png", 0.25)
-			# corpse_instance.texture = load("res://Sprites/new_bull_sprites/bull_corpse.png")
-			# corpse_instance.scale = Vector2(0.25, 0.25)
-
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)
@@ -123,3 +124,11 @@ func disable_targeter_handler():
 
 func enable_targeter_handler():
 	targeter.disabled = false
+
+func play_pre_lunge():
+	print("in_play_pre_lunge")
+	sprite.play("pre_lunge")
+
+func play_walk():
+	print("in_play_walk")
+	sprite.play("walk")	

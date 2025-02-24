@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_ym43u"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_7w27w"]
-[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://corpse.tscn" id="2_lwp8h"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_lwp8h"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="3_qbpuf"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="4_31r26"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="5_7uijm"]
@@ -174,6 +174,10 @@ collision_layer = 12
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_ym43u")
+flash_duration = null
+max_fire_level = null
+fire_decay_rate = null
+damage_per_fire_tick = null
 corpse_scene = ExtResource("2_lwp8h")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/Shooter"]

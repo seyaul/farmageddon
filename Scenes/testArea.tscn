@@ -922,10 +922,7 @@ script = ExtResource("4_b6lma")
 script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
-position_smoothing_speed = 100.0
-rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.1
@@ -948,8 +945,8 @@ tile_set = SubResource("TileSet_hg8tn")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
-position = Vector2(645, -770)
-scale = Vector2(15.4769, 6.11437)
+position = Vector2(367, -344)
+scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
 script = ExtResource("27_1laov")

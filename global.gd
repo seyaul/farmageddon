@@ -63,7 +63,7 @@ func _new_game_started():
 	playerHealth = playerHealthNode.player_max_health
 	print(playerHealth, "Player health in global.gd")
 	
-func _unhandled_input(event: InputEvent) -> void:
+func __input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

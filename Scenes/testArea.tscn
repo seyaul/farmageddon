@@ -1,9 +1,12 @@
-[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=30 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
+[ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_0krid"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="3_0r380"]
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
+[ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="4_q2hyt"]
+[ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="10_5mba2"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -896,6 +899,7 @@ script = ExtResource("1_36u1n")
 
 [node name="Crosshairs" type="Node2D" parent="."]
 z_index = 101
+script = ExtResource("2_0krid")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
@@ -904,6 +908,11 @@ texture = ExtResource("3_gmgqf")
 [node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
 position = Vector2(-33.3334, 0)
 scale = Vector2(6.5, 6.5)
+
+[node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+position = Vector2(-185.641, -50.2564)
+scale = Vector2(1.02564, 1.02564)
+texture = ExtResource("4_q2hyt")
 
 [node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
 offset_left = -56.4102
@@ -967,6 +976,8 @@ scale = Vector2(0.330365, 1)
 texture = ExtResource("11_k0a88")
 
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
+
+[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("10_5mba2")]
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 

@@ -36,7 +36,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if !active:
-		print("pass")
 		return
 	time += 1
 	if time >= life_span:
@@ -71,7 +70,6 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	
 func kill_bullet():
-	print("killing_bullet")
 	active = false
 	sync_to_physics = false
 	await get_tree().create_timer(hit_sound.stream.get_length()).timeout

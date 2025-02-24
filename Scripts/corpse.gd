@@ -15,7 +15,10 @@ func _on_animation_finished():
 func init(corpse_body_path: String, corpse_scale: float):
 	body = $Body
 	blood = $Blood
-	print(body)
 	body.texture = load(corpse_body_path)
 	body.scale = Vector2(corpse_scale, corpse_scale)
+	# blood.texture = load("res://Sprites/blood_splatters/blood spatter1.png")
+	# get_tree().create_timer(3).timeout.connect(_hide_body())
 	
+func _hide_body():
+	body.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=31 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_0krid"]

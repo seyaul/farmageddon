@@ -104,11 +104,13 @@ func die():
 	if corpse_scene:
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":
-			corpse_instance.texture = load("res://Sprites/new_chicken_sprites/corpse + blood.png")
-			corpse_instance.scale = Vector2(0.125, 0.125)
+			corpse_instance.init("res://Sprites/new_chicken_sprites/corpse + blood.png", 0.125)
+			# corpse_instance.texture = load("res://Sprites/new_chicken_sprites/corpse + blood.png")
+			# corpse_instance.scale = Vector2(0.125, 0.125)
 		elif name == "SmartPather":
-			corpse_instance.texture = load("res://Sprites/new_bull_sprites/bull_corpse.png")
-			corpse_instance.scale = Vector2(0.25, 0.25)
+			corpse_instance.init("res://Sprites/new_bull_sprites/bull_corpse.png", 0.25)
+			# corpse_instance.texture = load("res://Sprites/new_bull_sprites/bull_corpse.png")
+			# corpse_instance.scale = Vector2(0.25, 0.25)
 
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works

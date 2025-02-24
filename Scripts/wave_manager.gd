@@ -4,6 +4,8 @@ extends Node
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 var player_instance
 @export var num_enemies : int = 16 # number of enemies to spawn, probably len(list_enemies)
+@export var enemy_count = num_enemies # did this so enemies do not decrement twice, not fully implemented yet
+@onready var enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 var list_enemies : Array # list of a mapping of enemies to how many of that enemy to spawn
 @export var stage_type : String # variable that tracks what kind of stage we are on 
 @export var stage_difficulty_cost : float # variable to determin the list of enemies
@@ -28,9 +30,10 @@ signal wave_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await get_tree().process_frame
+	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
 	spawn_on_timer(enemy_bull_scene)
-	
 
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
@@ -57,7 +60,6 @@ func target_manager(targeterNode: Node, followNode: Node) -> void:
 			targeterNode.target = waypoint4
 			followNode.follow_target = waypoint4
 	pass
-
 
 # Currently this function only works for the smartpather due to some niche
 # situation with getting the targeter/follower node
@@ -93,6 +95,9 @@ func spawn_on_timer(enemy_scene_type):
 			else:
 				print("Node not found")
 		add_child(enemy_instance)
+		# Update the enemy counter
+		#enemy_count -= 1
+		#enemy_counter.update_enemy_count(enemy_count)
 		await $Timer.timeout
 		if Global.enemyCount == max_enemies_on_screen:
 			while !(Global.enemyCount < max_enemies_on_screen):
@@ -111,7 +116,6 @@ func _on_timer_timeout() -> void:
 	#spawn_on_timer(enemy_bull_scene)
 	pass
 	
-
 func _process(delta: float) -> void:
 	# want to do this if statement but I think there's definitely a more 
 	# elegant way to do this that doesn't constantly check in the process
@@ -123,10 +127,12 @@ func _process(delta: float) -> void:
 		print(Global.playerCurrHealth)
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://Scenes/Map.tscn")
+		# Switch to the reward scene for now, change to scene that zooms in 
+		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:
 		#intervals_passed = 0
 		waves_completed += 1
 		all_enemies_spawned = false
 		spawn_on_timer(enemy_bull_scene)
 		emit_signal("wave_changed")
+		#enemy_counter.update_enemy_count(enemy_count)

@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bq70alquqj74e"]
 
-[ext_resource type="PackedScene" uid="uid://qcjmkx8yw7tm" path="res://Scenes/card.tscn" id="1_4raak"]
-[ext_resource type="Script" path="res://reward_scene.gd" id="1_5e8rn"]
+[ext_resource type="Script" path="res://reward_scene.gd" id="1_br57g"]
+[ext_resource type="PackedScene" uid="uid://qcjmkx8yw7tm" path="res://Scenes/card.tscn" id="2_wxwtb"]
 
 [node name="RewardScene" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_5e8rn")
+script = ExtResource("1_br57g")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -33,27 +33,24 @@ alignment = 1
 [node name="HealCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
 
-[node name="Card" parent="CardContainer/HealCard" instance=ExtResource("1_4raak")]
+[node name="Card" parent="CardContainer/HealCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0
-anchors_preset = 0
 offset_left = 0.0
 offset_right = 200.0
 
 [node name="GoldCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
 
-[node name="Card" parent="CardContainer/GoldCard" instance=ExtResource("1_4raak")]
+[node name="Card" parent="CardContainer/GoldCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0
-anchors_preset = 0
 offset_left = 0.0
 offset_right = 200.0
 
 [node name="ExpCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
 
-[node name="Card" parent="CardContainer/ExpCard" instance=ExtResource("1_4raak")]
+[node name="Card" parent="CardContainer/ExpCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0
-anchors_preset = 0
 offset_left = 0.0
 offset_right = 200.0
 

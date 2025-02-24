@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=28 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="3_0r380"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://Scenes/wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
+[ext_resource type="PackedScene" uid="uid://kadqhp03w6iq" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
@@ -921,10 +922,7 @@ script = ExtResource("4_b6lma")
 script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
-position_smoothing_speed = 100.0
-rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.1
@@ -947,8 +945,8 @@ tile_set = SubResource("TileSet_hg8tn")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
-position = Vector2(645, -770)
-scale = Vector2(15.4769, 6.11437)
+position = Vector2(367, -344)
+scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
 script = ExtResource("27_1laov")
@@ -1046,6 +1044,8 @@ texture = ExtResource("13_iv5bc")
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 visible = false
+
+[node name="EnemyCounter" parent="UserInterfaceLayer" instance=ExtResource("16_r0rcy")]
 
 [node name="walls" type="Node2D" parent="."]
 

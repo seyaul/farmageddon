@@ -25,7 +25,6 @@ func _ready() -> void:
 	shockwaves = max_shockwaves
 	
 	
-	
 func _physics_process(delta: float) -> void:
 	if monitoring:
 		var bodies = get_overlapping_bodies()

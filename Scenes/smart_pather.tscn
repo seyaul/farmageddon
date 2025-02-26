@@ -254,10 +254,6 @@ collision_mask = 3
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_sxhn3")
-flash_duration = null
-max_fire_level = null
-fire_decay_rate = null
-damage_per_fire_tick = null
 corpse_scene = ExtResource("2_sjynd")
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]

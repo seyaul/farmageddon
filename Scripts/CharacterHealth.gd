@@ -1,7 +1,7 @@
 extends Node
 
 @export var max_health: float = 100
-@export var player_max_health : int = 10
+@export var player_max_health: int = 10
 var current_health: float
 signal damage_taken
 signal character_died
@@ -14,7 +14,9 @@ func _ready() -> void:
 	if character.name != "Player":  
 		current_health = max_health
 	else: 
-		current_health = Global.playerHealth
+		player_max_health = player_max_health + Global.player_stats.additional_max_health
+		current_health = player_max_health
+		print("current_health ", current_health)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -26,7 +28,6 @@ func take_damage(amount: float) -> void:
 		current_health = 0
 		die()
 	else:
-		#print(character.name, " health:", current_health)
 		pass
 	damage_taken.emit()
 
@@ -35,7 +36,6 @@ func heal(amount: float) -> void:
 	current_health += amount
 	if current_health > max_health:
 		current_health = max_health
-	#print(character.name, " health:", current_health)
 
 func die() -> void:
 	if character.name == "Player":

@@ -30,8 +30,6 @@ func _ready() -> void:
 	health = $Health
 	healthBar = $EnemySprite2/ProgressBar
 	healthBar.visible = false
-	#flash_timer = get_tree().create_timer(flash_duration)
-	#flash_timer.timeout.connect(_on_flash_timeout)
 	Global.incrementEnemyCount()
 	speed_modifier = randf_range(-1,1) * 2
 	var follow_node = $EMovementController/Follow
@@ -41,9 +39,9 @@ func _ready() -> void:
 		lunge_node.disable_targeter.connect(disable_targeter_handler)
 		lunge_node.enable_targeter.connect(enable_targeter_handler)
 	if lunge_node:
-		lunge_node.play_pre_lunge_animation.connect(play_pre_lunge)
+		lunge_node.play_pre_lunge_animation.connect(_handle_play_pre_lunge)
 	if follow_node:
-		follow_node.play_walk_animation.connect(play_walk)
+		follow_node.play_walk_animation.connect(_handle_play_walk)
 	if sprite:
 		sprite.play("walk")
 	follow_node.speed += speed_modifier
@@ -125,10 +123,10 @@ func disable_targeter_handler():
 func enable_targeter_handler():
 	targeter.disabled = false
 
-func play_pre_lunge():
+func _handle_play_pre_lunge():
 	print("in_play_pre_lunge")
 	sprite.play("pre_lunge")
 
-func play_walk():
+func _handle_play_walk():
 	print("in_play_walk")
 	sprite.play("walk")	

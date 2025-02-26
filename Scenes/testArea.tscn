@@ -1,12 +1,9 @@
-[gd_scene load_steps=31 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=28 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
-[ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_0krid"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="3_0r380"]
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
-[ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="4_q2hyt"]
-[ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="10_5mba2"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -883,9 +880,9 @@ sources/0 = SubResource("TileSetAtlasSource_qbql2")
 sources/2 = SubResource("TileSetAtlasSource_cp02l")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(133.023, -297.68, 133.438, 483.844, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 7.47656, -41.3594, -204.578, -298.633, 3.92188, -44.3516, 3.92188, 0.351562, -203.844, 478.797, 0.367188, -41.3594, -2.23438, -33.1797, -3.1875, -22, -2.23438, -10.8203, 0.367188, -2.64062)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6, 8), PackedInt32Array(9, 5, 1, 10), PackedInt32Array(7, 8, 11), PackedInt32Array(10, 7, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(10, 13, 14), PackedInt32Array(10, 14, 15), PackedInt32Array(10, 15, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-213.846, 488.667, 143.448, 494, 143.024, -307.667, -214.589, -308.667)])
+vertices = PackedVector2Array(136.102, -304.273, 136.102, 485.102, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 7.47656, -41.3594, -205.117, -302.062, 3.92188, -44.3516, 3.92188, 0.351562, -205.43, 488.547, 0.367188, -41.3594, -2.23438, -33.1797, -3.1875, -22, -2.23438, -10.8203, 0.367188, -2.64062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6, 8), PackedInt32Array(9, 5, 1, 10), PackedInt32Array(7, 8, 11), PackedInt32Array(10, 7, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(10, 13, 14), PackedInt32Array(10, 14, 15), PackedInt32Array(9, 10, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-215.437, 498.667, 146.098, 495, 146.098, -314.333, -215.119, -312)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
@@ -901,7 +898,6 @@ metadata/_edit_group_ = true
 
 [node name="Crosshairs" type="Node2D" parent="."]
 z_index = 101
-script = ExtResource("2_0krid")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
@@ -910,11 +906,6 @@ texture = ExtResource("3_gmgqf")
 [node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
 position = Vector2(-33.3334, 0)
 scale = Vector2(6.5, 6.5)
-
-[node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
-position = Vector2(-185.641, -50.2564)
-scale = Vector2(1.02564, 1.02564)
-texture = ExtResource("4_q2hyt")
 
 [node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
 offset_left = -56.4102
@@ -933,6 +924,7 @@ script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 100.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.1
@@ -978,8 +970,6 @@ scale = Vector2(0.330365, 1)
 texture = ExtResource("11_k0a88")
 
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
-
-[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("10_5mba2")]
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 

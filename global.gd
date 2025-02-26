@@ -6,6 +6,8 @@ var playerHealth : int
 var playerGold : int
 var playerExp : int
 var player_scene = preload("res://Scenes/player.tscn")
+var player_stats: PlayerStats
+var all_gun_stats: AllGunStats
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
@@ -27,6 +29,8 @@ signal newGameStarted
 func _ready() -> void:
 	#numRuns = 0
 	#enemyCount = 0
+	player_stats = PlayerStats.new()
+	all_gun_stats = AllGunStats.new()
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health

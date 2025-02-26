@@ -33,6 +33,7 @@ size = Vector2(2, 160)
 z_index = 1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_jvk8e")
+active_weapons = null
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")

@@ -21,14 +21,9 @@ var speed_modifier: float
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
-
-# Tractor dimensions TODO: possibly set these by grabbing the collision shapes from the scene
-const TRACTOR_WIDTH: float = 220
-const TRACTOR_HEIGHT: float = 160
-const HITBOX_EXTENSION: float = 2  # How far the hitbox extends forward
+@onready var walk_state = $MoveController/Walk
 
 func _ready() -> void:
-	# TODO: Find better way to reference nodes within the same scene as the player?
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	ammo_bar = get_node("../UserInterfaceLayer/PlayerUI/Ammo")
@@ -43,6 +38,7 @@ func _ready() -> void:
 		animation = get_node("AnimatedSprite2D")
 	hitbox = get_node("Hitbox")
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
+	walk_state.speed = (walk_state.speed + Global.player_stats.additional_speed) * Global.player_stats.speed_modifier
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
@@ -60,11 +56,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("switch_weapon"):
 		iterate_weapon()
-	
-	# This will be removed later when reloading is removed
-	# if Input.is_action_just_pressed("reload"):
-	# 	reload()
-
 
 func reload():
 	emit_signal("disable_shooting")

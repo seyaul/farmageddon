@@ -880,9 +880,9 @@ sources/0 = SubResource("TileSetAtlasSource_qbql2")
 sources/2 = SubResource("TileSetAtlasSource_cp02l")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 3.92188, 0.351562, -150.953, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-213.846, 488.667, 143.448, 494, 143.024, -307.667, -214.589, -308.667)])
+vertices = PackedVector2Array(136.102, -304.273, 136.102, 485.102, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 7.47656, -41.3594, -205.117, -302.062, 3.92188, -44.3516, 3.92188, 0.351562, -205.43, 488.547, 0.367188, -41.3594, -2.23438, -33.1797, -3.1875, -22, -2.23438, -10.8203, 0.367188, -2.64062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6, 8), PackedInt32Array(9, 5, 1, 10), PackedInt32Array(7, 8, 11), PackedInt32Array(10, 7, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(10, 13, 14), PackedInt32Array(10, 14, 15), PackedInt32Array(9, 10, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-215.437, 498.667, 146.098, 495, 146.098, -314.333, -215.119, -312)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 

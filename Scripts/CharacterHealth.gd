@@ -15,7 +15,7 @@ func _ready() -> void:
 		current_health = max_health
 	else: 
 		player_max_health = player_max_health + Global.player_stats.additional_max_health
-		current_health = player_max_health
+		current_health = Global.playerHealth
 		print("current_health ", current_health)
 	
 	

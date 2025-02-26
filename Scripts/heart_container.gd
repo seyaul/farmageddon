@@ -13,6 +13,7 @@ var curr_health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	curr_health = Global.playerHealth
+	update_hearts(curr_health)
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)
 	pass # Replace with function body.

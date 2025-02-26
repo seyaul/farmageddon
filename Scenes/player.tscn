@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=24 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="11_4pwex"]
+[ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="11_e22wr"]
 [ext_resource type="Script" path="res://Scripts/way_point_R.gd" id="20_kebbd"]
 [ext_resource type="Texture2D" uid="uid://dsry7buicqluw" path="res://Sprites/coin_1.png" id="21_wyjhk"]
 [ext_resource type="Script" path="res://Scripts/way_point_L.gd" id="22_ts6tn"]
@@ -75,10 +76,16 @@ shockwave_duration = 0.1
 shockwave_radius = 20.0
 shockwave_strength = 10000.0
 max_shockwaves = 2
-shockwave_cooldown = 100
+shockwave_cooldown = 1
 
 [node name="Collider" type="CollisionShape2D" parent="Shockwave"]
 shape = SubResource("CircleShape2D_dqb8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shockwave/Collider"]
+modulate = Color(0, 0.843137, 1, 0.333333)
+position = Vector2(0, -0.5)
+scale = Vector2(0.17, 0.16)
+texture = ExtResource("11_e22wr")
 
 [node name="wayPoint1" type="Node2D" parent="."]
 visible = false

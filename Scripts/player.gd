@@ -22,6 +22,8 @@ var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
 @onready var walk_state = $MoveController/Walk
+@onready var turret = $Turret
+@onready var turretGunSprite = $Turret/Gun
 
 func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
@@ -85,7 +87,8 @@ func equip_new_gun(new_gun: baseGun):
 	if gun:
 		gun.queue_free()  
 	gun = new_gun
-	$Turret.add_child(gun)	
+	turret.switch_gun_sprite(new_gun.name)
+	turret.add_child(gun)	
 	gun.position = Vector2(0, -115) # y = -115
 
 func setup_weapons():
@@ -98,11 +101,12 @@ func iterate_weapon():
 		current_gun_index = 0
 	else:
 		current_gun_index += 1
-	equip_new_gun(gun_scene_array[current_gun_index].instantiate())
+	var new_gun = gun_scene_array[current_gun_index].instantiate()
+	equip_new_gun(new_gun)
 
 	# Later on we can change the actual sprite for the turret here to make it look nicer
-	if gun.name == "flamethrower":
-		$Turret/Sprite2D.modulate = Color(1, 0.3, 0.3)
-	else:
-		$Turret/Sprite2D.modulate = Color(1, 1, 1)
+	# if gun.name == "flamethrower":
+	# 	$Turret/Sprite2D.modulate = Color(1, 0.3, 0.3)
+	# else:
+	# 	$Turret/Sprite2D.modulate = Color(1, 1, 1)
 	

@@ -21,6 +21,7 @@ var fire_timer: Timer
 var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
 var targeter: Node
+@onready var fire: AnimatedSprite2D = $Fire
 
 @export var corpse_scene: PackedScene
 
@@ -58,28 +59,37 @@ func setup_fire_timer():
 	# Timer to apply damage over time
 	fire_timer = Timer.new()
 	fire_timer.wait_time = fire_decay_rate
-	fire_timer.autostart = false
+	fire_timer.autostart = true
 	fire_timer.one_shot = false
 	fire_timer.paused = false
 	fire_timer.timeout.connect(fire_ticker)
 	add_child(fire_timer)
 
 func add_fire(levels_to_add: int):
-	# print("fire level", fire_level)
-	if levels_to_add == max_fire_level:
-		return
-	elif levels_to_add + fire_level > max_fire_level:
+	if levels_to_add + fire_level > max_fire_level:
 		fire_level = max_fire_level
 	else:
 		fire_level += levels_to_add
 
+	set_fire_opacity()
+	fire.visible = true
+
+
 func fire_ticker(): 
-	print("fire ticker")
 	if fire_level == 0:
-		#turn off fire animation
+		fire.visible = false
 		return
-	take_damage(fire_level*damage_per_fire_tick)
+	take_damage(damage_per_fire_tick)
 	fire_level -= 1
+	set_fire_opacity()
+
+func set_fire_opacity():
+	if fire_level == 1:
+		fire.modulate.a = .2
+	elif fire_level == 2:
+		fire.modulate.a = .5
+	elif fire_level == 3:
+		fire.modulate.a = .8
 
 func apply_knockback(force: Vector2):
 	emit_signal("knocked_back", force)
@@ -114,6 +124,8 @@ func die():
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)
+		if fire_level > 0:
+			corpse_instance.darken()
 		# :( refactor this bs
 		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
 
@@ -124,9 +136,7 @@ func enable_targeter_handler():
 	targeter.disabled = false
 
 func _handle_play_pre_lunge():
-	print("in_play_pre_lunge")
 	sprite.play("pre_lunge")
 
 func _handle_play_walk():
-	print("in_play_walk")
 	sprite.play("walk")	

@@ -54,10 +54,8 @@ func _on_body_entered(body) -> void:
 	apply_damage(body)
 		
 func apply_damage(body) -> void:  
-	if body.has_node("Health"): 
-		var health = body.get_node("Health")
-		if is_instance_valid(health):
-			health.take_damage(damage)
+	if body.has_method("take_damage"):
+		body.take_damage(20)  
 		
 func push_away(bodies) -> void:
 	for body in bodies:

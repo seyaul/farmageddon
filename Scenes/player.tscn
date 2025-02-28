@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=25 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Scripts/shockwave.gd" id="11_4pwex"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="11_e22wr"]
 [ext_resource type="Script" path="res://Scripts/way_point_R.gd" id="20_kebbd"]
+[ext_resource type="Texture2D" uid="uid://bpjyjjabsiyh0" path="res://Sprites/player_sprites/farmer_cockpit.png" id="20_vl4s5"]
+[ext_resource type="Texture2D" uid="uid://drt0a22xteinu" path="res://Sprites/player_sprites/guns/AKorn47.png" id="21_w6rlt"]
 [ext_resource type="Texture2D" uid="uid://dsry7buicqluw" path="res://Sprites/coin_1.png" id="21_wyjhk"]
 [ext_resource type="Script" path="res://Scripts/way_point_L.gd" id="22_ts6tn"]
 [ext_resource type="Script" path="res://Scripts/way_point_3.gd" id="23_8m0tm"]
@@ -19,7 +21,6 @@
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="25_3v1om"]
 [ext_resource type="Texture2D" uid="uid://cgdf84tx5m7ye" path="res://Sprites/player_sprites/no cockpit.png" id="26_hefpf"]
 [ext_resource type="Script" path="res://Scripts/turret.gd" id="27_0c222"]
-[ext_resource type="Texture2D" uid="uid://bhjk6rxtgyfk2" path="res://Sprites/player_sprites/gun cockpit farmer.png" id="27_p72jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65iyo"]
 size = Vector2(220, 160)
@@ -33,7 +34,6 @@ size = Vector2(2, 160)
 z_index = 1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_jvk8e")
-active_weapons = null
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")
@@ -131,9 +131,13 @@ texture = ExtResource("26_hefpf")
 [node name="Turret" type="Node2D" parent="."]
 script = ExtResource("27_0c222")
 
-[node name="Sprite2D" type="Sprite2D" parent="Turret"]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("27_p72jf")
+[node name="Cockpit" type="Sprite2D" parent="Turret"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("20_vl4s5")
 offset = Vector2(0, 3.05176e-05)
+
+[node name="Gun" type="Sprite2D" parent="Turret"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("21_w6rlt")
 
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]

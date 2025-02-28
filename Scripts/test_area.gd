@@ -9,7 +9,7 @@ var player_instance
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Global.numRuns += 1
-	var music = get_node("AudioStreamPlayer")
+	var music = get_node("AudioStreamPlayer")	
 	music.play()
 	player_instance = Global.playerInstance
 	add_child(player_instance)

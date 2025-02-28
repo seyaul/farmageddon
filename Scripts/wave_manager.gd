@@ -131,8 +131,9 @@ func _process(delta: float) -> void:
 	# Slight unidentifiable bug where sometimes the enemy count dips below 0. If anyone 
 	# has insight on this issue, lmk
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
-		Global.playerCurrHealth = Global.playerHealthNode.current_health
-		print(Global.playerCurrHealth)
+		# Shouldn't be setting the current health here
+		Global.playerHealth = Global.playerHealthNode.current_health
+		print(Global.playerHealth)
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(0.5).timeout
 		# Switch to the reward scene for now, change to scene that zooms in 
@@ -150,5 +151,5 @@ func handle_signal():
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
-		Global.playerCurrHealth = Global.playerHealthNode.current_health
+		Global.playerHealth = Global.playerHealthNode.current_health
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")

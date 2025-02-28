@@ -43,7 +43,7 @@ func _on_reward_selected(reward_type: int) -> void:
 
 	match reward_type:
 		0:
-			Global.playerHealth += 10
+			Global.playerHealth = min(Global.playerHealth + 10, Global.playerMaxHealth)
 			print("Player health is now:", Global.playerHealth)
 		1:
 			Global.playerGold += 100  

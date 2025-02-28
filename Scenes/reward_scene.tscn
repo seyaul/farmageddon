@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce0f0jktwwvhg"]
 
 [ext_resource type="Script" path="res://reward_scene.gd" id="1_br57g"]
-[ext_resource type="PackedScene" uid="uid://qcjmkx8yw7tm" path="res://Scenes/card.tscn" id="2_wxwtb"]
+[ext_resource type="PackedScene" uid="uid://b3swcbua2bkuv" path="res://Scenes/card.tscn" id="2_wxwtb"]
 
 [node name="RewardScene" type="Control"]
 layout_mode = 3

@@ -578,7 +578,7 @@ position = Vector2(-150, 0)
 rotation = -1.5708
 scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"walk"
+animation = &"pre_lunge"
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
 offset_left = -40.8098

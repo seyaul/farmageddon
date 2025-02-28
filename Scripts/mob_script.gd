@@ -124,6 +124,8 @@ func die():
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)
+		if fire_level > 0:
+			corpse_instance.darken()
 		# :( refactor this bs
 		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
 

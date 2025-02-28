@@ -17,13 +17,11 @@ func kill_bullet():
 	queue_free()
 
 func _explode() -> void:
-	print("about to explode")
 	# Spawn explosion effect
 	if blast_scene:
 		var blast = blast_scene.instantiate()
 		blast.global_position = global_position 
 		get_tree().current_scene.add_child(blast)
-		print("exploded")
 	
 
 	

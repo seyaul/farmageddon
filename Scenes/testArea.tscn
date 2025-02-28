@@ -1,9 +1,11 @@
-[gd_scene load_steps=28 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=31 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
+[ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="3_0r380"]
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
+[ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="6_rvr8e"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -13,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="PackedScene" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
+[ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
@@ -898,6 +901,7 @@ metadata/_edit_group_ = true
 
 [node name="Crosshairs" type="Node2D" parent="."]
 z_index = 101
+script = ExtResource("2_2hd24")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
@@ -919,12 +923,19 @@ tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
 
+[node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+position = Vector2(-195.897, 16.4103)
+scale = Vector2(1.02564, 1.02564)
+texture = ExtResource("6_rvr8e")
+
+[node name="Timer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/Crosshairinstr"]
+wait_time = 8.0
+
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
-position_smoothing_speed = 100.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.1
@@ -1044,10 +1055,12 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("13_iv5bc")
 
+[node name="EnemyCounter" parent="UserInterfaceLayer" instance=ExtResource("16_r0rcy")]
+
+[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
+
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 visible = false
-
-[node name="EnemyCounter" parent="UserInterfaceLayer" instance=ExtResource("16_r0rcy")]
 
 [node name="walls" type="Node2D" parent="."]
 

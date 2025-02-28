@@ -24,17 +24,6 @@ script = ExtResource("1_r8lbw")
 [node name="KeyboardButtons" type="Node2D" parent="."]
 scale = Vector2(0.2, 0.2)
 
-[node name="Shiftinstr" type="Sprite2D" parent="KeyboardButtons"]
-position = Vector2(1030, 1640)
-scale = Vector2(5, 5)
-texture = ExtResource("8_y1rc8")
-
-[node name="Spacebar" type="Sprite2D" parent="KeyboardButtons"]
-texture_filter = 1
-position = Vector2(3255, 2760)
-scale = Vector2(28.275, 28.45)
-texture = ExtResource("2_1o0vv")
-
 [node name="MovementInfo" type="TextureRect" parent="KeyboardButtons"]
 texture_filter = 1
 offset_left = 695.0
@@ -43,21 +32,32 @@ offset_right = 3935.0
 offset_bottom = 3670.0
 texture = ExtResource("3_mqgj2")
 
+[node name="Spacebar" type="Sprite2D" parent="KeyboardButtons"]
+texture_filter = 1
+position = Vector2(2905, 2785)
+scale = Vector2(28.275, 28.45)
+texture = ExtResource("2_1o0vv")
+
+[node name="Shiftinstr" type="Sprite2D" parent="KeyboardButtons"]
+position = Vector2(1030, 1640)
+scale = Vector2(5, 5)
+texture = ExtResource("8_y1rc8")
+
 [node name="Shift" type="Sprite2D" parent="KeyboardButtons"]
 texture_filter = 1
 position = Vector2(965, 2220)
 scale = Vector2(25.55, 22.85)
 texture = ExtResource("4_dmjhm")
 
-[node name="Wasdinstr" type="Sprite2D" parent="KeyboardButtons"]
-position = Vector2(2465, 1037.5)
-scale = Vector2(5.75, 6.45)
-texture = ExtResource("5_sjfdg")
-
 [node name="Spaceinstr" type="Sprite2D" parent="KeyboardButtons"]
 position = Vector2(3570, 2205)
 scale = Vector2(5.26666, 5.2)
 texture = ExtResource("6_xtehp")
+
+[node name="Wasdinstr" type="Sprite2D" parent="KeyboardButtons"]
+position = Vector2(2465, 1037.5)
+scale = Vector2(5.75, 6.45)
+texture = ExtResource("5_sjfdg")
 
 [node name="MouseAndCrosshair" type="Node2D" parent="."]
 visible = false

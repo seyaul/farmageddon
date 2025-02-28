@@ -1,7 +1,7 @@
 extends Node
 
 var enemyCount: int
-var numRuns : int
+var numRuns : int = 0
 var playerHealth : int
 var playerGold : int
 var playerExp : int
@@ -11,6 +11,7 @@ var all_gun_stats: AllGunStats
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
+var tutorial : bool = true
 signal campfire_selected
 
 # WIP variables
@@ -57,6 +58,7 @@ func incrementEnemyCount():
 func _game_started():
 	numRuns = 0
 	enemyCount = 0
+	tutorial = false
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerCurrHealth

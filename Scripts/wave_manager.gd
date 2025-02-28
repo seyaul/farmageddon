@@ -16,6 +16,8 @@ var list_enemies : Array # list of a mapping of enemies to how many of that enem
 var waves_completed : int = 0
 var all_enemies_spawned : bool = false
 
+var tut_scene
+
 var spawn_timer : float
 
 # This is a variable to cap the number of enemies on screen at one instance.
@@ -30,10 +32,15 @@ signal wave_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
+	tut_scene.tutorial_finished.connect(handle_signal)
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
-	spawn_on_timer(enemy_bull_scene)
+	if!(Global.tutorial):
+		spawn_on_timer(enemy_bull_scene)
+	else:
+		pass
 
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
@@ -117,6 +124,7 @@ func _on_timer_timeout() -> void:
 	pass
 	
 func _process(delta: float) -> void:
+	
 	# want to do this if statement but I think there's definitely a more 
 	# elegant way to do this that doesn't constantly check in the process
 	
@@ -136,3 +144,11 @@ func _process(delta: float) -> void:
 		spawn_on_timer(enemy_bull_scene)
 		emit_signal("wave_changed")
 		#enemy_counter.update_enemy_count(enemy_count)
+
+func handle_signal():
+	spawn_on_timer(enemy_bull_scene)
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("god_mode_debug"):
+		Global.playerCurrHealth = Global.playerHealthNode.current_health
+		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")

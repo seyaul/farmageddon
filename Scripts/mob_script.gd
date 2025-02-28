@@ -124,9 +124,7 @@ func enable_targeter_handler():
 	targeter.disabled = false
 
 func _handle_play_pre_lunge():
-	print("in_play_pre_lunge")
 	sprite.play("pre_lunge")
 
 func _handle_play_walk():
-	print("in_play_walk")
 	sprite.play("walk")	

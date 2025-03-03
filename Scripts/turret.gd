@@ -22,7 +22,7 @@ func switch_gun_sprite(name: String):
         gun_sprite.scale = Vector2(.4, .4)
     elif name == "flamethrower":
         gun_sprite.position = Vector2(0, 0)
-        gun_sprite.scale = Vector2(.8, .8)
+        gun_sprite.scale = Vector2(.7, .7)
     elif name == "rpg":
         gun_sprite.position = Vector2(16, -68)
         gun_sprite.scale = Vector2(1, 1)

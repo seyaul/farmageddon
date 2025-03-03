@@ -31,3 +31,15 @@ func _hide_body():
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("mobs"):
 		body.slow_down(0.4, 3)
+	else:
+		#in this case we are modifying the player
+		body.slow_down(0.4)
+	
+
+
+func _on_body_exited(body:Node2D) -> void:
+	if body.is_in_group("mobs"):
+		pass
+	else:
+		#in this case we are modifying the player
+		body.reset_speed()

@@ -21,17 +21,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.360784)
 
-[node name="CardContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 242.0
-offset_right = 1033.0
-offset_bottom = 282.0
-theme_override_constants/separation = 350
-alignment = 1
+[node name="CardContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 114.0
+offset_top = 232.0
+offset_right = 1094.0
+offset_bottom = 272.0
 
 [node name="HealCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
+offset_left = 140.0
+offset_right = 140.0
+offset_bottom = 40.0
 
 [node name="Card" parent="CardContainer/HealCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0
@@ -40,6 +41,9 @@ offset_right = 200.0
 
 [node name="GoldCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
+offset_left = 490.0
+offset_right = 490.0
+offset_bottom = 40.0
 
 [node name="Card" parent="CardContainer/GoldCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0
@@ -48,6 +52,9 @@ offset_right = 200.0
 
 [node name="ExpCard" type="TextureButton" parent="CardContainer"]
 layout_mode = 2
+offset_left = 840.0
+offset_right = 840.0
+offset_bottom = 40.0
 
 [node name="Card" parent="CardContainer/ExpCard" instance=ExtResource("2_wxwtb")]
 layout_mode = 0

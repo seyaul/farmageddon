@@ -3,6 +3,7 @@ extends Control
 @onready var card_container = $CardContainer
 const CARD_SCENE = preload("res://Scenes/Card.tscn")
 var cards = []
+var selected_cards = []
 
 const CARD_TYPES = {
 	0: preload("res://Sprites/healing (1).png"), 
@@ -11,45 +12,68 @@ const CARD_TYPES = {
 }
 
 func _ready():
-	# Create and configure each card dynamically
+	selected_cards = Global.get_random_rewards()
+	# make sure previous cards are removed before generating new ones
+	for child in card_container.get_children():
+		child.queue_free()
+	await get_tree().process_frame  
+
+	generate_cards()
+	slide_in_cards()
+
+func generate_cards():
 	for i in range(3):  
 		var card = CARD_SCENE.instantiate() as Card
-		card.set_card_texture(CARD_TYPES[i])
-		card.reward_type = i  # Assign correct reward type
+		var selected_data = selected_cards[i]
 
-		# Ensure the signal is connected correctly
+		card.card_name = selected_data["card_name"]
+		card.description = selected_data["description"]
+		card.icon = selected_data["icon"]
+		card.rarity = selected_data["rarity"]
+		card.can_repeat = selected_data["can_repeat"]
+		card.weight = selected_data["weight"]
+		card.modifies_player_stats = selected_data["modifies_player_stats"]
+		card.modifies_gun_stats = selected_data["modifies_gun_stats"]
+		
+		if "effect_data" in selected_data:
+			card.set_effect_data(selected_data["effect_data"])  
+		else:
+			card.set_effect_data({}) 
+
 		if not card.is_connected("reward_selected", Callable(self, "_on_reward_selected")):
 			card.connect("reward_selected", Callable(self, "_on_reward_selected"))
-			print("Connected reward_selected signal for card", i)
 
-		# Store and add card
+		card.position = Vector2(-1000, 242)
+		card_container.remove_child(card)  
+		add_child(card)  
 		cards.append(card)
-		card_container.add_child(card)
-		card.position = Vector2(-600, card_container.position.y)
 
-	# Animate cards sliding into place
-	slide_in_cards()
-	
 func slide_in_cards():
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	var final_x_positions = [120, 460, 800]  
 
 	for i in range(cards.size()):
 		var card = cards[i]
-		var target_x = card_container.position.x + (i * card_container.get("theme_override_constants/separation"))
+		var target_x = final_x_positions[i]  
 		tween.tween_property(card, "position:x", target_x, 0.5).set_delay(i * 0.2)
+		card_container.add_child(card)
 
-func _on_reward_selected(reward_type: int) -> void:
-	print("Reward selected:", reward_type)
 
-	match reward_type:
-		0:
-			Global.playerHealth = min(Global.playerHealth + 10, Global.playerMaxHealth)
-			print("Player health is now:", Global.playerHealth)
-		1:
-			Global.playerGold += 100  
-			print("Player gold is now:", Global.playerGold)
-		2:
-			Global.playerExp += 50  
-			print("Player EXP is now:", Global.playerExp)
+func apply_card_effect(effect_data: Dictionary):
+	if effect_data.keys().size() > 0:
+		for key in effect_data.keys():
+			if key in Global.player_stats:
+				var old_value = Global.player_stats.get(key)
+				var new_value = old_value + effect_data[key]
+				Global.player_stats.set(key, new_value)
+				print(key, " changed from ", old_value, " to ", new_value)
+			elif key in Global.all_gun_stats:
+				var old_value = Global.all_gun_stats.get(key)
+				var new_value = old_value * effect_data[key]  
+				Global.all_gun_stats.set(key, new_value)
+				print(key, " changed from ", old_value, " to ", new_value)
 
-	get_tree().change_scene_to_file("res://Scenes/Map.tscn")
+func _on_reward_selected(card: Card) -> void:
+	apply_card_effect(card.effect_data)
+	Global.adjust_weights_after_selection(card.card_name)
+	get_tree().change_scene_to_file("res://Scenes/map.tscn")

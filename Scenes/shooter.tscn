@@ -518,4 +518,3 @@ position = Vector2(0.106325, -30.6991)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_llbip")
 animation = &"on_fire"
-autoplay = "on_fire"

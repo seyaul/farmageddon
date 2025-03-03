@@ -13,7 +13,7 @@ func _ready():
 	splatter_animation.play("default")  # Play the animation once
 	body.texture = load(body_path)
 	body.scale = Vector2(c_scale, c_scale)
-	collision_shape.scale = Vector2(c_scale, c_scale)
+	collision_shape.scale = Vector2(c_scale*2, c_scale*2)
 	if darkened:
 		body.modulate = body.modulate.darkened(.5)
 

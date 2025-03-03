@@ -31,14 +31,14 @@ func show_tip(mouse_tip_shown: bool):
 	if times_clicked > 8:
 		hide_crosshair_instr()
 	elif mouse_tip_shown:
-		if !crosshair_tip_shown:
+		if not crosshair_tip_shown:
 			$CrosshairsSprite/Node2D/Crosshairinstr.visible = true
 			crosshair_tip_shown = true
-			times_clicked += 1
-			print(times_clicked)
 			if crosshair_timer.is_stopped():
 				start_timer.emit()
 				pass
+		times_clicked += 1
+		print(times_clicked)
 
 	
 func hide_crosshair_instr():

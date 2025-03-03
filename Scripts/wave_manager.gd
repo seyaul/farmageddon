@@ -10,6 +10,7 @@ var list_enemies : Array # list of a mapping of enemies to how many of that enem
 @export var stage_type : String # variable that tracks what kind of stage we are on 
 @export var stage_difficulty_cost : float # variable to determin the list of enemies
 @export var num_waves : int = 3
+var enemy_node_name : String 
 #@export var spawn_interval : int = 5 
 # ask groupmates if there is a way to set these exported variables from the map scene
 #var intervals_passed : int = 0
@@ -39,6 +40,7 @@ func _ready() -> void:
 	player_instance = Global.playerInstance
 	if!(Global.tutorial):
 		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_chicken_scene)
 	else:
 		pass
 
@@ -76,6 +78,8 @@ func spawn_on_timer(enemy_scene_type):
 	for i in range(0, num_enemies):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
+		enemy_node_name = enemy_instance.node_name
+		print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -94,9 +98,10 @@ func spawn_on_timer(enemy_scene_type):
 			# I think I figured out how to do this. Make a string variable that keeps 
 			# track of the name of the node, maybe as an export variable, and then
 			# combine it together to get the full string name. Then, get the 
-			# node accordingly. 
-			var targeterNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/Targeter")
-			var followNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/EMovementController/Follow")
+			# node accordingly.
+			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
+			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
+			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
 			if targeterNode and followNode:
 				target_manager(targeterNode, followNode)
 			else:
@@ -148,6 +153,7 @@ func _process(delta: float) -> void:
 
 func handle_signal():
 	spawn_on_timer(enemy_bull_scene)
+	spawn_on_timer(enemy_chicken_scene)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):

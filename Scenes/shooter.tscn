@@ -500,12 +500,11 @@ sprite_frames = SubResource("SpriteFrames_54st3")
 animation = &"walk"
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Shooter/EnemySprite2"]
-visible = false
-offset_left = -23.7499
-offset_top = 27.9166
-offset_right = 92.2501
-offset_bottom = 54.9166
-scale = Vector2(1.00186, 0.937574)
+offset_left = -176.666
+offset_top = -36.6668
+offset_right = -60.6662
+offset_bottom = -9.66678
+scale = Vector2(3, 2.808)
 theme = SubResource("Theme_nmayp")
 theme_override_styles/background = SubResource("StyleBoxFlat_hvnme")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3bxlp")
@@ -513,6 +512,7 @@ show_percentage = false
 script = ExtResource("16_oxrbs")
 
 [node name="Fire" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+visible = false
 z_index = 1
 position = Vector2(0.106325, -30.6991)
 scale = Vector2(7, 7)

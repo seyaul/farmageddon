@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=32 format=4 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="PackedScene" uid="uid://b8oilsliccgad" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
+[ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="23_llv11"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
@@ -923,6 +924,9 @@ tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
 
+[node name="CooldownTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
+wait_time = 0.5
+
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
@@ -1059,6 +1063,8 @@ texture = ExtResource("13_iv5bc")
 [node name="EnemyCounter" parent="UserInterfaceLayer" instance=ExtResource("16_r0rcy")]
 
 [node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
+
+[node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 visible = false

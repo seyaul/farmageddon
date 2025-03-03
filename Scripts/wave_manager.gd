@@ -4,12 +4,13 @@ extends Node
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 var player_instance
 @export var num_enemies : int = 16 # number of enemies to spawn, probably len(list_enemies)
-@export var enemy_count = num_enemies # did this so enemies do not decrement twice, not fully implemented yet
+@export var tot_enemy_count : int = 0 # did this so enemies do not decrement twice, not fully implemented yet
 @onready var enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 var list_enemies : Array # list of a mapping of enemies to how many of that enemy to spawn
 @export var stage_type : String # variable that tracks what kind of stage we are on 
 @export var stage_difficulty_cost : float # variable to determin the list of enemies
 @export var num_waves : int = 3
+var enemy_node_name : String 
 #@export var spawn_interval : int = 5 
 # ask groupmates if there is a way to set these exported variables from the map scene
 #var intervals_passed : int = 0
@@ -34,11 +35,13 @@ signal wave_changed
 func _ready() -> void:
 	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
 	tut_scene.tutorial_finished.connect(handle_signal)
+	tot_enemy_count = num_enemies * 2 * num_waves
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
 	if!(Global.tutorial):
 		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_chicken_scene)
 	else:
 		pass
 
@@ -76,6 +79,8 @@ func spawn_on_timer(enemy_scene_type):
 	for i in range(0, num_enemies):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
+		enemy_node_name = enemy_instance.node_name
+		print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -94,9 +99,10 @@ func spawn_on_timer(enemy_scene_type):
 			# I think I figured out how to do this. Make a string variable that keeps 
 			# track of the name of the node, maybe as an export variable, and then
 			# combine it together to get the full string name. Then, get the 
-			# node accordingly. 
-			var targeterNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/Targeter")
-			var followNode = enemy_instance.get_node("EnemyPath/EnemyGuide/SmartPather/EMovementController/Follow")
+			# node accordingly.
+			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
+			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
+			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
 			if targeterNode and followNode:
 				target_manager(targeterNode, followNode)
 			else:
@@ -131,8 +137,9 @@ func _process(delta: float) -> void:
 	# Slight unidentifiable bug where sometimes the enemy count dips below 0. If anyone 
 	# has insight on this issue, lmk
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
-		Global.playerCurrHealth = Global.playerHealthNode.current_health
-		print(Global.playerCurrHealth)
+		# Shouldn't be setting the current health here
+		Global.playerHealth = Global.playerHealthNode.current_health
+		print(Global.playerHealth)
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(0.5).timeout
 		# Switch to the reward scene for now, change to scene that zooms in 
@@ -142,13 +149,16 @@ func _process(delta: float) -> void:
 		waves_completed += 1
 		all_enemies_spawned = false
 		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_chicken_scene)
 		emit_signal("wave_changed")
 		#enemy_counter.update_enemy_count(enemy_count)
 
 func handle_signal():
 	spawn_on_timer(enemy_bull_scene)
+	spawn_on_timer(enemy_chicken_scene)
+
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
-		Global.playerCurrHealth = Global.playerHealthNode.current_health
+		Global.playerHealth = Global.playerHealthNode.current_health
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")

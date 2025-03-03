@@ -9,6 +9,8 @@ var crosshair_timer : Timer
 var crosshair_tip_shown : bool = false
 signal crosshair_tip_complete
 
+signal start_timer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tut_node = $"../UserInterfaceLayer/TutorialInterface"
@@ -16,6 +18,7 @@ func _ready() -> void:
 	$CrosshairsSprite/Node2D/Crosshairinstr.visible = false
 	crosshair_timer = $CrosshairsSprite/Node2D/Crosshairinstr/Timer
 	crosshair_timer.timeout.connect(_on_timer_timeout)
+	self.start_timer.connect(timer_handler)
 	mouse_node = tut_node.get_node("MouseAndCrosshair")
 	print(mouse_node)
 
@@ -28,13 +31,14 @@ func show_tip(mouse_tip_shown: bool):
 	if times_clicked > 8:
 		hide_crosshair_instr()
 	elif mouse_tip_shown:
-		if !crosshair_tip_shown:
+		if not crosshair_tip_shown:
 			$CrosshairsSprite/Node2D/Crosshairinstr.visible = true
 			crosshair_tip_shown = true
-			times_clicked += 1
 			if crosshair_timer.is_stopped():
-				print("haiiiii")
-				crosshair_timer.start()
+				start_timer.emit()
+				pass
+		times_clicked += 1
+		print(times_clicked)
 
 	
 func hide_crosshair_instr():
@@ -45,3 +49,6 @@ func hide_crosshair_instr():
 		
 func _on_timer_timeout():
 	hide_crosshair_instr()
+
+func timer_handler():
+	crosshair_timer.start()

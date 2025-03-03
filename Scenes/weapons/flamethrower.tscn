@@ -27,6 +27,8 @@ script = ExtResource("2_0xoen")
 flames_cutoff_delay = 0.2
 damage_interval = 0.05
 flame_damage = 3.0
+fire_type = "Continuous"
+heat_increase_rate = 0.4
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="0"]
 z_index = 100

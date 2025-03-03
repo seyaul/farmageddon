@@ -54,10 +54,9 @@ func _physics_process(delta: float) -> void:
 	#print(fire_type, " ", continuous_active)
 	#print(fire_type == "continuous" and continuous_active, " truth check")
 	if fire_type == "continuous" and continuous_active:
-		print("this should be printing cause cont started, basegun")
 		emit_signal("continuous_started", heat_increase_rate)
 	elif fire_type == "continuous" and !continuous_active:
-		print("this should be printing cause cont ended, basegun")
+		pass
 	
 func handle_signal(action: String, delta) -> void:
 	if not automatic && action == "tap":

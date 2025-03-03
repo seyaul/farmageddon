@@ -13,6 +13,8 @@ var crosshairs_node : Node2D
 
 signal mouse_first_clicked
 signal tutorial_finished
+# TODO: figure out a better way to do this 
+signal tutorial_finished2
 signal weapon_switched
 signal start_wave
 
@@ -49,8 +51,11 @@ func start_step(step_idx : int):
 		remaining_to_press = tutorial_segments[step_idx].duplicate()
 		print(remaining_to_press, " remaining to press in tut.gd")
 	else:
-		Global.tutorial = false
-		tutorial_finished.emit()
+		#Global.tutorial = false
+		#tutorial_finished.emit()
+		#tutorial_finished2.emit()
+		#start_wave.emit()
+		pass
 		
 func hide_all():
 	$MouseAndCrosshair.visible = false
@@ -71,6 +76,15 @@ func _input(event):
 					hide_all()
 					curr_tut_seg += 1
 			emit_signal("mouse_first_clicked", mouse_tooltip_shown)
+		elif event.is_action_pressed("skip_tutorial"):
+			if Global.tutorial:
+				Global.tutorial = false
+				mouse_tooltip_shown = false
+				hide_all()
+				tutorial_segments = []
+				tutorial_finished.emit()
+				tutorial_finished2.emit()
+				start_wave.emit()
 		else:
 			for button in remaining_to_press:
 				if Input.is_action_just_pressed(button):
@@ -90,8 +104,10 @@ func crosshair_handle():
 	start_step(curr_tut_seg)
 
 func weapon_handle():
-	Global.tutorial = false
-	tutorial_finished.emit()
-	start_wave.emit()
+	if Global.tutorial:
+		Global.tutorial = false
+		tutorial_finished.emit()
+		tutorial_finished2.emit()
+		start_wave.emit()
 
 	

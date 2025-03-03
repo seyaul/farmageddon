@@ -45,4 +45,5 @@ func die() -> void:
 	else:
 		mob_died.emit()
 		Global.decrementEnemyCount()
+		Global.num_enemies_defeated += 1
 		character.queue_free()

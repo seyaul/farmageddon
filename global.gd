@@ -12,6 +12,7 @@ var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
 var tutorial : bool = true
+var num_enemies_defeated : int
 signal campfire_selected
 
 
@@ -61,6 +62,7 @@ func incrementEnemyCount():
 func _game_started():
 	enemyCount = 0
 	tutorial = false
+	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerMaxHealth = playerHealthNode.player_max_health
@@ -70,6 +72,7 @@ func _new_game_started():
 	print("checking when newGameStarted is emitted, global")
 	newGame = false
 	enemyCount = 0
+	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health

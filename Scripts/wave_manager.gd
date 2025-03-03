@@ -4,7 +4,7 @@ extends Node
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 var player_instance
 @export var num_enemies : int = 16 # number of enemies to spawn, probably len(list_enemies)
-@export var enemy_count = num_enemies # did this so enemies do not decrement twice, not fully implemented yet
+@export var tot_enemy_count : int = 0 # did this so enemies do not decrement twice, not fully implemented yet
 @onready var enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 var list_enemies : Array # list of a mapping of enemies to how many of that enemy to spawn
 @export var stage_type : String # variable that tracks what kind of stage we are on 
@@ -35,6 +35,7 @@ signal wave_changed
 func _ready() -> void:
 	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
 	tut_scene.tutorial_finished.connect(handle_signal)
+	tot_enemy_count = num_enemies * 2 * num_waves
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
@@ -148,12 +149,14 @@ func _process(delta: float) -> void:
 		waves_completed += 1
 		all_enemies_spawned = false
 		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_chicken_scene)
 		emit_signal("wave_changed")
 		#enemy_counter.update_enemy_count(enemy_count)
 
 func handle_signal():
 	spawn_on_timer(enemy_bull_scene)
 	spawn_on_timer(enemy_chicken_scene)
+
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):

@@ -7,11 +7,13 @@ var darkened: bool
 @onready var body: Sprite2D = $Body
 @onready var blood: Sprite2D = $Blood
 @onready var splatter_animation: AnimatedSprite2D = $SplatterAnimation
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 func _ready():
 	splatter_animation.play("default")  # Play the animation once
 	body.texture = load(body_path)
 	body.scale = Vector2(c_scale, c_scale)
+	collision_shape.scale = Vector2(c_scale, c_scale)
 	if darkened:
 		body.modulate = body.modulate.darkened(.5)
 

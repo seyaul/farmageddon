@@ -923,6 +923,9 @@ tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
 
+[node name="CooldownTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
+wait_time = 0.5
+
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)

@@ -10,6 +10,7 @@ var damage_timer: Timer
 var damage_area: Area2D
 var targets = []
 
+
 func _ready() -> void:
 	super._ready()
 	

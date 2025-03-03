@@ -7,6 +7,10 @@ signal disable_shooting
 signal enable_shooting
 signal god_mode_debug
 signal update_heat
+signal start_cd_timer
+signal weapon_switched
+signal continuous_started
+signal continuous_ended
 
 @export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
 var weapons_directory = "res://Scenes/weapons/"
@@ -21,6 +25,7 @@ var speed_modifier: float
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
+var is_holding
 @onready var walk_state = $MoveController/Walk
 @onready var turret = $Turret
 @onready var turretGunSprite = $Turret/Gun
@@ -47,10 +52,16 @@ func _physics_process(delta: float) -> void:
 		emit_signal("shoot", "tap", delta)
 		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
+		if !is_holding:
+			emit_signal("continuous_started")
 		emit_signal("shoot", "hold", delta)
-		emit_signal("update_heat")
+		is_holding = true
 	elif Input.is_action_just_released("shoot"):
+		if is_holding:
+			emit_signal("continuous_ended")
 		emit_signal("shoot", "end", delta)
+		emit_signal("start_cd_timer")
+		is_holding = false
 	if Input.is_action_just_pressed("melee"):
 		emit_signal("melee")
 	if Input.is_action_just_pressed("shockwave"):
@@ -88,8 +99,11 @@ func equip_new_gun(new_gun: baseGun):
 		gun.queue_free()  
 	gun = new_gun
 	turret.switch_gun_sprite(new_gun.name)
-	turret.add_child(gun)	
+	turret.add_child(gun)
 	gun.position = Vector2(0, -115) # y = -115
+	
+	await get_tree().process_frame
+	emit_signal("weapon_switched")
 
 func setup_weapons():
 	for weapon_name in active_weapons:

@@ -1,27 +1,33 @@
-extends StaticBody2D
+extends Area2D
 
+var body_path: String
+var c_scale: float
+var darkened: bool
 @export var blood_dir_path: String
 @onready var body: Sprite2D = $Body
 @onready var blood: Sprite2D = $Blood
-@onready var splatter_animation: AnimatedSprite2D = $Splatter_Animation
+@onready var splatter_animation: AnimatedSprite2D = $SplatterAnimation
 
 func _ready():
 	splatter_animation.play("default")  # Play the animation once
-	splatter_animation.animation_finished.connect(_on_animation_finished)
+	body.texture = load(body_path)
+	body.scale = Vector2(c_scale, c_scale)
+	if darkened:
+		body.modulate = body.modulate.darkened(.5)
 
 func _on_animation_finished():
 	splatter_animation.visible = false # Stops at the last frame
 
 func init(corpse_body_path: String, corpse_scale: float):
-	body = $Body
-	blood = $Blood
-	body.texture = load(corpse_body_path)
-	body.scale = Vector2(corpse_scale, corpse_scale)
-	# blood.texture = load("res://Sprites/blood_splatters/blood spatter1.png")
-	# get_tree().create_timer(3).timeout.connect(_hide_body())
+	body_path = corpse_body_path
+	c_scale = corpse_scale
 
 func darken():
-	body.modulate = body.modulate.darkened(.5)
+	darkened = true
 
 func _hide_body():
 	body.visible = false
+
+func _on_body_entered(body: Node2D):
+	if body.is_in_group("mobs"):
+		body.slow_down(0.4, 3)

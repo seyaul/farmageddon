@@ -13,6 +13,7 @@ var sprite: AnimatedSprite2D  # Assuming the enemy has a Sprite2D node
 var health: Node
 var speed_modifier: float
 var healthBar: Node
+var follow_node: Node
 
 @export var max_fire_level: int = 3
 @export var fire_decay_rate: float = 1
@@ -22,7 +23,6 @@ var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
 var targeter: Node
 @onready var fire: AnimatedSprite2D = $Fire
-
 @export var corpse_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -33,7 +33,7 @@ func _ready() -> void:
 	healthBar.visible = false
 	Global.incrementEnemyCount()
 	speed_modifier = randf_range(-1,1) * 2
-	var follow_node = $EMovementController/Follow
+	follow_node = $EMovementController/Follow
 	var lunge_node = $EMovementController/Lunge
 	targeter = $Targeter
 	if lunge_node && targeter:
@@ -47,6 +47,7 @@ func _ready() -> void:
 		sprite.play("walk")
 	follow_node.speed += speed_modifier
 	health.mob_died.connect(die)
+	follow_node.no_longer_slowed.connect(end_slow)
 	setup_fire_timer()
 
 func take_damage(amount: int):
@@ -109,7 +110,6 @@ func flash_red():
 func _on_flash_timeout():
 	sprite.modulate = normal_color
 	sprite.z_index = 1
-	#flash_timer.timeout.disconnect(_on_flash_timeout)
 	
 func _on_hb_timeout():
 	healthBar.visible = false
@@ -128,6 +128,15 @@ func die():
 			corpse_instance.darken()
 		# :( refactor this bs
 		get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
+
+func slow_down(speed_modifier: float, seconds: float):
+	sprite.speed_scale = speed_modifier
+	follow_node.slow_down(speed_modifier, seconds)
+
+func end_slow():
+	sprite.speed_scale = 1
+	sprite.modulate = normal_color
+
 
 func disable_targeter_handler():
 	targeter.disabled = true

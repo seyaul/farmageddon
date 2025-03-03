@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6hkocg0m1554"]
+[gd_scene load_steps=7 format=3 uid="uid://c6hkocg0m1554"]
 
 [ext_resource type="Script" path="res://Scripts/corpse.gd" id="1_8cr8s"]
 [ext_resource type="Texture2D" uid="uid://ckriqkhq403wx" path="res://Sprites/blood_splatters/animation/largeblood1.png" id="2_vmcab"]
@@ -22,19 +22,28 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Corpse" type="StaticBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rip7m"]
+radius = 28.0
+height = 102.0
+
+[node name="Corpse" type="Area2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_8cr8s")
 
 [node name="Body" type="Sprite2D" parent="."]
 
 [node name="Blood" type="Sprite2D" parent="."]
 
-[node name="Splatter_Animation" type="AnimatedSprite2D" parent="."]
+[node name="SplatterAnimation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_4dkpq")
 frame = 2
 frame_progress = 1.0
 
-[connection signal="animation_finished" from="Splatter_Animation" to="." method="_on_animation_finished"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_rip7m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="SplatterAnimation" to="." method="_on_animation_finished"]

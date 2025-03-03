@@ -107,7 +107,7 @@ _data = {
 point_count = 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0q2d"]
-size = Vector2(11.8621, 14.9027)
+size = Vector2(43.353, 13.7606)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ej2u3"]
 atlas = ExtResource("10_mr0u1")
@@ -509,7 +509,7 @@ script = ExtResource("1_sxhn3")
 corpse_scene = ExtResource("2_sjynd")
 
 [node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(4.92413, 6.34744)
+position = Vector2(2.85157, 2.78403)
 scale = Vector2(6.24, 6.24)
 shape = SubResource("RectangleShape2D_w0q2d")
 
@@ -592,6 +592,7 @@ show_percentage = false
 script = ExtResource("15_8jqyx")
 
 [node name="Fire" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+visible = false
 z_index = 1
 position = Vector2(0.106325, -30.6991)
 scale = Vector2(7, 7)

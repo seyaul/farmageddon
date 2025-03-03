@@ -1,6 +1,7 @@
 extends State
 
 signal play_walk_animation
+signal no_longer_slowed
 
 @export var follow_target: Node2D
 @export var speed: float = 25
@@ -20,8 +21,9 @@ var targeter: Node
 var attacks: int
 # TODO: Replace with timer?
 var time: int
-
-
+var slowdown_timer: Timer
+var slowed_down: bool
+var slowed_down_modifier: float
 
 func Enter():
 	enemy = get_parent().get_parent()
@@ -40,7 +42,10 @@ func Update(delta: float):
 	var distance_to_target = enemy.global_position.distance_to(navigation.target_position)
 	
 	if distance_to_target >= max_deviation_distance:
-		enemy.velocity = dir * speed * delta
+		if slowed_down:
+			enemy.velocity = dir * speed * delta * slowed_down_modifier
+		else:
+			enemy.velocity = dir * speed * delta
 		
 	enemy.move_and_slide()
 	if distance_to_target <= distance_til_attack and attacks > 0:
@@ -62,3 +67,19 @@ func _physics_process(delta: float) -> void:
 		
 func _ready() -> void:
 	attacks = num_attacks
+	slowdown_timer = Timer.new()
+	slowdown_timer.timeout.connect(stop_slow_down)
+	add_child(slowdown_timer)
+
+func slow_down(modifier: float, seconds: float):
+	slowed_down = true
+	slowed_down_modifier = modifier
+	if slowdown_timer.is_stopped():
+		slowdown_timer.start(seconds)
+	else:
+		slowdown_timer.stop()
+		slowdown_timer.start(seconds)
+
+func stop_slow_down():
+	slowed_down = false
+	emit_signal("no_longer_slowed")

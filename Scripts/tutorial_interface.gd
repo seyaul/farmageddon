@@ -68,7 +68,7 @@ func hide_all():
 	$KeyboardButtons/Wasdinstr.visible = false
 
 func _input(event):
-	if event is InputEvent:
+	if event is InputEvent and Global.tutorial:
 		if event.is_action_pressed("shoot"):
 			if !remaining_to_press.is_empty():
 				if remaining_to_press[0] == "shoot":
@@ -101,7 +101,8 @@ func _input(event):
 
 # custom signal handling function that is need to just so that the screen isn't cluttered?
 func crosshair_handle():
-	start_step(curr_tut_seg)
+	if Global.tutorial:
+		start_step(curr_tut_seg)
 
 func weapon_handle():
 	if Global.tutorial:

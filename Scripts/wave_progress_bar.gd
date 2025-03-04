@@ -12,6 +12,7 @@ func _ready():
 	tut_scene.tutorial_finished2.connect(handle_signal)
 	if !Global.tutorial:
 		self.visible = true
+		await get_tree().process_frame
 		total_enemies = wave_manager_node.tot_enemy_count
 
 # Change this to be a signal eventually

@@ -19,7 +19,7 @@ var card_skip_counts = {}
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
-var tutorial : bool = true
+var tutorial : bool
 var num_enemies_defeated : int
 signal campfire_selected
 
@@ -149,6 +149,7 @@ func _new_game_started():
 	newGame = false
 	enemyCount = 0
 	num_enemies_defeated = 0
+	tutorial = true
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health

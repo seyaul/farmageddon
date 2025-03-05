@@ -1,13 +1,11 @@
 extends State
 
-<<<<<<< HEAD:Scripts/followState.gd
 @export_enum("Cooldown", "Duration")
 var attack_style: String
-=======
+
 signal play_walk_animation
 signal no_longer_slowed
 
->>>>>>> main:Scripts/fsm/followState.gd
 @export var follow_target: Node2D
 @export var speed: float = 25
 @export var look_at_player: bool

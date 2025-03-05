@@ -118,12 +118,6 @@ func _on_hb_timeout():
 
 func die():
 	if corpse_scene:
-<<<<<<< HEAD
-			var corpse_instance = corpse_scene.instantiate()
-			corpse_instance.global_position = global_position
-			# :( refactor this bs
-			get_parent().get_parent().get_parent().get_parent().add_child(corpse_instance)
-=======
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":
 			corpse_instance.init("res://Sprites/new_chicken_sprites/corpse + blood.png", 0.125)
@@ -173,4 +167,3 @@ func stop_stun_animation():
 	if stunAnimation:
 		stunAnimation.visible = false
 	
->>>>>>> main

@@ -94,6 +94,38 @@ region = Rect2(528, 120, 24, 24)
 atlas = ExtResource("3_so4dp")
 region = Rect2(552, 120, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yq4n"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(384, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuqx2"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(408, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8my8"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(432, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su267"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(456, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeibg"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(480, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n5i7"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(504, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7a8c"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(528, 120, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6ns3"]
+atlas = ExtResource("3_so4dp")
+region = Rect2(552, 120, 24, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_i0vis"]
 animations = [{
 "frames": [{
@@ -197,6 +229,7 @@ collision_layer = 2
 
 [node name="baseBullet" type="AnimatableBody2D"]
 z_index = 1
+z_index = 1
 scale = Vector2(2, 2)
 collision_layer = 0
 >>>>>>> main
@@ -212,6 +245,9 @@ max_range = 700
 >>>>>>> main
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CapsuleShape2D_ud0yu")
 rotation = -1.5708
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CapsuleShape2D_ud0yu")

@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
-[ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_4t6rf"]
-[ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
-[ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
+[ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="2_4t6rf"]
+[ext_resource type="Script" path="res://Scripts/fsm/idleState.gd" id="3_vyege"]
+[ext_resource type="Script" path="res://Scripts/fsm/walkState.gd" id="4_kjumt"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]

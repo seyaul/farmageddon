@@ -18,3 +18,6 @@ func Update(delta):
 # This is signaled on timeout to exit the lunge state
 func _on_knockback_timeout():
 	emit_signal("state_transition", self, "Follow")
+
+func Exit():
+	pass

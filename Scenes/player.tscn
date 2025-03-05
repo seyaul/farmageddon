@@ -116,8 +116,6 @@ melee_weapon = ExtResource("9_mr22e")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("10_8j6e3")
-max_health = null
-player_max_health = null
 
 [node name="Shockwave" type="Area2D" parent="."]
 collision_mask = 12

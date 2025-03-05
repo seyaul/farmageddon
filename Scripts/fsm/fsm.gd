@@ -14,6 +14,7 @@ func _ready() -> void:
 	parent = get_parent()
 	if parent.is_in_group("mobs"):
 		parent.knocked_back.connect(set_knockback_vector)
+		parent.stunned.connect(_handle_stunned)
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -78,3 +79,6 @@ func set_knockback_vector(force: Vector2):
 		if child is KnockedBackState:
 			child.knockback_velocity = force
 	change_state(current_state, "KnockedBack")
+
+func _handle_stunned():
+	change_state(current_state, "Stunned")

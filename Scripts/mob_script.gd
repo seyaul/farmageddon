@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal shoot
 signal knocked_back
+signal stunned
 
 @export var flash_duration: float = 0.2  # Duration of red flash
 var hb_timer_duration: float = 1.5
@@ -23,6 +24,7 @@ var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
 var targeter: Node
 @onready var fire: AnimatedSprite2D = $Fire
+@onready var stunAnimation: AnimatedSprite2D = $StunAnimation
 @export var corpse_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -149,3 +151,19 @@ func _handle_play_pre_lunge():
 
 func _handle_play_walk():
 	sprite.play("walk")	
+
+func stun():
+	stunned.emit()
+
+func play_stun_animation():
+	disable_targeter_handler()
+	sprite.pause()
+	if stunAnimation:
+		stunAnimation.visible = true
+
+func stop_stun_animation():
+	enable_targeter_handler()
+	sprite.play()
+	if stunAnimation:
+		stunAnimation.visible = false
+	

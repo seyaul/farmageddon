@@ -1,22 +1,19 @@
-[gd_scene load_steps=120 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=111 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
-[ext_resource type="Script" path="res://Scripts/fsm.gd" id="1_f4cnc"]
+[ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
 [ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
-[ext_resource type="Script" path="res://Scripts/followState.gd" id="3_51yba"]
+[ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="5_3di07"]
 [ext_resource type="Script" path="res://Scripts/strafe_state.gd" id="6_ur5l3"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="7_riaty"]
-[ext_resource type="Script" path="res://Scripts/knockedBack.gd" id="8_fxl72"]
+[ext_resource type="Script" path="res://Scripts/fsm/knockedBack.gd" id="8_fxl72"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="8_yeokn"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="9_k6tbs"]
-[ext_resource type="Texture2D" uid="uid://fkpp5tekafg2" path="res://Sprites/cow_sprites/cow back.png" id="10_mr0u1"]
-[ext_resource type="Texture2D" uid="uid://ea5fxks1ppem" path="res://Sprites/cow_sprites/cow front.png" id="11_622el"]
-[ext_resource type="Texture2D" uid="uid://e0ed84wmkgkw" path="res://Sprites/cow_sprites/cow left.png" id="12_3tk1y"]
-[ext_resource type="Texture2D" uid="uid://s6bb5b4xxw0a" path="res://Sprites/cow_sprites/cow right.png" id="13_ostc6"]
+[ext_resource type="Script" path="res://Scripts/fsm/stunnedState.gd" id="11_symhq"]
 [ext_resource type="Texture2D" uid="uid://c6mrw8srbumso" path="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-0.png" id="15_6bvsy"]
 [ext_resource type="Script" path="res://Scripts/smartpather_health_bar.gd" id="15_8jqyx"]
 [ext_resource type="Texture2D" uid="uid://duhpl55kqmfpy" path="res://Sprites/new_bull_sprites/head_and_smoke/pixil-frame-1.png" id="16_5a71t"]
@@ -100,6 +97,7 @@
 [ext_resource type="Texture2D" uid="uid://hty2p5k32qht" path="res://Sprites/effects/fire/bull_fire/1_58.png" id="97_1ynln"]
 [ext_resource type="Texture2D" uid="uid://dbx3vr7y8unjc" path="res://Sprites/effects/fire/bull_fire/1_59.png" id="98_dy8xw"]
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="99_auqd3"]
+[ext_resource type="Texture2D" uid="uid://bdhft265vwah7" path="res://Sprites/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="101_u82o8"]
 
 [sub_resource type="Curve2D" id="Curve2D_5geu8"]
 _data = {
@@ -110,98 +108,8 @@ point_count = 4
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0q2d"]
 size = Vector2(43.353, 13.7606)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ej2u3"]
-atlas = ExtResource("10_mr0u1")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyvt2"]
-atlas = ExtResource("10_mr0u1")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5caab"]
-atlas = ExtResource("10_mr0u1")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eurcj"]
-atlas = ExtResource("11_622el")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_veys4"]
-atlas = ExtResource("11_622el")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ry7ni"]
-atlas = ExtResource("11_622el")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kt7lt"]
-atlas = ExtResource("12_3tk1y")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tplax"]
-atlas = ExtResource("12_3tk1y")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pa2fb"]
-atlas = ExtResource("12_3tk1y")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cwm3w"]
-atlas = ExtResource("13_ostc6")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ak5ym"]
-atlas = ExtResource("13_ostc6")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4avkc"]
-atlas = ExtResource("13_ostc6")
-region = Rect2(128, 0, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_pggo2"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ej2u3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pyvt2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5caab")
-}],
-"loop": true,
-"name": &"backFacingWalk",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eurcj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_veys4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ry7ni")
-}],
-"loop": true,
-"name": &"frontFacingWalk",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kt7lt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tplax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pa2fb")
-}],
-"loop": true,
-"name": &"leftFacingWalk",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("15_6bvsy")
@@ -251,20 +159,6 @@ animations = [{
 "loop": false,
 "name": &"pre_lunge",
 "speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cwm3w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ak5ym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4avkc")
-}],
-"loop": true,
-"name": &"rightFacingWalk",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -489,6 +383,42 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjium"]
+atlas = ExtResource("101_u82o8")
+region = Rect2(512, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy34l"]
+atlas = ExtResource("101_u82o8")
+region = Rect2(544, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4sq5"]
+atlas = ExtResource("101_u82o8")
+region = Rect2(576, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7d81"]
+atlas = ExtResource("101_u82o8")
+region = Rect2(608, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3416o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjium")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jy34l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4sq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7d81")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="smartPather" type="Node2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1jr2g")
@@ -561,6 +491,9 @@ script = ExtResource("6_ur5l3")
 [node name="KnockedBack" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("8_fxl72")
 
+[node name="Stunned" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
+script = ExtResource("11_symhq")
+
 [node name="MeleeWeapon" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("7_riaty")]
 collision_layer = 0
 collision_mask = 1
@@ -580,7 +513,7 @@ position = Vector2(-150, 0)
 rotation = -1.5708
 scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"pre_lunge"
+animation = &"walk"
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
 offset_left = -40.8098
@@ -602,3 +535,14 @@ sprite_frames = SubResource("SpriteFrames_jqdjg")
 animation = &"on_fire"
 autoplay = "on_fire"
 frame_progress = 0.135907
+
+[node name="StunAnimation" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+visible = false
+modulate = Color(1, 1, 1, 0.811765)
+z_index = 1
+texture_filter = 1
+position = Vector2(64.4347, -2.89673)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_3416o")
+autoplay = "default"
+frame_progress = 0.844849

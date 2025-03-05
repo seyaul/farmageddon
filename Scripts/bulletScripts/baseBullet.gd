@@ -50,11 +50,11 @@ func _physics_process(delta: float) -> void:
 	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
-
-	hit_sound.play()	
+	
 	var collider = collision.get_collider()
 	if collider.has_method("take_damage"):
 		collider.take_damage(20)  
+		hit_sound.play()
 
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO
@@ -70,6 +70,7 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	
 func kill_bullet():
+	animated_sprite.visible = false
 	active = false
 	sync_to_physics = false
 	await get_tree().create_timer(hit_sound.stream.get_length()).timeout

@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=37 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
-[ext_resource type="Script" path="res://Scripts/fsm.gd" id="2_4t6rf"]
-[ext_resource type="Script" path="res://Scripts/idleState.gd" id="3_vyege"]
-[ext_resource type="Script" path="res://Scripts/walkState.gd" id="4_kjumt"]
+[ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="2_4t6rf"]
+[ext_resource type="Script" path="res://Scripts/fsm/idleState.gd" id="3_vyege"]
+[ext_resource type="Script" path="res://Scripts/fsm/walkState.gd" id="4_kjumt"]
 [ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
@@ -15,12 +15,23 @@
 [ext_resource type="Texture2D" uid="uid://bpjyjjabsiyh0" path="res://Sprites/player_sprites/farmer_cockpit.png" id="20_vl4s5"]
 [ext_resource type="Texture2D" uid="uid://drt0a22xteinu" path="res://Sprites/player_sprites/guns/AKorn47.png" id="21_w6rlt"]
 [ext_resource type="Texture2D" uid="uid://dsry7buicqluw" path="res://Sprites/coin_1.png" id="21_wyjhk"]
+[ext_resource type="Texture2D" uid="uid://cjhluwckyvsn" path="res://Sprites/player_sprites/death_explosion/pixil-frame-0.png" id="22_dtlmb"]
 [ext_resource type="Script" path="res://Scripts/way_point_L.gd" id="22_ts6tn"]
+[ext_resource type="Texture2D" uid="uid://rang8fketrl8" path="res://Sprites/player_sprites/death_explosion/pixil-frame-1.png" id="23_1pvhr"]
 [ext_resource type="Script" path="res://Scripts/way_point_3.gd" id="23_8m0tm"]
+[ext_resource type="Texture2D" uid="uid://de0hkfjl83i4j" path="res://Sprites/player_sprites/death_explosion/pixil-frame-2.png" id="24_pwqjk"]
 [ext_resource type="Script" path="res://Scripts/way_point_4.gd" id="24_qr5vi"]
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="25_3v1om"]
+[ext_resource type="Texture2D" uid="uid://bhgg7eh7yro0e" path="res://Sprites/player_sprites/death_explosion/pixil-frame-3.png" id="25_h8517"]
+[ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="26_6u547"]
 [ext_resource type="Texture2D" uid="uid://cgdf84tx5m7ye" path="res://Sprites/player_sprites/no cockpit.png" id="26_hefpf"]
 [ext_resource type="Script" path="res://Scripts/turret.gd" id="27_0c222"]
+[ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="27_jdjd8"]
+[ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="28_ft2t4"]
+[ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="29_3v4mr"]
+[ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="30_0mc5u"]
+[ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="31_eb4io"]
+[ext_resource type="AudioStream" uid="uid://b42da4pa3o080" path="res://audio/effects/player_damaged.wav" id="32_aa2t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65iyo"]
 size = Vector2(220, 160)
@@ -29,6 +40,44 @@ size = Vector2(220, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trg3w"]
 size = Vector2(2, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_olutn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_dtlmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_1pvhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_pwqjk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_h8517")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6u547")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0mc5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_eb4io")
+}],
+"loop": false,
+"name": &"death_animation",
+"speed": 10.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -140,4 +189,16 @@ offset = Vector2(0, 3.05176e-05)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("21_w6rlt")
 
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_olutn")
+animation = &"death_animation"
+
+[node name="DamagedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_aa2t0")
+
+[connection signal="character_died" from="Health" to="." method="_on_health_character_died"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]

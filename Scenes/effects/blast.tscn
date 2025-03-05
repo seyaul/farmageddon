@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxv6ripotnohu"]
+
+[ext_resource type="Script" path="res://Scripts/effects/blast.gd" id="1_botqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1xdx"]
+radius = 41.0488
+
+[sub_resource type="Curve" id="Curve_2f18d"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 50.9265), -14.1377, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_4m5cd"]
+offsets = PackedFloat32Array(0.0572917, 0.489583, 0.796875)
+colors = PackedColorArray(1, 1, 0, 1, 0.991536, 0.460432, 0.166117, 1, 0.984314, 0, 0, 1)
+
+[node name="Blast" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_botqp")
+
+[node name="BlastRadius" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+
+[node name="BlastHitbox" type="CollisionShape2D" parent="BlastRadius"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_x1xdx")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1000
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 0.9
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+damping_min = 10.0
+damping_max = 50.0
+damping_curve = SubResource("Curve_2f18d")
+scale_amount_min = 5.0
+scale_amount_max = 30.0
+color_ramp = SubResource("Gradient_4m5cd")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="BlastRadius" to="." method="_on_blast_radius_body_entered"]

@@ -1,16 +1,21 @@
+<<<<<<< HEAD
 [gd_scene load_steps=47 format=4 uid="uid://cfte2bglhtfoe"]
+=======
+[gd_scene load_steps=30 format=4 uid="uid://cfte2bglhtfoe"]
+>>>>>>> main
 
 [ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_bd3un"]
 [ext_resource type="Script" path="res://Scripts/snake.gd" id="1_dgb70"]
+[ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="2_7boqh"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="2_enxoq"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="2_i7aow"]
 [ext_resource type="Script" path="res://Scripts/legs.gd" id="2_qb7y7"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4kwib"]
-[ext_resource type="Script" path="res://Scripts/fsm.gd" id="3_aia4q"]
+[ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="3_aia4q"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="4_7o3d4"]
 [ext_resource type="Script" path="res://Scripts/snake_guns.gd" id="6_7qxi2"]
 [ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="6_l3up4"]
-[ext_resource type="Script" path="res://Scripts/followState.gd" id="7_1eh23"]
+[ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="7_1eh23"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="7_vm6rj"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="8_ooqc3"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="9_hfs7c"]
@@ -927,6 +932,13 @@ health_node = NodePath("../Boss/Health")
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.29, 0.29)
 texture = ExtResource("4_7o3d4")
+
+[node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
+
+[node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_7boqh")
 
 [node name="FollowMouse" type="Node" parent="Crosshairs"]
 script = ExtResource("3_4kwib")

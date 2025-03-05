@@ -40,7 +40,6 @@ func Update(delta: float):
 			collider.disabled = true
 		var dir = (target_position - character.position).normalized()
 		character.velocity = dir * dash_speed * delta
-		print("Dashing ", round(target_position/ 10), "  ", round(character.position / 10), " ", round(character.position / 10) != round(target_position/ 10))
 		# Use move_and_slide to move and detect collisions
 		character.move_and_slide()
 		dashes -= 1

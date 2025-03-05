@@ -1,6 +1,7 @@
 extends Node
 
 @export var max_health: float = 100
+@export var player_max_health: int = 10
 var current_health: float
 signal damage_taken
 signal character_died
@@ -13,7 +14,9 @@ func _ready() -> void:
 	if character.name != "Player":  
 		current_health = max_health
 	else: 
+		player_max_health = player_max_health + Global.player_stats.additional_max_health
 		current_health = Global.playerHealth
+		print("current_health ", current_health)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -25,7 +28,6 @@ func take_damage(amount: float) -> void:
 		current_health = 0
 		die()
 	else:
-		#print(character.name, " health:", current_health)
 		pass
 	damage_taken.emit()
 
@@ -34,14 +36,15 @@ func heal(amount: float) -> void:
 	current_health += amount
 	if current_health > max_health:
 		current_health = max_health
-	#print(character.name, " health:", current_health)
 
 func die() -> void:
 	if character.name == "Player":
-		await get_tree().create_timer(0.68).timeout
+		character_died.emit()
+		await get_tree().create_timer(0.9).timeout
 		if(get_tree() != null):
 			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
 	else:
 		mob_died.emit()
 		Global.decrementEnemyCount()
+		Global.num_enemies_defeated += 1
 		character.queue_free()

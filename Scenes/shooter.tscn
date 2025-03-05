@@ -460,6 +460,8 @@ fire_rate = 50
 
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]
 script = ExtResource("6_3xo06")
+max_health = null
+player_max_health = null
 
 [node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_u2m1h")
@@ -513,8 +515,11 @@ show_percentage = false
 script = ExtResource("16_oxrbs")
 
 [node name="Fire" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Shooter"]
+visible = false
 z_index = 1
 position = Vector2(0.106325, -30.6991)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_llbip")
 animation = &"on_fire"
+autoplay = "on_fire"
+frame_progress = 0.17868

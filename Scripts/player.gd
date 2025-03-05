@@ -21,14 +21,15 @@ var ammo: int = 10
 var max_ammo: int = 10
 var ammo_bar: Label
 var animation: AnimatedSprite2D
-var speed_modifier: float
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
 var is_holding
 @onready var walk_state = $MoveController/Walk
-@onready var turret = $Turret
-@onready var turretGunSprite = $Turret/Gun
+@onready var turret: Node2D = $Turret
+@onready var turretGunSprite: Node2D = $Turret/Gun
+@onready var deathAnimation: AnimatedSprite2D = $DeathAnimation
+@onready var tankSprite: Sprite2D = $TankSprite
 
 func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
@@ -85,6 +86,15 @@ func _on_bullet_fired() -> void:
 	if ammo == 0:
 		emit_signal("disable_shooting")
 
+# _on_health_character_died() handles a character died signal from the
+# CharacterHealth child node in order to play the death animation
+func _on_health_character_died():
+	walk_state.modify_speed(0)
+	tankSprite.visible = false
+	turret.visible = false
+	deathAnimation.visible = true
+	deathAnimation.play()
+
 func update_ammo_bar(new_ammo: int):
 	if new_ammo == 0:
 		ammo_bar.label_settings.font_color = Color.RED
@@ -117,7 +127,7 @@ func iterate_weapon():
 	var new_gun = gun_scene_array[current_gun_index].instantiate()
 	equip_new_gun(new_gun)
 
-func slow_down(speed_modifier: float):
+func modify_speed(speed_modifier: float):
 	walk_state.modify_speed(speed_modifier)
 
 func reset_speed():

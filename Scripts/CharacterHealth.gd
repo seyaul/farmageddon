@@ -39,6 +39,7 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	if character.name == "Player":
+		character_died.emit()
 		await get_tree().create_timer(0.68).timeout
 		if(get_tree() != null):
 			get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")

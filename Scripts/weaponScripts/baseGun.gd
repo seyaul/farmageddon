@@ -23,12 +23,12 @@ var fire_type: String = "Discrete"
 @export var fire_rate: int = 20
 @export var spread: float = 0
 @export var bullets_per_fire: int = 1
-@export var magazine_size: int = 10
 @export var heat_increase_rate : float 
 var continuous_active : bool
 var active_shooting: bool = true
 var audio_player: AudioStreamPlayer2D
 var muzzle_particles: CPUParticles2D
+var player: CharacterBody2D
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -36,13 +36,12 @@ var counting: bool = false
 var beam: Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_parent().get_parent().shoot.connect(handle_signal)
-	get_parent().get_parent().disable_shooting.connect(disable_shooting_handler)
-	get_parent().get_parent().enable_shooting.connect(enable_shooting_handler)
-	get_parent().get_parent().max_ammo = magazine_size
-	get_parent().get_parent().ammo = magazine_size
-	get_parent().get_parent().continuous_started.connect(handle_continuous_start)
-	get_parent().get_parent().continuous_ended.connect(handle_continuous_ended)
+	player = get_parent().get_parent()
+	player.shoot.connect(handle_signal)
+	player.disable_shooting.connect(disable_shooting_handler)
+	player.enable_shooting.connect(enable_shooting_handler)
+	player.continuous_started.connect(handle_continuous_start)
+	player.continuous_ended.connect(handle_continuous_ended)
 	audio_player = $ShootingSound
 	muzzle_particles = $MuzzleParticles
 

@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://Scenes/wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
-[ext_resource type="PackedScene" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
+[ext_resource type="PackedScene" uid="uid://kadqhp03w6iq" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
@@ -23,17 +23,17 @@
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(136.102, -304.273, 136.102, 485.102, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, 7.47656, -41.3594, -205.117, -302.062, 3.92188, -44.3516, 3.92188, 0.351562, -205.43, 488.547, 0.367188, -41.3594, -2.23438, -33.1797, -3.1875, -22, -2.23438, -10.8203, 0.367188, -2.64062)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6, 8), PackedInt32Array(9, 5, 1, 10), PackedInt32Array(7, 8, 11), PackedInt32Array(10, 7, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(10, 13, 14), PackedInt32Array(10, 14, 15), PackedInt32Array(9, 10, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-215.437, 498.667, 146.098, 495, 146.098, -314.333, -215.119, -312)])
+vertices = PackedVector2Array(288.922, -302.602, 293.281, 735.898, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, -210.844, 731.094, 7.47656, -41.3594, -211.258, -300.047, 3.92188, -44.3516, 3.92188, 0.351562, 0.367188, -41.3594, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1, 6), PackedInt32Array(0, 3, 7), PackedInt32Array(8, 0, 7, 9), PackedInt32Array(10, 5, 6), PackedInt32Array(8, 9, 11), PackedInt32Array(12, 10, 6), PackedInt32Array(12, 6, 8, 13), PackedInt32Array(14, 13, 8), PackedInt32Array(15, 14, 8), PackedInt32Array(15, 8, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-220.844, 741, 303.329, 746, 298.876, -312.667, -221.268, -310)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
-size = Vector2(101, 2458.5)
+size = Vector2(101, 3833.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk34s"]
-size = Vector2(3387, 90)
+size = Vector2(5393.25, 90.5)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
@@ -94,7 +94,7 @@ drag_bottom_margin = 0.1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
-position = Vector2(367, -344)
+position = Vector2(-416, -516)
 scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
@@ -208,19 +208,19 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(583, 354)
+position = Vector2(1180, 543)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-2905, 362)
+position = Vector2(-3647, 514)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1161, -902)
+position = Vector2(-1212, -1099)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1161, 1610)
+position = Vector2(-1252, 2165)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

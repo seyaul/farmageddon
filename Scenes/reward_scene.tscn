@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce0f0jktwwvhg"]
+
+[ext_resource type="Script" path="res://reward_scene.gd" id="1_br57g"]
+[ext_resource type="PackedScene" uid="uid://b3swcbua2bkuv" path="res://Scenes/card.tscn" id="2_wxwtb"]
+
+[node name="RewardScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_br57g")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1113.0
+offset_bottom = 609.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.360784)
+
+[node name="CardContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 114.0
+offset_top = 232.0
+offset_right = 1094.0
+offset_bottom = 272.0
+
+[node name="HealCard" type="TextureButton" parent="CardContainer"]
+layout_mode = 2
+offset_left = 140.0
+offset_right = 140.0
+offset_bottom = 40.0
+
+[node name="Card" parent="CardContainer/HealCard" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 200.0
+
+[node name="GoldCard" type="TextureButton" parent="CardContainer"]
+layout_mode = 2
+offset_left = 490.0
+offset_right = 490.0
+offset_bottom = 40.0
+
+[node name="Card" parent="CardContainer/GoldCard" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 200.0
+
+[node name="ExpCard" type="TextureButton" parent="CardContainer"]
+layout_mode = 2
+offset_left = 840.0
+offset_right = 840.0
+offset_bottom = 40.0
+
+[node name="Card" parent="CardContainer/ExpCard" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 200.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 87.0
+offset_right = 880.0
+offset_bottom = 171.0
+theme_override_font_sizes/font_size = 61
+text = "Choose your rewards!
+"

@@ -35,7 +35,7 @@ func _on_body_entered(body: Node2D):
 		body.slow_down(0.4, 3)
 	elif body.name == "Player":
 		#in this case we are modifying the player
-		body.slow_down(0.6)
+		body.modify_speed(0.6)
 	
 
 

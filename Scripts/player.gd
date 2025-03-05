@@ -13,22 +13,28 @@ signal continuous_started
 signal continuous_ended
 
 @export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
+@export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
 
+var normal_color: Color = Color(1, 1, 1)  # Default color (normal)
+var flash_color: Color = Color(1, 0, 0)  # Red flash color
 var ammo: int = 10
 var max_ammo: int = 10
 var ammo_bar: Label
 var animation: AnimatedSprite2D
-var speed_modifier: float
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
 var is_holding
 @onready var walk_state = $MoveController/Walk
-@onready var turret = $Turret
-@onready var turretGunSprite = $Turret/Gun
+@onready var turret: Node2D = $Turret
+@onready var turretGunSprite: Node2D = $Turret/Gun
+@onready var deathAnimation: AnimatedSprite2D = $DeathAnimation
+@onready var tankSprite: Sprite2D = $TankSprite
+@onready var health: Node = $Health
+@onready var damagedAudio: AudioStreamPlayer = $DamagedAudio
 
 func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
@@ -85,6 +91,15 @@ func _on_bullet_fired() -> void:
 	if ammo == 0:
 		emit_signal("disable_shooting")
 
+# _on_health_character_died() handles a character died signal from the
+# CharacterHealth child node in order to play the death animation
+func _on_health_character_died():
+	walk_state.modify_speed(0)
+	tankSprite.visible = false
+	turret.visible = false
+	deathAnimation.visible = true
+	deathAnimation.play()
+
 func update_ammo_bar(new_ammo: int):
 	if new_ammo == 0:
 		ammo_bar.label_settings.font_color = Color.RED
@@ -117,9 +132,24 @@ func iterate_weapon():
 	var new_gun = gun_scene_array[current_gun_index].instantiate()
 	equip_new_gun(new_gun)
 
-func slow_down(speed_modifier: float):
+func modify_speed(speed_modifier: float):
 	walk_state.modify_speed(speed_modifier)
 
 func reset_speed():
 	walk_state.reset_speed_modifier()
 	
+func take_damage(amount: int):
+	# Trigger damage reaction (flashing red)
+	damagedAudio.play()
+	flash_red()
+	# decrease health
+	health.take_damage(amount)
+
+func flash_red():
+	tankSprite.modulate = flash_color
+	var flash_timer = get_tree().create_timer(flash_duration)
+	flash_timer.timeout.connect(_on_flash_timeout)
+	# Wait for the flash duration and then reset color
+
+func _on_flash_timeout():
+	tankSprite.modulate = normal_color

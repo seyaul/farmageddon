@@ -60,8 +60,8 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("shoot"):
 		if is_holding:
 			emit_signal("continuous_ended")
+			emit_signal("start_cd_timer")
 		emit_signal("shoot", "end", delta)
-		emit_signal("start_cd_timer")
 		is_holding = false
 	if Input.is_action_just_pressed("melee"):
 		emit_signal("melee")

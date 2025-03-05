@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="1_u3vkn"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_ym43u"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_7w27w"]
-[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_lwp8h"]
+[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="2_lwp8h"]
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="3_qbpuf"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="4_31r26"]
 [ext_resource type="PackedScene" uid="uid://dll6vo86ekfw6" path="res://Scenes/bullet.tscn" id="5_7uijm"]

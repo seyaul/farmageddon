@@ -81,6 +81,7 @@ func handle_signal(action: String, delta) -> void:
 
 func fire(delta: float) -> void:
 	muzzle_particles.emitting = true
+	#print(active_shooting, " ", automatic)
 	if !active_shooting:
 		return
 	# Get the mouse position in global coordinates

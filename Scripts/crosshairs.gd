@@ -39,7 +39,7 @@ func show_tip(mouse_tip_shown: bool):
 				pass
 		times_clicked += 1
 		print(times_clicked)
-	else:
+	elif !mouse_tip_shown:
 		hide_crosshair_instr()
 
 	

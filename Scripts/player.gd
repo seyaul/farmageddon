@@ -117,7 +117,7 @@ func equip_new_gun(new_gun: baseGun):
 	gun.position = Vector2(0, -115) # y = -115
 	
 	await get_tree().process_frame
-	emit_signal("weapon_switched")git p
+	emit_signal("weapon_switched")
 
 func setup_weapons():
 	for weapon_name in active_weapons:

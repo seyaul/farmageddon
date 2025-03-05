@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=37 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="29_3v4mr"]
 [ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="30_0mc5u"]
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="31_eb4io"]
+[ext_resource type="AudioStream" uid="uid://b42da4pa3o080" path="res://audio/effects/player_damaged.wav" id="32_aa2t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65iyo"]
 size = Vector2(220, 160)
@@ -197,6 +198,9 @@ rotation = 1.5708
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_olutn")
 animation = &"death_animation"
+
+[node name="DamagedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_aa2t0")
 
 [connection signal="character_died" from="Health" to="." method="_on_health_character_died"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]

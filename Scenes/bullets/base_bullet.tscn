@@ -1,8 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3tixxhlwjl4x"]
+[gd_scene load_steps=21 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
 [ext_resource type="Texture2D" uid="uid://db0jp3uwhbi8l" path="res://Boss-Projectile-2.png" id="2_mowie"]
 [ext_resource type="Texture2D" uid="uid://dp62u8ugkme7a" path="res://Sprites/Bullet 24x24 Free Part 3A.png" id="3_so4dp"]
+[ext_resource type="Texture2D" uid="uid://doplu75g1dl76" path="res://pixil-frame-0 (3).png" id="4_v7vl0"]
+[ext_resource type="Texture2D" uid="uid://bnkx7jujeec3p" path="res://pixilart-frames/pixil-frame-0.png" id="5_1m2qa"]
+[ext_resource type="Texture2D" uid="uid://bi687nwkarv68" path="res://pixilart-frames/pixil-frame-1.png" id="6_yc3e5"]
+[ext_resource type="Texture2D" uid="uid://dmv0ct06r2kmq" path="res://pixilart-frames/pixil-frame-2.png" id="7_rlwif"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6n65"]
 
@@ -94,6 +98,28 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_v7vl0")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1m2qa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yc3e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rlwif")
+}],
+"loop": true,
+"name": &"new_animation_1",
+"speed": 5.0
 }]
 
 [node name="baseBullet" type="AnimatableBody2D"]
@@ -117,6 +143,4 @@ scale = Vector2(0.027, 0.027)
 texture_filter = 1
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_i0vis")
-animation = &"centipede_boss"
-frame = 2
-frame_progress = 0.43457
+animation = &"new_animation_1"

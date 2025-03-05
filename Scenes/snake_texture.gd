@@ -28,7 +28,9 @@ func _add_textures_to_segments() -> void:
 # TODO: Fix parameters for this
 func add_texture_to_segment(i: int) -> void:
 	var sprite: Sprite2D = Sprite2D.new()
-	snake.segments[i].z_index = snake.segments.size() - i
+	sprite.z_index = snake.segments.size() - i
+	sprite.z_as_relative = false
+	print(snake.segments.size() - i)
 	sprite.scale = sprite.scale * 2
 	sprite.texture = texture
 	sprite.rotation_degrees += offset_degrees

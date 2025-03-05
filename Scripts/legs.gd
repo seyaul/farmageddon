@@ -1,6 +1,7 @@
 extends Node
 
-@export var texture: Texture2D
+@export var foot_texture: Texture2D
+@export var leg_texture: Texture2D
 @export var segment: int
 @export var leg_length: float
 @export var leg_spread: float
@@ -36,6 +37,11 @@ func _ready() -> void:
 	if view_lines:
 		line = Line2D.new()
 		line.width = line_width
+		line.texture = leg_texture
+		line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+		line.texture_mode = Line2D.LINE_TEXTURE_TILE
+		line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		line.end_cap_mode = Line2D.LINE_CAP_ROUND
 		get_tree().current_scene.add_child.call_deferred(line)
 	get_tree().current_scene.add_child.call_deferred(leg1)
 	get_tree().current_scene.add_child.call_deferred(leg2)
@@ -95,7 +101,8 @@ func leg_factory() -> Node2D:
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	var sprite: Sprite2D = Sprite2D.new()
 	collider.shape = CircleShape2D.new()
-	sprite.texture = texture
+	sprite.texture = foot_texture
+	sprite.scale = sprite.scale / 2
 	node.add_child(collider)
 	node.add_child(sprite)
 	return node

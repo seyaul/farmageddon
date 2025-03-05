@@ -5,6 +5,7 @@ class_name Snake
 # TODO: Make head stop tweaking out or something idk.
 @export var interact_with_environment: bool = false
 @export var num_segments: int = 1
+@export var segment_scale: float = 1
 @export_range(0.0,1.0)
 var stiffness: float
 
@@ -39,10 +40,10 @@ func segment_factory() -> Node2D:
 	if interact_with_environment:
 		node = RigidBody2D.new()
 		node.gravity_scale = 0
-		node.global_position = global_position
 	else:
 		node = Node2D.new()
-	node.scale = node.scale * 2
+	
+	node.scale = node.scale * segment_scale
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CircleShape2D.new()
 	node.add_child(collider)

@@ -1,11 +1,11 @@
 extends State
 
 @export var target: Node2D
+var fsm: FiniteStateMachine
+var followPathState : State
 
 func Enter():
 	# Merely setting up path before making the enemy follow the path.
-	var fsm = get_parent()
-	var followPathState = fsm.get_node("FollowPath")
 	followPathState.attach_position_to = target
 	followPathState.backwards = true
 	
@@ -16,3 +16,8 @@ func Update(_delta: float):
 
 func Exit():
 	pass
+
+func _ready() -> void:
+	fsm = get_parent()
+	followPathState = fsm.get_node("FollowPath")
+	

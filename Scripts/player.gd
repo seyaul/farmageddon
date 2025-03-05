@@ -45,7 +45,6 @@ func _ready() -> void:
 		animation = get_node("AnimatedSprite2D")
 	hitbox = get_node("Hitbox")
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
-	walk_state.speed = (walk_state.speed + Global.player_stats.additional_speed) * Global.player_stats.speed_modifier
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
@@ -118,9 +117,9 @@ func iterate_weapon():
 	var new_gun = gun_scene_array[current_gun_index].instantiate()
 	equip_new_gun(new_gun)
 
-	# Later on we can change the actual sprite for the turret here to make it look nicer
-	# if gun.name == "flamethrower":
-	# 	$Turret/Sprite2D.modulate = Color(1, 0.3, 0.3)
-	# else:
-	# 	$Turret/Sprite2D.modulate = Color(1, 1, 1)
+func slow_down(speed_modifier: float):
+	walk_state.modify_speed(speed_modifier)
+
+func reset_speed():
+	walk_state.reset_speed_modifier()
 	

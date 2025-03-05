@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://73fsopgsja4w"
-path="res://.godot/imported/segment flesh1.png-f5f02ab90038d92438f14b6e7b810b2b.ctex"
+uid="uid://doplu75g1dl76"
+path="res://.godot/imported/pixil-frame-0 (3).png-7b2a4ee334076f9c9a1b0dd9dfa9279b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://segment flesh1.png"
-dest_files=["res://.godot/imported/segment flesh1.png-f5f02ab90038d92438f14b6e7b810b2b.ctex"]
+source_file="res://Sprites/pixil-frame-0 (3).png"
+dest_files=["res://.godot/imported/pixil-frame-0 (3).png-7b2a4ee334076f9c9a1b0dd9dfa9279b.ctex"]
 
 [params]
 

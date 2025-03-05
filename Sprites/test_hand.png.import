@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7bxl5vt5ohdp"
-path="res://.godot/imported/2_21 claw1.png-481ad46a5d68c36ea2eed2f759cd5465.ctex"
+uid="uid://y2sfvptv3iiq"
+path="res://.godot/imported/test_hand.png-5240c8e51b16b816742c886c871a4bde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2_21 claw1.png"
-dest_files=["res://.godot/imported/2_21 claw1.png-481ad46a5d68c36ea2eed2f759cd5465.ctex"]
+source_file="res://Sprites/test_hand.png"
+dest_files=["res://.godot/imported/test_hand.png-5240c8e51b16b816742c886c871a4bde.ctex"]
 
 [params]
 

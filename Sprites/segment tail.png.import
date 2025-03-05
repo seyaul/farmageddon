@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7obnt8ybvddo"
-path="res://.godot/imported/2_21 claw2.png-947084872c3d067e67b2c9b5f9d320ed.ctex"
+uid="uid://bn763rt1qk4sw"
+path="res://.godot/imported/segment tail.png-032daaba31a0f5588d04c8d2ce5ad55b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2_21 claw2.png"
-dest_files=["res://.godot/imported/2_21 claw2.png-947084872c3d067e67b2c9b5f9d320ed.ctex"]
+source_file="res://Sprites/segment tail.png"
+dest_files=["res://.godot/imported/segment tail.png-032daaba31a0f5588d04c8d2ce5ad55b.ctex"]
 
 [params]
 

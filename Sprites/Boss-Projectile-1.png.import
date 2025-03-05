@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr7kb5pjotiao"
-path="res://.godot/imported/pixil-frame-0 (2).png-3518ea07d4b7b07323f6a64175fb6f0f.ctex"
+uid="uid://c55hntbdb67gm"
+path="res://.godot/imported/Boss-Projectile-1.png-946b29ae0052920287c80b9094c496c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pixil-frame-0 (2).png"
-dest_files=["res://.godot/imported/pixil-frame-0 (2).png-3518ea07d4b7b07323f6a64175fb6f0f.ctex"]
+source_file="res://Sprites/Boss-Projectile-1.png"
+dest_files=["res://.godot/imported/Boss-Projectile-1.png-946b29ae0052920287c80b9094c496c4.ctex"]
 
 [params]
 

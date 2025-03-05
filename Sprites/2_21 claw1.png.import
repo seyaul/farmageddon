@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5erwhd3ork0c"
-path="res://.godot/imported/New Piskel-1.png.png-5bd417022c4f3e30e3bd272836ced644.ctex"
+uid="uid://b7bxl5vt5ohdp"
+path="res://.godot/imported/2_21 claw1.png-ab5fc5fa396b5a95ea6cfe46c81bc3f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://New Piskel-1.png.png"
-dest_files=["res://.godot/imported/New Piskel-1.png.png-5bd417022c4f3e30e3bd272836ced644.ctex"]
+source_file="res://Sprites/2_21 claw1.png"
+dest_files=["res://.godot/imported/2_21 claw1.png-ab5fc5fa396b5a95ea6cfe46c81bc3f5.ctex"]
 
 [params]
 

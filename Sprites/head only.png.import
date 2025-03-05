@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7a0wideh312w"
-path="res://.godot/imported/2_21 texture darker.png-810f732a1322271e23c9465acb057312.ctex"
+uid="uid://du7nl64cg1otx"
+path="res://.godot/imported/head only.png-378a6665c2c284d05cffc7a4dffa1f62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2_21 texture darker.png"
-dest_files=["res://.godot/imported/2_21 texture darker.png-810f732a1322271e23c9465acb057312.ctex"]
+source_file="res://Sprites/head only.png"
+dest_files=["res://.godot/imported/head only.png-378a6665c2c284d05cffc7a4dffa1f62.ctex"]
 
 [params]
 

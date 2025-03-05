@@ -18,12 +18,19 @@ signal continuous_started
 @export_enum("Discrete", "Continuous")
 var fire_type: String = "Discrete"
 @export var bullet: PackedScene
-@export var projectile_speed: float = 400 
-@export var automatic: bool = false
-@export var fire_rate: int = 20
+
+# gun stats prior to modifiers
+@export var projectile_speed: float
+@export var base_fire_rate: int
 @export var spread: float = 0
-@export var bullets_per_fire: int = 1
-@export var heat_increase_rate : float 
+@export var bullets_per_fire: int
+@export var base_heat_increase_rate: float 
+
+# actual gun stats
+var actual_fire_rate: int
+var actual_heat_increase_rate: float
+
+@export var automatic: bool 
 var continuous_active : bool
 var active_shooting: bool = true
 var audio_player: AudioStreamPlayer2D
@@ -42,6 +49,11 @@ func _ready() -> void:
 	player.enable_shooting.connect(enable_shooting_handler)
 	player.continuous_started.connect(handle_continuous_start)
 	player.continuous_ended.connect(handle_continuous_ended)
+
+	# initialize actual gun stats using config
+	actual_fire_rate = int(base_fire_rate / Global.all_gun_stats.fire_rate_modifier)
+	actual_heat_increase_rate = base_heat_increase_rate * Global.all_gun_stats.cooldown_speed_modifier
+
 	audio_player = $ShootingSound
 	muzzle_particles = $MuzzleParticles
 
@@ -49,11 +61,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if counting:
 		time += 1
-	
-	#print(fire_type, " ", continuous_active)
-	#print(fire_type == "continuous" and continuous_active, " truth check")
 	if fire_type == "continuous" and continuous_active:
-		emit_signal("continuous_started", heat_increase_rate)
+		emit_signal("continuous_started", actual_heat_increase_rate)
 	elif fire_type == "continuous" and !continuous_active:
 		pass
 	
@@ -62,7 +71,7 @@ func handle_signal(action: String, delta) -> void:
 		fire(delta)
 	elif automatic && action == "hold": 
 		counting = true
-		if time % fire_rate == 0 and is_instance_valid(bullet):
+		if time % actual_fire_rate == 0 and is_instance_valid(bullet):
 			fire(delta)
 	elif automatic && action == "end":
 		if is_instance_valid(beam):
@@ -98,7 +107,7 @@ func fire(delta: float) -> void:
 			get_tree().current_scene.add_child(projectile)
 
 			# Emit signal to indicate bullet has been fired
-			emit_signal("bullet_fired", heat_increase_rate)
+			emit_signal("bullet_fired", actual_heat_increase_rate)
 
 	elif fire_type == "Continuous":
 		if not is_instance_valid(beam):

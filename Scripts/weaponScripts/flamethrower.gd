@@ -32,7 +32,6 @@ func _ready() -> void:
 	add_child(damage_timer)
 
 	# Customize weapon-specific properties
-	fire_rate = 1
 	bullets_per_fire = 1
 	spread = 0
 	projectile_speed = 30000

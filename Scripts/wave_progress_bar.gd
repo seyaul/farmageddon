@@ -33,8 +33,8 @@ func _process(delta : float):
 # Call this function whenever an enemy is defeated
 func update_progress():
 	value = float(enemies_defeated) / float(total_enemies) * 100  # Update the progress bar
-	if enemies_defeated >= total_enemies and !Global.tutorial:
-		print("Wave Complete!")
+	# if enemies_defeated >= total_enemies and !Global.tutorial:
+	# 	# print("Wave Complete!")
 
 func handle_signal():
 	self.visible = true

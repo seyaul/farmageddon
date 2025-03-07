@@ -455,7 +455,7 @@ texture = ExtResource("2_7w27w")
 [node name="Gun" parent="EnemyPath/EnemyGuide/Shooter" instance=ExtResource("4_31r26")]
 rotation = -1.5708
 bullet = ExtResource("7_auhv4")
-projectile_speed = 20000.0
+projectile_speed = 15000.0
 fire_rate = 50
 
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Shooter"]

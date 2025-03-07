@@ -111,6 +111,11 @@ animations = [{
 "name": &"egg",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"egg_breaking",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5yq4n")

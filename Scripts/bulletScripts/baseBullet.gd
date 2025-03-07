@@ -16,6 +16,8 @@ var collision_behavior: String = "Bouncy"
 @export var safe_margin: float = 1
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer = $HitSound
+var hit_animation: AnimatedSprite2D
+var damage: int
 var active: bool = true
 
 var curr_collisions: int = 0
@@ -31,6 +33,11 @@ func _ready() -> void:
 		print("spawned")
 	if animated_sprite:
 		animated_sprite.play()
+	if has_node("HitAnimation"):
+		hit_animation = $HitAnimation
+
+func init(damage: int):
+	self.damage = damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,14 +53,19 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
 		_handle_collisions(collision)
-	
-	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	var collider = collision.get_collider()
+
+	# this enables shooting eggs out of the air
+	if collider.is_in_group("mob_bullet"):
+		collider.kill_bullet()
+		kill_bullet()
+		return
+
 	if collider.has_method("take_damage"):
-		collider.take_damage(20)  
+		collider.take_damage(damage)  
 		hit_sound.play()
 
 	if collision_behavior == "Sticky":
@@ -72,6 +84,9 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 func kill_bullet():
 	animated_sprite.visible = false
 	active = false
-	sync_to_physics = false
+	if hit_animation:
+		hit_animation.visible = true
+		hit_animation.play()
+		await hit_animation.animation_finished
 	await get_tree().create_timer(hit_sound.stream.get_length()).timeout
 	queue_free()

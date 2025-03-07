@@ -5,6 +5,7 @@ class_name Snake
 # TODO: Make head stop tweaking out or something idk.
 @export var interact_with_environment: bool = false
 @export var num_segments: int = 1
+@export var segment_scale: float = 1
 @export_range(0.0,1.0)
 var stiffness: float
 
@@ -33,18 +34,19 @@ func _physics_process(_delta: float) -> void:
 	if view_lines:
 		draw_lines()
 
+# TODO: Refactor to use a scene as a segment.
 func segment_factory() -> Node2D:
-	var node
+	var node: Node2D
 	if interact_with_environment:
 		node = RigidBody2D.new()
 		node.gravity_scale = 0
-		node.global_position = global_position
 	else:
 		node = Node2D.new()
+	
+	node.scale = node.scale * segment_scale
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CircleShape2D.new()
 	node.add_child(collider)
-	
 	return node
 	
 func segments_factory() -> void:
@@ -52,9 +54,6 @@ func segments_factory() -> void:
 		var segment = segment_factory()
 		get_tree().current_scene.add_child.call_deferred(segment)
 		segments.append(segment)
-
-# TODO: Copied this from mouefollower, change this or mousefollower later.
-
 
 func make_segments_follow_each_other() -> void:
 	segments[0].position = segments[0].position.lerp(global_position, stiffness)

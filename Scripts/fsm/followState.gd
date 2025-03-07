@@ -1,5 +1,7 @@
 extends State
 
+@export_enum("Cooldown", "Duration")
+var attack_style: String
 signal play_walk_animation
 signal no_longer_slowed
 
@@ -18,6 +20,8 @@ var targeter: Node
 @export var distance_til_attack: float = 150
 @export var num_attacks: int = 0
 @export var attack_cooldown: int = 1
+
+@export var time_following: int
 var attacks: int
 # TODO: Replace with timer?
 var time: int
@@ -26,9 +30,8 @@ var slowed_down: bool
 var slowed_down_modifier: float
 
 func Enter():
-	enemy = get_parent().get_parent()
-	navigation = enemy.get_node("NavigationAgent2D")
-	targeter = enemy.get_node("Targeter")
+	if attack_style == "Duration":
+		time = 0
 	attacks = num_attacks if start_with_attacks else 0
 	if targeter && not look_at_player:
 		targeter.disabled = true
@@ -36,6 +39,8 @@ func Enter():
 
 # TODO: Figure out how to elegatly manage both shooting and following states simulateously without messing with each other.
 func Update(delta: float):
+	if attack_style == "Duration":
+		time += 1
 	makepath()
 	
 	var dir = (navigation.get_next_path_position() - enemy.global_position).normalized()
@@ -48,9 +53,11 @@ func Update(delta: float):
 			enemy.velocity = dir * speed * delta
 		
 	enemy.move_and_slide()
-	if distance_to_target <= distance_til_attack and attacks > 0:
+	if attack_style == "Cooldown" and distance_to_target <= distance_til_attack and attacks > 0:
 		emit_signal("state_transition", self, action)
 		attacks -= 1
+	elif attack_style == "Duration" and time >= time_following:
+		emit_signal("state_transition", self, action)
 		
 func makepath() -> void:
 	if(navigation and follow_target != null):
@@ -59,13 +66,18 @@ func makepath() -> void:
 func Exit():
 	if targeter:
 		targeter.disabled = false
+	
 
 func _physics_process(delta: float) -> void:
-	time += 1
-	if time % attack_cooldown == 0 and attacks < num_attacks:
-		attacks += num_attacks
-		
+	if attack_style == "Cooldown":
+		time += 1
+		if time % attack_cooldown == 0 and attacks < num_attacks:
+			attacks += num_attacks
+			
 func _ready() -> void:
+	enemy = get_parent().get_parent()
+	navigation = enemy.get_node("NavigationAgent2D")
+	targeter = enemy.get_node("Targeter")
 	attacks = num_attacks
 	slowdown_timer = Timer.new()
 	slowdown_timer.timeout.connect(stop_slow_down)

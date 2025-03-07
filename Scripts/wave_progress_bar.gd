@@ -10,10 +10,8 @@ func _ready():
 	wave_manager_node = get_parent().get_parent().get_parent().get_node("WaveManager")
 	tut_scene = get_parent().get_parent().get_node("TutorialInterface")
 	tut_scene.tutorial_finished2.connect(handle_signal)
-	if !Global.tutorial:
-		self.visible = true
-		await get_tree().process_frame
-		total_enemies = wave_manager_node.tot_enemy_count
+	wave_manager_node.setup_complete_wp.connect(handle_setup_complete_wp)
+	
 
 # Change this to be a signal eventually
 func _process(delta : float):
@@ -33,9 +31,16 @@ func _process(delta : float):
 # Call this function whenever an enemy is defeated
 func update_progress():
 	value = float(enemies_defeated) / float(total_enemies) * 100  # Update the progress bar
-	# if enemies_defeated >= total_enemies and !Global.tutorial:
-	# 	# print("Wave Complete!")
+	if enemies_defeated >= total_enemies and !Global.tutorial:
+		#print("Wave Complete!")
+		pass
 
 func handle_signal():
 	self.visible = true
 	total_enemies = wave_manager_node.tot_enemy_count
+
+func handle_setup_complete_wp():
+	if !Global.tutorial:
+		self.visible = true
+		await get_tree().process_frame
+		total_enemies = wave_manager_node.tot_enemy_count

@@ -45,7 +45,7 @@ func show_tip(mouse_tip_shown: bool):
 	
 func hide_crosshair_instr():
 	$CrosshairsSprite/Node2D/Crosshairinstr.visible = false
-	if !ct_emitted:
+	if !ct_emitted and crosshair_tip_shown:
 		crosshair_tip_complete.emit()
 		ct_emitted = true
 		

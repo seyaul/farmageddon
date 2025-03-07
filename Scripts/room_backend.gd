@@ -71,11 +71,7 @@ func _on_texture_button_pressed() -> void:
 	clicked.emit(room)
 	print("clicked", room.get_key())
 	
-	# logging if the map has been generated because it is a new game/existing game
-	if Global.newGame:
-		Global.emit_signal("newGameStarted")
-	else: 
-		Global.emit_signal("gameStarted")
+	
 	var key = room.get_key()
 
 	
@@ -94,7 +90,17 @@ func _on_texture_button_pressed() -> void:
 	if room.type == Room.Type.CAMPFIRE:
 		Global.emit_signal("campfire_selected")
 		print("campfire selected")
+	elif room.type == Room.Type.ELITE:
+		# Elite room tracking
+		Global.elite_room = true
+		
 	else:
+		Global.elite_room = false
 		GameState.save_map_state(map_data, floors_climbed, room)
 		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+		# logging if the map has been generated because it is a new game/existing game
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else: 
+			Global.emit_signal("gameStarted")
 		print("selected")

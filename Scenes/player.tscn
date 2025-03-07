@@ -132,8 +132,8 @@ shape = SubResource("CircleShape2D_dqb8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="Shockwave/Collider"]
 modulate = Color(0, 0.843137, 1, 0.333333)
-position = Vector2(0, -0.5)
-scale = Vector2(0.17, 0.16)
+position = Vector2(-2.38419e-07, 5.96046e-08)
+scale = Vector2(0.131875, 0.138594)
 texture = ExtResource("11_e22wr")
 
 [node name="wayPoint1" type="Node2D" parent="."]

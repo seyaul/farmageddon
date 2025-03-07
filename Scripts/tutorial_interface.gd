@@ -102,6 +102,7 @@ func _input(event):
 # custom signal handling function that is need to just so that the screen isn't cluttered?
 func crosshair_handle():
 	if Global.tutorial:
+		print("checking crosshair handle, ", curr_tut_seg)
 		start_step(curr_tut_seg)
 
 func weapon_handle():

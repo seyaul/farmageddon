@@ -6,7 +6,6 @@
 
 [node name="explodingBullet" instance=ExtResource("1_k151k")]
 scale = Vector2(3, 3)
-collision_mask = 12
 script = ExtResource("2_fvp0l")
 explosion_radius = 50.0
 explosion_damage = 20
@@ -14,4 +13,3 @@ blast_scene = ExtResource("3_y6lux")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 animation = &"rocket_bullet"
-frame_progress = 0.0

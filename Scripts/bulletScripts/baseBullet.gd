@@ -16,6 +16,7 @@ var collision_behavior: String = "Bouncy"
 @export var safe_margin: float = 1
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer = $HitSound
+var hit_animation: AnimatedSprite2D
 var damage: int
 var active: bool = true
 
@@ -32,6 +33,8 @@ func _ready() -> void:
 		print("spawned")
 	if animated_sprite:
 		animated_sprite.play()
+	if has_node("HitAnimation"):
+		hit_animation = $HitAnimation
 
 func init(damage: int):
 	self.damage = damage
@@ -50,8 +53,6 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
 		_handle_collisions(collision)
-	
-	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
@@ -76,6 +77,9 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 func kill_bullet():
 	animated_sprite.visible = false
 	active = false
-	sync_to_physics = false
+	if hit_animation:
+		hit_animation.visible = true
+		hit_animation.play()
+		await hit_animation.animation_finished
 	await get_tree().create_timer(hit_sound.stream.get_length()).timeout
 	queue_free()

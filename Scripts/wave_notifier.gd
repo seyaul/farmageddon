@@ -3,15 +3,12 @@ extends Control
 var curr_wave : int = 1
 var max_waves : int
 var tut_node : Control
+var wave_manager_node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# position is currently not relative to the player, I can fix but too sleepy rn
-	# to figure out
-	if !Global.tutorial:
-		max_waves = $"../../WaveManager".num_waves
-		$WaveNotificationText.text = "Wave " + str(curr_wave) + "/" + str(max_waves)
-		$"../../WaveManager".wave_changed.connect(Callable(_on_wave_changed))
-	else:
+	wave_manager_node = $"../../WaveManager"
+	wave_manager_node.setup_complete_wn.connect(handle_setup_complete)
+	if Global.tutorial:
 		tut_node = $"../TutorialInterface"
 		tut_node.start_wave.connect(handle_start_wave)
 		$WaveNotificationText.visible = false
@@ -36,3 +33,9 @@ func handle_start_wave():
 	$"../../WaveManager".wave_changed.connect(Callable(_on_wave_changed))
 	$WaveNotificationText.visible = true
 	$Timer.start()
+	
+func handle_setup_complete():
+	if !Global.tutorial:
+		max_waves = $"../../WaveManager".num_waves
+		$WaveNotificationText.text = "Wave " + str(curr_wave) + "/" + str(max_waves)
+		$"../../WaveManager".wave_changed.connect(Callable(_on_wave_changed))

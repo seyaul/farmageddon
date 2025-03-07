@@ -3,13 +3,13 @@ extends Node
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 var player_instance
-@export var num_enemies : int = 16 # number of enemies to spawn, probably len(list_enemies)
-@export var tot_enemy_count : int = 0 # did this so enemies do not decrement twice, not fully implemented yet
+@export var num_enemies : int # number of enemies to spawn, probably len(list_enemies)
+@export var tot_enemy_count : int  # did this so enemies do not decrement twice, not fully implemented yet
 @onready var enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 var list_enemies : Array # list of a mapping of enemies to how many of that enemy to spawn
 @export var stage_type : String # variable that tracks what kind of stage we are on 
 @export var stage_difficulty_cost : float # variable to determin the list of enemies
-@export var num_waves : int = 3
+@export var num_waves : int 
 var enemy_node_name : String 
 #@export var spawn_interval : int = 5 
 # ask groupmates if there is a way to set these exported variables from the map scene
@@ -29,19 +29,21 @@ var spawn_timer : float
 var max_enemies_on_screen : int = 15
 
 signal wave_changed
-
+signal setup_complete_wn
+signal setup_complete_wp
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
 	tut_scene.tutorial_finished.connect(handle_signal)
-	tot_enemy_count = num_enemies * 2 * num_waves
+	print(Global.tutorial, " ", num_enemies, " num enemies", tot_enemy_count, " tot enemy count" )
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
 	if!(Global.tutorial):
-		spawn_on_timer(enemy_bull_scene)
-		spawn_on_timer(enemy_chicken_scene)
+		level_selector()
+		#spawn_on_timer(enemy_bull_scene)
+		#spawn_on_timer(enemy_chicken_scene)
 	else:
 		pass
 
@@ -148,16 +150,45 @@ func _process(delta: float) -> void:
 		#intervals_passed = 0
 		waves_completed += 1
 		all_enemies_spawned = false
-		spawn_on_timer(enemy_bull_scene)
-		spawn_on_timer(enemy_chicken_scene)
+		level_selector()
 		emit_signal("wave_changed")
 		#enemy_counter.update_enemy_count(enemy_count)
 
 func handle_signal():
-	spawn_on_timer(enemy_bull_scene)
-	spawn_on_timer(enemy_chicken_scene)
+	print("What the hel wave manager")
+	level_selector()
 
 	
+func level_selector():
+	# wave progress bar is incorrect rn
+	# bug with progress bar not updating across runs. Check room_backend
+	if Global.numLevelsComplete == 0:
+		num_enemies = 5
+		num_waves = 1
+		spawn_on_timer(enemy_chicken_scene)
+		tot_enemy_count = num_enemies * num_waves
+	elif Global.numLevelsComplete == 1:
+		print("EAHJWKA")
+		num_enemies = 8
+		num_waves = 2
+		spawn_on_timer(enemy_chicken_scene)
+		tot_enemy_count = num_enemies * num_waves
+	elif Global.numLevelsComplete == 2:
+		num_enemies = 10
+		num_waves = 2
+		spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
+		tot_enemy_count = num_enemies * num_waves * 2
+	elif Global.numLevelsComplete == 3:
+		num_enemies = 15
+		num_waves = 3
+		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_chicken_scene)
+		tot_enemy_count = num_enemies * num_waves * 2
+	if waves_completed == 0:
+		emit_signal("setup_complete_wn")
+		emit_signal("setup_complete_wp")
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
 		Global.playerHealth = Global.playerHealthNode.current_health

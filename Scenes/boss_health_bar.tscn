@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpvonu2brg8li"]
+
+[ext_resource type="Texture2D" uid="uid://cgvr5pl1ivcsg" path="res://Sprites/BHB-Background.png" id="1_40r63"]
+[ext_resource type="Texture2D" uid="uid://4chaw4tyl7ek" path="res://Sprites/BHB-Foreground.png" id="2_a64mb"]
+[ext_resource type="Texture2D" uid="uid://dfkwymtmj3hk1" path="res://Sprites/BHB-Border.png" id="2_bf7lq"]
+[ext_resource type="Script" path="res://Scripts/boss_health_bar.gd" id="4_g7c5s"]
+
+[node name="BossHealthBar" type="TextureProgressBar"]
+z_as_relative = false
+texture_filter = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -624.0
+offset_right = -852.0
+offset_bottom = -524.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+step = 0.0
+value = 90.0
+texture_under = ExtResource("1_40r63")
+texture_over = ExtResource("2_bf7lq")
+texture_progress = ExtResource("2_a64mb")
+script = ExtResource("4_g7c5s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+light_mask = 0
+z_index = 51
+z_as_relative = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -59.615
+grow_vertical = 0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(52, 55)
+text = "Old Major"

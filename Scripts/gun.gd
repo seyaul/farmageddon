@@ -43,9 +43,11 @@ func fire(delta: float) -> void:
 	if fire_type == "Discrete":
 		for i in range(bullets_per_fire):
 			var projectile: AnimatableBody2D = bullet.instantiate()
+			projectile.init(1)
 			projectile.position = global_position
 			# TODO:Refactor this
-			projectile.rotation_degrees = (global_rotation_degrees - 90) + randf_range(-1 * spread, spread) 
+			print("global shooter rotation", global_rotation_degrees)
+			projectile.rotation_degrees = (global_rotation_degrees + 90) + randf_range(-1 * spread, spread) 
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 			projectile.constant_linear_velocity = direction * projectile_speed * delta
 			get_tree().current_scene.add_child(projectile)

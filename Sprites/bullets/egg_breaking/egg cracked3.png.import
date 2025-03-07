@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp62u8ugkme7a"
-path="res://.godot/imported/Bullet 24x24 Free Part 3A.png-a0adc9c8c0f98ce4453977bc718cf889.ctex"
+uid="uid://duu0uetmt5dcj"
+path="res://.godot/imported/egg cracked3.png-afaa666d1d8a2f52b28fc9333ea387e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Bullet 24x24 Free Part 3A.png"
-dest_files=["res://.godot/imported/Bullet 24x24 Free Part 3A.png-a0adc9c8c0f98ce4453977bc718cf889.ctex"]
+source_file="res://Sprites/bullets/egg_breaking/egg cracked3.png"
+dest_files=["res://.godot/imported/egg cracked3.png-afaa666d1d8a2f52b28fc9333ea387e7.ctex"]
 
 [params]
 

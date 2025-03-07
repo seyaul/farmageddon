@@ -31,6 +31,7 @@ var actual_fire_rate: int
 var actual_heat_increase_rate: float
 
 @export var automatic: bool 
+@export var damage: int
 var continuous_active : bool
 var active_shooting: bool = true
 var audio_player: AudioStreamPlayer2D
@@ -95,6 +96,7 @@ func fire(delta: float) -> void:
 				audio_player.pitch_scale = randf_range(0.9, 1.1)
 				audio_player.play()
 			var projectile: AnimatableBody2D = bullet.instantiate()
+			projectile.init(20)
 			projectile.position = global_position
 
 			var spread_angle = randf_range(-1 * spread, spread)

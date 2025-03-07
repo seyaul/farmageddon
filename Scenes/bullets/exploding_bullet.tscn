@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://xtwska5otmtn"]
+[gd_scene load_steps=4 format=3 uid="uid://xtwska5otmtn"]
 
 [ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="1_k151k"]
 [ext_resource type="Script" path="res://Scripts/bulletScripts/explodingBullet.gd" id="2_fvp0l"]
+[ext_resource type="PackedScene" uid="uid://bxv6ripotnohu" path="res://Scenes/effects/blast.tscn" id="3_y6lux"]
 
 [node name="explodingBullet" instance=ExtResource("1_k151k")]
+scale = Vector2(3, 3)
+collision_mask = 12
 script = ExtResource("2_fvp0l")
 explosion_radius = 50.0
 explosion_damage = 20
-explosion_effect_scene = null
+blast_scene = ExtResource("3_y6lux")
 
-[node name="AnimatedSprite2D" parent="." index="2"]
-scale = Vector2(0.2, 0.2)
+[node name="AnimatedSprite2D" parent="." index="1"]
+animation = &"rocket_bullet"
+frame_progress = 0.0

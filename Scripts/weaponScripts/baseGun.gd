@@ -5,22 +5,38 @@ class_name baseGun
 
 # signal used to decrease the number of bullets in the mag in the player node
 signal bullet_fired
+
 # signal used to set the max ammo for the parent player node
 signal set_max_ammo
+
+# signals for continuous weapons
+signal continuous_started
+#signal continuous_ended
 
 #NOTE: Interesting concept, really slow projectiles act as a trail of bullets left behind.
 # TODO: Refactor to determine bullet type dynamically.
 @export_enum("Discrete", "Continuous")
 var fire_type: String = "Discrete"
 @export var bullet: PackedScene
-@export var projectile_speed: float = 400 
-@export var automatic: bool = false
-@export var fire_rate: int = 20
+
+# gun stats prior to modifiers
+@export var projectile_speed: float
+@export var base_fire_rate: int
 @export var spread: float = 0
-@export var bullets_per_fire: int = 1
-@export var magazine_size: int = 10
+@export var bullets_per_fire: int
+@export var base_heat_increase_rate: float 
+
+# actual gun stats
+var actual_fire_rate: int
+var actual_heat_increase_rate: float
+
+@export var automatic: bool 
+@export var damage: int
+var continuous_active : bool
 var active_shooting: bool = true
 var audio_player: AudioStreamPlayer2D
+var muzzle_particles: CPUParticles2D
+var player: CharacterBody2D
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -28,24 +44,35 @@ var counting: bool = false
 var beam: Line2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_parent().get_parent().shoot.connect(handle_signal)
-	get_parent().get_parent().disable_shooting.connect(disable_shooting_handler)
-	get_parent().get_parent().enable_shooting.connect(enable_shooting_handler)
-	get_parent().get_parent().max_ammo = magazine_size
-	get_parent().get_parent().ammo = magazine_size
+	player = get_parent().get_parent()
+	player.shoot.connect(handle_signal)
+	player.disable_shooting.connect(disable_shooting_handler)
+	player.enable_shooting.connect(enable_shooting_handler)
+	player.continuous_started.connect(handle_continuous_start)
+	player.continuous_ended.connect(handle_continuous_ended)
+
+	# initialize actual gun stats using config
+	actual_fire_rate = int(base_fire_rate / Global.all_gun_stats.fire_rate_modifier)
+	actual_heat_increase_rate = base_heat_increase_rate * Global.all_gun_stats.cooldown_speed_modifier
+
 	audio_player = $ShootingSound
+	muzzle_particles = $MuzzleParticles
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if counting:
 		time += 1
+	if fire_type == "continuous" and continuous_active:
+		emit_signal("continuous_started", actual_heat_increase_rate)
+	elif fire_type == "continuous" and !continuous_active:
+		pass
 	
 func handle_signal(action: String, delta) -> void:
 	if not automatic && action == "tap":
 		fire(delta)
 	elif automatic && action == "hold": 
 		counting = true
-		if time % fire_rate == 0 and is_instance_valid(bullet):
+		if time % actual_fire_rate == 0 and is_instance_valid(bullet):
 			fire(delta)
 	elif automatic && action == "end":
 		if is_instance_valid(beam):
@@ -54,6 +81,8 @@ func handle_signal(action: String, delta) -> void:
 		time = 0
 
 func fire(delta: float) -> void:
+	muzzle_particles.emitting = true
+	#print(active_shooting, " ", automatic)
 	if !active_shooting:
 		return
 	# Get the mouse position in global coordinates
@@ -67,6 +96,7 @@ func fire(delta: float) -> void:
 				audio_player.pitch_scale = randf_range(0.9, 1.1)
 				audio_player.play()
 			var projectile: AnimatableBody2D = bullet.instantiate()
+			projectile.init(20)
 			projectile.position = global_position
 
 			var spread_angle = randf_range(-1 * spread, spread)
@@ -79,8 +109,8 @@ func fire(delta: float) -> void:
 			# Add projectile to the scene
 			get_tree().current_scene.add_child(projectile)
 
-			# Emit signal to reduce ammo
-			emit_signal("bullet_fired")
+			# Emit signal to indicate bullet has been fired
+			emit_signal("bullet_fired", actual_heat_increase_rate)
 
 	elif fire_type == "Continuous":
 		if not is_instance_valid(beam):
@@ -89,9 +119,19 @@ func fire(delta: float) -> void:
 			add_child(beam)
 		else:
 			beam.apply_damage()
+			# can't figure out continuous heat increase within gun. I know how to do it within player.
+			#emit_signal("bullet_fired", heat_increase_rate)
 
 func disable_shooting_handler():
 	active_shooting = false
 
 func enable_shooting_handler():
 	active_shooting = true
+	
+func handle_continuous_start():
+	continuous_active = true
+	print("continuous shooting started, ", continuous_active)
+
+func handle_continuous_ended():
+	continuous_active = false
+	print("continuous shooting ended ", continuous_active)

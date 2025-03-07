@@ -18,13 +18,14 @@ var time: int
 func _ready() -> void:
 	sprite = get_node("Needle")
 	curr_health = Global.playerHealth
+	print(curr_health)
 	#print(curr_health, " checking curr health in healthbar..gd")
 	var health_fraction = curr_health / health
 	sprite.rotation_degrees = lerp(final_rotation, initial_rotation, health_fraction)
 	#change_health.connect(set_curr_health)
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)
-	#ssetHealthBar()
+	#setHealthBar()
 
 func _physics_process(delta: float) -> void:
 	update_rotation(delta)
@@ -43,6 +44,7 @@ func handleSignal() -> void:
 
 func setHealthBar():
 	curr_health = Global.playerHealthNode.current_health
+	#print(curr_health, " health_bar.gd")
 
 func update_rotation(delta: float) -> void:
 	var health_fraction = curr_health / health

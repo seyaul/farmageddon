@@ -10,10 +10,15 @@ var collision_behavior: String = "Bouncy"
 @export var bounces_til_despawn: int = 1
 # WARNING: Too many bullets in the scene causes lag.
 @export var life_span: int = 100
-@export var max_range: int = 100
+@export var max_range: int = 300
 # WARNING: Slow moving objects won't be detected for collisions with a low safe margin.
 # NOTE: Higher safe margin is used for preventing multi-collisions and penetration for fast moving objects.
 @export var safe_margin: float = 1
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var hit_sound: AudioStreamPlayer = $HitSound
+var hit_animation: AnimatedSprite2D
+var damage: int
+var active: bool = true
 
 var curr_collisions: int = 0
 #TODO: Replace with timer?
@@ -26,35 +31,42 @@ func _ready() -> void:
 	initial_position = position
 	if name == "Fragment":
 		print("spawned")
-	var animated_sprite = $AnimatedSprite2D
 	if animated_sprite:
-		animated_sprite.play("new_animation_1")
+		animated_sprite.play()
+	if has_node("HitAnimation"):
+		hit_animation = $HitAnimation
+
+func init(damage: int):
+	self.damage = damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if !active:
+		return
 	time += 1
 	if time >= life_span:
-		queue_free()
+		kill_bullet()
 	if initial_position.distance_to(position) >= max_range:
-		constant_linear_velocity = Vector2.ZERO
+		kill_bullet()
+		# constant_linear_velocity = Vector2.ZERO
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
 		_handle_collisions(collision)
-	
-	
 
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	var collider = collision.get_collider()
-	# if collider.has_node("Health"):
-	# 	var enemy_health = collider.get_node("Health")
-	# 	if enemy_health and enemy_health.has_method("take_damage"):
-	# 		print("damaging enemy")
-	# 		enemy_health.take_damage(20)  
+
+	# this enables shooting eggs out of the air
+	if collider.is_in_group("mob_bullet"):
+		collider.kill_bullet()
+		kill_bullet()
+		return
+
 	if collider.has_method("take_damage"):
-		#print("damaging enemy")
-		collider.take_damage(20)  
+		collider.take_damage(damage)  
+		hit_sound.play()
 
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO
@@ -64,8 +76,17 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 			constant_linear_velocity = constant_linear_velocity.bounce(collision.get_normal())
 			bounces_til_despawn -= 1
 		else:
-			queue_free()
+			kill_bullet()
 	elif collision_behavior == "Simple":
-		queue_free()
+		kill_bullet()
 	
 	
+func kill_bullet():
+	animated_sprite.visible = false
+	active = false
+	if hit_animation:
+		hit_animation.visible = true
+		hit_animation.play()
+		await hit_animation.animation_finished
+	await get_tree().create_timer(hit_sound.stream.get_length()).timeout
+	queue_free()

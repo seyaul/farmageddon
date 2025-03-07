@@ -24,7 +24,7 @@ var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time
 var targeter: Node
 @onready var fire: AnimatedSprite2D = $Fire
-@onready var stunAnimation: AnimatedSprite2D = $StunAnimation
+var stunAnimation: AnimatedSprite2D
 @export var corpse_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -36,8 +36,12 @@ func _ready() -> void:
 	Global.incrementEnemyCount()
 	speed_modifier = randf_range(-1,1) * 2
 	follow_node = $EMovementController/Follow
-	var lunge_node = $EMovementController/Lunge
+	var lunge_node
+	if has_node("EMovementController/Lunge"):
+		lunge_node = $EMovementController/Lunge
 	targeter = $Targeter
+	if has_node("StunAnimation"):
+		stunAnimation = $StunAnimation
 	if lunge_node && targeter:
 		lunge_node.disable_targeter.connect(disable_targeter_handler)
 		lunge_node.enable_targeter.connect(enable_targeter_handler)

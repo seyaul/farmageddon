@@ -16,6 +16,7 @@ var collision_behavior: String = "Bouncy"
 @export var safe_margin: float = 1
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer = $HitSound
+var damage: int
 var active: bool = true
 
 var curr_collisions: int = 0
@@ -31,6 +32,9 @@ func _ready() -> void:
 		print("spawned")
 	if animated_sprite:
 		animated_sprite.play()
+
+func init(damage: int):
+	self.damage = damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,7 +57,7 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	var collider = collision.get_collider()
 	if collider.has_method("take_damage"):
-		collider.take_damage(20)  
+		collider.take_damage(damage)  
 		hit_sound.play()
 
 	if collision_behavior == "Sticky":

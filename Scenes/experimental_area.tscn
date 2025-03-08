@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="3_aia4q"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="4_7o3d4"]
 [ext_resource type="Script" path="res://Scripts/snake_guns.gd" id="6_7qxi2"]
-[ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="6_l3up4"]
 [ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="7_1eh23"]
 [ext_resource type="Texture2D" uid="uid://bc6epmk46av1" path="res://Solaria Demo Tiles.png" id="7_vm6rj"]
 [ext_resource type="Texture2D" uid="uid://b545h2awvk0ot" path="res://free.png" id="8_ooqc3"]
@@ -20,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="10_bkqhs"]
 [ext_resource type="Texture2D" uid="uid://7a0wideh312w" path="res://Sprites/2_21 texture darker.png" id="10_recjd"]
 [ext_resource type="Script" path="res://Sprites/snake_texture.gd" id="14_gel5c"]
+[ext_resource type="PackedScene" uid="uid://brby3dmfwnpti" path="res://Scenes/bullets/old_major_bullet.tscn" id="14_iok2m"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="15_yfnpp"]
 [ext_resource type="Script" path="res://Scripts/surround_state.gd" id="16_7w3qe"]
 [ext_resource type="Script" path="res://Scripts/repath.gd" id="16_5350e"]
@@ -919,6 +919,7 @@ point_count = 138
 [node name="ExperimentalArea" type="Node2D"]
 
 [node name="BossHealthBar" parent="." node_paths=PackedStringArray("health_node") instance=ExtResource("1_bd3un")]
+visible = false
 z_index = 51
 health_node = NodePath("../Boss/Health")
 
@@ -1109,7 +1110,7 @@ line_width = 9.0
 [node name="Snake_Guns" type="Node" parent="Boss"]
 script = ExtResource("6_7qxi2")
 gun = ExtResource("2_i7aow")
-bullet = ExtResource("6_l3up4")
+bullet = ExtResource("14_iok2m")
 segments_with_gun = 2
 front_gun_projectile_speed = 80000.0
 side_gun_projectile_speed = 20000.0

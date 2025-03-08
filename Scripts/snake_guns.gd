@@ -33,12 +33,14 @@ func _segment_guns_factory(i: int) -> void:
 	segment.lgun = gun1
 	segment.rgun = gun2
 	if i != 0:
-		gun1.rotation_degrees = 0
-		gun2.rotation_degrees = 180
+		gun1.rotation_degrees = 180
+		gun2.rotation_degrees = 0
 		gun1.projectile_speed = side_gun_projectile_speed
 		gun2.projectile_speed = side_gun_projectile_speed
 	# TODO: Maybe add parameter values for this?
 	elif i == 0:
+		gun1.rotation_degrees += 180
+		gun2.rotation_degrees += 180
 		gun1.position -= Vector2(0, 10)
 		gun2.position  += Vector2(0, 10)
 		gun1.projectile_speed = front_gun_projectile_speed

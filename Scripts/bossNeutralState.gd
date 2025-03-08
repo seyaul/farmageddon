@@ -17,7 +17,3 @@ func Exit():
 	
 func _ready() -> void:
 	mfsm = get_parent().get_parent().get_node("MovementController")
-
-func _physics_process(delta: float) -> void:
-	print("MOVEMENT:",mfsm.current_state.name)
-	print("ATTACK:",get_parent().current_state.name)

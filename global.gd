@@ -1,7 +1,7 @@
 extends Node
 
 var enemyCount: int
-var numRuns : int = 0
+var numLevelsComplete : int = 0
 var playerHealth : int
 var playerGold : int
 var playerExp : int
@@ -21,6 +21,8 @@ var playerHealthNode : Node
 var playerCurrHealth : float
 var tutorial : bool
 var num_enemies_defeated : int
+
+var elite_room : bool = false
 signal campfire_selected
 
 
@@ -138,6 +140,7 @@ func incrementEnemyCount():
 func _game_started():
 	enemyCount = 0
 	tutorial = false
+	numLevelsComplete += 1
 	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
@@ -149,6 +152,7 @@ func _new_game_started():
 	newGame = false
 	enemyCount = 0
 	num_enemies_defeated = 0
+	numLevelsComplete = 0
 	tutorial = true
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")

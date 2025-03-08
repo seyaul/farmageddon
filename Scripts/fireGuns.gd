@@ -16,13 +16,17 @@ func Enter():
 func Update(delta: float):
 	if guns.guns_connected:
 		shoot_guns(delta)
+		
 	if is_instance_valid(mfsm.current_state) and \
 	trigger_attack_with_state.has(mfsm.current_state.name) and \
 	trigger_attack_with_state[mfsm.current_state.name] != name:
 		emit_signal("state_transition", self, trigger_attack_with_state[mfsm.current_state.name])
+	elif is_instance_valid(mfsm.current_state) and \
+	not trigger_attack_with_state.has(mfsm.current_state.name):
+		emit_signal("state_transition", self, "Neutral")
 
 func Exit():
-	for i in range(1, snake.num_segments, guns.segments_with_gun):
+	for i in range(0, snake.num_segments, guns.segments_with_gun):
 		var segment = snake.segments[i]
 		segment.emit_signal("shoot", 0, "end", 0)
 		segment.emit_signal("shoot", 1, "end", 0)

@@ -68,7 +68,7 @@ position = Vector2(584, 334)
 scale = Vector2(1.445, 1.10667)
 sprite_frames = SubResource("SpriteFrames_1vyap")
 animation = &"lose"
-frame_progress = 0.896884
+frame_progress = 0.54914
 
 [node name="ReplayButton" type="Button" parent="CanvasLayer"]
 offset_left = 520.0

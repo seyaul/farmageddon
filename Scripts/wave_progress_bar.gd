@@ -1,4 +1,4 @@
-git extends ProgressBar
+extends ProgressBar
 
 var total_enemies: int = 0  # Total enemies in the current wave
 var enemies_defeated: int = 0  # How many enemies have been defeated

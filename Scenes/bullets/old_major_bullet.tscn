@@ -47,7 +47,7 @@ scale = Vector2(1.655, 0.68)
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(8.11, -1.945)
 scale = Vector2(0.81, 0.81)
-frame_progress = 0.0852445
+animation = &"clot"
 
 [node name="HitAnimation" type="AnimatedSprite2D" parent="." index="3"]
 visible = false

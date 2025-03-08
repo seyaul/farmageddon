@@ -1,4 +1,4 @@
-extends Button
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,11 +11,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-
-func _on_pressed() -> void:
+func _on_replay_button_pressed() -> void:
 	GameState.player_died = true
 	get_tree().change_scene_to_file("res://Scenes/Map.tscn")
 	Global.enemyCount = 0
 	Global.numRuns = 0
 	Global.newGame = true
-	

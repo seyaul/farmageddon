@@ -1,24 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://b38iafldu3vsm"]
+[gd_scene load_steps=15 format=3 uid="uid://b38iafldu3vsm"]
 
-[ext_resource type="Texture2D" uid="uid://dm75qv84mboai" path="res://Sprites/you_lose.jpeg" id="1_pq7re"]
-[ext_resource type="Script" path="res://Scripts/replay_button.gd" id="2_gb5my"]
+[ext_resource type="Texture2D" uid="uid://cvaq8ogxnrqw5" path="res://Sprites/pixil-frame-0.png" id="1_bjnfv"]
+[ext_resource type="Script" path="res://Scenes/lose_screen.gd" id="1_xdw5r"]
+[ext_resource type="Texture2D" uid="uid://bm05vnynm2y5" path="res://Sprites/pixil-frame-1.png" id="2_nqfjo"]
+[ext_resource type="Texture2D" uid="uid://b1x8y8dhh4e3a" path="res://Sprites/pixil-frame-2.png" id="3_7s4gv"]
+[ext_resource type="Texture2D" uid="uid://cwul5s5r5c5s5" path="res://Sprites/pixil-frame-3.png" id="4_ffaw3"]
+[ext_resource type="Texture2D" uid="uid://c8umyxug6drgr" path="res://Sprites/pixil-frame-4.png" id="5_ossrk"]
+[ext_resource type="Texture2D" uid="uid://djp1lsgjncqwf" path="res://Sprites/pixil-frame-5.png" id="6_1hcpo"]
+[ext_resource type="Texture2D" uid="uid://bdcd5neyo2n6" path="res://Sprites/pixil-frame-6.png" id="7_k0gia"]
+[ext_resource type="Texture2D" uid="uid://b7n8lkoxdtxeh" path="res://Sprites/pixil-frame-7.png" id="8_15kxd"]
+[ext_resource type="Texture2D" uid="uid://bqh054p1ot1s2" path="res://Sprites/pixil-frame-8.png" id="9_gv5dk"]
+[ext_resource type="Texture2D" uid="uid://c62ardf4xocpo" path="res://Sprites/pixil-frame-9.png" id="10_mu546"]
+[ext_resource type="Texture2D" uid="uid://w7pj02xosba3" path="res://Sprites/pixil-frame-10.png" id="11_f232p"]
+[ext_resource type="Texture2D" uid="uid://caf6ir46riist" path="res://Sprites/pixil-frame-11.png" id="12_ixevd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vyap"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bjnfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nqfjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7s4gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ffaw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ossrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1hcpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k0gia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_15kxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gv5dk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mu546")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f232p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ixevd")
+}],
+"loop": true,
+"name": &"lose",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_xdw5r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_right = 1156.0
-offset_bottom = 668.0
-texture = ExtResource("1_pq7re")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(584, 334)
+scale = Vector2(1.445, 1.10667)
+sprite_frames = SubResource("SpriteFrames_1vyap")
+animation = &"lose"
+frame_progress = 0.896884
 
 [node name="ReplayButton" type="Button" parent="CanvasLayer"]
-offset_left = 491.0
-offset_top = 512.0
-offset_right = 674.0
-offset_bottom = 589.0
+offset_left = 520.0
+offset_top = 553.0
+offset_right = 703.0
+offset_bottom = 630.0
 theme_override_font_sizes/font_size = 50
 text = "Restart"
-script = ExtResource("2_gb5my")
 
+[connection signal="pressed" from="CanvasLayer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ReplayButton" to="CanvasLayer/ReplayButton" method="_on_pressed"]

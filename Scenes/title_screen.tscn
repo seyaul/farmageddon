@@ -67,7 +67,7 @@ position = Vector2(1190.21, 675)
 scale = Vector2(2.97809, 2.25859)
 sprite_frames = SubResource("SpriteFrames_54w43")
 animation = &"intro"
-frame_progress = 0.667399
+frame_progress = 0.449276
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer"]
 scale = Vector2(0.6, 0.6)
@@ -81,10 +81,10 @@ anchor_left = -0.000289334
 anchor_top = 0.000514466
 anchor_right = -0.151334
 anchor_bottom = 0.0205762
-offset_left = 860.333
-offset_top = 389.667
-offset_right = 1338.34
-offset_bottom = 511.667
+offset_left = 817.0
+offset_top = 399.667
+offset_right = 1295.0
+offset_bottom = 521.667
 texture_normal = ExtResource("12_fc3pm")
 texture_pressed = ExtResource("13_r5y5t")
 texture_hover = ExtResource("14_et3k8")

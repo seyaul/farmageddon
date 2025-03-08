@@ -100,6 +100,7 @@ width = 2.0
 default_color = Color(0.594877, 0.629716, 0.713622, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture_filter = 1
 texture = ExtResource("2_rpiir")
 
 [node name="TextureButton" type="TextureButton" parent="Visuals"]

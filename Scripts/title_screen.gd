@@ -5,6 +5,7 @@ extends Node2D
 func _ready() -> void:
 	var music = get_node("AudioStreamPlayer")
 	music.play()
+	$Control/CanvasLayer/AnimatedSprite2D.play("intro")
 	pass # Replace with function body.
 
 

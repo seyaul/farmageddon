@@ -1,11 +1,58 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkqg5oxyd33m1"]
+[gd_scene load_steps=17 format=3 uid="uid://bkqg5oxyd33m1"]
 
 [ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_jkwuf"]
-[ext_resource type="Texture2D" uid="uid://xt7ni05fn3p" path="res://Sprites/play only (3).png" id="2_ov175"]
-[ext_resource type="Texture2D" uid="uid://c02tuahrhu715" path="res://Sprites/Screenshot 2025-01-27 at 2.00.17 AM.png" id="3_a8g00"]
-[ext_resource type="Texture2D" uid="uid://blng3b73snt52" path="res://Sprites/Screenshot 2025-01-27 at 1.58.25 AM.png" id="4_jtm1o"]
-[ext_resource type="Texture2D" uid="uid://bw7kplolpkvxu" path="res://Sprites/Screenshot 2025-01-27 at 1.59.26 AM.png" id="5_ggvn1"]
+[ext_resource type="Texture2D" uid="uid://swelctjphrwl" path="res://Sprites/title_screen_sprites/pixil-frame-0.png" id="2_rdd7w"]
+[ext_resource type="Texture2D" uid="uid://drrfgldujgw0b" path="res://Sprites/title_screen_sprites/pixil-frame-1.png" id="3_od10t"]
+[ext_resource type="Texture2D" uid="uid://cw7ddj2g4d5id" path="res://Sprites/title_screen_sprites/pixil-frame-2.png" id="4_51jg2"]
+[ext_resource type="Texture2D" uid="uid://bv0m1hc13hsgq" path="res://Sprites/title_screen_sprites/pixil-frame-3.png" id="5_wgt8o"]
 [ext_resource type="AudioStream" uid="uid://bmd2ih60gwxiy" path="res://audio/music/startscreen.mp3" id="6_ks3sl"]
+[ext_resource type="Texture2D" uid="uid://ve040car504g" path="res://Sprites/title_screen_sprites/pixil-frame-4.png" id="6_x6rit"]
+[ext_resource type="Texture2D" uid="uid://b313c4aqptevp" path="res://Sprites/title_screen_sprites/pixil-frame-5.png" id="7_iflsv"]
+[ext_resource type="Texture2D" uid="uid://c05307cg62uv3" path="res://Sprites/title_screen_sprites/pixil-frame-6.png" id="8_sexjf"]
+[ext_resource type="Texture2D" uid="uid://cjt3ujgt2gpyk" path="res://Sprites/title_screen_sprites/pixil-frame-7.png" id="9_vw6mh"]
+[ext_resource type="Texture2D" uid="uid://bds4dwsbl6sds" path="res://Sprites/title_screen_sprites/pixil-frame-8.png" id="10_mx02y"]
+[ext_resource type="Texture2D" uid="uid://hvfwlhmkspw0" path="res://Sprites/title_screen_sprites/pixil-frame-9.png" id="11_cuvlt"]
+[ext_resource type="Texture2D" uid="uid://durv0xo1w72iq" path="res://Sprites/title_screen_sprites/play button (1).png" id="12_uwsvw"]
+[ext_resource type="Texture2D" uid="uid://bfvnh7ghm3nau" path="res://Sprites/title_screen_sprites/play button click (1).png" id="13_3ykcx"]
+[ext_resource type="Texture2D" uid="uid://c2podbw5xo6fo" path="res://Sprites/title_screen_sprites/play button hover (1).png" id="14_lhfp3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x57y8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rdd7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_od10t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_51jg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wgt8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x6rit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iflsv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sexjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vw6mh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mx02y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cuvlt")
+}],
+"loop": true,
+"name": &"intro",
+"speed": 5.0
+}]
 
 [node name="TitleScreen" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -21,12 +68,12 @@ offset_bottom = 1296.0
 scale = Vector2(0.485, 0.485)
 transform = Transform2D(0.485, 0, 0, 0.485, 0, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer"]
-texture_filter = 1
-offset_top = 1.52588e-05
-offset_right = 2382.0
-offset_bottom = 1353.0
-texture = ExtResource("2_ov175")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/CanvasLayer"]
+position = Vector2(1186.6, 668.557)
+scale = Vector2(2.96134, 2.21821)
+sprite_frames = SubResource("SpriteFrames_x57y8")
+animation = &"intro"
+frame_progress = 0.790519
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control/CanvasLayer"]
 scale = Vector2(0.6, 0.6)
@@ -35,13 +82,13 @@ transform = Transform2D(0.6, 0, 0, 0.6, 0, 0)
 [node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer/CanvasLayer"]
 top_level = true
 texture_filter = 1
-offset_left = 736.667
-offset_top = 566.667
-offset_right = 1214.67
-offset_bottom = 688.667
-texture_normal = ExtResource("3_a8g00")
-texture_pressed = ExtResource("4_jtm1o")
-texture_hover = ExtResource("5_ggvn1")
+offset_left = 820.0
+offset_top = 396.667
+offset_right = 1124.0
+offset_bottom = 531.667
+texture_normal = ExtResource("12_uwsvw")
+texture_pressed = ExtResource("13_3ykcx")
+texture_hover = ExtResource("14_lhfp3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ks3sl")

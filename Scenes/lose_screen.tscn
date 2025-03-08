@@ -1,22 +1,80 @@
-[gd_scene load_steps=3 format=3 uid="uid://b38iafldu3vsm"]
+[gd_scene load_steps=16 format=3 uid="uid://b38iafldu3vsm"]
 
-[ext_resource type="Texture2D" uid="uid://dm75qv84mboai" path="res://Sprites/you_lose.jpeg" id="1_pq7re"]
+[ext_resource type="Script" path="res://Scripts/lose_screen.gd" id="1_xyhrq"]
+[ext_resource type="Texture2D" uid="uid://g8oi3a3q6uwv" path="res://Sprites/lose_screen_sprites/pixil-frame-0.png" id="2_2ysbu"]
 [ext_resource type="Script" path="res://Scripts/replay_button.gd" id="2_gb5my"]
+[ext_resource type="Texture2D" uid="uid://dhxyetrwhf25s" path="res://Sprites/lose_screen_sprites/pixil-frame-1.png" id="3_aloij"]
+[ext_resource type="Texture2D" uid="uid://dcfbj7bhl1s8s" path="res://Sprites/lose_screen_sprites/pixil-frame-2.png" id="4_ynmoi"]
+[ext_resource type="Texture2D" uid="uid://dpwtqoiym02bd" path="res://Sprites/lose_screen_sprites/pixil-frame-3.png" id="5_6b3gq"]
+[ext_resource type="Texture2D" uid="uid://c11ya1j8e2gdj" path="res://Sprites/lose_screen_sprites/pixil-frame-4.png" id="6_y31jb"]
+[ext_resource type="Texture2D" uid="uid://fwx3r4hmk6ew" path="res://Sprites/lose_screen_sprites/pixil-frame-5.png" id="7_j6wos"]
+[ext_resource type="Texture2D" uid="uid://bafb1045qpg5v" path="res://Sprites/lose_screen_sprites/pixil-frame-6.png" id="8_88tcj"]
+[ext_resource type="Texture2D" uid="uid://bf71jgkk1n1g0" path="res://Sprites/lose_screen_sprites/pixil-frame-7.png" id="9_0lnb3"]
+[ext_resource type="Texture2D" uid="uid://c25hg1wtb6y4d" path="res://Sprites/lose_screen_sprites/pixil-frame-8.png" id="10_v5bop"]
+[ext_resource type="Texture2D" uid="uid://c3r2dh1x2lip7" path="res://Sprites/lose_screen_sprites/pixil-frame-9.png" id="11_m1g6e"]
+[ext_resource type="Texture2D" uid="uid://boq5qw6agri8" path="res://Sprites/lose_screen_sprites/pixil-frame-10.png" id="12_4pxd2"]
+[ext_resource type="Texture2D" uid="uid://b1mha2cjrnt08" path="res://Sprites/lose_screen_sprites/pixil-frame-11.png" id="13_jpts4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_emfrn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ysbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_aloij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ynmoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6b3gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y31jb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j6wos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_88tcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0lnb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_v5bop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m1g6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4pxd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jpts4")
+}],
+"loop": false,
+"name": &"lose",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_xyhrq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_right = 1156.0
-offset_bottom = 668.0
-texture = ExtResource("1_pq7re")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(577, 318)
+scale = Vector2(1.4425, 1.05333)
+sprite_frames = SubResource("SpriteFrames_emfrn")
+animation = &"lose"
 
 [node name="ReplayButton" type="Button" parent="CanvasLayer"]
-offset_left = 491.0
-offset_top = 512.0
-offset_right = 674.0
-offset_bottom = 589.0
+offset_left = 513.0
+offset_top = 522.0
+offset_right = 696.0
+offset_bottom = 599.0
 theme_override_font_sizes/font_size = 50
 text = "Restart"
 script = ExtResource("2_gb5my")

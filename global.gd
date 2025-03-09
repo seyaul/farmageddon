@@ -2,6 +2,7 @@ extends Node
 
 var enemyCount: int
 var numLevelsComplete : int = 0
+var numResets : int = 0
 var playerHealth : int
 var playerGold : int
 var playerExp : int
@@ -153,7 +154,8 @@ func _new_game_started():
 	enemyCount = 0
 	num_enemies_defeated = 0
 	numLevelsComplete = 0
-	tutorial = true
+	if numResets == 0:
+		tutorial = true
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health

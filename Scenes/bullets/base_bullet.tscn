@@ -1,9 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3tixxhlwjl4x"]
+[gd_scene load_steps=26 format=3 uid="uid://d3tixxhlwjl4x"]
 
 [ext_resource type="Script" path="res://Scripts/bulletScripts/baseBullet.gd" id="1_rp1mo"]
+[ext_resource type="Texture2D" uid="uid://bnkx7jujeec3p" path="res://pixilart-frames/pixil-frame-0.png" id="2_crs43"]
+[ext_resource type="Texture2D" uid="uid://bi687nwkarv68" path="res://pixilart-frames/pixil-frame-1.png" id="3_al7up"]
 [ext_resource type="AudioStream" uid="uid://beg60p8mo0srk" path="res://audio/effects/hitmarker_sound.wav" id="3_hpuen"]
 [ext_resource type="Texture2D" uid="uid://dp62u8ugkme7a" path="res://Sprites/bullets/Bullet 24x24 Free Part 3A.png" id="3_so4dp"]
 [ext_resource type="Texture2D" uid="uid://bdvp1merw4ix2" path="res://Sprites/bullets/egg.png" id="3_x113q"]
+[ext_resource type="Texture2D" uid="uid://dmv0ct06r2kmq" path="res://pixilart-frames/pixil-frame-2.png" id="4_23x8t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ud0yu"]
 height = 56.6667
@@ -74,6 +77,20 @@ region = Rect2(552, 120, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i0vis"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_crs43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_al7up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_23x8t")
+}],
+"loop": true,
+"name": &"clot",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xr7g7")
@@ -160,7 +177,6 @@ shape = SubResource("CapsuleShape2D_ud0yu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_i0vis")
-frame_progress = 0.965357
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hpuen")

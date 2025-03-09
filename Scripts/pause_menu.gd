@@ -37,6 +37,7 @@ func _on_start_new_run_pressed() -> void:
 	GameState.player_died = true
 	get_tree().change_scene_to_file("res://Scenes/Map.tscn")
 	Global.enemyCount = 0
+	Global.tutorial = false
 	Global.numLevelsComplete = 0
 	Global.newGame = true
 	Global.numResets += 1

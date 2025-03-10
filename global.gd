@@ -7,6 +7,7 @@ var playerHealth : int
 var playerGold : int
 var playerExp : int
 var player_scene = preload("res://Scenes/player.tscn")
+var lifesteal_popup_scene = preload("res://Scenes/lifesteal_popup.tscn")
 var player_stats: PlayerStats
 var all_gun_stats: AllGunStats
 var card_pool: Array = [] 
@@ -55,17 +56,42 @@ func _ready() -> void:
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health
+	
 	playerGold = 0
 	playerExp = 0
+	
+	Global.connect("mob_died", Callable(self, "_on_mob_died"))
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
 	#emit_signal("newGameStarted")
 	pass # Replace with function body.
 
+func show_lifesteal_popup():
+	print("LIFESTEAL SHOWING AHHH")
+	if playerInstance:
+		var popup = lifesteal_popup_scene.instantiate()
+		var ui_layer = get_tree().root.get_node_or_null("UserInterfaceLayer")
+		if ui_layer:
+			ui_layer.add_child(popup)
+		else:
+			ui_layer = CanvasLayer.new()
+			ui_layer.name = "UserInterfaceLayer2"
+			get_tree().root.add_child(ui_layer)
+		ui_layer.add_child(popup)
+		popup.show_popup()
+
+func _on_mob_died() -> void:
+	var lifesteal_roll = randf()
+	
+	if lifesteal_roll <= Global.player_stats.lifesteal_chance:
+		playerHealthNode.heal(2)
+		show_lifesteal_popup()
+		print("lifesteal activated yippee!")
+
 func initialize_card_pool():
 	# weights/rarities subject to change
 	card_pool = [
-		create_card("Max Health Boost", "Increases max health by 10.", "common", 
+		create_card("Max Health Boost", "Increases max health by 10.", "rare", 
 			preload("res://Sprites/healing (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health": 10}),
 		create_card("Speed Boost", "Increases movement speed by 1.", "medium", 
 			preload("res://Sprites/gold (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1}), # probs shld be common
@@ -73,8 +99,8 @@ func initialize_card_pool():
 			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "cooldown_speed_modifier": 0.9}),
 		create_card("Fire Rate Buff", "Increases fire rate by 15%.", "common", 
 			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1.15}),
-		create_card("Lifesteal Ability", "Chance to regain health when dealing damage.", "rare", 
-			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 5})
+		create_card("Lifesteal Ability", "Chance to regain health when dealing damage.", "common", 
+			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05})
 	]
 	
 	for card in card_pool:

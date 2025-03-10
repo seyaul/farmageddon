@@ -109,6 +109,11 @@ func spawn_on_timer(enemy_scene_type):
 				target_manager(targeterNode, followNode)
 			else:
 				print("Node not found")
+		
+		var enemy_health_path_name = "EnemyPath/EnemyGuide/" + enemy_node_name + "/Health" 
+		var enemy_health = enemy_instance.get_node_or_null(enemy_health_path_name) 
+		if enemy_health and not enemy_health.is_connected("mob_died", Callable(Global, "_on_mob_died")):
+			enemy_health.connect("mob_died", Callable(Global, "_on_mob_died"))
 		add_child(enemy_instance)
 		# Update the enemy counter
 		#enemy_count -= 1

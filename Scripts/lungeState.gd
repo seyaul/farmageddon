@@ -15,17 +15,28 @@ signal play_pre_lunge_animation
 var enemy: CharacterBody2D
 var initial_position: Vector2
 var target_position: Vector2
-var lunge_timer: SceneTreeTimer
+var lunge_timer: Timer
+var prep_phase_timer: Timer
 var in_prep_phase: bool = false
 var in_move_phase: bool = false
+var next_lunge_direction: Vector2
  
-	
+func _ready():
+	lunge_timer = Timer.new()
+	lunge_timer.wait_time = timeout
+	lunge_timer.timeout.connect(_on_lunge_timeout)
+	prep_phase_timer = Timer.new()
+	prep_phase_timer.wait_time = lunge_prep_delay
+	prep_phase_timer.timeout.connect(exit_prep_phase)
+	add_child(lunge_timer)
+	add_child(prep_phase_timer)
+
+
 func Enter():
 	enemy = get_parent().get_parent()
 	initial_position = enemy.global_position
 	target_position = enemy.global_position + enemy.velocity.normalized() * max_distance
-	lunge_timer = get_tree().create_timer(timeout)
-	lunge_timer.timeout.connect(_on_lunge_timeout)
+	lunge_timer.start()
 	emit_signal("disable_targeter")
 	
 func Update(_delta: float):
@@ -47,8 +58,8 @@ func Exit():
 	in_move_phase = false
 	emit_signal("enable_targeter")
 	phase(false)
-	if lunge_timer and lunge_timer.timeout.is_connected(_on_lunge_timeout):
-		lunge_timer.timeout.disconnect(_on_lunge_timeout)
+	lunge_timer.stop()
+	prep_phase_timer.stop()
 
 func phase(action: bool) -> void:
 	enemy.set_collision_layer_value(3, not action)
@@ -58,16 +69,17 @@ func phase(action: bool) -> void:
 func _on_lunge_timeout():
 	emit_signal("state_transition", self, "Follow")
 
-func exit_prep_phase(direction: Vector2):
+func exit_prep_phase():
 	print("in exit_prep_phase")
 	in_prep_phase = false
 	in_move_phase = true
 	if phase_on_lunge:
 		phase(true)
-	enemy.velocity = direction * lunge_speed
+	enemy.velocity = next_lunge_direction * lunge_speed
 
 func enter_prep_phase(direction: Vector2):
+	print("entering prep phase")
 	emit_signal("play_pre_lunge_animation")
 	in_prep_phase = true
-	var prep_phase_timer = get_tree().create_timer(lunge_prep_delay)
-	prep_phase_timer.timeout.connect(exit_prep_phase.bind(direction))
+	next_lunge_direction = direction
+	prep_phase_timer.start()

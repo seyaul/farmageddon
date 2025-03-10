@@ -12,7 +12,6 @@ signal weapon_switched
 signal continuous_started
 signal continuous_ended
 
-@export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
@@ -92,7 +91,7 @@ func equip_new_gun(new_gun: baseGun):
 	emit_signal("weapon_switched")
 
 func setup_weapons():
-	for weapon_name in active_weapons:
+	for weapon_name in Global.active_weapons:
 		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
 		gun_scene_array.append(weapon_scene)
 

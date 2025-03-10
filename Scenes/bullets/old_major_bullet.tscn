@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brby3dmfwnpti"]
+[gd_scene load_steps=9 format=3 uid="uid://c78itx0henaly"]
 
 [ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="1_5awf7"]
 [ext_resource type="Texture2D" uid="uid://qud5funvme1y" path="res://Sprites/blood_splatters/blood spatter1.png" id="2_2wfts"]

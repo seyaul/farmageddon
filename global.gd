@@ -10,6 +10,7 @@ var player_scene = preload("res://Scenes/player.tscn")
 var player_stats: PlayerStats
 var all_gun_stats: AllGunStats
 var card_pool: Array = [] 
+var active_weapons: Array[String] = ["AKorn47"]
 var weight_adjustments: Dictionary = {} 
 const CARD_BASE_WEIGHTS = {
 	"common": 10, 
@@ -142,6 +143,10 @@ func _game_started():
 	enemyCount = 0
 	tutorial = false
 	numLevelsComplete += 1
+	if numLevelsComplete == 1:
+		active_weapons.append("flamethrower")
+	elif numLevelsComplete == 2:
+		active_weapons.append("rpg")
 	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")

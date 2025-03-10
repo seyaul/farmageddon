@@ -202,7 +202,6 @@ texture = ExtResource("13_iv5bc")
 visible = false
 
 [node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
-script = null
 
 [node name="walls" type="Node2D" parent="."]
 

@@ -87,6 +87,8 @@ func _on_mob_died() -> void:
 		playerHealthNode.heal(2)
 		show_lifesteal_popup()
 		print("lifesteal activated yippee!")
+	else:
+		print("no lifesteal for u")
 
 func initialize_card_pool():
 	# weights/rarities subject to change
@@ -100,7 +102,7 @@ func initialize_card_pool():
 		create_card("Fire Rate Buff", "Increases fire rate by 15%.", "common", 
 			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1.15}),
 		create_card("Lifesteal Ability", "Chance to regain health when dealing damage.", "common", 
-			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05})
+			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05}) # change this to 1 for the demo mayhaps
 	]
 	
 	for card in card_pool:

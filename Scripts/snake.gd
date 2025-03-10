@@ -46,6 +46,9 @@ func segment_factory() -> Node2D:
 	node.scale = node.scale * segment_scale
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CircleShape2D.new()
+	collider.scale *= 2
+	collider.z_index = 100
+	node.collision_layer = (1 << 2) | (1 << 3)
 	node.add_child(collider)
 	return node
 	

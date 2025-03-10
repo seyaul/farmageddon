@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://u2sln50fv6dn"]
+
+[ext_resource type="Script" path="res://Scripts/lifesteal_popup.gd" id="1_fxhn6"]
+
+[node name="LifestealPopup" type="Control"]
+z_index = -1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fxhn6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -55.0
+offset_top = -138.0
+offset_right = 57.0
+offset_bottom = -100.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Life Steal!"

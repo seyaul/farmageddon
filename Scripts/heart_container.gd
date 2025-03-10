@@ -14,6 +14,7 @@ var curr_health: int
 func _ready() -> void:
 	curr_health = Global.playerHealth
 	update_hearts(curr_health)
+	await get_tree().process_frame
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)
 	pass # Replace with function body.

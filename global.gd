@@ -42,6 +42,7 @@ var weapons : Array
 
 signal gameStarted 
 signal newGameStarted
+signal bossLevelStarted
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,6 +64,7 @@ func _ready() -> void:
 	Global.connect("mob_died", Callable(self, "_on_mob_died"))
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
+	Global.connect("bossLevelStarted", Callable(self, "_boss_level_started"))
 	#emit_signal("newGameStarted")
 	pass # Replace with function body.
 
@@ -194,6 +196,12 @@ func _new_game_started():
 	playerHealth = playerHealthNode.player_max_health
 	playerMaxHealth = playerHealthNode.player_max_health
 	print(playerHealth, "Player health in global.gd")
+
+func _boss_level_started():
+	playerInstance = player_scene.instantiate()
+	playerHealthNode = playerInstance.get_node("./Health")
+	print("player instantiated!")
+	
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):

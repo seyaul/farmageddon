@@ -1,8 +1,8 @@
 [gd_scene load_steps=45 format=3 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
-[ext_resource type="PackedScene" uid="uid://ch8sblcgx4rnm" path="res://Scenes/player.tscn" id="2_iwxje"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="6_fvbo2"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="7_8uohq"]
@@ -60,10 +60,9 @@ _data = {
 point_count = 138
 
 [node name="OldMajor" type="Node2D"]
+script = ExtResource("1_yeg3i")
 
 [node name="World" parent="." instance=ExtResource("37_qmmin")]
-
-[node name="Player" parent="." instance=ExtResource("2_iwxje")]
 
 [node name="Crosshairs" type="Node2D" parent="."]
 

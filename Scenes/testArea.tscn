@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=27 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="6_rvr8e"]
+[ext_resource type="Texture2D" uid="uid://bd4dead1pq5qc" path="res://Sprites/newWeaponUnlock.png" id="7_mk7n7"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -15,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
-[ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
+[ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
@@ -76,6 +77,11 @@ texture = ExtResource("6_rvr8e")
 
 [node name="Timer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/Crosshairinstr"]
 wait_time = 8.0
+
+[node name="newWeaponNoti" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+visible = false
+position = Vector2(165.128, -41.0256)
+texture = ExtResource("7_mk7n7")
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("12_g3doo")

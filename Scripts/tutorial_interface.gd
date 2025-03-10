@@ -49,7 +49,7 @@ func start_step(step_idx : int):
 			"switch_weapon":
 				$WeaponInstr.visible = true
 		remaining_to_press = tutorial_segments[step_idx].duplicate()
-		print(remaining_to_press, " remaining to press in tut.gd")
+		#print(remaining_to_press, " remaining to press in tut.gd")
 	else:
 		#Global.tutorial = false
 		#tutorial_finished.emit()

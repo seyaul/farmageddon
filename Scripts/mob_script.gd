@@ -58,10 +58,10 @@ func _ready() -> void:
 	follow_node.no_longer_slowed.connect(end_slow)
 	setup_fire_timer()
 	
-	print("Hurt Sound Exists:", has_node("hurt"))
-	print("Die Sound Exists:", has_node("die"))
-	print("Attacking Sound Exists:", has_node("attacking"))
-	print("Braying Sound Exists:", has_node("braying"))
+	# print("Hurt Sound Exists:", has_node("hurt"))
+	# print("Die Sound Exists:", has_node("die"))
+	# print("Attacking Sound Exists:", has_node("attacking"))
+	# print("Braying Sound Exists:", has_node("braying"))
 
 func take_damage(amount: int):
 	# Trigger damage reaction (flashing red)

@@ -8,6 +8,7 @@ signal damage_taken
 signal character_died
 signal mob_died
 signal healed
+signal you_win
 
 var character: CharacterBody2D
 func _ready() -> void:
@@ -38,10 +39,10 @@ func take_damage(amount: float) -> void:
 	damage_taken.emit()
 
 func heal(amount: float) -> void:
-	healed.emit()
 	current_health += amount
-	if current_health > max_health:
-		current_health = max_health
+	if current_health > player_max_health:
+		current_health = player_max_health
+	healed.emit()
 
 func die() -> void:
 	if character.name == "Player":
@@ -54,7 +55,12 @@ func die() -> void:
 		isDead = true
 		Global.decrementEnemyCount()
 		Global.num_enemies_defeated += 1
-		await $"../die".finished
+		if has_node("../die"):
+			await $"../die".finished
+		elif has_node("../DeathAnimation"):
+			print("Hello???")
+			character.queue_free()
+			you_win.emit()
 		character.queue_free()
 		
 func check_sound_playing():

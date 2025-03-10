@@ -3,6 +3,7 @@ extends Control
 var curr_wave : int = 1
 var max_waves : int
 var tut_node : Control
+var warned : bool = false
 var wave_manager_node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,6 +24,15 @@ func _process(delta: float) -> void:
 		
 func _on_timer_timeout() -> void:
 	$WaveNotificationText.visible = false
+	if Global.elite_room == 2 and !warned:
+		warned = true
+		$WaveNotificationText.text = "WARNING: \nELITE DIFFICULTY!"
+		$WaveNotificationText.modulate = Color(1, 0, 0)
+		await get_tree().create_timer(1.5).timeout
+		$WaveNotificationText.visible = true
+		await get_tree().create_timer(2.5).timeout
+		$WaveNotificationText.modulate = Color(255, 255, 255)
+		$WaveNotificationText.visible = false
 
 func _on_wave_changed():
 	curr_wave += 1

@@ -91,16 +91,8 @@ func _on_texture_button_pressed() -> void:
 		Global.emit_signal("campfire_selected")
 		print("campfire selected")
 	elif room.type == Room.Type.ELITE:
-		# Elite room tracking
-		Global.elite_room = true
-	elif room.type ==  Room.Type.BOSS:
-		print("Boss room selected (roombackend)")
-		Global.elite_room = false
-		GameState.save_map_state(map_data, floors_climbed, room)
-		Global.emit_signal("bossLevelStarted")
-		get_tree().change_scene_to_file("res://Scenes/old_major.tscn")
-	else:
-		Global.elite_room = false
+		# Elite room tracking (temporary measure, any elite room multiplies enemy damage by 2.)
+		Global.elite_room = 2
 		GameState.save_map_state(map_data, floors_climbed, room)
 		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
 		# logging if the map has been generated because it is a new game/existing game
@@ -108,4 +100,19 @@ func _on_texture_button_pressed() -> void:
 			Global.emit_signal("newGameStarted")
 		else: 
 			Global.emit_signal("gameStarted")
-		print("selected")
+	elif room.type ==  Room.Type.BOSS:
+		print("Boss room selected (roombackend)")
+		Global.elite_room = 1
+		GameState.save_map_state(map_data, floors_climbed, room)
+		Global.emit_signal("bossLevelStarted")
+		get_tree().change_scene_to_file("res://Scenes/old_major.tscn")
+	else:
+		Global.elite_room = 1
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+		# logging if the map has been generated because it is a new game/existing game
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else: 
+			Global.emit_signal("gameStarted")
+		#print("selected")

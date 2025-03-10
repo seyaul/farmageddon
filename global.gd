@@ -25,7 +25,7 @@ var playerCurrHealth : float
 var tutorial : bool
 var num_enemies_defeated : int
 
-var elite_room : bool = false
+var elite_room : int = 1
 signal campfire_selected
 
 
@@ -43,6 +43,7 @@ var weapons : Array
 signal gameStarted 
 signal newGameStarted
 signal bossLevelStarted
+signal newWeaponUnlocked
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -97,14 +98,14 @@ func initialize_card_pool():
 	card_pool = [
 		create_card("Max Health Boost", "Increases max health by 10.", "rare", 
 			preload("res://Sprites/healing (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health": 10}),
-		create_card("Speed Boost", "Increases movement speed by 1.", "medium", 
-			preload("res://Sprites/gold (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1}), # probs shld be common
-		create_card("Cooldown Reduction", "Reduces weapon cooldown time by 10%.", "common", 
-			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "cooldown_speed_modifier": 0.9}),
-		create_card("Fire Rate Buff", "Increases fire rate by 15%.", "common", 
-			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1.15}),
+		create_card("Speed Boost", "Increases movement speed by " + str(1 * elite_room) + ".", "medium", 
+			preload("res://Sprites/gold (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1 * Global.elite_room}), # probs shld be common
+		create_card("Cooldown Reduction", "Reduces weapon cooldown time by " + str(20 * elite_room) + "%.", "common", 
+			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "cooldown_speed_modifier": 0.8 / Global.elite_room}),
+		create_card("Fire Rate Buff", "Increases fire rate by " + str(15 * elite_room) + "%.", "common", 
+			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1 + 0.15 * Global.elite_room}),
 		create_card("Lifesteal Ability", "Chance to regain health when dealing damage.", "common", 
-			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05}) # change this to 1 for the demo mayhaps
+			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05 * Global.elite_room}) # change this to 1 for the demo mayhaps
 	]
 	
 	for card in card_pool:
@@ -171,6 +172,9 @@ func incrementEnemyCount():
 
 func _game_started():
 	enemyCount = 0
+	player_stats.print_all_stats()
+	all_gun_stats.print_all_stats()
+	initialize_card_pool()
 	tutorial = false
 	numLevelsComplete += 1
 	if numLevelsComplete == 1:
@@ -185,6 +189,10 @@ func _game_started():
 	
 func _new_game_started():
 	print("checking when newGameStarted is emitted, global")
+	player_stats.reset_to_defaults()
+	player_stats.print_all_stats()
+	all_gun_stats.reset_to_defaults()
+	all_gun_stats.print_all_stats()
 	newGame = false
 	enemyCount = 0
 	num_enemies_defeated = 0
@@ -195,11 +203,13 @@ func _new_game_started():
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerHealth = playerHealthNode.player_max_health
 	playerMaxHealth = playerHealthNode.player_max_health
-	print(playerHealth, "Player health in global.gd")
+	#print(playerHealth, "Player health in global.gd")
 
 func _boss_level_started():
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
+	player_stats.print_all_stats()
+	all_gun_stats.print_all_stats()
 	print("player instantiated!")
 	
 	

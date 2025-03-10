@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
     rotation = direction_to_mouse.angle() + deg_to_rad(90)
 
 func switch_gun_sprite(name: String):
-    print("loading texture: ", weapon_sprites_path + name + ".png")
+    #print("loading texture: ", weapon_sprites_path + name + ".png")
     gun_sprite.texture = load(weapon_sprites_path + name + ".png")
     if name == "AKorn47":
         gun_sprite.position = Vector2(0, 0)

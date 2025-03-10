@@ -42,24 +42,24 @@ func _ready():
 		connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 # what da hell why is this function defined twice what im too scared to delete it tho
-func apply_card_effect(effect_data: Dictionary):
-	if effect_data.keys().size() > 0:
-		for key in effect_data.keys():
-			if key in Global.player_stats:
-				var old_value = Global.player_stats.get(key)
-				var new_value = old_value + effect_data[key]
-				Global.player_stats.set(key, new_value)
-
-			elif key in Global.all_gun_stats:
-				var old_value = Global.all_gun_stats.get(key)
-				var new_value = old_value * effect_data[key]  
-				Global.all_gun_stats.set(key, new_value)
+#func apply_card_effect(effect_data: Dictionary):
+	#if effect_data.keys().size() > 0:
+		#for key in effect_data.keys():
+			#if key in Global.player_stats:
+				#var old_value = Global.player_stats.get(key)
+				#var new_value = old_value + effect_data[key]
+				#Global.player_stats.set(key, new_value)
+#
+			#elif key in Global.all_gun_stats:
+				#var old_value = Global.all_gun_stats.get(key)
+				#var new_value = old_value * effect_data[key]  
+				#Global.all_gun_stats.set(key, new_value)
 
 func set_effect_data(data: Dictionary) -> void:
 	effect_data = data.duplicate(true)  
 
 func _on_card_pressed() -> void:
-	apply_card_effect(effect_data)
+	#apply_card_effect(effect_data)
 	emit_signal("reward_selected", self)
 
 func set_card_texture(texture: Texture2D) -> void:

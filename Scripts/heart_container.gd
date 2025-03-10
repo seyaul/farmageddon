@@ -38,4 +38,4 @@ func update_hearts(current_hp):
 			heart.texture = heart_textures[1]  # Half heart
 		else:
 			heart.texture = heart_textures[2]  # Empty heart
-	print("damage taken in heart_container.gd")
+	#print("damage taken in heart_container.gd")

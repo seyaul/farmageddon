@@ -19,3 +19,11 @@ func reset_to_defaults():
 	additional_speed = 0
 	speed_modifier = 1
 	lifesteal_chance = 0.0
+
+func print_all_stats():
+	print("=========================Player Stats:=========================")
+	print("Additional Max Health: ", additional_max_health)
+	print("Additional Speed: ", additional_speed)
+	print("Speed Modifier: ", speed_modifier)
+	print("Lifesteal Chance: ", lifesteal_chance)
+	print("=========================End Player Stats=========================")

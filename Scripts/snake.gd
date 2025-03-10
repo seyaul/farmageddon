@@ -53,8 +53,8 @@ func segment_factory() -> Node2D:
 	return node
 
 func take_damage(damage: int) -> void:
-	print("took damage ", damage)
-	$Health.take_damage(4)
+	print("took damage ", 1)
+	$Health.take_damage(1)
 	
 	
 func segments_factory() -> void:

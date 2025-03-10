@@ -13,6 +13,7 @@ signal continuous_started
 signal continuous_ended
 
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
+@export var debug_use_all_guns: bool = false
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
@@ -92,7 +93,12 @@ func equip_new_gun(new_gun: baseGun):
 	emit_signal("weapon_switched")
 
 func setup_weapons():
-	for weapon_name in Global.active_weapons:
+	var weapons = []
+	if debug_use_all_guns:
+		weapons = ["Akorn47", "flamethrower", "rpg"]
+	else:
+		weapons = Global.active_weapons
+	for weapon_name in weapons:
 		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
 		gun_scene_array.append(weapon_scene)
 

@@ -38,12 +38,12 @@ func _physics_process(_delta: float) -> void:
 func segment_factory() -> Node2D:
 	var node: Node2D
 	if interact_with_environment:
-		node = RigidBody2D.new()
+		node = Segment.new()
 		node.gravity_scale = 0
 	else:
 		node = Node2D.new()
-	
 	node.scale = node.scale * segment_scale
+	node.took_damage.connect(take_damage)
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CircleShape2D.new()
 	collider.scale *= 2
@@ -51,6 +51,11 @@ func segment_factory() -> Node2D:
 	node.collision_layer = (1 << 2) | (1 << 3)
 	node.add_child(collider)
 	return node
+
+func take_damage(damage: int) -> void:
+	print("took damage ", damage)
+	$Health.take_damage(4)
+	
 	
 func segments_factory() -> void:
 	for i in range(num_segments):

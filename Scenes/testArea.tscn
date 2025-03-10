@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=27 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="PackedScene" uid="uid://b8oilsliccgad" path="res://Scenes/enemy_counter.tscn" id="16_r0rcy"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
+[ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
@@ -199,6 +200,9 @@ texture = ExtResource("13_iv5bc")
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 visible = false
+
+[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
+script = null
 
 [node name="walls" type="Node2D" parent="."]
 

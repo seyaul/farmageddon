@@ -130,6 +130,7 @@ func _on_hb_timeout():
 func die():
 	follow_node.speed = 0
 	healthBar.visible = false
+	sprite.visible = false
 	if corpse_scene:
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":

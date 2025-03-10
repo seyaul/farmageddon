@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddojeuv8d1834"
+path="res://.godot/imported/chickenhurt.mp3-8e6d73156e5ddb119c73934b946a6b96.mp3str"
+
+[deps]
+
+source_file="res://audio/enemy sounds/chickenhurt.mp3"
+dest_files=["res://.godot/imported/chickenhurt.mp3-8e6d73156e5ddb119c73934b946a6b96.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

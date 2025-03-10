@@ -471,12 +471,13 @@ script = ExtResource("2_t0fbs")
 
 [node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("3_51yba")
+attack_style = "Cooldown"
 speed = 5000.0
 look_at_player = true
 action = "Lunge"
 distance_til_attack = 200.0
 num_attacks = 1
-attack_cooldown = 200
+attack_cooldown = 100
 
 [node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/SmartPather/EMovementController"]
 script = ExtResource("4_dqm7w")
@@ -553,6 +554,7 @@ frame_progress = 0.844849
 
 [node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("99_msm36")
+volume_db = 5.0
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("100_0vi4c")

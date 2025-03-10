@@ -155,13 +155,10 @@ func end_slow():
 
 func disable_targeter_handler():
 	targeter.disabled = true
-
+		
 func enable_targeter_handler():
 	targeter.disabled = false
-	if has_node("attacking"):
-		$attacking.play()
 	
-
 func _handle_play_pre_lunge():
 	sprite.play("pre_lunge")
 	if has_node("braying"):

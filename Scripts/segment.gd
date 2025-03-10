@@ -7,6 +7,8 @@ signal took_damage(damage: int)
 var lgun: Sprite2D
 var rgun: Sprite2D
 
+func _ready() -> void:
+	add_to_group("mobs")
+
 func take_damage(damage: int):
-	print("in segment's take_damage")
 	took_damage.emit(damage)

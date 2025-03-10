@@ -19,4 +19,4 @@ func show_popup():
 #
 	#tween.tween_property(self, "modulate:a", 0.0, duration * 0.5)
 	#tween.tween_callback(queue_free) 
-	#
+	

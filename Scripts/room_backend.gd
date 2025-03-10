@@ -8,9 +8,9 @@ const ICONS := {
 	Room.Type.NOT_ASSIGNED: [null, Vector2.ONE],
 	Room.Type.MONSTER: [preload("res://Sprites/chicken_high_res.png"), Vector2(0.1,0.1)],
 	Room.Type.ELITE: [preload("res://Sprites/bull icon.png"), Vector2(0.15, 0.15)],
-	Room.Type.TREASURE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
+	Room.Type.TREASURE: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
 	Room.Type.CAMPFIRE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
-	Room.Type.SHOP: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
+	Room.Type.SHOP: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
 	Room.Type.BOSS: [preload("res://Sprites/boss.PNG"), Vector2(0.2, 0.2)]
 }
 
@@ -87,13 +87,15 @@ func _on_texture_button_pressed() -> void:
 	animation_player.play("Select")
 	selected.emit(room) #kinda a safeguard
 	
-	if room.type == Room.Type.CAMPFIRE:
+	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
 		Global.emit_signal("campfire_selected")
 		print("campfire selected")
 	elif room.type == Room.Type.ELITE:
 		# Elite room tracking
 		Global.elite_room = true
-		
+	elif room.type == Room.Type.TREASURE:
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
 	else:
 		Global.elite_room = false
 		GameState.save_map_state(map_data, floors_climbed, room)

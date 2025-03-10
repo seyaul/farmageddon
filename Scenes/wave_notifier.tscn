@@ -32,4 +32,16 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 267.0
+offset_top = 191.0
+offset_right = 990.0
+offset_bottom = 438.0
+theme_override_font_sizes/normal_font_size = 50
+text = "           Wave Complete!
+Transporting you to rewards
+                     now..."
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

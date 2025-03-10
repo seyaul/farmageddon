@@ -31,6 +31,7 @@ var max_enemies_on_screen : int = 15
 signal wave_changed
 signal setup_complete_wn
 signal setup_complete_wp
+signal level_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -146,9 +147,9 @@ func _process(delta: float) -> void:
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
 		# Shouldn't be setting the current health here
 		Global.playerHealth = Global.playerHealthNode.current_health
-		print(Global.playerHealth)
+		emit_signal("level_complete")
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(3).timeout
 		# Switch to the reward scene for now, change to scene that zooms in 
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:

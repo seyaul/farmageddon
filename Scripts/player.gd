@@ -48,18 +48,19 @@ func _ready() -> void:
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
+	## add a couple cases for the specific type of gun to discourage holding == not cooling
 	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
 		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
-		if !is_holding:
+		if !is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_started")
 		emit_signal("shoot", "hold", delta)
 		is_holding = true
 	elif Input.is_action_just_released("shoot"):
-		if is_holding:
+		if is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_ended")
-			emit_signal("start_cd_timer")
+		emit_signal("start_cd_timer")
 		emit_signal("shoot", "end", delta)
 		is_holding = false
 	if Input.is_action_just_pressed("melee"):

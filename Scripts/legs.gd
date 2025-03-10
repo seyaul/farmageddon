@@ -1,5 +1,6 @@
 extends Node
 
+@export var interact_with_environment: bool = false
 @export var foot_texture: Texture2D
 @export var leg_texture: Texture2D
 @export var segment: int
@@ -92,7 +93,8 @@ func move_to_step(delta: float) -> void:
 
 func leg_factory() -> Node2D:
 	var node: Node2D
-	if snake.interact_with_environment:
+	
+	if interact_with_environment:
 		node = RigidBody2D.new()
 		node.gravity_scale = 0
 		node.global_position = snake.global_position
@@ -101,6 +103,7 @@ func leg_factory() -> Node2D:
 	var collider: CollisionShape2D = CollisionShape2D.new()
 	var sprite: Sprite2D = Sprite2D.new()
 	collider.shape = CircleShape2D.new()
+	collider.z_index = 100
 	sprite.texture = foot_texture
 	sprite.scale = sprite.scale / 2
 	node.add_child(collider)

@@ -1,9 +1,9 @@
-[gd_scene load_steps=111 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=115 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
-[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_sjynd"]
+[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
@@ -97,7 +97,11 @@
 [ext_resource type="Texture2D" uid="uid://hty2p5k32qht" path="res://Sprites/effects/fire/bull_fire/1_58.png" id="97_1ynln"]
 [ext_resource type="Texture2D" uid="uid://dbx3vr7y8unjc" path="res://Sprites/effects/fire/bull_fire/1_59.png" id="98_dy8xw"]
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="99_auqd3"]
+[ext_resource type="AudioStream" uid="uid://bu3ap7lfpsr5b" path="res://audio/enemy sounds/bullbray.mp3" id="99_msm36"]
+[ext_resource type="AudioStream" uid="uid://bqpve7bwakoti" path="res://audio/enemy sounds/bullcharge.mp3" id="100_0vi4c"]
+[ext_resource type="AudioStream" uid="uid://dmp54apa83rp2" path="res://audio/enemy sounds/bullhurt.mp3" id="101_hum3q"]
 [ext_resource type="Texture2D" uid="uid://bdhft265vwah7" path="res://Sprites/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="101_u82o8"]
+[ext_resource type="AudioStream" uid="uid://cob8hoaerce23" path="res://audio/enemy sounds/bulldie.mp3" id="102_g8s4e"]
 
 [sub_resource type="Curve2D" id="Curve2D_5geu8"]
 _data = {
@@ -547,3 +551,16 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3416o")
 autoplay = "default"
 frame_progress = 0.844849
+
+[node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("99_msm36")
+volume_db = 5.0
+
+[node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("100_0vi4c")
+
+[node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("101_hum3q")
+
+[node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("102_g8s4e")

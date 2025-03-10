@@ -16,6 +16,8 @@ var speed_modifier: float
 var healthBar: Node
 var follow_node: Node
 
+var isDead : bool 
+
 @export var max_fire_level: int = 3
 @export var fire_decay_rate: float = 1
 @export var damage_per_fire_tick: int = 5
@@ -55,6 +57,11 @@ func _ready() -> void:
 	health.mob_died.connect(die)
 	follow_node.no_longer_slowed.connect(end_slow)
 	setup_fire_timer()
+	
+	print("Hurt Sound Exists:", has_node("hurt"))
+	print("Die Sound Exists:", has_node("die"))
+	print("Attacking Sound Exists:", has_node("attacking"))
+	print("Braying Sound Exists:", has_node("braying"))
 
 func take_damage(amount: int):
 	# Trigger damage reaction (flashing red)
@@ -121,6 +128,8 @@ func _on_hb_timeout():
 	healthBar.visible = false
 
 func die():
+	follow_node.speed = 0
+	healthBar.visible = false
 	if corpse_scene:
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":
@@ -146,12 +155,14 @@ func end_slow():
 
 func disable_targeter_handler():
 	targeter.disabled = true
-
+		
 func enable_targeter_handler():
 	targeter.disabled = false
-
+	
 func _handle_play_pre_lunge():
 	sprite.play("pre_lunge")
+	if has_node("braying"):
+		$braying.play()
 
 func _handle_play_walk():
 	sprite.play("walk")	
@@ -170,4 +181,6 @@ func stop_stun_animation():
 	sprite.play()
 	if stunAnimation:
 		stunAnimation.visible = false
-	
+
+
+		

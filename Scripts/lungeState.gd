@@ -70,7 +70,8 @@ func _on_lunge_timeout():
 	emit_signal("state_transition", self, "Follow")
 
 func exit_prep_phase():
-	print("in exit_prep_phase")
+	if has_node("../../attacking"):
+		$"../../attacking".play()
 	in_prep_phase = false
 	in_move_phase = true
 	if phase_on_lunge:

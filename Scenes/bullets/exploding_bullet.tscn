@@ -14,4 +14,3 @@ blast_scene = ExtResource("3_y6lux")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 animation = &"rocket_bullet"
-frame_progress = 0.0

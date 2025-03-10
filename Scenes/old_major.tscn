@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="PackedScene" uid="uid://ch8sblcgx4rnm" path="res://Scenes/player.tscn" id="2_iwxje"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -105,6 +105,7 @@ texture = ExtResource("7_8uohq")
 [node name="Boss" type="CharacterBody2D" parent="."]
 collision_layer = 12
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("8_b7gf3")
 interact_with_environment = true
 num_segments = 20
@@ -112,6 +113,11 @@ stiffness = 0.8
 distance = 40.0
 view_lines = true
 connect_head = true
+
+[node name="BossHead" type="CollisionPolygon2D" parent="Boss"]
+z_index = 100
+position = Vector2(2, 0)
+polygon = PackedVector2Array(-20, -60, -20, 60, 80, 10, 80, -10)
 
 [node name="Legs" type="Node" parent="Boss"]
 script = ExtResource("9_7ju08")

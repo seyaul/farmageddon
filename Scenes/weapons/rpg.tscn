@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://u44n157yt4e"]
+[gd_scene load_steps=5 format=3 uid="uid://u44n157yt4e"]
 
 [ext_resource type="PackedScene" uid="uid://conr5ggj1qu7n" path="res://Scenes/weapons/baseGun.tscn" id="1_six75"]
 [ext_resource type="Script" path="res://Scripts/weaponScripts/rpg.gd" id="2_vfyoy"]
 [ext_resource type="PackedScene" uid="uid://xtwska5otmtn" path="res://Scenes/bullets/exploding_bullet.tscn" id="2_wg1to"]
+[ext_resource type="AudioStream" uid="uid://cd2ui5egg7lgh" path="res://audio/effects/rpg_launch.wav" id="4_beq6i"]
 
 [node name="rpg" instance=ExtResource("1_six75")]
 script = ExtResource("2_vfyoy")
@@ -10,3 +11,7 @@ bullet = ExtResource("2_wg1to")
 projectile_speed = 300.0
 base_fire_rate = 10
 base_heat_increase_rate = 30.0
+
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="2"]
+stream = ExtResource("4_beq6i")
+volume_db = -4.457

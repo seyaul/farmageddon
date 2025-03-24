@@ -8,8 +8,8 @@ extends Node2D
 
 func _ready():
 	particles.emitting = true 
-   # explosion_sound.play()
-	await get_tree().create_timer(0.5).timeout 
+	explosion_sound.play()
+	await get_tree().create_timer(0.7).timeout 
 	queue_free() 
 
 

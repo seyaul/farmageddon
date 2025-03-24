@@ -8,6 +8,7 @@ var playerGold : int
 var playerExp : int
 var player_scene = preload("res://Scenes/player.tscn")
 var lifesteal_popup_scene = preload("res://Scenes/lifesteal_popup.tscn")
+var campfire_popup_instance = null
 var player_stats: PlayerStats
 var all_gun_stats: AllGunStats
 var card_pool: Array = [] 
@@ -61,13 +62,40 @@ func _ready() -> void:
 	
 	playerGold = 0
 	playerExp = 0
-	
+	if not is_connected("campfire_selected", Callable(self, "_on_campfire_selected")):
+		connect("campfire_selected", Callable(self, "_on_campfire_selected"))
+		print("connected campfire_selected signal")
 	Global.connect("mob_died", Callable(self, "_on_mob_died"))
 	Global.connect("gameStarted", Callable(self, "_game_started"))
 	Global.connect("newGameStarted", Callable(self, "_new_game_started"))
 	Global.connect("bossLevelStarted", Callable(self, "_boss_level_started"))
 	#emit_signal("newGameStarted")
 	pass # Replace with function body.
+
+func _on_campfire_selected():
+	Global.playerHealth = Global.playerMaxHealth
+	show_campfire_heal_popup()
+
+func show_campfire_heal_popup():
+	var existing_popup = get_tree().root.find_child("CampfireRoom", true, false)
+	if existing_popup:
+		existing_popup.queue_free()
+		await get_tree().process_frame
+
+	var campfire_popup_scene = preload("res://Scenes/CampfireRoom.tscn")
+	campfire_popup_instance = campfire_popup_scene.instantiate()
+	
+	var ui_layer = get_tree().root.get_node_or_null("UserInterfaceLayer")
+	if ui_layer:
+		ui_layer.add_child(campfire_popup_instance)
+	else:
+		ui_layer = CanvasLayer.new()
+		ui_layer.name = "UserInterfaceLayer2"
+		get_tree().root.add_child(ui_layer)
+	ui_layer.add_child(campfire_popup_instance)
+	campfire_popup_instance.global_position = Vector2(50, 50)
+	campfire_popup_instance.show_popup()
+
 
 func show_lifesteal_popup():
 	print("LIFESTEAL SHOWING AHHH")
@@ -84,8 +112,11 @@ func show_lifesteal_popup():
 		popup.show_popup()
 
 func _on_mob_died() -> void:
+	# dont overheal the player
+	if Global.playerHealthNode.current_health >= Global.playerHealthNode.player_max_health:
+		return
+
 	var lifesteal_roll = randf()
-	
 	if lifesteal_roll <= Global.player_stats.lifesteal_chance:
 		playerHealthNode.heal(2)
 		show_lifesteal_popup()

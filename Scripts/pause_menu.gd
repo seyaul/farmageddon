@@ -5,6 +5,7 @@ var isPaused : bool = false:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	set_process_unhandled_input(true)  # Ensure input is processed
 	process_mode = Node.PROCESS_MODE_ALWAYS  # Allows input even when paused
 

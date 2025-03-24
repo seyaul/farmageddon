@@ -12,8 +12,8 @@ signal weapon_switched
 signal continuous_started
 signal continuous_ended
 
-@export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
+@export var debug_use_all_guns: bool = false
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
@@ -49,18 +49,19 @@ func _ready() -> void:
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
+	## add a couple cases for the specific type of gun to discourage holding == not cooling
 	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
 		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
-		if !is_holding:
+		if !is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_started")
 		emit_signal("shoot", "hold", delta)
 		is_holding = true
 	elif Input.is_action_just_released("shoot"):
-		if is_holding:
+		if is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_ended")
-			emit_signal("start_cd_timer")
+		emit_signal("start_cd_timer")
 		emit_signal("shoot", "end", delta)
 		is_holding = false
 	if Input.is_action_just_pressed("melee"):
@@ -92,7 +93,12 @@ func equip_new_gun(new_gun: baseGun):
 	emit_signal("weapon_switched")
 
 func setup_weapons():
-	for weapon_name in active_weapons:
+	var weapons = []
+	if debug_use_all_guns:
+		weapons = ["Akorn47", "flamethrower", "rpg"]
+	else:
+		weapons = Global.active_weapons
+	for weapon_name in weapons:
 		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
 		gun_scene_array.append(weapon_scene)
 

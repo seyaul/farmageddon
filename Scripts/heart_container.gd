@@ -14,6 +14,7 @@ var curr_health: int
 func _ready() -> void:
 	curr_health = Global.playerHealth
 	update_hearts(curr_health)
+	await get_tree().process_frame
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)
 	pass # Replace with function body.
@@ -37,4 +38,4 @@ func update_hearts(current_hp):
 			heart.texture = heart_textures[1]  # Half heart
 		else:
 			heart.texture = heart_textures[2]  # Empty heart
-	print("damage taken in heart_container.gd")
+	#print("damage taken in heart_container.gd")

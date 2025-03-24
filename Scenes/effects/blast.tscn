@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxv6ripotnohu"]
+[gd_scene load_steps=6 format=3 uid="uid://bxv6ripotnohu"]
 
 [ext_resource type="Script" path="res://Scripts/effects/blast.gd" id="1_botqp"]
+[ext_resource type="AudioStream" uid="uid://dml76iwlvq14" path="res://audio/effects/rpg_explosion.wav" id="2_3btjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x1xdx"]
 radius = 41.0488
@@ -46,5 +47,7 @@ scale_amount_max = 30.0
 color_ramp = SubResource("Gradient_4m5cd")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_3btjs")
+volume_db = 1.981
 
 [connection signal="body_entered" from="BlastRadius" to="." method="_on_blast_radius_body_entered"]

@@ -3,15 +3,19 @@ extends Control
 var curr_wave : int = 1
 var max_waves : int
 var tut_node : Control
+var warned : bool = false
 var wave_manager_node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	wave_manager_node = $"../../WaveManager"
+	$RichTextLabel.visible = false
 	wave_manager_node.setup_complete_wn.connect(handle_setup_complete)
+	wave_manager_node.level_complete.connect(handle_level_complete)
 	if Global.tutorial:
 		tut_node = $"../TutorialInterface"
 		tut_node.start_wave.connect(handle_start_wave)
 		$WaveNotificationText.visible = false
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -20,6 +24,15 @@ func _process(delta: float) -> void:
 		
 func _on_timer_timeout() -> void:
 	$WaveNotificationText.visible = false
+	if Global.elite_room == 2 and !warned:
+		warned = true
+		$WaveNotificationText.text = "WARNING: \nELITE DIFFICULTY!"
+		$WaveNotificationText.modulate = Color(1, 0, 0)
+		await get_tree().create_timer(1.5).timeout
+		$WaveNotificationText.visible = true
+		await get_tree().create_timer(2.5).timeout
+		$WaveNotificationText.modulate = Color(255, 255, 255)
+		$WaveNotificationText.visible = false
 
 func _on_wave_changed():
 	curr_wave += 1
@@ -39,3 +52,6 @@ func handle_setup_complete():
 		max_waves = $"../../WaveManager".num_waves
 		$WaveNotificationText.text = "Wave " + str(curr_wave) + "/" + str(max_waves)
 		$"../../WaveManager".wave_changed.connect(Callable(_on_wave_changed))
+
+func handle_level_complete():
+	$RichTextLabel.visible = true

@@ -8,8 +8,8 @@ extends Node2D
 
 func _ready():
 	particles.emitting = true 
-   # explosion_sound.play()
-	await get_tree().create_timer(0.5).timeout 
+	explosion_sound.play()
+	await get_tree().create_timer(0.7).timeout 
 	queue_free() 
 
 
@@ -17,4 +17,5 @@ func _on_blast_radius_body_entered(body: Node2D) -> void:
 	if body.is_in_group("mobs"):
 		body.take_damage(damage)
 		if stuns:
-			body.stun()
+			if body.has_method("stun"):
+				body.stun()

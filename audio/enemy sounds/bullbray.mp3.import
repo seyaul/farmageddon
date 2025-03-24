@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bu3ap7lfpsr5b"
+path="res://.godot/imported/bullbray.mp3-32b02f49b24db5286c6b45e24bdab488.mp3str"
+
+[deps]
+
+source_file="res://audio/enemy sounds/bullbray.mp3"
+dest_files=["res://.godot/imported/bullbray.mp3-32b02f49b24db5286c6b45e24bdab488.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

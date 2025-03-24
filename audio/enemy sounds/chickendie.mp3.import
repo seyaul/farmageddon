@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://df3hk63v3hepl"
+path="res://.godot/imported/chickendie.mp3-429a7b4dc18c32e1f3aa4368cbc1c574.mp3str"
+
+[deps]
+
+source_file="res://audio/enemy sounds/chickendie.mp3"
+dest_files=["res://.godot/imported/chickendie.mp3-429a7b4dc18c32e1f3aa4368cbc1c574.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

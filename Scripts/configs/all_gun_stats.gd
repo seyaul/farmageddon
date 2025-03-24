@@ -10,5 +10,11 @@ class_name AllGunStats
 
 
 func reset_to_defaults():
-    fire_rate_modifier = 1
-    cooldown_speed_modifier = 1
+	fire_rate_modifier = 1
+	cooldown_speed_modifier = 1
+
+func print_all_stats():
+	print("=========================Gun Stats:=========================")
+	print("fire_rate_modifier: ", fire_rate_modifier)
+	print("cooldown_speed_modifier: ", cooldown_speed_modifier)
+	print("=========================End Gun Stats=========================")

@@ -31,12 +31,13 @@ var max_enemies_on_screen : int = 15
 signal wave_changed
 signal setup_complete_wn
 signal setup_complete_wp
+signal level_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
 	tut_scene.tutorial_finished.connect(handle_signal)
-	print(Global.tutorial, " ", num_enemies, " num enemies", tot_enemy_count, " tot enemy count" )
+	#print(Global.tutorial, " ", num_enemies, " num enemies", tot_enemy_count, " tot enemy count" )
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
@@ -82,7 +83,7 @@ func spawn_on_timer(enemy_scene_type):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
 		enemy_node_name = enemy_instance.node_name
-		print(enemy_node_name, " this is in wave_manager.gd")
+		#print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -103,6 +104,7 @@ func spawn_on_timer(enemy_scene_type):
 			# combine it together to get the full string name. Then, get the 
 			# node accordingly.
 			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
+			apply_elite_buff(enemy_instance, path_name)
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
 			if targeterNode and followNode:
@@ -146,9 +148,9 @@ func _process(delta: float) -> void:
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
 		# Shouldn't be setting the current health here
 		Global.playerHealth = Global.playerHealthNode.current_health
-		print(Global.playerHealth)
+		emit_signal("level_complete")
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(3).timeout
 		# Switch to the reward scene for now, change to scene that zooms in 
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:
@@ -160,7 +162,7 @@ func _process(delta: float) -> void:
 		#enemy_counter.update_enemy_count(enemy_count)
 
 func handle_signal():
-	print("What the hel wave manager")
+	#print("What the hel wave manager")
 	level_selector()
 
 	
@@ -173,7 +175,7 @@ func level_selector():
 		spawn_on_timer(enemy_chicken_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 1:
-		print("EAHJWKA")
+		#print("EAHJWKA")
 		num_enemies = 8
 		num_waves = 2
 		spawn_on_timer(enemy_chicken_scene)
@@ -184,7 +186,7 @@ func level_selector():
 		spawn_on_timer(enemy_chicken_scene)
 		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves * 2
-	elif Global.numLevelsComplete == 3:
+	elif Global.numLevelsComplete >= 3:
 		num_enemies = 15
 		num_waves = 3
 		spawn_on_timer(enemy_bull_scene)
@@ -198,3 +200,19 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
 		Global.playerHealth = Global.playerHealthNode.current_health
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
+
+func apply_elite_buff(enemy_instance, enemy_path_name):
+	#print("attempting elite buff ", enemy_node_name)
+	if enemy_node_name == "SmartPather":
+		var full_path = enemy_path_name + "/MeleeWeapon"
+		var meleeNode = enemy_instance.get_node(full_path)
+		print(meleeNode)
+		meleeNode.damage *= Global.elite_room
+	elif enemy_node_name == "Shooter":
+		#print("hello deer friend chicken")
+		var full_path = enemy_path_name + "/Gun"
+		var gunNode = enemy_instance.get_node(full_path)
+		#print(gunNode)
+		gunNode.bullet_dmg *= Global.elite_room
+
+	

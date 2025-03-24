@@ -90,5 +90,6 @@ func _on_body_exited(body: Node2D) -> void:
 func apply_damage() -> void:
 	for target in targets:
 		if is_instance_valid(target):
-			target.add_fire(1)
+			if target.has_method("add_fire"):
+				target.add_fire(1)
 			target.take_damage(flame_damage)

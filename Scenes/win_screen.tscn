@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://djgc0a1agnebk"]
+
+[ext_resource type="Texture2D" uid="uid://dcpfhvfdrfemt" path="res://Sprites/Screenshot 2025-03-10 at 3.26.09 AM.png" id="1_7ta41"]
+
+[node name="winScreen" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 42.0
+offset_bottom = 42.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(578, 354)
+scale = Vector2(0.765481, 0.512337)
+texture = ExtResource("1_7ta41")

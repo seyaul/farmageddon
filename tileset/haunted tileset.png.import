@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuyssqr2cyaqh"
-path="res://.godot/imported/pixil-frame-0 3.png-e800f65fe5fdf4e15203ee070c8bc709.ctex"
+uid="uid://cblljhipvkn37"
+path="res://.godot/imported/haunted tileset.png-b97601934c74297b9304ebebe56fcc4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pixil-frame-0 3.png"
-dest_files=["res://.godot/imported/pixil-frame-0 3.png-e800f65fe5fdf4e15203ee070c8bc709.ctex"]
+source_file="res://tileset/haunted tileset.png"
+dest_files=["res://.godot/imported/haunted tileset.png-b97601934c74297b9304ebebe56fcc4c.ctex"]
 
 [params]
 

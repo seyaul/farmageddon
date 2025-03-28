@@ -228,6 +228,7 @@ func _new_game_started():
 	enemyCount = 0
 	num_enemies_defeated = 0
 	numLevelsComplete = 0
+	active_weapons = ["AKorn47"]
 	if numResets == 0:
 		tutorial = true
 	playerInstance = player_scene.instantiate()

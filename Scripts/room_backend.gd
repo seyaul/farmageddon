@@ -8,9 +8,9 @@ const ICONS := {
 	Room.Type.NOT_ASSIGNED: [null, Vector2.ONE],
 	Room.Type.MONSTER: [preload("res://Sprites/chicken_high_res.png"), Vector2(0.1,0.1)],
 	Room.Type.ELITE: [preload("res://Sprites/bull icon.png"), Vector2(0.15, 0.15)],
-	Room.Type.TREASURE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
+	Room.Type.TREASURE: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
 	Room.Type.CAMPFIRE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
-	Room.Type.SHOP: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
+	Room.Type.SHOP: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
 	Room.Type.BOSS: [preload("res://Sprites/boss.PNG"), Vector2(0.2, 0.2)]
 }
 
@@ -115,4 +115,3 @@ func _on_texture_button_pressed() -> void:
 			Global.emit_signal("newGameStarted")
 		else: 
 			Global.emit_signal("gameStarted")
-		#print("selected")

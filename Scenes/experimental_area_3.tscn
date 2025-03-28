@@ -1120,8 +1120,8 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-3" type="Bone2D" parent="SoftBody2D/Skeleton2D"]
 position = Vector2(6.5, 7.5)
 rotation = 1.71269
-scale = Vector2(0.999993, 1.00251)
-skew = 0.0538096
+scale = Vector2(0.999996, 1.00251)
+skew = 0.0538074
 rest = Transform2D(-0.141421, 0.98995, -0.98995, -0.141421, 6.5, 7.5)
 auto_calculate_length_and_angle = false
 length = 2.0
@@ -1383,8 +1383,8 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-21" type="Bone2D" parent="SoftBody2D/Skeleton2D"]
 position = Vector2(6, 13)
 rotation = -1.44644
-scale = Vector2(0.999992, 1.00194)
-skew = 0.0473993
+scale = Vector2(0.999996, 1.00194)
+skew = 0.0473982
 rest = Transform2D(0.124035, -0.992278, 0.992278, 0.124035, 6, 13)
 auto_calculate_length_and_angle = false
 length = 2.0
@@ -1651,8 +1651,8 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-39" type="Bone2D" parent="SoftBody2D/Skeleton2D"]
 position = Vector2(4.5, 28.25)
 rotation = -0.223476
-scale = Vector2(0.999998, 1.0044)
-skew = 0.061142
+scale = Vector2(1, 1.0044)
+skew = 0.0611408
 rest = Transform2D(0.975133, -0.221621, 0.221621, 0.975133, 4.5, 28.25)
 auto_calculate_length_and_angle = false
 length = 2.0
@@ -2502,8 +2502,8 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-96" type="Bone2D" parent="SoftBody2D/Skeleton2D"]
 position = Vector2(18, 25)
 rotation = 1.68459
-scale = Vector2(0.999992, 1.00164)
-skew = 0.0434921
+scale = Vector2(0.999996, 1.00164)
+skew = 0.0434933
 rest = Transform2D(-0.113549, 0.993532, -0.993532, -0.113549, 18, 25)
 auto_calculate_length_and_angle = false
 length = 2.0
@@ -2531,7 +2531,7 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-98" type="Bone2D" parent="SoftBody2D/Skeleton2D"]
 position = Vector2(17.6, 28.5)
 rotation = -1.457
-scale = Vector2(0.999993, 1.00164)
+scale = Vector2(0.999996, 1.00164)
 skew = 0.0434932
 rest = Transform2D(0.113549, -0.993532, 0.993532, 0.113549, 17.6, 28.5)
 auto_calculate_length_and_angle = false

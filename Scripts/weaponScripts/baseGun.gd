@@ -18,6 +18,7 @@ signal continuous_started
 @export_enum("Discrete", "Continuous")
 var fire_type: String = "Discrete"
 @export var bullet: PackedScene
+var emission_point_offset: Vector2 = Vector2(0, -115)
 
 # gun stats prior to modifiers
 @export var projectile_speed: float
@@ -107,7 +108,7 @@ func fire(delta: float) -> void:
 		return
 	# Get the mouse position in global coordinates
 	var mouse_position = get_global_mouse_position()
-	var direction_to_mouse = (mouse_position - global_position).normalized()
+	var direction_to_mouse = (mouse_position - player.global_position).normalized()
 	var base_rotation = direction_to_mouse.angle()
 
 	if fire_type == "Discrete":

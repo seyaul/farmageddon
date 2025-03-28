@@ -38,6 +38,8 @@ size = Vector2(5393.25, 90.5)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
+enemy_bull_scene = null
+enemy_chicken_scene = null
 metadata/_edit_group_ = true
 
 [node name="Crosshairs" type="Node2D" parent="."]

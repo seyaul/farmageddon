@@ -17,6 +17,8 @@ var enemy_node_name : String
 var waves_completed : int = 0
 var all_enemies_spawned : bool = false
 
+var active_enemies : Array = []
+
 var tut_scene
 
 var spawn_timer : float
@@ -105,6 +107,18 @@ func spawn_on_timer(enemy_scene_type):
 			# node accordingly.
 			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
 			apply_elite_buff(enemy_instance, path_name)
+			
+			
+			var enemy = enemy_instance.get_node(path_name)
+			print(enemy, " debugging for node")
+			#var enemy_screen_pos = get_viewport().get_camera_2d().unproject_position(enemy.global_position)
+			#var screen_size = Vector2(1152, 648)
+			#var is_offscreen = enemy_screen_pos.x < 0 or enemy_screen_pos.x > screen_size.x or enemy_screen_pos.y < 0 or enemy_screen_pos.y > screen_size.y
+			#print(is_offscreen)
+			
+			
+			
+			
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
 			if targeterNode and followNode:
@@ -117,6 +131,7 @@ func spawn_on_timer(enemy_scene_type):
 		if enemy_health and not enemy_health.is_connected("mob_died", Callable(Global, "_on_mob_died")):
 			enemy_health.connect("mob_died", Callable(Global, "_on_mob_died"))
 		add_child(enemy_instance)
+		active_enemies.append(enemy_instance)
 		# Update the enemy counter
 		#enemy_count -= 1
 		#enemy_counter.update_enemy_count(enemy_count)
@@ -214,5 +229,9 @@ func apply_elite_buff(enemy_instance, enemy_path_name):
 		var gunNode = enemy_instance.get_node(full_path)
 		#print(gunNode)
 		gunNode.bullet_dmg *= Global.elite_room
+		
+		
+func spawn_enemy_indicator():
+	pass
 
 	

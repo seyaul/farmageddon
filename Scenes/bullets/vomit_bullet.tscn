@@ -212,5 +212,5 @@ stream = ExtResource("8_j14k6")
 script = ExtResource("9_ol5i5")
 domino = ExtResource("10_fhrue")
 gap = 60.0
-num_dominos = 12
+num_dominos = 7
 cascade_rate = 10

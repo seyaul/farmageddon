@@ -8,7 +8,8 @@ var enemy: CharacterBody2D
 
 func Enter():
     enemy = self.get_parent().get_parent()
-    enemy.play_stun_animation()
+    if !enemy.isDead:
+        enemy.play_stun_animation()
     seconds_left = stunned_seconds
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

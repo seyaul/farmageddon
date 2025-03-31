@@ -11,6 +11,7 @@ signal start_cd_timer
 signal weapon_switched
 signal continuous_started
 signal continuous_ended
+signal switch_weapon_icon
 
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
 @export var debug_use_all_guns: bool = false
@@ -83,6 +84,8 @@ func _on_health_character_died():
 
 func equip_new_gun(new_gun: baseGun):
 	if gun:
+		if new_gun.name == gun.name:
+			return
 		gun.queue_free()  
 	gun = new_gun
 	turret.switch_gun_sprite(new_gun.name)
@@ -91,6 +94,7 @@ func equip_new_gun(new_gun: baseGun):
 	
 	await get_tree().process_frame
 	emit_signal("weapon_switched")
+	switch_weapon_icon.emit(new_gun.name)
 
 func setup_weapons():
 	var weapons = []

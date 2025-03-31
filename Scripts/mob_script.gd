@@ -129,6 +129,7 @@ func _on_hb_timeout():
 
 func die():
 	follow_node.speed = 0
+	isDead = true
 	healthBar.visible = false
 	sprite.visible = false
 	fire.visible = false

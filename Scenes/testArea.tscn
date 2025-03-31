@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=29 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://Scenes/wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
+[ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
+[ext_resource type="Texture2D" uid="uid://b86hkcb3vqnfw" path="res://Sprites/player_sprites/guns/icons/akorn.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
@@ -65,6 +67,10 @@ texture_progress = ExtResource("3_0r380")
 tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
+max_heat = null
+heat_cool_rate = null
+overheat_penalty_time = null
+min_shot_interval = null
 
 [node name="CooldownTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
 wait_time = 0.5
@@ -198,6 +204,33 @@ texture = ExtResource("13_iv5bc")
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("13_iv5bc")
+
+[node name="gunIcon" type="VBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.913194
+anchor_top = 0.804012
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("17_b1833")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
+layout_mode = 2
+texture = ExtResource("17_pwx0c")
+
+[node name="name" type="Label" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.918817, 0.918817, 0.918817, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Akorn47"
+horizontal_alignment = 1
 
 [node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
 

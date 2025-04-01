@@ -53,6 +53,7 @@ func _ready() -> void:
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
 	var rand_target_det = randi_range(0,4)
+	## TODO: Add a check to see if player has been instantiated.
 	var waypoint1 = player_instance.get_node("wayPoint1")
 	var waypoint2 = player_instance.get_node("wayPoint2")
 	var waypoint3 = player_instance.get_node("wayPoint3")

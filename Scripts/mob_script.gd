@@ -57,7 +57,7 @@ func _ready() -> void:
 	health.mob_died.connect(die)
 	follow_node.no_longer_slowed.connect(end_slow)
 	setup_fire_timer()
-	
+	add_to_group("enemies")
 	# print("Hurt Sound Exists:", has_node("hurt"))
 	# print("Die Sound Exists:", has_node("die"))
 	# print("Attacking Sound Exists:", has_node("attacking"))

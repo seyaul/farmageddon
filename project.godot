@@ -32,6 +32,10 @@ project/assembly_name="farmageddon"
 
 enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
 
+[global_group]
+
+enemies="enemy class for farmageddon"
+
 [input]
 
 move_up={

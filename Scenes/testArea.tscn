@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=30 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
-[ext_resource type="Texture2D" uid="uid://b86hkcb3vqnfw" path="res://Sprites/player_sprites/guns/icons/akorn.png" id="17_pwx0c"]
+[ext_resource type="Texture2D" uid="uid://cg6l2qfxkpfhh" path="res://Sprites/player_sprites/guns/icons/AKorn47.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
@@ -80,6 +80,7 @@ wait_time = 0.5
 wait_time = 5.0
 
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+texture_filter = 1
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
 texture = ExtResource("6_rvr8e")

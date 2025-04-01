@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b74ivl06j4oeu"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_indicator.gd" id="1_1eehs"]
+[ext_resource type="Texture2D" uid="uid://cmcmfthd2cloq" path="res://Sprites/enemyindicator.png" id="2_3do56"]
+
+[node name="EnemyIndicator" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1eehs")
+
+[node name="indicator" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_3do56")

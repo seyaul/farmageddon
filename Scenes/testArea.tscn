@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=30 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -16,11 +16,12 @@
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
-[ext_resource type="Texture2D" uid="uid://b86hkcb3vqnfw" path="res://Sprites/player_sprites/guns/icons/akorn.png" id="17_pwx0c"]
+[ext_resource type="Texture2D" uid="uid://cg6l2qfxkpfhh" path="res://Sprites/player_sprites/guns/icons/AKorn47.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
+[ext_resource type="Script" path="res://Scripts/enemy_indicator_manager.gd" id="23_qq6e7"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
@@ -79,6 +80,7 @@ wait_time = 0.5
 wait_time = 5.0
 
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+texture_filter = 1
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
 texture = ExtResource("6_rvr8e")
@@ -95,6 +97,8 @@ texture = ExtResource("7_mk7n7")
 script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+self_modulate = Color(1, 0.844234, 0.754239, 1)
+top_level = true
 process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -103,6 +107,8 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="World" parent="." instance=ExtResource("23_atxwb")]
 
@@ -131,6 +137,10 @@ scale = Vector2(0.330365, 1)
 texture = ExtResource("11_k0a88")
 
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
+
+[node name="EnemyIndicatorManager" type="Node" parent="UserInterfaceLayer" node_paths=PackedStringArray("camera")]
+script = ExtResource("23_qq6e7")
+camera = NodePath("../../Camera2D")
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 

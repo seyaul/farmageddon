@@ -129,8 +129,14 @@ func _on_hb_timeout():
 
 func die():
 	follow_node.speed = 0
+	isDead = true
 	healthBar.visible = false
 	sprite.visible = false
+	fire.visible = false
+	if $Collider:
+		$Collider.disabled = true
+	if $MeleeWeapon:
+		$MeleeWeapon.disabled = true
 	if corpse_scene:
 		var corpse_instance = corpse_scene.instantiate()
 		if name == "Shooter":

@@ -115,9 +115,7 @@ func spawn_on_timer(enemy_scene_type):
 			#var enemy_screen_pos = get_viewport().get_camera_2d().unproject_position(enemy.global_position)
 			#var screen_size = Vector2(1152, 648)
 			#var is_offscreen = enemy_screen_pos.x < 0 or enemy_screen_pos.x > screen_size.x or enemy_screen_pos.y < 0 or enemy_screen_pos.y > screen_size.y
-			#print(is_offscreen)
-			
-			
+			#print(is_offscreen
 			
 			
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
@@ -188,13 +186,15 @@ func level_selector():
 	if Global.numLevelsComplete == 0:
 		num_enemies = 5
 		num_waves = 1
-		spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 1:
 		#print("EAHJWKA")
 		num_enemies = 8
 		num_waves = 2
-		spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 2:
 		num_enemies = 10

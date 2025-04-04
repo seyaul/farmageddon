@@ -41,15 +41,15 @@ base_heat_increase_rate = 0.5
 z_index = 100
 z_as_relative = false
 scale = Vector2(5, 5)
-amount = 250
-local_coords = true
+amount = 400
 spread = 3.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 100.0
-initial_velocity_max = 200.0
+initial_velocity_max = 175.0
 damping_max = 50.0
 damping_curve = SubResource("Curve_xgg7o")
-scale_amount_max = 7.0
+scale_amount_min = 8.0
+scale_amount_max = 12.0
 scale_amount_curve = SubResource("Curve_3mta6")
 color_ramp = SubResource("Gradient_eg4ga")
 
@@ -65,9 +65,9 @@ collision_layer = 2
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" index="0"]
-visible = false
 position = Vector2(276.5, -2.5)
 shape = SubResource("RectangleShape2D_66qcs")
 
 [node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource("4_fe43h")
+volume_db = 5.0

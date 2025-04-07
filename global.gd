@@ -22,15 +22,14 @@ const CARD_BASE_WEIGHTS = {
 var card_skip_counts = {}
 var playerInstance : CharacterBody2D
 var playerHealthNode : Node
+var playerMaxHealth: int
 var playerCurrHealth : float
 var tutorial : bool
+var map_tutorial : bool
 var num_enemies_defeated : int
 
 var elite_room : int = 1
 signal campfire_selected
-
-
-var playerMaxHealth
 
 # WIP variables
 var newGame : bool = true
@@ -58,7 +57,8 @@ func _ready() -> void:
 	
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerHealth = playerHealthNode.player_max_health
+	playerMaxHealth = playerHealthNode.player_max_health
+	playerHealth = playerMaxHealth + player_stats.additional_max_health
 	
 	playerGold = 0
 	playerExp = 0
@@ -75,7 +75,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_campfire_selected():
-	Global.playerHealth = Global.playerMaxHealth
+	Global.playerHealth = playerMaxHealth + player_stats.additional_max_health
 	show_campfire_heal_popup()
 
 func show_campfire_heal_popup():
@@ -113,12 +113,12 @@ func show_lifesteal_popup():
 		popup.show_popup()
 
 func _on_mob_died() -> void:
-	if Global.playerHealthNode.current_health >= Global.playerHealthNode.player_max_health:
+	if Global.playerHealth >= Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health:
 		return
 
 	var lifesteal_roll = randf()
 	if lifesteal_roll <= Global.player_stats.lifesteal_chance:
-		playerHealthNode.heal(2)
+		playerHealthNode.heal(1)
 		show_lifesteal_popup()
 		print("lifesteal activated yippee!")
 	else:
@@ -207,6 +207,7 @@ func _game_started():
 	all_gun_stats.print_all_stats()
 	initialize_card_pool()
 	tutorial = false
+	map_tutorial = false
 	numLevelsComplete += 1
 	if numLevelsComplete == 1:
 		active_weapons.append("flamethrower")
@@ -215,8 +216,7 @@ func _game_started():
 	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerMaxHealth = playerHealthNode.player_max_health
-	print(playerHealth, " current health, Global ")
+	print(playerHealth, " playerHealth, Global ")
 	
 func _new_game_started():
 	print("checking when newGameStarted is emitted, global")
@@ -225,6 +225,7 @@ func _new_game_started():
 	all_gun_stats.reset_to_defaults()
 	all_gun_stats.print_all_stats()
 	newGame = false
+	map_tutorial = true
 	enemyCount = 0
 	num_enemies_defeated = 0
 	numLevelsComplete = 0
@@ -233,9 +234,7 @@ func _new_game_started():
 		tutorial = true
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerHealth = playerHealthNode.player_max_health
-	playerMaxHealth = playerHealthNode.player_max_health
-	#print(playerHealth, "Player health in global.gd")
+	playerHealth = playerHealthNode.player_max_health + player_stats.additional_max_health
 
 func _boss_level_started():
 	playerInstance = player_scene.instantiate()

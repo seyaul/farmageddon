@@ -161,8 +161,6 @@ func _process(delta: float) -> void:
 	# Slight unidentifiable bug where sometimes the enemy count dips below 0. If anyone 
 	# has insight on this issue, lmk
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
-		# Shouldn't be setting the current health here
-		Global.playerHealth = Global.playerHealthNode.current_health
 		emit_signal("level_complete")
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(3).timeout
@@ -216,7 +214,6 @@ func level_selector():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
-		Global.playerHealth = Global.playerHealthNode.current_health
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
 
 func apply_elite_buff(enemy_instance, enemy_path_name):

@@ -16,9 +16,8 @@ func _ready() -> void:
 	if character.name != "Player":  
 		current_health = max_health
 	else: 
-		player_max_health = player_max_health + Global.player_stats.additional_max_health
-		current_health = Global.playerHealth
-		print("current_health ", current_health)
+		print("player_max_health ", player_max_health)
+		print("global player health ", Global.playerHealth)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -27,21 +26,30 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: float) -> void:
 	if isDead:
 		return
-	current_health -= amount
-	if current_health <= 0:
-		current_health = 0
-		if has_node("../die"):
-			$"../die".play()
-		die()
+	if character.name != "Player":
+		current_health -= amount
+		if current_health <= 0:
+			current_health = 0
+			if has_node("../die"):
+				$"../die".play()
+			die()
+	if character.name == "Player":
+		Global.playerHealth -= amount
+		if Global.playerHealth <= 0:
+			Global.playerHealth = 0
+			if has_node("../die"):
+				$"../die".play()
+			print("dying, global health ", Global.playerHealth)
+			die()
 	else:
 		if has_node("../hurt"):
 			$"../hurt".play()
 	damage_taken.emit()
 
 func heal(amount: float) -> void:
-	current_health += amount
-	if current_health > player_max_health:
-		current_health = player_max_health
+	Global.playerHealth += amount
+	if Global.playerHealth > player_max_health + Global.player_stats.additional_max_health:
+		Global.playerHealth = player_max_health + Global.player_stats.additional_max_health
 	healed.emit()
 
 func die() -> void:

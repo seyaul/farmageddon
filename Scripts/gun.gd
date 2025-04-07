@@ -53,7 +53,6 @@ func fire(delta: float) -> void:
 			projectile.init(bullet_dmg)
 			projectile.position = global_position
 			# TODO:Refactor this
-			print("global shooter rotation", global_rotation_degrees)
 			projectile.rotation_degrees = (global_rotation_degrees + 90) + randf_range(-1 * spread, spread) 
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 			projectile.constant_linear_velocity = direction * projectile_speed * delta

@@ -11,6 +11,8 @@ const MAP_LINE = preload("res://Scenes/line.tscn")
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var campfire_popup = preload("res://Scenes/CampfireRoom.tscn").instantiate()
+@onready var map_background = $MapBackground
+
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -26,17 +28,35 @@ func _ready() -> void:
 	add_child(campfire_popup)
 	campfire_popup.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
 	Global.connect("campfire_selected", Callable(self, "_on_campfire_selected"))
+	Global.connect("newGameStarted", Callable(self, "_on_new_game_started"))
+
+	# make sure the node has been freed so two instances dont spawn
+	if Global.map_tutorial:
+		var existing_tutorial = map_background.get_node_or_null("MapTutorialInterface")
+		print(existing_tutorial)
+		if existing_tutorial:
+			var monster_prompt = existing_tutorial.get_node_or_null("MonsterPrompt")
+			if monster_prompt:
+				monster_prompt.visible = false
+			existing_tutorial.queue_free()
+			await get_tree().process_frame
 
 	# transition to this checking if it is within a Global group of rooms 
 	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
+		Global.map_tutorial = false
 	else:
 		generate_new_map()
 
 		if Global.newGame or GameState.player_died:
 			GameState.player_died = false
 			unlock_floor(0)
+
+	if Global.newGame:
+		Global.map_tutorial = true
+	else:
+		Global.map_tutorial = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
@@ -61,14 +81,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_2d.position.y += SCROLL_SPEED
 
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
-		
+
+func _on_new_game_started():
+	# instantiate the map tut
+		var tut_scene = preload("res://Scenes/tutorial_interface.tscn")
+		var tut_instance = tut_scene.instantiate()
+		$MapBackground.add_child(tut_instance)
+
 func generate_new_map() -> void:
 	floors_climbed = 0
 	map_data = map_generator.generate_map()
 	create_map()
 	last_room = map_data[0][0]
 	unlock_floor(0)
-	
+
 func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room) -> void:
 	floors_climbed = floors_completed
 	map_data = map

@@ -33,7 +33,6 @@ func set_available(new_value: bool) -> void:
 	else: 
 		animation_player.stop()
 
-
 func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
@@ -46,7 +45,6 @@ func set_room(new_data: Room) -> void:
 		show_selected()
 	else:
 		available = false
-
 
 func show_selected() -> void:
 	line_2d.modulate = Color.WHITE
@@ -62,16 +60,16 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	animation_player.play("Select")
 
 func _on_texture_button_pressed() -> void:
-	if not available:
+	if not available or Global.map_tutorial:
 		return
-	
+
 	room.selected = true
 	available = false  
   
 	clicked.emit(room)
 	print("clicked", room.get_key())
 	
-	
+
 	var key = room.get_key()
 
 	

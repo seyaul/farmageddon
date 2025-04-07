@@ -25,6 +25,7 @@ var playerHealthNode : Node
 var playerMaxHealth: int
 var playerCurrHealth : float
 var tutorial : bool
+var map_tutorial : bool
 var num_enemies_defeated : int
 
 var elite_room : int = 1
@@ -206,6 +207,7 @@ func _game_started():
 	all_gun_stats.print_all_stats()
 	initialize_card_pool()
 	tutorial = false
+	map_tutorial = false
 	numLevelsComplete += 1
 	if numLevelsComplete == 1:
 		active_weapons.append("flamethrower")
@@ -223,6 +225,7 @@ func _new_game_started():
 	all_gun_stats.reset_to_defaults()
 	all_gun_stats.print_all_stats()
 	newGame = false
+	map_tutorial = true
 	enemyCount = 0
 	num_enemies_defeated = 0
 	numLevelsComplete = 0

@@ -24,6 +24,7 @@ var playerInstance : CharacterBody2D
 var playerHealthNode : Node
 var playerCurrHealth : float
 var tutorial : bool
+var map_tutorial : bool
 var num_enemies_defeated : int
 
 var elite_room : int = 1
@@ -207,6 +208,7 @@ func _game_started():
 	all_gun_stats.print_all_stats()
 	initialize_card_pool()
 	tutorial = false
+	map_tutorial = false
 	numLevelsComplete += 1
 	if numLevelsComplete == 1:
 		active_weapons.append("flamethrower")
@@ -217,7 +219,7 @@ func _game_started():
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerMaxHealth = playerHealthNode.player_max_health
 	print(playerHealth, " current health, Global ")
-	
+
 func _new_game_started():
 	print("checking when newGameStarted is emitted, global")
 	player_stats.reset_to_defaults()
@@ -225,6 +227,7 @@ func _new_game_started():
 	all_gun_stats.reset_to_defaults()
 	all_gun_stats.print_all_stats()
 	newGame = false
+	map_tutorial = true
 	enemyCount = 0
 	num_enemies_defeated = 0
 	numLevelsComplete = 0

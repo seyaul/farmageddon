@@ -58,10 +58,9 @@ func _ready() -> void:
 	follow_node.no_longer_slowed.connect(end_slow)
 	setup_fire_timer()
 	add_to_group("enemies")
-	# print("Hurt Sound Exists:", has_node("hurt"))
-	# print("Die Sound Exists:", has_node("die"))
-	# print("Attacking Sound Exists:", has_node("attacking"))
-	# print("Braying Sound Exists:", has_node("braying"))
+	#make_intangible(true)
+	#$ghostTimer.start()
+	#$ghostTimer.timeout.connect(_on_timer_timeout)
 
 func take_damage(amount: int):
 	# Trigger damage reaction (flashing red)
@@ -188,6 +187,24 @@ func stop_stun_animation():
 	sprite.play()
 	if stunAnimation:
 		stunAnimation.visible = false
+		
+func _on_timer_timeout():
+	print("timed out")
+	
+	
+# unused function because for some reason the mobs can enter but can't leave? dude idk
+func make_intangible(truthVal):
+	#set_collision_mask_value(1, !truthVal)
+	#print(get_collision_mask_value(1))
+	#set_collision_mask_value(8, truthVal)
+	#print(get_collision_mask_value(8))
+	#set_collision_layer_value(3, !truthVal)
+	#print(get_collision_layer_value(3))
+	#set_collision_layer_value(4, !truthVal)
+	#print(get_collision_layer_value(4))
+	#set_collision_layer_value(8, truthVal)
+	#print(get_collision_layer_value(8))
+	pass
 
 
 		

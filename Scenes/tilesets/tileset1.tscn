@@ -3873,7 +3873,7 @@ sources/5 = SubResource("TileSetAtlasSource_iwkjw")
 sources/2 = SubResource("TileSetAtlasSource_lcghj")
 
 [node name="World" type="Node2D"]
-position = Vector2(93, -16)
+position = Vector2(127, -127)
 script = ExtResource("1_o1c0y")
 
 [node name="KloyGrassBorder" type="TileMapLayer" parent="."]

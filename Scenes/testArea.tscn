@@ -27,17 +27,17 @@
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(288.922, -302.602, 293.281, 735.898, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, -210.844, 731.094, 7.47656, -41.3594, -211.258, -300.047, 3.92188, -44.3516, 3.92188, 0.351562, 0.367188, -41.3594, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797)
+vertices = PackedVector2Array(288.859, -302.602, 286.867, 771.148, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, -208.961, 762.172, 7.47656, -41.3594, -211.242, -300.047, 3.92188, -44.3516, 3.92188, 0.351562, 0.367188, -41.3594, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1, 6), PackedInt32Array(0, 3, 7), PackedInt32Array(8, 0, 7, 9), PackedInt32Array(10, 5, 6), PackedInt32Array(8, 9, 11), PackedInt32Array(12, 10, 6), PackedInt32Array(12, 6, 8, 13), PackedInt32Array(14, 13, 8), PackedInt32Array(15, 14, 8), PackedInt32Array(15, 8, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-220.844, 741, 303.329, 746, 298.876, -312.667, -221.268, -310)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-218.936, 772, 296.862, 781.333, 298.876, -312.667, -221.268, -310)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
-size = Vector2(101, 3833.25)
+size = Vector2(287.5, 3833.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk34s"]
-size = Vector2(5393.25, 90.5)
+size = Vector2(5393.25, 284.25)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
@@ -99,7 +99,6 @@ script = ExtResource("12_g3doo")
 [node name="Camera2D" type="Camera2D" parent="."]
 self_modulate = Color(1, 0.844234, 0.754239, 1)
 top_level = true
-zoom = Vector2(0.2, 0.2)
 process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -115,7 +114,7 @@ editor_draw_drag_margin = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
-position = Vector2(-416, -516)
+position = Vector2(-381, -704)
 scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
@@ -260,19 +259,19 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(1180, 543)
+position = Vector2(1342, 420)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-3647, 514)
+position = Vector2(-3740, 413)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1212, -1099)
+position = Vector2(-1181, -1354)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1252, 2165)
+position = Vector2(-1189, 2195)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

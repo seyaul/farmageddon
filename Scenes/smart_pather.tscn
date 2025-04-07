@@ -438,7 +438,7 @@ rotation = 0.720474
 z_index = 1
 z_as_relative = false
 collision_layer = 12
-collision_mask = 3
+collision_mask = 128
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_sxhn3")
@@ -561,3 +561,7 @@ stream = ExtResource("101_hum3q")
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("102_g8s4e")
+
+[node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
+wait_time = 3.0
+one_shot = true

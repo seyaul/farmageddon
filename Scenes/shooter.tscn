@@ -428,6 +428,7 @@ z_as_relative = false
 position = Vector2(43.8487, 350.065)
 rotation = -0.720474
 collision_layer = 12
+collision_mask = 128
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_ym43u")
@@ -533,3 +534,7 @@ stream = ExtResource("84_7fodd")
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Shooter"]
 stream = ExtResource("85_f7rhc")
+
+[node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/Shooter"]
+wait_time = 3.0
+one_shot = true

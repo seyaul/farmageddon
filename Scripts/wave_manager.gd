@@ -96,10 +96,10 @@ func spawn_on_timer(enemy_scene_type):
 			match rand_wall_choose:
 				0: # left/right walls
 					enemy_instance.position = Vector2(rand_orientation[randi() % rand_orientation.size()] 
-					* 2375, randf_range(-1,1) * 1550)
+					* 2690, randf_range(-1,1) * 1920)
 				1: # top/bottom walls
-					enemy_instance.position = Vector2(randf_range(-1,1) * 2375, 
-					rand_orientation[randi() % rand_orientation.size()]  * 1550)
+					enemy_instance.position = Vector2(randf_range(-1,1) * 2690, 
+					rand_orientation[randi() % rand_orientation.size()]  * 1920)
 			# Currently needing to figure out how to do this as a shared function for all types of scenes 
 			# that are passed in as an input
 			# I think I figured out how to do this. Make a string variable that keeps 

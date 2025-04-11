@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cq5vvvwaryslu" path="res://cutscene_border.png" id="2_801x3"]
 [ext_resource type="Script" path="res://Scripts/typing.gd" id="3_1j64g"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Cutscene" type="Node2D"]
 texture_filter = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -21,8 +21,8 @@ loop = true
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
 z_index = 1

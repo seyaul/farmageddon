@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsxc4vyehaou"]
 
-[ext_resource type="VideoStream" path="res://static_farm_cutscene.ogv" id="1_36ra1"]
-[ext_resource type="Texture2D" uid="uid://cq5vvvwaryslu" path="res://cutscene_border.png" id="2_2krj3"]
-[ext_resource type="Script" path="res://typing.gd" id="3_empqr"]
+[ext_resource type="VideoStream" path="res://static_farm_cutscene.ogv" id="1_i3xby"]
+[ext_resource type="Texture2D" uid="uid://cq5vvvwaryslu" path="res://cutscene_border.png" id="2_801x3"]
+[ext_resource type="Script" path="res://Scripts/typing.gd" id="3_1j64g"]
 
 [node name="Node2D" type="Node2D"]
 texture_filter = 3
@@ -14,7 +14,7 @@ zoom = Vector2(0.3, 0.3)
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-stream = ExtResource("1_36ra1")
+stream = ExtResource("1_i3xby")
 autoplay = true
 loop = true
 
@@ -27,7 +27,7 @@ offset_bottom = 40.0
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
 z_index = 1
 scale = Vector2(16, 16)
-texture = ExtResource("2_2krj3")
+texture = ExtResource("2_801x3")
 centered = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -43,5 +43,5 @@ text = "[bgcolor=black]RAAAAA IM A FARMER GO KILL DEM MUTANT ANIMALS DANGNABIT!!
 "
 visible_characters = 0
 visible_ratio = 0.0
-script = ExtResource("3_empqr")
+script = ExtResource("3_1j64g")
 blinking_speed = 20

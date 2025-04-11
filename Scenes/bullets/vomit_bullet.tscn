@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bdvp1merw4ix2" path="res://Sprites/bullets/egg.png" id="6_xsl6f"]
 [ext_resource type="Texture2D" uid="uid://c55hntbdb67gm" path="res://Sprites/Boss-Projectile-1.png" id="7_tukkp"]
 [ext_resource type="AudioStream" uid="uid://beg60p8mo0srk" path="res://audio/effects/hitmarker_sound.wav" id="8_j14k6"]
-[ext_resource type="Script" path="res://Scenes/bullets/domino.gd" id="9_ol5i5"]
-[ext_resource type="PackedScene" uid="uid://d0nnsvijjq8cl" path="res://vomit_bullet_domino.tscn" id="10_fhrue"]
+[ext_resource type="Script" path="res://Scripts/domino.gd" id="9_ol5i5"]
+[ext_resource type="PackedScene" uid="uid://d0nnsvijjq8cl" path="res://Scenes/bullets/vomit_bullet_domino.tscn" id="10_fhrue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7awh"]
 radius = 24.0

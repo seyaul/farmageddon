@@ -279,7 +279,7 @@ time_following = 600
 [node name="Follow" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("20_wi5t2")
 attack_style = "Duration"
-follow_target = NodePath("../../../Crosshairs")
+follow_target = NodePath("../../../Player")
 speed = 20000.0
 look_at_player = true
 max_deviation_distance = 150.0

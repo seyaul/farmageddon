@@ -27,7 +27,7 @@ var playerCurrHealth : float
 var tutorial : bool
 var map_tutorial : bool
 var num_enemies_defeated : int
-
+var map_tutorial_has_run := false
 var elite_room : int = 1
 signal campfire_selected
 

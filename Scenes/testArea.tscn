@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
 [ext_resource type="Texture2D" uid="uid://cg6l2qfxkpfhh" path="res://Sprites/player_sprites/guns/icons/AKorn47.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://Scenes/tutorial_interface.tscn" id="17_q5r2r"]
-[ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
+[ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
 [ext_resource type="Script" path="res://Scripts/enemy_indicator_manager.gd" id="23_qq6e7"]
@@ -34,10 +34,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-218.936, 772, 296.862,
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
-size = Vector2(287.5, 3833.25)
+size = Vector2(719.75, 3833.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk34s"]
-size = Vector2(5393.25, 284.25)
+size = Vector2(5393.25, 716.125)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
@@ -100,6 +100,10 @@ script = ExtResource("12_g3doo")
 self_modulate = Color(1, 0.844234, 0.754239, 1)
 top_level = true
 process_callback = 0
+limit_left = -2680
+limit_top = -1870
+limit_right = 2680
+limit_bottom = 1870
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -255,23 +259,23 @@ visible = false
 
 [node name="TestWall" type="StaticBody2D" parent="walls"]
 position = Vector2(1193, -418)
-collision_layer = 15
+collision_layer = 271
 collision_mask = 15
 
 [node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(1342, 420)
+position = Vector2(1558.12, 420)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-3740, 413)
+position = Vector2(-3928, 409)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1181, -1354)
+position = Vector2(-1181, -1569.94)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1189, 2195)
+position = Vector2(-1197, 2399)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

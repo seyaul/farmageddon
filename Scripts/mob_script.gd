@@ -20,7 +20,7 @@ var isDead : bool
 
 @export var max_fire_level: int = 3
 @export var fire_decay_rate: float = 1
-@export var damage_per_fire_tick: int = 5
+@export var damage_per_fire_tick: int = 10
 var fire_timer: Timer
 var on_fire: bool
 var fire_level: int # This level will determine how "on fire" the mob is and will decay over time

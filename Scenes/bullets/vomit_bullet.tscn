@@ -211,6 +211,6 @@ stream = ExtResource("8_j14k6")
 [node name="Domino" type="Node" parent="."]
 script = ExtResource("9_ol5i5")
 domino = ExtResource("10_fhrue")
-gap = 60.0
-num_dominos = 7
-cascade_rate = 10
+gap = 20.0
+num_dominos = 15
+cascade_rate = 5

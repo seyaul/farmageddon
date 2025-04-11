@@ -7,7 +7,11 @@ var step_labels: Dictionary = {}
 signal tutorial_completed
 
 func _ready():
-	hide_all_except_monster()
+	if Global.map_tutorial_has_run == false:
+		hide_all_except_monster()
+	else:
+		hide_all()
+
 	if Global.map_tutorial:
 		curr_step = 0
 		start_step(curr_step)
@@ -38,6 +42,7 @@ func advance_tutorial():
 	if curr_step >= tutorial_steps.size():
 		hide_all()
 		Global.map_tutorial = false
+		Global.map_tutorial_has_run = true
 		emit_signal("tutorial_completed")
 		queue_free()
 	else:
@@ -46,6 +51,7 @@ func advance_tutorial():
 func skip_tutorial():
 	hide_all()
 	Global.map_tutorial = false
+	Global.map_tutorial_has_run = true
 	emit_signal("tutorial_completed")
 	queue_free()
 

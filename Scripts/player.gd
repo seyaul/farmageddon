@@ -81,8 +81,9 @@ func _on_health_character_died():
 	tankSprite.visible = false
 	turret.visible = false
 	deathAnimation.visible = true
-	if !deathAnimation.is_playing():
-		deathAnimation.play("death_animation")
+	deathAnimation.play("death_animation")
+	deathAnimation.get_child(0).play()
+	deathAnimation.get_child(1).play()
 
 func equip_new_gun(new_gun: baseGun):
 	if gun:

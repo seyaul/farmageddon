@@ -33,7 +33,6 @@ func _ready() -> void:
 	# make sure the node has been freed so two instances dont spawn
 	if Global.map_tutorial:
 		var existing_tutorial = map_background.get_node_or_null("MapTutorialInterface")
-		print(existing_tutorial)
 		if existing_tutorial:
 			var monster_prompt = existing_tutorial.get_node_or_null("MonsterPrompt")
 			if monster_prompt:
@@ -48,12 +47,12 @@ func _ready() -> void:
 		Global.map_tutorial = false
 	else:
 		generate_new_map()
-
 		if Global.newGame or GameState.player_died:
 			GameState.player_died = false
 			unlock_floor(0)
+	unlock_floor(0)
 
-	if Global.newGame:
+	if Global.newGame and not Global.map_tutorial_has_run:
 		Global.map_tutorial = true
 	else:
 		Global.map_tutorial = false
@@ -162,7 +161,7 @@ func unlock_floor(which_floor: int = floors_climbed) -> void:
 					GameState.room_states[key]["available"] = true
 					continue
 					
-			elif not Global.newGame:
+			elif not Global.newGame and not GameState.player_died and Global.map_tutorial_has_run:
 				return
 
 		if GameState.room_states[key]["selected"]:

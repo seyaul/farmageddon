@@ -85,9 +85,16 @@ func _on_texture_button_pressed() -> void:
 	animation_player.play("Select")
 	selected.emit(room) #kinda a safeguard
 	
-	if room.type == Room.Type.CAMPFIRE:
+	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
 		Global.emit_signal("campfire_selected")
 		print("campfire selected")
+	elif room.type == Room.Type.TREASURE:
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else:
+			Global.emit_signal("gameStarted")
 	elif room.type == Room.Type.ELITE:
 		# Elite room tracking (temporary measure, any elite room multiplies enemy damage by 2.)
 		Global.elite_room = 2

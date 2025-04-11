@@ -28,12 +28,12 @@ func _ready():
 	
 	self.texture_normal = icon
 	self.tooltip_text = card_name + "\n" + description
-
+	self.scale = Vector2(2.0, 2.0)
+	
 	# Ensure signals are connected
 	if not is_connected("pressed", Callable(self, "_on_card_pressed")):
 		connect("pressed", Callable(self, "_on_card_pressed"))
 		print("Connected pressed signal to:", self.name)
-
 
 	if not is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
 		connect("mouse_entered", Callable(self, "_on_mouse_entered"))
@@ -69,10 +69,10 @@ func _on_mouse_entered() -> void:
 	if tween_hover and tween_hover.is_running():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
+	tween_hover.tween_property(self, "scale", Vector2(2.8, 2.8), 0.5)
 
 func _on_mouse_exited() -> void:
 	if tween_hover and tween_hover.is_running():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween_hover.tween_property(self, "scale", Vector2(1.0, 1.0), 0.3)
+	tween_hover.tween_property(self, "scale", Vector2(2.0, 2.0), 0.3)

@@ -240,7 +240,6 @@ func _on_campfire_selected() -> void:
 	print("campfire popup triggered from global signal")
 	var campfire_popup_scene = preload("res://Scenes/CampfireRoom.tscn")
 	var popup_instance = campfire_popup_scene.instantiate()
-	#add_child(popup_instance)
 	popup_instance.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
 	popup_instance.show_popup()
 

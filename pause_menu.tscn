@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpf1axxe7re1j"]
+[gd_scene load_steps=4 format=3 uid="uid://cpf1axxe7re1j"]
 
 [ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_xsoq4"]
+[ext_resource type="FontFile" uid="uid://h2jqhx6xxsxq" path="res://Fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" id="2_oootk"]
+[ext_resource type="PackedScene" uid="uid://canid4cu7drel" path="res://Scenes/volume_slider.tscn" id="3_pc3g1"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -24,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.282353, 0.282353, 0.282353, 0.505882)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="PauseMenu" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,23 +41,80 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/v_separation = 14
 
-[node name="Label" type="Label" parent="GridContainer"]
+[node name="Label" type="Label" parent="PauseMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Paused"
 
-[node name="Resume" type="Button" parent="GridContainer"]
+[node name="Resume" type="Button" parent="PauseMenu"]
 layout_mode = 2
 text = "Resume Game"
 
-[node name="Settings" type="Button" parent="GridContainer"]
+[node name="Settings" type="Button" parent="PauseMenu"]
 layout_mode = 2
 text = "Settings"
 
-[node name="StartNewRun" type="Button" parent="GridContainer"]
+[node name="StartNewRun" type="Button" parent="PauseMenu"]
 layout_mode = 2
 text = "Start New Run"
 
-[connection signal="pressed" from="GridContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="GridContainer/StartNewRun" to="." method="_on_start_new_run_pressed"]
+[node name="Sound" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -95.5
+offset_right = 56.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sound"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_oootk")
+theme_override_font_sizes/font_size = 40
+text = "Master"
+
+[node name="master_volume_slider" parent="Sound/VBoxContainer" instance=ExtResource("3_pc3g1")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_oootk")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+
+[node name="music_volume_slider" parent="Sound/VBoxContainer" instance=ExtResource("3_pc3g1")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_oootk")
+theme_override_font_sizes/font_size = 40
+text = "Sfx
+"
+
+[node name="sfx_volume_slider" parent="Sound/VBoxContainer" instance=ExtResource("3_pc3g1")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Back" type="Button" parent="Sound/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PauseMenu/StartNewRun" to="." method="_on_start_new_run_pressed"]
+[connection signal="pressed" from="Sound/VBoxContainer/Back" to="." method="_on_back_pressed"]

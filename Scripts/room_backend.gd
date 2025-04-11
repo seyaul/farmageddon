@@ -87,7 +87,6 @@ func _on_texture_button_pressed() -> void:
 	
 	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
 		Global.emit_signal("campfire_selected")
-		print("campfire selected")
 	elif room.type == Room.Type.TREASURE:
 		GameState.save_map_state(map_data, floors_climbed, room)
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")

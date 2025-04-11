@@ -22,6 +22,7 @@ signal reward_selected(reward_type: int)
 @export var reward_type: int = 0
 
 func _ready():
+	size = Vector2(300, 100)
 	# Allow the card to react to mouse events
 	self.focus_mode = Control.FOCUS_ALL
 	mouse_filter = Control.MOUSE_FILTER_STOP

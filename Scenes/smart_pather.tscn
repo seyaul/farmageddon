@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=117 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
@@ -423,6 +423,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_tt5mx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s7vim"]
+gradient = SubResource("Gradient_tt5mx")
+fill = 1
+fill_from = Vector2(0.502294, 0.509174)
+fill_to = Vector2(0.704128, 0.323395)
+
 [node name="smartPather" type="Node2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1jr2g")
@@ -565,3 +573,10 @@ stream = ExtResource("102_g8s4e")
 [node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
 wait_time = 3.0
 one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+visible = false
+position = Vector2(-3.73182, 0.681445)
+scale = Vector2(5.21567, 2.41882)
+energy = 16.0
+texture = SubResource("GradientTexture2D_s7vim")

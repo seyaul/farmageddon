@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
-[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="2_sjynd"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
@@ -560,19 +560,15 @@ frame_progress = 0.844849
 [node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("99_msm36")
 volume_db = 5.0
-bus = &"SFX"
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("100_0vi4c")
-bus = &"SFX"
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("101_hum3q")
-bus = &"SFX"
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("102_g8s4e")
-bus = &"SFX"
 
 [node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
 wait_time = 3.0

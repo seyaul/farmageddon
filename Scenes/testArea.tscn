@@ -16,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
 [ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
-[ext_resource type="Texture2D" uid="uid://cg6l2qfxkpfhh" path="res://Sprites/player_sprites/guns/icons/AKorn47.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://Scenes/tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
@@ -32,6 +31,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-218.936, 772, 296.862, 781.333, 298.876, -312.667, -221.268, -310)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b7dst"]
+load_path = "res://.godot/imported/AKorn47.png-c4d4d51e13c493c7735e534086d29e36.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
 size = Vector2(719.75, 3833.25)
@@ -237,7 +239,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="icon" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
 layout_mode = 2
-texture = ExtResource("17_pwx0c")
+texture = SubResource("CompressedTexture2D_b7dst")
 
 [node name="name" type="Label" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
 layout_mode = 2

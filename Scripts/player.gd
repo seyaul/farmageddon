@@ -38,6 +38,7 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	setup_weapons()
+	deathAnimation.animation_finished.connect(_on_death_animation_finished)
 	if len(gun_scene_array) > 0:
 		equip_new_gun(gun_scene_array[current_gun_index].instantiate())
 	else:
@@ -80,7 +81,9 @@ func _on_health_character_died():
 	tankSprite.visible = false
 	turret.visible = false
 	deathAnimation.visible = true
-	deathAnimation.play()
+	deathAnimation.play("death_animation")
+	deathAnimation.get_child(0).play()
+	deathAnimation.get_child(1).play()
 
 func equip_new_gun(new_gun: baseGun):
 	if gun:
@@ -135,3 +138,6 @@ func flash_red():
 
 func _on_flash_timeout():
 	tankSprite.modulate = normal_color
+
+func _on_death_animation_finished() -> void:
+	deathAnimation.visible = false

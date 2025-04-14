@@ -34,7 +34,6 @@ func Enter():
 
 	
 func Update(delta: float):
-	print("dash state")
 	if dashes <= 0:
 		emit_signal("state_transition", self, "Walk")
 		# TODO: Change this
@@ -54,6 +53,7 @@ func Update(delta: float):
 	
 func Exit():
 	# collider.disabled = false
+	dash_timer.stop()
 	character.collision_layer |= 1 << 0
 	character.collision_mask |= 1 << 0
 	collider = null

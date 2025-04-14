@@ -11,8 +11,6 @@ func Enter():
 func Update(_delta: float):
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
 		emit_signal("state_transition", self, "Walk")
-	elif Input.is_action_just_pressed("dash"):
-		emit_signal("state_transition", self, "Dash")
 	else:
 		if mc.previous_move_vector and mc.animation:
 			var pmv = mc.previous_move_vector

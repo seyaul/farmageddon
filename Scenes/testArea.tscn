@@ -155,11 +155,6 @@ camera = NodePath("../../Camera2D")
 
 [node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
 
-[node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
-visible = false
-
-[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
-
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
 layout_mode = 3
 anchors_preset = 15
@@ -267,6 +262,11 @@ offset_right = 1100.0
 offset_bottom = 111.0
 alignment = 2
 script = ExtResource("20_4d1kj")
+
+[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
+
+[node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
+visible = false
 
 [node name="walls" type="Node2D" parent="."]
 

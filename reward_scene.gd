@@ -76,4 +76,6 @@ func apply_card_effect(effect_data: Dictionary):
 func _on_reward_selected(card: Card) -> void:
 	apply_card_effect(card.effect_data)
 	Global.adjust_weights_after_selection(card.card_name)
+	if card.card_name not in Global.chosen_buffs:
+		Global.chosen_buffs.append(card.card_name)
 	get_tree().change_scene_to_file("res://Scenes/map.tscn")

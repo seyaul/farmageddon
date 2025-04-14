@@ -245,5 +245,5 @@ func _on_campfire_selected() -> void:
 
 func _on_heal_accepted() -> void:
 	print("updating player health.")
-	Global.player_health = Global.player_stats.base_max_health + Global.player_stats.additional_max_health
+	Global.player_health = Global.player_stats.base_max_health + Global.player_stats.additional_max_health_modifier
 	print("player health is now: ", Global.player_health)

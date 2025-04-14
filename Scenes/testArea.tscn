@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=31 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cg6l2qfxkpfhh" path="res://Sprites/player_sprites/guns/icons/AKorn47.png" id="17_pwx0c"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://Scenes/tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
+[ext_resource type="Script" path="res://Scripts/buff_container.gd" id="20_4d1kj"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
 [ext_resource type="Script" path="res://Scripts/enemy_indicator_manager.gd" id="23_qq6e7"]
@@ -148,6 +149,15 @@ camera = NodePath("../../Camera2D")
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 
+[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
+
+[node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
+
+[node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
+visible = false
+
+[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
+
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
 layout_mode = 3
 anchors_preset = 15
@@ -246,14 +256,15 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Akorn47"
 horizontal_alignment = 1
 
-[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
-
-[node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
-
-[node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
-visible = false
-
-[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
+[node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
+z_index = 1
+layout_mode = 0
+offset_left = 844.0
+offset_top = 11.0
+offset_right = 1100.0
+offset_bottom = 111.0
+alignment = 2
+script = ExtResource("20_4d1kj")
 
 [node name="walls" type="Node2D" parent="."]
 

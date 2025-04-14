@@ -48,8 +48,8 @@ func take_damage(amount: float) -> void:
 
 func heal(amount: float) -> void:
 	Global.playerHealth += amount
-	if Global.playerHealth > player_max_health + Global.player_stats.additional_max_health:
-		Global.playerHealth = player_max_health + Global.player_stats.additional_max_health
+	if Global.playerHealth > player_max_health + Global.player_stats.additional_max_health_modifier:
+		Global.playerHealth = player_max_health + Global.player_stats.additional_max_health_modifier
 	healed.emit()
 
 func die() -> void:

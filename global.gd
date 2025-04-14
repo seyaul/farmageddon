@@ -35,7 +35,7 @@ signal campfire_selected
 var newGame : bool = true
 
 # To be implemented
-var powerUps : Array
+var chosen_buffs : Array
 var stats : Array
 var weapons : Array
 
@@ -58,7 +58,7 @@ func _ready() -> void:
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
 	playerMaxHealth = playerHealthNode.player_max_health
-	playerHealth = playerMaxHealth + player_stats.additional_max_health
+	playerHealth = playerMaxHealth + player_stats.additional_max_health_modifier
 	
 	playerGold = 0
 	playerExp = 0
@@ -75,7 +75,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_campfire_selected():
-	Global.playerHealth = playerMaxHealth + player_stats.additional_max_health
+	Global.playerHealth = playerMaxHealth + player_stats.additional_max_health_modifier
 	show_campfire_heal_popup()
 
 func show_campfire_heal_popup():
@@ -113,11 +113,11 @@ func show_lifesteal_popup():
 		popup.show_popup()
 
 func _on_mob_died() -> void:
-	if Global.playerHealth >= Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health:
+	if Global.playerHealth >= Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health_modifier:
 		return
 
 	var lifesteal_roll = randf()
-	if lifesteal_roll <= Global.player_stats.lifesteal_chance:
+	if lifesteal_roll <= Global.player_stats.lifesteal_chance_modifier:
 		playerHealthNode.heal(1)
 		show_lifesteal_popup()
 		print("lifesteal activated yippee!")
@@ -128,7 +128,7 @@ func initialize_card_pool():
 	# weights/rarities subject to change
 	card_pool = [
 		create_card("Max Health Boost", "Increases max health by 10.", "rare", 
-			preload("res://Sprites/healing (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health": 10}),
+			preload("res://Sprites/healing (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health_modifier": 10}),
 		create_card("Speed Boost", "Increases movement speed by " + str(1 * elite_room) + ".", "medium", 
 			preload("res://Sprites/gold (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1 * Global.elite_room}), # probs shld be common
 		create_card("Heating Rate Reduction", "Reduces weapon heating rate time by " + str(20 * elite_room) + "%.", "common", 
@@ -136,7 +136,7 @@ func initialize_card_pool():
 		create_card("Fire Rate Buff", "Increases fire rate by " + str(15 * elite_room) + "%.", "common", 
 			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1 + 0.15 * Global.elite_room}),
 		create_card("Lifesteal Ability", "Chance to regain half a heart when dealing damage. Increases by 0.1% every time this card is selected.", "common", 
-			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05 * Global.elite_room}) # change this to 1 for the demo mayhaps
+			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance_modifier": 0.05 * Global.elite_room}) # change this to 1 for the demo mayhaps
 	]
 	
 	for card in card_pool:
@@ -220,6 +220,7 @@ func _game_started():
 	
 func _new_game_started():
 	print("checking when newGameStarted is emitted, global")
+	chosen_buffs = []
 	player_stats.reset_to_defaults()
 	player_stats.print_all_stats()
 	all_gun_stats.reset_to_defaults()
@@ -234,7 +235,7 @@ func _new_game_started():
 		tutorial = true
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	playerHealth = playerHealthNode.player_max_health + player_stats.additional_max_health
+	playerHealth = playerHealthNode.player_max_health + player_stats.additional_max_health_modifier
 
 func _boss_level_started():
 	playerInstance = player_scene.instantiate()
@@ -254,3 +255,5 @@ func _input(event: InputEvent) -> void:
 func get_enemy_count() -> int:
 	return Global.enemyCount
 	
+func get_chosen_buffs() -> Array:
+	return Global.chosen_buffs

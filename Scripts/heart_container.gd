@@ -24,7 +24,7 @@ func handleSignal():
 	update_hearts(curr_health)
 
 func update_hearts(current_hp):
-	var max_hp = Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health
+	var max_hp = Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health_modifier
 	print("max_hp ", max_hp)
 	var heart_count = int(ceil(max_hp / 2.0))
 

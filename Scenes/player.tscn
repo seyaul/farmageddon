@@ -1,11 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=38 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="2_4t6rf"]
 [ext_resource type="Script" path="res://Scripts/fsm/idleState.gd" id="3_vyege"]
 [ext_resource type="Script" path="res://Scripts/fsm/walkState.gd" id="4_kjumt"]
-[ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
+[ext_resource type="Script" path="res://Scripts/fsm/dashState.gd" id="6_cnlrr"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
@@ -63,7 +63,25 @@ animations = [{
 "texture": ExtResource("27_jdjd8")
 }, {
 "duration": 1.0,
+"texture": ExtResource("26_6u547")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
 "texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0mc5u")
 }, {
 "duration": 1.0,
 "texture": ExtResource("29_3v4mr")
@@ -76,6 +94,32 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_animation",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sdb5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0mc5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_eb4io")
+}],
+"loop": true,
+"name": &"default",
 "speed": 10.0
 }]
 
@@ -103,7 +147,7 @@ script = ExtResource("3_vyege")
 script = ExtResource("4_kjumt")
 
 [node name="Dash" type="Node" parent="MoveController"]
-script = ExtResource("5_fslrm")
+script = ExtResource("6_cnlrr")
 phase_on_dash = true
 max_distance = 200.0
 dash_speed = 75000.0
@@ -119,11 +163,11 @@ melee_weapon = ExtResource("9_mr22e")
 script = ExtResource("10_8j6e3")
 
 [node name="Shockwave" type="Area2D" parent="."]
-collision_mask = 12
+collision_mask = 28
 script = ExtResource("11_4pwex")
 damage = 20.0
 shockwave_duration = 0.1
-shockwave_radius = 30.0
+shockwave_radius = 45.0
 shockwave_strength = 10000.0
 max_shockwaves = 2
 shockwave_cooldown = 1
@@ -197,6 +241,20 @@ rotation = 1.5708
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_olutn")
 animation = &"death_animation"
+frame = 15
+frame_progress = 1.0
+
+[node name="smallfire1" type="AnimatedSprite2D" parent="DeathAnimation"]
+position = Vector2(-25, -25)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sdb5h")
+frame_progress = 0.589364
+
+[node name="smallfire2" type="AnimatedSprite2D" parent="DeathAnimation"]
+position = Vector2(25, 25)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sdb5h")
+frame_progress = 0.544894
 
 [node name="DamagedAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_aa2t0")

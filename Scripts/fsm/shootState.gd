@@ -14,6 +14,7 @@ func Update(delta: float):
 	enemy.emit_signal("shoot", 0, "tap", delta)
 	if time >= time_shooting:
 		emit_signal("state_transition", self, "Neutral")
+		
 
 func Exit():
-	time = 0
+	pass

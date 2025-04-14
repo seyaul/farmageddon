@@ -13,8 +13,11 @@ func _physics_process(delta: float) -> void:
 	var mouse_position := parent.get_global_mouse_position()
 	#parent.global_position = mouse_position
 	var children = parent.get_children().filter(func(node): return node is RigidBody2D)
+	var armed_children = children.filter(func(child): return child.has_node("Gun"))
 	if time % move_frequency == 0:
 		for i in range(0, bones_per_move):
 			var j = randi_range(0, children.size() - 1)
 			var child = children[j]
 			child.apply_central_impulse((mouse_position - child.global_position).normalized() * speed)
+	for child in armed_children:
+		child.emit_signal("shoot", 0, "hold", delta)

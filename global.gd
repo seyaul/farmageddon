@@ -128,15 +128,15 @@ func initialize_card_pool():
 	# weights/rarities subject to change
 	card_pool = [
 		create_card("Max Health Boost", "Increases max health by 10.", "rare", 
-			preload("res://Sprites/healing (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health_modifier": 10}),
+			preload("res://Sprites/max health.png"), false, 1.0, {"modifies_player_stats": true, "additional_max_health": 10}),
 		create_card("Speed Boost", "Increases movement speed by " + str(1 * elite_room) + ".", "medium", 
-			preload("res://Sprites/gold (1).png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1 * Global.elite_room}), # probs shld be common
+			preload("res://Sprites/speed buff.png"), false, 1.0, {"modifies_player_stats": true, "additional_speed": 1 * Global.elite_room}), # probs shld be common
 		create_card("Heating Rate Reduction", "Reduces weapon heating rate time by " + str(20 * elite_room) + "%.", "common", 
-			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "cooldown_speed_modifier": 0.8 / Global.elite_room}),
+			preload("res://Sprites/heat rate.png"), true, 1.0, {"modifies_gun_stats": true, "cooldown_speed_modifier": 0.8 / Global.elite_room}),
 		create_card("Fire Rate Buff", "Increases fire rate by " + str(15 * elite_room) + "%.", "common", 
-			preload("res://Sprites/xp (1).png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1 + 0.15 * Global.elite_room}),
+			preload("res://Sprites/fire rate.png"), true, 1.0, {"modifies_gun_stats": true, "fire_rate_modifier": 1 + 0.15 * Global.elite_room}),
 		create_card("Lifesteal Ability", "Chance to regain half a heart when dealing damage. Increases by 0.1% every time this card is selected.", "common", 
-			preload("res://Sprites/healing (1).png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance_modifier": 0.05 * Global.elite_room}) # change this to 1 for the demo mayhaps
+			preload("res://Sprites/lifesteal card.png"), true, 1.0, {"modifies_player_stats": true, "lifesteal_chance": 0.05 * Global.elite_room}) # change this to 1 for the demo mayhaps
 	]
 	
 	for card in card_pool:

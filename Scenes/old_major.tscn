@@ -305,11 +305,11 @@ texture = ExtResource("17_v88cp")
 segments_with_texture = "Odd"
 x_offset = 80.0
 
-[node name="MovementController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+[node name="EMovementController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("18_oun5g")
 initial_state = NodePath("Wander")
 
-[node name="Wander" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+[node name="Wander" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide", "path")]
 script = ExtResource("19_r1bva")
 next_state = "Random"
 return_state = "Wander Return"
@@ -318,7 +318,7 @@ path = NodePath("../../../Circle2")
 speed = 0.03
 time_following = 600
 
-[node name="Follow" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("20_wi5t2")
 attack_style = "Duration"
 follow_target = NodePath("../../../Crosshairs3")
@@ -330,7 +330,7 @@ distance_til_attack = 10000.0
 num_attacks = 1
 time_following = 800
 
-[node name="FollowPath" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+[node name="FollowPath" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide", "path")]
 script = ExtResource("19_r1bva")
 next_state = "Wander"
 return_state = "FollowPath Return"
@@ -340,33 +340,33 @@ speed = 0.9
 time_following = 800
 slide_speed = 0.5
 
-[node name="Surround" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("target")]
+[node name="Surround" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("target")]
 script = ExtResource("21_nicn2")
 target = NodePath("../../../Crosshairs3")
 
-[node name="Wander Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+[node name="Wander Return" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide")]
 script = ExtResource("22_oe7j4")
 follow_path_state = "Wander"
 guide = NodePath("../../../Circle2/PathFollow2D")
 speed = 20000.0
 snap_distance = 10.0
 
-[node name="FollowPath Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+[node name="FollowPath Return" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide")]
 script = ExtResource("22_oe7j4")
 follow_path_state = "FollowPath"
 guide = NodePath("../../../Circle/PathFollow2D")
 speed = 20000.0
 snap_distance = 10.0
 
-[node name="Random" type="Node" parent="Boss/MovementController"]
+[node name="Random" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("23_6q85v")
 options = Array[String](["Surround", "FollowPath", "Follow"])
 
-[node name="AttackController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+[node name="EAttackController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("18_oun5g")
 initial_state = NodePath("Neutral")
 
-[node name="Neutral" type="Node" parent="Boss/AttackController"]
+[node name="Neutral" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("24_mk54l")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -374,7 +374,7 @@ trigger_attack_with_state = {
 "Wander": "Neutral"
 }
 
-[node name="FireLeftGuns" type="Node" parent="Boss/AttackController"]
+[node name="FireLeftGuns" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("25_4so6p")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -383,7 +383,7 @@ trigger_attack_with_state = {
 }
 side_shooting = "Left"
 
-[node name="FireFrontGuns" type="Node" parent="Boss/AttackController"]
+[node name="FireFrontGuns" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("25_4so6p")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",

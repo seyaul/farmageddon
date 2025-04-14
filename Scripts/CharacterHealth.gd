@@ -53,7 +53,10 @@ func heal(amount: float) -> void:
 	healed.emit()
 
 func die() -> void:
+	if isDead:
+		return
 	if character.name == "Player":
+		isDead = true
 		character_died.emit()
 		await get_tree().create_timer(3).timeout
 		if(get_tree() != null):

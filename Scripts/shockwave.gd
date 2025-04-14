@@ -59,6 +59,8 @@ func apply_damage(body) -> void:
 		
 func push_away(bodies) -> void:
 	for body in bodies:
+		if body.is_in_group("mob_bullet"):
+			body.kill_bullet()
 		if body is CharacterBody2D:
 			var direction = (body.global_position - global_position).normalized()
 			var distance = global_position.distance_to(body.global_position)

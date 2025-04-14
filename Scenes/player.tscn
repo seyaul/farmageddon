@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ch8sblcgx4rnm"]
+[gd_scene load_steps=38 format=3 uid="uid://ch8sblcgx4rnm"]
 
 [ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="1_f2wt3"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jvk8e"]
@@ -63,7 +63,25 @@ animations = [{
 "texture": ExtResource("27_jdjd8")
 }, {
 "duration": 1.0,
+"texture": ExtResource("26_6u547")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
 "texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0mc5u")
 }, {
 "duration": 1.0,
 "texture": ExtResource("29_3v4mr")
@@ -79,10 +97,38 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_sdb5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ft2t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jdjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3v4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0mc5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_eb4io")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(0.5, 0.5)
+collision_mask = 257
 script = ExtResource("1_jvk8e")
+debug_use_all_guns = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")
@@ -196,6 +242,20 @@ rotation = 1.5708
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_olutn")
 animation = &"death_animation"
+frame = 15
+frame_progress = 1.0
+
+[node name="smallfire1" type="AnimatedSprite2D" parent="DeathAnimation"]
+position = Vector2(-25, -25)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sdb5h")
+frame_progress = 0.589364
+
+[node name="smallfire2" type="AnimatedSprite2D" parent="DeathAnimation"]
+position = Vector2(25, 25)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sdb5h")
+frame_progress = 0.544894
 
 [node name="DamagedAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_aa2t0")

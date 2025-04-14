@@ -28,7 +28,8 @@ func _ready() -> void:
 	if Global.playerInstance.gun:
 		gun_node = Global.playerInstance.gun
 	else: 
-		print("no gun rn in ready for heating_gauge")
+		#print("no gun rn in ready for heating_gauge")
+		pass
 	await get_tree().process_frame
 	check_and_connect_gun()
 
@@ -92,7 +93,7 @@ func check_and_connect_gun():
 					penalty_applied = true
 					print("When swithing, this should print. ", penalty_applied)
 				elif penalty_timer.is_stopped():
-					print("This shouldn't be printing")
+					#print("This shouldn't be printing")
 					penalty_applied = false
 				gun_node.bullet_fired.disconnect(handle_signal)
 				#print("signal disconnected")

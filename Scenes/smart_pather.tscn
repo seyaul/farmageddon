@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=117 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
@@ -423,6 +423,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_tt5mx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s7vim"]
+gradient = SubResource("Gradient_tt5mx")
+fill = 1
+fill_from = Vector2(0.502294, 0.509174)
+fill_to = Vector2(0.704128, 0.323395)
+
 [node name="smartPather" type="Node2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1jr2g")
@@ -438,7 +446,7 @@ rotation = 0.720474
 z_index = 1
 z_as_relative = false
 collision_layer = 12
-collision_mask = 3
+collision_mask = 128
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_sxhn3")
@@ -509,9 +517,6 @@ melee_duration = 1e+08
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
 script = ExtResource("8_yeokn")
 
-[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(-150, 0)
-
 [node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
 
 [node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
@@ -555,12 +560,27 @@ frame_progress = 0.844849
 [node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("99_msm36")
 volume_db = 5.0
+bus = &"SFX"
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("100_0vi4c")
+bus = &"SFX"
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("101_hum3q")
+bus = &"SFX"
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("102_g8s4e")
+bus = &"SFX"
+
+[node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
+wait_time = 3.0
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+visible = false
+position = Vector2(-3.73182, 0.681445)
+scale = Vector2(5.21567, 2.41882)
+energy = 16.0
+texture = SubResource("GradientTexture2D_s7vim")

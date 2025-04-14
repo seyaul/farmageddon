@@ -8,9 +8,9 @@ const ICONS := {
 	Room.Type.NOT_ASSIGNED: [null, Vector2.ONE],
 	Room.Type.MONSTER: [preload("res://Sprites/chicken_high_res.png"), Vector2(0.1,0.1)],
 	Room.Type.ELITE: [preload("res://Sprites/bull icon.png"), Vector2(0.15, 0.15)],
-	Room.Type.TREASURE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
+	Room.Type.TREASURE: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
 	Room.Type.CAMPFIRE: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
-	Room.Type.SHOP: [preload("res://Sprites/treasure.PNG"), Vector2(0.3, 0.3)],
+	Room.Type.SHOP: [preload("res://Sprites/campfire-pixilart (2) (1).png"), Vector2(0.3, 0.3)],
 	Room.Type.BOSS: [preload("res://Sprites/boss.PNG"), Vector2(0.2, 0.2)]
 }
 
@@ -33,7 +33,6 @@ func set_available(new_value: bool) -> void:
 	else: 
 		animation_player.stop()
 
-
 func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
@@ -46,7 +45,6 @@ func set_room(new_data: Room) -> void:
 		show_selected()
 	else:
 		available = false
-
 
 func show_selected() -> void:
 	line_2d.modulate = Color.WHITE
@@ -62,16 +60,16 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	animation_player.play("Select")
 
 func _on_texture_button_pressed() -> void:
-	if not available:
+	if not available or Global.map_tutorial:
 		return
-	
+
 	room.selected = true
 	available = false  
   
 	clicked.emit(room)
 	print("clicked", room.get_key())
 	
-	
+
 	var key = room.get_key()
 
 	
@@ -87,15 +85,18 @@ func _on_texture_button_pressed() -> void:
 	animation_player.play("Select")
 	selected.emit(room) #kinda a safeguard
 	
-	if room.type == Room.Type.CAMPFIRE:
+	if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
 		Global.emit_signal("campfire_selected")
-		print("campfire selected")
+	elif room.type == Room.Type.TREASURE:
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else:
+			Global.emit_signal("gameStarted")
 	elif room.type == Room.Type.ELITE:
-		# Elite room tracking
-		Global.elite_room = true
-		
-	else:
-		Global.elite_room = false
+		# Elite room tracking (temporary measure, any elite room multiplies enemy damage by 2.)
+		Global.elite_room = 2
 		GameState.save_map_state(map_data, floors_climbed, room)
 		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
 		# logging if the map has been generated because it is a new game/existing game
@@ -103,4 +104,18 @@ func _on_texture_button_pressed() -> void:
 			Global.emit_signal("newGameStarted")
 		else: 
 			Global.emit_signal("gameStarted")
-		print("selected")
+	elif room.type ==  Room.Type.BOSS:
+		print("Boss room selected (roombackend)")
+		Global.elite_room = 1
+		GameState.save_map_state(map_data, floors_climbed, room)
+		Global.emit_signal("bossLevelStarted")
+		get_tree().change_scene_to_file("res://Scenes/old_major.tscn")
+	else:
+		Global.elite_room = 1
+		GameState.save_map_state(map_data, floors_climbed, room)
+		get_tree().change_scene_to_file("res://Scenes/testArea.tscn")
+		# logging if the map has been generated because it is a new game/existing game
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else: 
+			Global.emit_signal("gameStarted")

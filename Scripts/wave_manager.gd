@@ -2,6 +2,7 @@ extends Node
 
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
+var reward_scene = preload("res://Scenes/reward_scene.tscn")
 var player_instance
 @export var num_enemies : int # number of enemies to spawn, probably len(list_enemies)
 @export var tot_enemy_count : int  # did this so enemies do not decrement twice, not fully implemented yet
@@ -16,6 +17,8 @@ var enemy_node_name : String
 #var intervals_passed : int = 0
 var waves_completed : int = 0
 var all_enemies_spawned : bool = false
+
+var active_enemies : Array = []
 
 var tut_scene
 
@@ -37,7 +40,7 @@ signal level_complete
 func _ready() -> void:
 	tut_scene = $"../UserInterfaceLayer/TutorialInterface"
 	tut_scene.tutorial_finished.connect(handle_signal)
-	print(Global.tutorial, " ", num_enemies, " num enemies", tot_enemy_count, " tot enemy count" )
+	#print(Global.tutorial, " ", num_enemies, " num enemies", tot_enemy_count, " tot enemy count" )
 	await get_tree().process_frame
 	#enemy_counter = get_node_or_null("UserInterfaceLayer/EnemyCounter")
 	player_instance = Global.playerInstance
@@ -51,6 +54,7 @@ func _ready() -> void:
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
 	var rand_target_det = randi_range(0,4)
+	## TODO: Add a check to see if player has been instantiated.
 	var waypoint1 = player_instance.get_node("wayPoint1")
 	var waypoint2 = player_instance.get_node("wayPoint2")
 	var waypoint3 = player_instance.get_node("wayPoint3")
@@ -83,7 +87,7 @@ func spawn_on_timer(enemy_scene_type):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
 		enemy_node_name = enemy_instance.node_name
-		print(enemy_node_name, " this is in wave_manager.gd")
+		#print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -93,10 +97,10 @@ func spawn_on_timer(enemy_scene_type):
 			match rand_wall_choose:
 				0: # left/right walls
 					enemy_instance.position = Vector2(rand_orientation[randi() % rand_orientation.size()] 
-					* 1650, randf_range(-1,1) * 1150)
+					* 2690, randf_range(-1,1) * 1920)
 				1: # top/bottom walls
-					enemy_instance.position = Vector2(randf_range(-1,1) * 1650, 
-					rand_orientation[randi() % rand_orientation.size()]  * 1150)
+					enemy_instance.position = Vector2(randf_range(-1,1) * 2690, 
+					rand_orientation[randi() % rand_orientation.size()]  * 1920)
 			# Currently needing to figure out how to do this as a shared function for all types of scenes 
 			# that are passed in as an input
 			# I think I figured out how to do this. Make a string variable that keeps 
@@ -104,6 +108,17 @@ func spawn_on_timer(enemy_scene_type):
 			# combine it together to get the full string name. Then, get the 
 			# node accordingly.
 			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
+			apply_elite_buff(enemy_instance, path_name)
+			
+			
+			var enemy = enemy_instance.get_node(path_name)
+			print(enemy, " debugging for node")
+			#var enemy_screen_pos = get_viewport().get_camera_2d().unproject_position(enemy.global_position)
+			#var screen_size = Vector2(1152, 648)
+			#var is_offscreen = enemy_screen_pos.x < 0 or enemy_screen_pos.x > screen_size.x or enemy_screen_pos.y < 0 or enemy_screen_pos.y > screen_size.y
+			#print(is_offscreen
+			
+			
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
 			if targeterNode and followNode:
@@ -116,6 +131,7 @@ func spawn_on_timer(enemy_scene_type):
 		if enemy_health and not enemy_health.is_connected("mob_died", Callable(Global, "_on_mob_died")):
 			enemy_health.connect("mob_died", Callable(Global, "_on_mob_died"))
 		add_child(enemy_instance)
+		active_enemies.append(enemy_instance)
 		# Update the enemy counter
 		#enemy_count -= 1
 		#enemy_counter.update_enemy_count(enemy_count)
@@ -145,13 +161,12 @@ func _process(delta: float) -> void:
 	# Slight unidentifiable bug where sometimes the enemy count dips below 0. If anyone 
 	# has insight on this issue, lmk
 	if Global.enemyCount <= 0 and waves_completed == num_waves - 1:
-		# Shouldn't be setting the current health here
-		Global.playerHealth = Global.playerHealthNode.current_health
 		emit_signal("level_complete")
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(3).timeout
+		
 		# Switch to the reward scene for now, change to scene that zooms in 
-		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
+		get_tree().change_scene_to_packed(reward_scene)
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:
 		#intervals_passed = 0
 		waves_completed += 1
@@ -161,7 +176,7 @@ func _process(delta: float) -> void:
 		#enemy_counter.update_enemy_count(enemy_count)
 
 func handle_signal():
-	print("What the hel wave manager")
+	#print("What the hel wave manager")
 	level_selector()
 
 	
@@ -171,13 +186,15 @@ func level_selector():
 	if Global.numLevelsComplete == 0:
 		num_enemies = 5
 		num_waves = 1
-		spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 1:
-		print("EAHJWKA")
+		#print("EAHJWKA")
 		num_enemies = 8
 		num_waves = 2
-		spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 2:
 		num_enemies = 10
@@ -185,7 +202,7 @@ func level_selector():
 		spawn_on_timer(enemy_chicken_scene)
 		spawn_on_timer(enemy_bull_scene)
 		tot_enemy_count = num_enemies * num_waves * 2
-	elif Global.numLevelsComplete == 3:
+	elif Global.numLevelsComplete >= 3:
 		num_enemies = 15
 		num_waves = 3
 		spawn_on_timer(enemy_bull_scene)
@@ -197,5 +214,24 @@ func level_selector():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("god_mode_debug"):
-		Global.playerHealth = Global.playerHealthNode.current_health
 		get_tree().change_scene_to_file("res://Scenes/reward_scene.tscn")
+
+func apply_elite_buff(enemy_instance, enemy_path_name):
+	#print("attempting elite buff ", enemy_node_name)
+	if enemy_node_name == "SmartPather":
+		var full_path = enemy_path_name + "/MeleeWeapon"
+		var meleeNode = enemy_instance.get_node(full_path)
+		print(meleeNode)
+		meleeNode.damage *= Global.elite_room
+	elif enemy_node_name == "Shooter":
+		#print("hello deer friend chicken")
+		var full_path = enemy_path_name + "/Gun"
+		var gunNode = enemy_instance.get_node(full_path)
+		#print(gunNode)
+		gunNode.bullet_dmg *= Global.elite_room
+		
+		
+func spawn_enemy_indicator():
+	pass
+
+	

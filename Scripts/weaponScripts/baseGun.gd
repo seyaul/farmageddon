@@ -56,7 +56,7 @@ func _ready() -> void:
 	player.continuous_ended.connect(handle_continuous_ended)
 	$discrGunTimer.timeout.connect(handle_dgcd)
 	# initialize actual gun stats using config
-	actual_fire_rate = int(base_fire_rate / Global.all_gun_stats.fire_rate_modifier)
+	actual_fire_rate = int(base_fire_rate * Global.all_gun_stats.fire_rate_modifier)
 	print(actual_fire_rate, " actual fire rate")
 	actual_heat_increase_rate = base_heat_increase_rate * Global.all_gun_stats.cooldown_speed_modifier
 	time_between_shots = 10.0 / actual_fire_rate
@@ -80,7 +80,7 @@ func handle_signal(action: String, delta) -> void:
 		#if !discrete_shot_cd_fulfilled:
 			#return  # Prevent shooting too fast when clicking
 	if not automatic and action == "tap":
-		print("hello is this thing on")
+		#print("hello is this thing on")
 		if !discrete_shot_cd_fulfilled:
 			return
 		fire(delta)

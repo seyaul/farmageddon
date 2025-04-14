@@ -11,8 +11,10 @@ signal start_cd_timer
 signal weapon_switched
 signal continuous_started
 signal continuous_ended
+signal switch_weapon_icon
 
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
+@export var debug_use_all_guns: bool = false
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
@@ -36,6 +38,7 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	setup_weapons()
+	deathAnimation.animation_finished.connect(_on_death_animation_finished)
 	if len(gun_scene_array) > 0:
 		equip_new_gun(gun_scene_array[current_gun_index].instantiate())
 	else:
@@ -78,10 +81,14 @@ func _on_health_character_died():
 	tankSprite.visible = false
 	turret.visible = false
 	deathAnimation.visible = true
-	deathAnimation.play()
+	deathAnimation.play("death_animation")
+	deathAnimation.get_child(0).play()
+	deathAnimation.get_child(1).play()
 
 func equip_new_gun(new_gun: baseGun):
 	if gun:
+		if new_gun.name == gun.name:
+			return
 		gun.queue_free()  
 	gun = new_gun
 	turret.switch_gun_sprite(new_gun.name)
@@ -90,9 +97,15 @@ func equip_new_gun(new_gun: baseGun):
 	
 	await get_tree().process_frame
 	emit_signal("weapon_switched")
+	switch_weapon_icon.emit(new_gun.name)
 
 func setup_weapons():
-	for weapon_name in Global.active_weapons:
+	var weapons = []
+	if debug_use_all_guns:
+		weapons = ["Akorn47", "flamethrower", "rpg"]
+	else:
+		weapons = Global.active_weapons
+	for weapon_name in weapons:
 		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
 		gun_scene_array.append(weapon_scene)
 
@@ -125,3 +138,6 @@ func flash_red():
 
 func _on_flash_timeout():
 	tankSprite.modulate = normal_color
+
+func _on_death_animation_finished() -> void:
+	deathAnimation.visible = false

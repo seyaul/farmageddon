@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=30 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="6_rvr8e"]
+[ext_resource type="Texture2D" uid="uid://bd4dead1pq5qc" path="res://Sprites/newWeaponUnlock.png" id="7_mk7n7"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -14,29 +15,36 @@
 [ext_resource type="PackedScene" uid="uid://uvd8mgouvmdx" path="res://Scenes/wave_manager.tscn" id="14_cx7gw"]
 [ext_resource type="AudioStream" uid="uid://bvxkd3hnfb181" path="res://audio/music/combat (loop).mp3" id="14_iwkse"]
 [ext_resource type="PackedScene" uid="uid://ddku3d8osgcq1" path="res://Scenes/wave_notifier.tscn" id="15_j1wly"]
-[ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://tutorial_interface.tscn" id="17_q5r2r"]
-[ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
+[ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
+[ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://Scenes/tutorial_interface.tscn" id="17_q5r2r"]
+[ext_resource type="PackedScene" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
+[ext_resource type="Script" path="res://Scripts/enemy_indicator_manager.gd" id="23_qq6e7"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="24_cp3x2"]
 [ext_resource type="PackedScene" uid="uid://co6u51b687ujj" path="res://Scenes/actual_health_bar.tscn" id="24_o64g5"]
 [ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="27_1laov"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hiv8k"]
-vertices = PackedVector2Array(288.922, -302.602, 293.281, 735.898, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, -210.844, 731.094, 7.47656, -41.3594, -211.258, -300.047, 3.92188, -44.3516, 3.92188, 0.351562, 0.367188, -41.3594, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797)
+vertices = PackedVector2Array(288.859, -302.602, 286.867, 771.148, 11.0312, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64062, -208.961, 762.172, 7.47656, -41.3594, -211.242, -300.047, 3.92188, -44.3516, 3.92188, 0.351562, 0.367188, -41.3594, 0.367188, -2.64062, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1, 6), PackedInt32Array(0, 3, 7), PackedInt32Array(8, 0, 7, 9), PackedInt32Array(10, 5, 6), PackedInt32Array(8, 9, 11), PackedInt32Array(12, 10, 6), PackedInt32Array(12, 6, 8, 13), PackedInt32Array(14, 13, 8), PackedInt32Array(15, 14, 8), PackedInt32Array(15, 8, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-220.844, 741, 303.329, 746, 298.876, -312.667, -221.268, -310)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-218.936, 772, 296.862, 781.333, 298.876, -312.667, -221.268, -310)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_tiuqs"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b7dst"]
+load_path = "res://.godot/imported/AKorn47.png-c4d4d51e13c493c7735e534086d29e36.ctex"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4akdh"]
-size = Vector2(101, 3833.25)
+size = Vector2(719.75, 3833.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk34s"]
-size = Vector2(5393.25, 90.5)
+size = Vector2(5393.25, 716.125)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_36u1n")
+enemy_bull_scene = null
+enemy_chicken_scene = null
 metadata/_edit_group_ = true
 
 [node name="Crosshairs" type="Node2D" parent="."]
@@ -62,6 +70,10 @@ texture_progress = ExtResource("3_0r380")
 tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("4_b6lma")
+max_heat = null
+heat_cool_rate = null
+overheat_penalty_time = null
+min_shot_interval = null
 
 [node name="CooldownTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
 wait_time = 0.5
@@ -70,6 +82,7 @@ wait_time = 0.5
 wait_time = 5.0
 
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+texture_filter = 1
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
 texture = ExtResource("6_rvr8e")
@@ -77,11 +90,22 @@ texture = ExtResource("6_rvr8e")
 [node name="Timer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/Crosshairinstr"]
 wait_time = 8.0
 
+[node name="newWeaponNoti" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+visible = false
+position = Vector2(165.128, -41.0256)
+texture = ExtResource("7_mk7n7")
+
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("12_g3doo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+self_modulate = Color(1, 0.844234, 0.754239, 1)
+top_level = true
 process_callback = 0
+limit_left = -2680
+limit_top = -1870
+limit_right = 2680
+limit_bottom = 1870
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -89,12 +113,14 @@ drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="World" parent="." instance=ExtResource("23_atxwb")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
-position = Vector2(-416, -516)
+position = Vector2(-381, -704)
 scale = Vector2(9.432, 3)
 navigation_polygon = SubResource("NavigationPolygon_hiv8k")
 navigation_layers = 5
@@ -117,6 +143,10 @@ scale = Vector2(0.330365, 1)
 texture = ExtResource("11_k0a88")
 
 [node name="UserInterfaceLayer" type="CanvasLayer" parent="."]
+
+[node name="EnemyIndicatorManager" type="Node" parent="UserInterfaceLayer" node_paths=PackedStringArray("camera")]
+script = ExtResource("23_qq6e7")
+camera = NodePath("../../Camera2D")
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
 
@@ -191,6 +221,33 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("13_iv5bc")
 
+[node name="gunIcon" type="VBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.913194
+anchor_top = 0.804012
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("17_b1833")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="TextureRect" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_b7dst")
+
+[node name="name" type="Label" parent="UserInterfaceLayer/PlayerUI/gunIcon"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.918817, 0.918817, 0.918817, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Akorn47"
+horizontal_alignment = 1
+
 [node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
 
 [node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
@@ -204,27 +261,33 @@ visible = false
 
 [node name="TestWall" type="StaticBody2D" parent="walls"]
 position = Vector2(1193, -418)
-collision_layer = 15
+collision_layer = 271
 collision_mask = 15
 
 [node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(1180, 543)
+position = Vector2(1558.12, 420)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-3647, 514)
+position = Vector2(-3928, 409)
 shape = SubResource("RectangleShape2D_4akdh")
 
 [node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1212, -1099)
+position = Vector2(-1181, -1569.94)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
-position = Vector2(-1252, 2165)
+position = Vector2(-1197, 2399)
 shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_iwkse")
+bus = &"Music"
 parameters/looping = true
 
 [node name="WaveManager" parent="." instance=ExtResource("14_cx7gw")]
+num_enemies = null
+tot_enemy_count = null
+stage_type = null
+stage_difficulty_cost = null
+num_waves = null

@@ -7,7 +7,7 @@
 [node name="AKorn47" instance=ExtResource("1_s23ph")]
 bullet = ExtResource("2_8pqak")
 projectile_speed = 70000.0
-base_fire_rate = 20
+base_fire_rate = 30
 spread = 3.0
 bullets_per_fire = 1
 base_heat_increase_rate = 5.0
@@ -16,3 +16,4 @@ automatic = true
 [node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="0"]
 stream = ExtResource("3_2xtba")
 volume_db = -16.0
+bus = &"SFX"

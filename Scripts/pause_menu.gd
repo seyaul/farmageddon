@@ -8,6 +8,8 @@ func _ready() -> void:
 	
 	set_process_unhandled_input(true)  # Ensure input is processed
 	process_mode = Node.PROCESS_MODE_ALWAYS  # Allows input even when paused
+	$Sound.visible = false
+	$PauseMenu.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,3 +44,13 @@ func _on_start_new_run_pressed() -> void:
 	Global.numLevelsComplete = 0
 	Global.newGame = true
 	Global.numResets += 1
+
+
+func _on_settings_pressed() -> void:
+	$PauseMenu.visible = false
+	$Sound.visible = true
+
+
+func _on_back_pressed() -> void:
+	$PauseMenu.visible = true
+	$Sound.visible = false

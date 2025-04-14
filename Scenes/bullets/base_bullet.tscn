@@ -180,3 +180,4 @@ sprite_frames = SubResource("SpriteFrames_i0vis")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hpuen")
+bus = &"SFX"

@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Snake
 
+var can_take_damage: bool = true
+@export var damage_cooldown: float = 0.2  # seconds
+
 # TODO: Add way to manually tweak size of each point.
 # TODO: Make head stop tweaking out or something idk.
 @export var interact_with_environment: bool = false
@@ -53,8 +56,15 @@ func segment_factory() -> Node2D:
 	return node
 
 func take_damage(damage: int) -> void:
-	print("took damage ", 1)
-	$Health.take_damage(1)
+	if not can_take_damage:
+		return
+	can_take_damage = false
+	print("took damage ", 2)
+	$Health.take_damage(2)
+
+	# Start cooldown to prevent more damage
+	await get_tree().create_timer(damage_cooldown).timeout
+	can_take_damage = true
 	
 	
 func segments_factory() -> void:

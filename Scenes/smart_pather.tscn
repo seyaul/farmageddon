@@ -560,19 +560,15 @@ frame_progress = 0.844849
 [node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("99_msm36")
 volume_db = 5.0
-bus = &"SFX"
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("100_0vi4c")
-bus = &"SFX"
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("101_hum3q")
-bus = &"SFX"
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
 stream = ExtResource("102_g8s4e")
-bus = &"SFX"
 
 [node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
 wait_time = 3.0

@@ -17,5 +17,5 @@ func Exit():
 	pass
 	
 func _ready() -> void:
-	mfsm = get_parent().get_parent().get_node("MovementController")
+	mfsm = get_parent().get_parent().get_node("EMovementController")
 	

@@ -17,4 +17,4 @@ func Update(delta: float):
 		
 
 func Exit():
-	time = 0
+	pass

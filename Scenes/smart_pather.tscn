@@ -443,6 +443,7 @@ position = Vector2(113, -257)
 rotation = 0.720474
 
 [node name="SmartPather" type="CharacterBody2D" parent="EnemyPath/EnemyGuide" groups=["mobs"]]
+visible = false
 z_index = 1
 z_as_relative = false
 collision_layer = 12
@@ -523,7 +524,9 @@ script = ExtResource("8_yeokn")
 rotation = -1.5708
 scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"walk"
+animation = &"pre_lunge"
+frame = 14
+frame_progress = 1.0
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
 offset_left = -40.8098

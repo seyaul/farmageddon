@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="2_4t6rf"]
 [ext_resource type="Script" path="res://Scripts/fsm/idleState.gd" id="3_vyege"]
 [ext_resource type="Script" path="res://Scripts/fsm/walkState.gd" id="4_kjumt"]
-[ext_resource type="Script" path="res://Scripts/dashState.gd" id="5_fslrm"]
+[ext_resource type="Script" path="res://Scripts/fsm/dashState.gd" id="6_cnlrr"]
 [ext_resource type="Script" path="res://Scripts/melee.gd" id="8_vyjy7"]
 [ext_resource type="PackedScene" uid="uid://exici47g63lu" path="res://Scenes/meleeWeapon.tscn" id="9_mr22e"]
 [ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="10_8j6e3"]
@@ -128,7 +128,6 @@ z_index = 1
 scale = Vector2(0.5, 0.5)
 collision_mask = 257
 script = ExtResource("1_jvk8e")
-debug_use_all_guns = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")
@@ -148,7 +147,7 @@ script = ExtResource("3_vyege")
 script = ExtResource("4_kjumt")
 
 [node name="Dash" type="Node" parent="MoveController"]
-script = ExtResource("5_fslrm")
+script = ExtResource("6_cnlrr")
 phase_on_dash = true
 max_distance = 200.0
 dash_speed = 75000.0
@@ -168,7 +167,7 @@ collision_mask = 28
 script = ExtResource("11_4pwex")
 damage = 20.0
 shockwave_duration = 0.1
-shockwave_radius = 60.0
+shockwave_radius = 45.0
 shockwave_strength = 10000.0
 max_shockwaves = 2
 shockwave_cooldown = 1

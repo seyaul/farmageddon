@@ -34,7 +34,6 @@ func Enter():
 
 	
 func Update(delta: float):
-	print("dash state")
 	if dashes <= 0:
 		emit_signal("state_transition", self, "Walk")
 		# TODO: Change this

@@ -1,9 +1,9 @@
-[gd_scene load_steps=111 format=3 uid="uid://h3pb83fqvqly"]
+[gd_scene load_steps=117 format=3 uid="uid://h3pb83fqvqly"]
 
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
-[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="2_sjynd"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]
@@ -97,7 +97,11 @@
 [ext_resource type="Texture2D" uid="uid://hty2p5k32qht" path="res://Sprites/effects/fire/bull_fire/1_58.png" id="97_1ynln"]
 [ext_resource type="Texture2D" uid="uid://dbx3vr7y8unjc" path="res://Sprites/effects/fire/bull_fire/1_59.png" id="98_dy8xw"]
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="99_auqd3"]
+[ext_resource type="AudioStream" uid="uid://bu3ap7lfpsr5b" path="res://audio/enemy sounds/bullbray.mp3" id="99_msm36"]
+[ext_resource type="AudioStream" uid="uid://bqpve7bwakoti" path="res://audio/enemy sounds/bullcharge.mp3" id="100_0vi4c"]
+[ext_resource type="AudioStream" uid="uid://dmp54apa83rp2" path="res://audio/enemy sounds/bullhurt.mp3" id="101_hum3q"]
 [ext_resource type="Texture2D" uid="uid://bdhft265vwah7" path="res://Sprites/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="101_u82o8"]
+[ext_resource type="AudioStream" uid="uid://cob8hoaerce23" path="res://audio/enemy sounds/bulldie.mp3" id="102_g8s4e"]
 
 [sub_resource type="Curve2D" id="Curve2D_5geu8"]
 _data = {
@@ -419,6 +423,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_tt5mx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s7vim"]
+gradient = SubResource("Gradient_tt5mx")
+fill = 1
+fill_from = Vector2(0.502294, 0.509174)
+fill_to = Vector2(0.704128, 0.323395)
+
 [node name="smartPather" type="Node2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1jr2g")
@@ -434,7 +446,7 @@ rotation = 0.720474
 z_index = 1
 z_as_relative = false
 collision_layer = 12
-collision_mask = 3
+collision_mask = 128
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("1_sxhn3")
@@ -505,9 +517,6 @@ melee_duration = 1e+08
 [node name="Health" type="Node" parent="EnemyPath/EnemyGuide/SmartPather"]
 script = ExtResource("8_yeokn")
 
-[node name="Node2D" type="Node2D" parent="EnemyPath/EnemyGuide/SmartPather"]
-position = Vector2(-150, 0)
-
 [node name="Targeter" parent="EnemyPath/EnemyGuide/SmartPather" instance=ExtResource("9_k6tbs")]
 
 [node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/SmartPather"]
@@ -547,3 +556,31 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3416o")
 autoplay = "default"
 frame_progress = 0.844849
+
+[node name="braying" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("99_msm36")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("100_0vi4c")
+bus = &"SFX"
+
+[node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("101_hum3q")
+bus = &"SFX"
+
+[node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/SmartPather"]
+stream = ExtResource("102_g8s4e")
+bus = &"SFX"
+
+[node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/SmartPather"]
+wait_time = 3.0
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="EnemyPath/EnemyGuide/SmartPather"]
+visible = false
+position = Vector2(-3.73182, 0.681445)
+scale = Vector2(5.21567, 2.41882)
+energy = 16.0
+texture = SubResource("GradientTexture2D_s7vim")

@@ -16,8 +16,13 @@ var id: int = 0
 var time: int = 0
 var counting: bool = false
 var beam: Line2D
+var character
+
+var bullet_dmg : int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	character = get_parent()
+	#print(character, " This is character")
 	get_parent().shoot.connect(handle_signal)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,12 +46,13 @@ func handle_signal(gun_id: int, action: String, delta: float) -> void:
 
 func fire(delta: float) -> void:
 	if fire_type == "Discrete":
+		if character.name == "Shooter":
+			$"../attacking".play()
 		for i in range(bullets_per_fire):
 			var projectile: AnimatableBody2D = bullet.instantiate()
-			projectile.init(1)
+			projectile.init(bullet_dmg)
 			projectile.position = global_position
 			# TODO:Refactor this
-			print("global shooter rotation", global_rotation_degrees)
 			projectile.rotation_degrees = (global_rotation_degrees + 90) + randf_range(-1 * spread, spread) 
 			var direction = Vector2(cos(projectile.rotation), sin(projectile.rotation)).normalized()
 			projectile.constant_linear_velocity = direction * projectile_speed * delta

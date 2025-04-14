@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqpve7bwakoti"
+path="res://.godot/imported/bullcharge.mp3-647218bf37ecf883da3c31b977cf094f.mp3str"
+
+[deps]
+
+source_file="res://audio/enemy sounds/bullcharge.mp3"
+dest_files=["res://.godot/imported/bullcharge.mp3-647218bf37ecf883da3c31b977cf094f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

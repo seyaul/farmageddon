@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brby3dmfwnpti"]
+[gd_scene load_steps=10 format=3 uid="uid://brby3dmfwnpti"]
 
 [ext_resource type="PackedScene" uid="uid://d3tixxhlwjl4x" path="res://Scenes/bullets/base_bullet.tscn" id="1_5awf7"]
 [ext_resource type="Texture2D" uid="uid://qud5funvme1y" path="res://Sprites/blood_splatters/blood spatter1.png" id="2_2wfts"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bjq4e4hw41bh7" path="res://Sprites/bullets/egg_breaking/egg cracked2.png" id="3_uy3i4"]
 [ext_resource type="Texture2D" uid="uid://duu0uetmt5dcj" path="res://Sprites/bullets/egg_breaking/egg cracked3.png" id="4_5btit"]
 [ext_resource type="Texture2D" uid="uid://clfkec5t417mf" path="res://Sprites/blood_splatters/blood spatter3.png" id="4_y81a8"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_d0yg4"]
+points = PackedVector2Array(-8, -25, 8, -25, 2, 25, -2, 25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yuwde"]
 animations = [{
@@ -40,9 +43,12 @@ animations = [{
 }]
 
 [node name="bossBullet" instance=ExtResource("1_5awf7")]
+collision_layer = 16
+collision_mask = 1
 
 [node name="BulletHitbox" parent="." index="0"]
 scale = Vector2(1.655, 0.68)
+shape = SubResource("ConvexPolygonShape2D_d0yg4")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(8.11, -1.945)
@@ -55,3 +61,5 @@ texture_filter = 1
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_yuwde")
 animation = &"blood_spatter"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="4"]

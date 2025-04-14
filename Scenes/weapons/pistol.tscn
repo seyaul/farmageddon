@@ -6,4 +6,3 @@
 [node name="pistol" instance=ExtResource("1_6nw4q")]
 bullet = ExtResource("3_tl5r4")
 projectile_speed = 50001.0
-fire_rate = 10

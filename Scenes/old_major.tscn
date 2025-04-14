@@ -1,0 +1,624 @@
+[gd_scene load_steps=57 format=3 uid="uid://cfte2bglhtfoe"]
+
+[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+
+[ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
+[ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
+[ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
+[ext_resource type="Script" path="res://Scripts/navigation_region_2d.gd" id="6_fvbo2"]
+[ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="7_8uohq"]
+[ext_resource type="Script" path="res://Scripts/snake.gd" id="8_b7gf3"]
+[ext_resource type="Script" path="res://Scripts/legs.gd" id="9_7ju08"]
+[ext_resource type="Texture2D" uid="uid://7obnt8ybvddo" path="res://Sprites/2_21 claw2.png" id="10_7f8ja"]
+[ext_resource type="Texture2D" uid="uid://7a0wideh312w" path="res://Sprites/2_21 texture darker.png" id="11_ey47n"]
+[ext_resource type="Script" path="res://Scripts/snake_guns.gd" id="12_uu8lk"]
+[ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="13_qcdmj"]
+[ext_resource type="PackedScene" uid="uid://brby3dmfwnpti" path="res://Scenes/bullets/old_major_bullet.tscn" id="14_36h7u"]
+[ext_resource type="Script" path="res://Sprites/snake_texture.gd" id="15_kh3dc"]
+[ext_resource type="Texture2D" uid="uid://73fsopgsja4w" path="res://Sprites/segment flesh1.png" id="16_u6r0l"]
+[ext_resource type="Texture2D" uid="uid://bn763rt1qk4sw" path="res://Sprites/segment tail.png" id="17_v88cp"]
+[ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="18_oun5g"]
+[ext_resource type="Script" path="res://Scripts/follow_path.gd" id="19_r1bva"]
+[ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="20_wi5t2"]
+[ext_resource type="Script" path="res://Scripts/surround_state.gd" id="21_nicn2"]
+[ext_resource type="Script" path="res://Scripts/repath.gd" id="22_oe7j4"]
+[ext_resource type="Script" path="res://Scripts/randomStateJunction.gd" id="23_6q85v"]
+[ext_resource type="Script" path="res://Scripts/bossNeutralState.gd" id="24_mk54l"]
+[ext_resource type="Script" path="res://Scripts/fireGuns.gd" id="25_4so6p"]
+[ext_resource type="Script" path="res://Scripts/audio_state.gd" id="26_frb64"]
+[ext_resource type="AudioStream" uid="uid://bw1eegdxrekio" path="res://audio/pig_boss/oink_1.mp3" id="27_sbsyh"]
+[ext_resource type="AudioStream" uid="uid://dybcauoubl30w" path="res://audio/pig_boss/oink_2.mp3" id="28_hp0ld"]
+[ext_resource type="AudioStream" uid="uid://757pum7bspgi" path="res://audio/pig_boss/oink_3.mp3" id="29_f3658"]
+[ext_resource type="AudioStream" uid="uid://bvmosc15q70bv" path="res://audio/pig_boss/oink_4.mp3" id="30_fhwva"]
+[ext_resource type="PackedScene" uid="uid://lpn12517i80e" path="res://Scenes/targeter.tscn" id="31_jfh8n"]
+[ext_resource type="Script" path="res://Scripts/CharacterHealth.gd" id="32_v70m5"]
+[ext_resource type="Texture2D" uid="uid://du7nl64cg1otx" path="res://Sprites/head only.png" id="33_81fig"]
+[ext_resource type="AudioStream" uid="uid://d0atq0xlb0c4n" path="res://audio/pig_boss/breathing_loop.mp3" id="34_1guxd"]
+[ext_resource type="AudioStream" uid="uid://cs30eiyq8xnb3" path="res://audio/pig_boss/weird_1.mp3" id="35_s38h0"]
+[ext_resource type="AudioStream" uid="uid://cd25mbdyvqruo" path="res://audio/pig_boss/weird_2.mp3" id="36_aun44"]
+[ext_resource type="AudioStream" uid="uid://4ahljq1db6bk" path="res://audio/pig_boss/weird_3.mp3" id="37_b6t7k"]
+[ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="37_qmmin"]
+[ext_resource type="AudioStream" uid="uid://bvf3n6nif2jnc" path="res://audio/pig_boss/attack_1.mp3" id="38_tv2og"]
+[ext_resource type="Script" path="res://Scripts/heart_container.gd" id="39_bymuh"]
+[ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="40_rs7ol"]
+[ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="41_rgave"]
+[ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="42_ko1wo"]
+[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="43_syxrl"]
+[ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="44_iqqjc"]
+[ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
+[ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
+[ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
+[ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
+[ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
+[ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="50_8xs56"]
+[ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="51_apcog"]
+[ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ivfr4"]
+vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 3.92188, 0.351563, -150.938, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64063, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-160.941, 329.667, 82.3791, 325.333, 82.3791, -98.6667, -161.047, -96)])
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_410vj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_10l6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_st8kg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_5w6fv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_8xs56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_apcog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_bhusx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_gyk8w"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, -200, 0, 0, 0, 0, 51, -195, 0, 0, 0, 0, 100, -176, 0, 0, 0, 0, 142, -146, 0, 0, 0, 0, 175, -101, 0, 0, 0, 0, 193, -52, 0, 0, 0, 0, 200, -1, 0, 0, 0, 0, 193, 50, 0, 0, 0, 0, 174, 97, 0, 0, 0, 0, 142, 141, 0, 0, 0, 0, 104, 172, 0, 0, 0, 0, 53, 195, 0, 0, 0, 0, -3, 201, 0, 0, 0, 0, -52, 193, 0, 0, 0, 0, -101, 174, 0, 0, 0, 0, -143, 143, 0, 0, 0, 0, -175, 101, 0, 0, 0, 0, -193, 50, 0, 0, 0, 0, -201, -1, 0, 0, 0, 0, -196, -55, 0, 0, 0, 0, -175, -103, 0, 0, 0, 0, -144, -142, 0, 0, 0, 0, -104, -176, 0, 0, 0, 0, -55, -193, 0, 0, 0, 0, 1, -200)
+}
+point_count = 25
+
+[sub_resource type="Curve2D" id="Curve2D_hoh5i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 15, -12, 0, 0, 0, 0, 15, -12, 0, 0, 0, 0, -73, -66, 0, 0, 0, 0, -73, -66, 0, 0, 0, 0, -146, -182, 0, 0, 0, 0, -172, -224, 0, 0, 0, 0, -172, -227, 0, 0, 0, 0, -197, -278, 0, 0, 0, 0, -220, -312, 0, 0, 0, 0, -225, -318, 0, 0, 0, 0, -245, -360, 0, 0, 0, 0, -245, -360, 0, 0, 0, 0, -310, -425, 0, 0, 0, 0, -356, -451, 0, 0, 0, 0, -358, -453, 0, 0, 0, 0, -469, -462, 0, 0, 0, 0, -554, -453, 0, 0, 0, 0, -630, -462, 0, 0, 0, 0, -718, -445, 0, 0, 0, 0, -800, -391, 0, 0, 0, 0, -842, -349, 0, 0, 0, 0, -845, -346, 0, 0, 0, 0, -907, -318, 0, 0, 0, 0, -924, -238, 0, 0, 0, 0, -924, -241, 0, 0, 0, 0, -839, -199, 0, 0, 0, 0, -749, -230, 0, 0, 0, 0, -613, -253, 0, 0, 0, 0, -613, -253, 0, 0, 0, 0, -440, -301, 0, 0, 0, 0, -347, -281, 0, 0, 0, 0, -291, -272, 0, 0, 0, 0, -347, -281, 0, 0, 0, 0, -192, -261, 0, 0, 0, 0, -98, -315, 0, 0, 0, 0, -22, -380, 0, 0, 0, 0, -22, -380, 0, 0, 0, 0, 105, -431, 0, 0, 0, 0, 185, -439, 0, 0, 0, 0, 289, -436, 0, 0, 0, 0, 351, -352, 0, 0, 0, 0, 272, -261, 0, 0, 0, 0, 190, -202, 0, 0, 0, 0, 162, -139, 0, 0, 0, 0, 190, -202, 0, 0, 0, 0, 250, -125, 0, 0, 0, 0, 385, -156, 0, 0, 0, 0, 450, -233, 0, 0, 0, 0, 448, -332, 0, 0, 0, 0, 499, -405, 0, 0, 0, 0, 612, -436, 0, 0, 0, 0, 719, -428, 0, 0, 0, 0, 830, -417, 0, 0, 0, 0, 906, -391, 0, 0, 0, 0, 974, -323, 0, 0, 0, 0, 880, -261, 0, 0, 0, 0, 784, -241, 0, 0, 0, 0, 640, -213, 0, 0, 0, 0, 504, -114, 0, 0, 0, 0, 479, -43, 0, 0, 0, 0, 479, -40, 0, 0, 0, 0, 496, 8, 0, 0, 0, 0, 586, 19, 0, 0, 0, 0, 705, -32, 0, 0, 0, 0, 830, -74, 0, 0, 0, 0, 917, -52, 0, 0, 0, 0, 951, 33, 0, 0, 0, 0, 945, 81, 0, 0, 0, 0, 943, 87, 0, 0, 0, 0, 883, 183, 0, 0, 0, 0, 742, 169, 0, 0, 0, 0, 583, 146, 0, 0, 0, 0, 484, 152, 0, 0, 0, 0, 507, 341, 0, 0, 0, 0, 682, 313, 0, 0, 0, 0, 815, 347, 0, 0, 0, 0, 830, 406, 0, 0, 0, 0, 815, 347, 0, 0, 0, 0, 844, 426, 0, 0, 0, 0, 880, 480, 0, 0, 0, 0, 872, 491, 0, 0, 0, 0, 764, 559, 0, 0, 0, 0, 617, 565, 0, 0, 0, 0, 521, 528, 0, 0, 0, 0, 434, 531, 0, 0, 0, 0, 349, 497, 0, 0, 0, 0, 323, 372, 0, 0, 0, 0, 343, 231, 0, 0, 0, 0, 332, 95, 0, 0, 0, 0, 272, 2, 0, 0, 0, 0, 165, 47, 0, 0, 0, 0, 134, 112, 0, 0, 0, 0, 131, 115, 0, 0, 0, 0, 131, 220, 0, 0, 0, 0, 168, 378, 0, 0, 0, 0, 108, 466, 0, 0, 0, 0, 4, 477, 0, 0, 0, 0, -112, 488, 0, 0, 0, 0, -214, 505, 0, 0, 0, 0, -183, 344, 0, 0, 0, 0, -67, 240, 0, 0, 0, 0, 69, 149, 0, 0, 0, 0, 74, -38, 0, 0, 0, 0, -16, -72, 0, 0, 0, 0, -149, -38, 0, 0, 0, 0, -254, 149, 0, 0, 0, 0, -288, 248, 0, 0, 0, 0, -333, 336, 0, 0, 0, 0, -347, 471, 0, 0, 0, 0, -457, 500, 0, 0, 0, 0, -605, 491, 0, 0, 0, 0, -698, 460, 0, 0, 0, 0, -783, 406, 0, 0, 0, 0, -870, 330, 0, 0, 0, 0, -814, 251, 0, 0, 0, 0, -633, 234, 0, 0, 0, 0, -486, 282, 0, 0, 0, 0, -248, 271, 0, 0, 0, 0, -118, 237, 0, 0, 0, 0, 1, 265, 0, 0, 0, 0, 105, 240, 0, 0, 0, 0, 159, 163, 0, 0, 0, 0, 74, 101, 0, 0, 0, 0, -93, 64, 0, 0, 0, 0, -339, 90, 0, 0, 0, 0, -551, 98, 0, 0, 0, 0, -672, 92, 0, 0, 0, 0, -771, -12, 0, 0, 0, 0, -735, -94, 0, 0, 0, 0, -607, -142, 0, 0, 0, 0, -506, -38, 0, 0, 0, 0, -497, 135, 0, 0, 0, 0, -489, 237, 0, 0, 0, 0, -308, 225, 0, 0, 0, 0, -265, 22, 0, 0, 0, 0, -189, -114, 0, 0, 0, 0, -70, -89, 0, 0, 0, 0, 15, -12)
+}
+point_count = 138
+
+[node name="OldMajor" type="Node2D"]
+script = ExtResource("1_yeg3i")
+
+[node name="World" parent="." instance=ExtResource("37_qmmin")]
+
+[node name="Crosshairs3" type="Node2D" parent="."]
+visible = false
+
+[node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs3"]
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("2_dfm6e")
+
+[node name="FollowMouse" type="Node" parent="Crosshairs3"]
+script = ExtResource("3_4de51")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Crosshairs3"]
+current = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(367, -344)
+scale = Vector2(9.432, 3)
+navigation_polygon = SubResource("NavigationPolygon_ivfr4")
+navigation_layers = 5
+script = ExtResource("6_fvbo2")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+visible = false
+position = Vector2(3.92281, -22)
+scale = Vector2(0.106022, 0.333333)
+radius = 67.06
+vertices = PackedVector2Array(-39, -41, 49, -36, 17, 51)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 5
+
+[node name="Background" type="Sprite2D" parent="NavigationRegion2D"]
+visible = false
+z_index = -1
+scale = Vector2(0.330365, 1)
+texture = ExtResource("7_8uohq")
+
+[node name="Boss" type="CharacterBody2D" parent="."]
+collision_layer = 12
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("8_b7gf3")
+interact_with_environment = true
+num_segments = 20
+stiffness = 0.8
+distance = 40.0
+view_lines = true
+connect_head = true
+
+[node name="DeathAnimation" type="AnimatedSprite2D" parent="Boss"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_410vj")
+frame_progress = 0.497977
+
+[node name="BossHead" type="CollisionPolygon2D" parent="Boss"]
+z_index = 100
+position = Vector2(2, 0)
+polygon = PackedVector2Array(-20, -60, -20, 60, 80, 10, 80, -10)
+
+[node name="Legs" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 1
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+view_lines = true
+line_width = 9.0
+
+[node name="Legs3" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 3
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+line_width = 9.0
+
+[node name="Legs5" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 5
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+view_lines = true
+line_width = 9.0
+
+[node name="Legs7" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 7
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+line_width = 9.0
+
+[node name="Legs9" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 9
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+view_lines = true
+line_width = 9.0
+
+[node name="Legs11" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 11
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+line_width = 9.0
+
+[node name="Legs13" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 13
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+view_lines = true
+line_width = 9.0
+
+[node name="Legs15" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 15
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+line_width = 9.0
+
+[node name="Legs17" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 17
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+view_lines = true
+line_width = 9.0
+
+[node name="Legs19" type="Node" parent="Boss"]
+script = ExtResource("9_7ju08")
+foot_texture = ExtResource("10_7f8ja")
+leg_texture = ExtResource("11_ey47n")
+segment = 19
+leg_spread = 40.0
+leg_distance = 120.0
+reposition_distance = 120.0
+speed = 10.0
+active_leg = 2
+view_lines = true
+line_width = 9.0
+
+[node name="Snake_Guns" type="Node" parent="Boss"]
+script = ExtResource("12_uu8lk")
+gun = ExtResource("13_qcdmj")
+bullet = ExtResource("14_36h7u")
+segments_with_gun = 2
+front_gun_projectile_speed = 80000.0
+side_gun_projectile_speed = 20000.0
+
+[node name="Snake_Texture1" type="Node" parent="Boss"]
+script = ExtResource("15_kh3dc")
+texture = ExtResource("16_u6r0l")
+segments_with_texture = "Even"
+
+[node name="Snake_Texture2" type="Node" parent="Boss"]
+script = ExtResource("15_kh3dc")
+texture = ExtResource("17_v88cp")
+segments_with_texture = "Odd"
+x_offset = 80.0
+
+[node name="MovementController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("18_oun5g")
+initial_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+script = ExtResource("19_r1bva")
+next_state = "Random"
+return_state = "Wander Return"
+guide = NodePath("../../../Circle2/PathFollow2D")
+path = NodePath("../../../Circle2")
+speed = 0.03
+time_following = 600
+
+[node name="Follow" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("follow_target")]
+script = ExtResource("20_wi5t2")
+attack_style = "Duration"
+follow_target = NodePath("../../../Crosshairs3")
+speed = 20000.0
+look_at_player = true
+max_deviation_distance = 150.0
+action = "Wander"
+distance_til_attack = 10000.0
+num_attacks = 1
+time_following = 800
+
+[node name="FollowPath" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+script = ExtResource("19_r1bva")
+next_state = "Wander"
+return_state = "FollowPath Return"
+guide = NodePath("../../../Circle/PathFollow2D")
+path = NodePath("../../../Circle")
+speed = 0.9
+time_following = 800
+slide_speed = 0.5
+
+[node name="Surround" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("target")]
+script = ExtResource("21_nicn2")
+target = NodePath("../../../Crosshairs3")
+
+[node name="Wander Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+script = ExtResource("22_oe7j4")
+follow_path_state = "Wander"
+guide = NodePath("../../../Circle2/PathFollow2D")
+speed = 20000.0
+snap_distance = 10.0
+
+[node name="FollowPath Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+script = ExtResource("22_oe7j4")
+follow_path_state = "FollowPath"
+guide = NodePath("../../../Circle/PathFollow2D")
+speed = 20000.0
+snap_distance = 10.0
+
+[node name="Random" type="Node" parent="Boss/MovementController"]
+script = ExtResource("23_6q85v")
+options = Array[String](["Surround", "FollowPath", "Follow"])
+
+[node name="AttackController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("18_oun5g")
+initial_state = NodePath("Neutral")
+
+[node name="Neutral" type="Node" parent="Boss/AttackController"]
+script = ExtResource("24_mk54l")
+trigger_attack_with_state = {
+"Follow": "FireFrontGuns",
+"FollowPath": "FireLeftGuns",
+"Wander": "Neutral"
+}
+
+[node name="FireLeftGuns" type="Node" parent="Boss/AttackController"]
+script = ExtResource("25_4so6p")
+trigger_attack_with_state = {
+"Follow": "FireFrontGuns",
+"FollowPath": "FireLeftGuns",
+"Wander": "Neutral"
+}
+side_shooting = "Left"
+
+[node name="FireFrontGuns" type="Node" parent="Boss/AttackController"]
+script = ExtResource("25_4so6p")
+trigger_attack_with_state = {
+"Follow": "FireFrontGuns",
+"FollowPath": "FireLeftGuns",
+"Wander": "Neutral"
+}
+side_shooting = "Front"
+
+[node name="AudioController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("18_oun5g")
+initial_state = NodePath("Oink4")
+
+[node name="Oink1" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
+script = ExtResource("26_frb64")
+audio = NodePath("OinkOne")
+trigger_attack_with_state = {
+"FollowPath": "Oink2",
+"Surround": "Oink3",
+"Wander": "Oink4"
+}
+
+[node name="OinkOne" type="AudioStreamPlayer2D" parent="Boss/AudioController/Oink1"]
+position = Vector2(1, -200)
+rotation = 0.0996687
+stream = ExtResource("27_sbsyh")
+volume_db = 2.0
+parameters/looping = false
+
+[node name="Oink2" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
+script = ExtResource("26_frb64")
+audio = NodePath("OinkTwo")
+trigger_attack_with_state = {
+"Follow": "Oink1",
+"Surround": "Oink3",
+"Wander": "Oink4"
+}
+
+[node name="OinkTwo" type="AudioStreamPlayer2D" parent="Boss/AudioController/Oink2"]
+position = Vector2(1, -200)
+rotation = 0.0996687
+stream = ExtResource("28_hp0ld")
+volume_db = 2.0
+parameters/looping = false
+
+[node name="Oink3" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
+script = ExtResource("26_frb64")
+audio = NodePath("OinkThree")
+trigger_attack_with_state = {
+"Follow": "Oink1",
+"FollowPath": "Oink2",
+"Wander": "Oink4"
+}
+
+[node name="OinkThree" type="AudioStreamPlayer2D" parent="Boss/AudioController/Oink3"]
+position = Vector2(1, -200)
+rotation = 0.0996687
+stream = ExtResource("29_f3658")
+volume_db = 2.0
+parameters/looping = false
+
+[node name="Oink4" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
+script = ExtResource("26_frb64")
+audio = NodePath("OinkFour")
+trigger_attack_with_state = {
+"Follow": "Oink1",
+"FollowPath": "Oink2",
+"Surround": "Oink3"
+}
+
+[node name="OinkFour" type="AudioStreamPlayer2D" parent="Boss/AudioController/Oink4"]
+stream = ExtResource("30_fhwva")
+parameters/looping = false
+
+[node name="Targeter" parent="Boss" node_paths=PackedStringArray("target") instance=ExtResource("31_jfh8n")]
+target = NodePath("../../Crosshairs3")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Boss"]
+navigation_layers = 5
+
+[node name="Health" type="Node" parent="Boss"]
+script = ExtResource("32_v70m5")
+max_health = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Boss"]
+z_index = 50
+z_as_relative = false
+rotation = 1.5708
+scale = Vector2(0.495, 0.495)
+texture = ExtResource("33_81fig")
+centered = false
+offset = Vector2(-300, -200)
+
+[node name="Breather" type="AudioStreamPlayer2D" parent="Boss"]
+stream = ExtResource("34_1guxd")
+volume_db = 18.0
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.46228
+parameters/looping = true
+
+[node name="Weird1" type="AudioStreamPlayer2D" parent="Boss"]
+stream = ExtResource("35_s38h0")
+autoplay = true
+parameters/looping = true
+
+[node name="Weird2" type="AudioStreamPlayer2D" parent="Boss"]
+stream = ExtResource("36_aun44")
+parameters/looping = true
+
+[node name="Weird3" type="AudioStreamPlayer2D" parent="Boss"]
+stream = ExtResource("37_b6t7k")
+parameters/looping = true
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Boss"]
+stream = ExtResource("38_tv2og")
+pitch_scale = 0.55
+parameters/looping = false
+
+[node name="Circle" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gyk8w")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Circle"]
+position = Vector2(1, -200)
+rotation = 0.0996687
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(0.53, 0.53)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="Circle2" type="Path2D" parent="."]
+position = Vector2(-5.80701, -50.1781)
+scale = Vector2(1.17229, 1.18793)
+curve = SubResource("Curve2D_hoh5i")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Circle2"]
+position = Vector2(15.2363, -11.855)
+
+[node name="UserInterfaceLayaer" type="CanvasLayer" parent="."]
+
+[node name="BossHealthBar" parent="UserInterfaceLayaer" node_paths=PackedStringArray("health_node") instance=ExtResource("1_5kkx1")]
+offset_left = 182.0
+offset_top = -149.0
+offset_right = -870.0
+offset_bottom = -49.0
+health_node = NodePath("../../Boss/Health")
+
+[node name="PlayerUI" type="Control" parent="UserInterfaceLayaer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="heartContainer" type="HBoxContainer" parent="UserInterfaceLayaer/PlayerUI"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 27.0
+offset_right = 315.0
+offset_bottom = 77.0
+script = ExtResource("39_bymuh")
+
+[node name="TextureRect" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("40_rs7ol")
+
+[node name="TextureRect2" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("40_rs7ol")
+
+[node name="TextureRect3" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("40_rs7ol")
+
+[node name="TextureRect4" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("40_rs7ol")
+
+[node name="TextureRect5" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/heartContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("40_rs7ol")
+
+[node name="PauseMenu" parent="UserInterfaceLayaer" instance=ExtResource("41_rgave")]
+visible = false
+
+[node name="Crosshairs" type="Node2D" parent="."]
+z_index = 101
+script = ExtResource("42_ko1wo")
+
+[node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("43_syxrl")
+
+[node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
+position = Vector2(-33.3334, 0)
+scale = Vector2(6.5, 6.5)
+
+[node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
+offset_left = -56.4102
+offset_top = -62.5641
+offset_right = 71.5898
+offset_bottom = 65.4359
+fill_mode = 4
+texture_under = ExtResource("44_iqqjc")
+texture_progress = ExtResource("44_iqqjc")
+tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
+tint_progress = Color(0.941176, 0, 0, 0.505882)
+script = ExtResource("45_edu8u")
+
+[node name="CooldownTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
+wait_time = 0.5
+
+[node name="PenaltyTimer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/HeatingGauge"]
+wait_time = 5.0
+
+[node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+position = Vector2(-195.897, 16.4103)
+scale = Vector2(1.02564, 1.02564)
+texture = ExtResource("46_g85ut")
+
+[node name="Timer" type="Timer" parent="Crosshairs/CrosshairsSprite/Node2D/Crosshairinstr"]
+wait_time = 8.0
+
+[node name="MouseFollower" type="Node" parent="Crosshairs"]
+script = ExtResource("3_4de51")

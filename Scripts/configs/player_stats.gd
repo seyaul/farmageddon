@@ -12,10 +12,18 @@ class_name PlayerStats
 # speed_modifier is multiplied by the players base_speed+additional_speed
 @export var speed_modifier: float = 1
 # lifesteal_chance/100 is the chance of getting a half heart back when you kill an enemy    
-@export var lifesteal_chance: int = 0
+@export var lifesteal_chance: float = 0.0
 
 func reset_to_defaults():
-    additional_max_health = 0
-    additional_speed = 0
-    speed_modifier = 1
-    lifesteal_chance = 0
+	additional_max_health = 0
+	additional_speed = 0
+	speed_modifier = 1
+	lifesteal_chance = 0.0
+
+func print_all_stats():
+	print("=========================Player Stats:=========================")
+	print("Additional Max Health: ", additional_max_health)
+	print("Additional Speed: ", additional_speed)
+	print("Speed Modifier: ", speed_modifier)
+	print("Lifesteal Chance: ", lifesteal_chance)
+	print("=========================End Player Stats=========================")

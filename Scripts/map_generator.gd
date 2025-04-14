@@ -13,7 +13,6 @@ const ELITE_ROOM_WEIGHT := 5.0
 const SHOP_ROOM_WEIGHT := 2.5
 const CAMPFIRE_ROOM_WEIGHT := 4.0
 
-
 var random_room_type_weights = {
 	Room.Type.MONSTER: 0.0,
 	Room.Type.CAMPFIRE: 0.0,
@@ -23,7 +22,6 @@ var random_room_type_weights = {
 var random_room_type_total_weight := 0
 var map_data: Array[Array]
 
-
 func generate_map() -> Array[Array]:
 	map_data = _generate_initial_grid()
 	var starting_points := _get_random_starting_points()
@@ -32,13 +30,12 @@ func generate_map() -> Array[Array]:
 		var current_j := j
 		for i in FLOORS - 1:
 			current_j = _setup_connection(i, current_j)
-			
+
 	_setup_boss_room()
 	_setup_random_room_weights()
 	_setup_room_types()
 	
 	return map_data
-
 
 func _generate_initial_grid() -> Array[Array]:
 	var result: Array[Array] = []

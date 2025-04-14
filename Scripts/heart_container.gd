@@ -1,40 +1,49 @@
 extends HBoxContainer
 
-@onready var heart_containers = $".".get_children()
-
 const FULL_HEART = preload("res://Sprites/heart_textures/fullHeart.png")
 const HALF_HEART = preload("res://Sprites/heart_textures/halfHeart.png")
 const EMPTY_HEART = preload("res://Sprites/heart_textures/emptyHeart.png")
 
 var heart_textures = [FULL_HEART, HALF_HEART, EMPTY_HEART]
 
+@onready var HeartScene = preload("res://Scenes/heart.tscn")  # This should be a TextureRect or whatever you use
+
 var curr_health: int
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	curr_health = Global.playerHealth
+	curr_health = Global.playerHealth 
 	update_hearts(curr_health)
+
+	await get_tree().process_frame
 	Global.playerHealthNode.damage_taken.connect(handleSignal)
 	Global.playerHealthNode.healed.connect(handleSignal)
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func handleSignal():
-	curr_health = Global.playerHealthNode.current_health
+	curr_health = Global.playerHealth
 	update_hearts(curr_health)
-	
+
 func update_hearts(current_hp):
-	for i in range(heart_containers.size()):
-		var heart = heart_containers[i]
-		var heart_index = i * 2  # Each heart represents 2 HP
+	var max_hp = Global.playerHealthNode.player_max_health + Global.player_stats.additional_max_health
+	print("max_hp ", max_hp)
+	var heart_count = int(ceil(max_hp / 2.0))
+
+	# Create hearts if needed
+	while get_child_count() < heart_count:
+		var heart = HeartScene.instantiate()
+		add_child(heart)
+
+	# Remove extra hearts if any
+	while get_child_count() > heart_count:
+		get_child(get_child_count() - 1).queue_free()
+
+	# Update textures
+	for i in range(heart_count):
+		var heart = get_child(i)
+		var heart_index = i * 2
 		if current_hp >= heart_index + 2:
-			heart.texture = heart_textures[0]  # Full heart
+			heart.texture = heart_textures[0]  # Full
 		elif current_hp == heart_index + 1:
-			heart.texture = heart_textures[1]  # Half heart
+			heart.texture = heart_textures[1]  # Half
 		else:
-			heart.texture = heart_textures[2]  # Empty heart
-	print("damage taken in heart_container.gd")
+			heart.texture = heart_textures[2]  # Empty

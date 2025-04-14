@@ -13,14 +13,20 @@ signal start_timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	tut_node = $"../UserInterfaceLayer/TutorialInterface"
-	tut_node.mouse_first_clicked.connect(show_tip)
+	if has_node("../UserInterfaceLayer/TutorialInterface"):
+		tut_node = $"../UserInterfaceLayer/TutorialInterface"
+		tut_node.mouse_first_clicked.connect(show_tip)
+		mouse_node = tut_node.get_node("MouseAndCrosshair")
 	$CrosshairsSprite/Node2D/Crosshairinstr.visible = false
+	if has_node("CrosshairsSprite/Node2D/newWeaponNoti"):
+		$CrosshairsSprite/Node2D/newWeaponNoti.visible = false
+		if Global.numLevelsComplete == 1 or Global.numLevelsComplete == 2:
+			handle_new_weapon_unlocked()
+	#Global.newWeaponUnlocked.connect(handle_new_weapon_unlocked)
 	crosshair_timer = $CrosshairsSprite/Node2D/Crosshairinstr/Timer
 	crosshair_timer.timeout.connect(_on_timer_timeout)
 	self.start_timer.connect(timer_handler)
-	mouse_node = tut_node.get_node("MouseAndCrosshair")
-	print(mouse_node)
+	#print(mouse_node)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,3 +60,9 @@ func _on_timer_timeout():
 
 func timer_handler():
 	crosshair_timer.start()
+
+func handle_new_weapon_unlocked():
+	print("Is this thing one")
+	$CrosshairsSprite/Node2D/newWeaponNoti.visible = true
+	await get_tree().create_timer(5).timeout
+	$CrosshairsSprite/Node2D/newWeaponNoti.visible = false

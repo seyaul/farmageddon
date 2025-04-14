@@ -11,9 +11,10 @@ signal start_cd_timer
 signal weapon_switched
 signal continuous_started
 signal continuous_ended
+signal switch_weapon_icon
 
-@export var active_weapons: Array = ["AKorn47", "flamethrower", "rpg"]  # Array showing which weapons to equip
 @export var flash_duration: float = 0.2  # Duration of red flash upon taking damage
+@export var debug_use_all_guns: bool = false
 var weapons_directory = "res://Scenes/weapons/"
 var gun_scene_array: Array = []  # Array to hold instances of the guns
 var current_gun_index: int = 0  # Index of the current active gun in gun_array
@@ -37,6 +38,7 @@ func _ready() -> void:
 	var crosshairs = get_node("../Crosshairs")
 	$Targeter.target = crosshairs
 	setup_weapons()
+	deathAnimation.animation_finished.connect(_on_death_animation_finished)
 	if len(gun_scene_array) > 0:
 		equip_new_gun(gun_scene_array[current_gun_index].instantiate())
 	else:
@@ -49,18 +51,19 @@ func _ready() -> void:
 	hitbox_shape = get_node("Hitbox/CollisionShape2D")
 
 func _physics_process(delta: float) -> void:
+	## add a couple cases for the specific type of gun to discourage holding == not cooling
 	if Input.is_action_just_pressed("shoot"):
 		emit_signal("shoot", "tap", delta)
 		emit_signal("update_heat")
 	elif Input.is_action_pressed("shoot"):
-		if !is_holding:
+		if !is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_started")
 		emit_signal("shoot", "hold", delta)
 		is_holding = true
 	elif Input.is_action_just_released("shoot"):
-		if is_holding:
+		if is_holding and gun.fire_type == "continuous":
 			emit_signal("continuous_ended")
-			emit_signal("start_cd_timer")
+		emit_signal("start_cd_timer")
 		emit_signal("shoot", "end", delta)
 		is_holding = false
 	if Input.is_action_just_pressed("melee"):
@@ -78,10 +81,14 @@ func _on_health_character_died():
 	tankSprite.visible = false
 	turret.visible = false
 	deathAnimation.visible = true
-	deathAnimation.play()
+	deathAnimation.play("death_animation")
+	deathAnimation.get_child(0).play()
+	deathAnimation.get_child(1).play()
 
 func equip_new_gun(new_gun: baseGun):
 	if gun:
+		if new_gun.name == gun.name:
+			return
 		gun.queue_free()  
 	gun = new_gun
 	turret.switch_gun_sprite(new_gun.name)
@@ -90,9 +97,15 @@ func equip_new_gun(new_gun: baseGun):
 	
 	await get_tree().process_frame
 	emit_signal("weapon_switched")
+	switch_weapon_icon.emit(new_gun.name)
 
 func setup_weapons():
-	for weapon_name in active_weapons:
+	var weapons = []
+	if debug_use_all_guns:
+		weapons = ["Akorn47", "flamethrower", "rpg"]
+	else:
+		weapons = Global.active_weapons
+	for weapon_name in weapons:
 		var weapon_scene = load(weapons_directory + weapon_name + ".tscn")
 		gun_scene_array.append(weapon_scene)
 
@@ -125,3 +138,6 @@ func flash_red():
 
 func _on_flash_timeout():
 	tankSprite.modulate = normal_color
+
+func _on_death_animation_finished() -> void:
+	deathAnimation.visible = false

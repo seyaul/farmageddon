@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	var collider = collision.get_collider()
-
+	print("COLLIDER:", collider.name)
 	# this enables shooting eggs out of the air
 	if collider.is_in_group("mob_bullet"):
 		collider.kill_bullet()

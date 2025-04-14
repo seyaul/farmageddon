@@ -10,7 +10,8 @@ const MAP_LINE = preload("res://Scenes/line.tscn")
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var campfire_popup = preload("res://Scenes/CampfireRoom.tscn").instantiate()
+@onready var map_background = $MapBackground
+
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -18,25 +19,41 @@ var last_room: Room
 var camera_edge_y: float
 var scroll_direction: int
 var camera_y_pos : int
+var god_mode_enabled: bool = false
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
 	
 	# campfire node/signal stuff
-	add_child(campfire_popup)
-	campfire_popup.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
 	Global.connect("campfire_selected", Callable(self, "_on_campfire_selected"))
+	Global.connect("newGameStarted", Callable(self, "_on_new_game_started"))
+
+	# make sure the node has been freed so two instances dont spawn
+	if Global.map_tutorial:
+		var existing_tutorial = map_background.get_node_or_null("MapTutorialInterface")
+		if existing_tutorial:
+			var monster_prompt = existing_tutorial.get_node_or_null("MonsterPrompt")
+			if monster_prompt:
+				monster_prompt.visible = false
+			existing_tutorial.queue_free()
+			await get_tree().process_frame
 
 	# transition to this checking if it is within a Global group of rooms 
 	if GameState.returning_from_stage and !Global.newGame:
 		print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
+		Global.map_tutorial = false
 	else:
 		generate_new_map()
-
 		if Global.newGame or GameState.player_died:
 			GameState.player_died = false
 			unlock_floor(0)
+	unlock_floor(0)
+
+	if Global.newGame and not Global.map_tutorial_has_run:
+		Global.map_tutorial = true
+	else:
+		Global.map_tutorial = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("scroll_up") or Input.is_action_pressed("move_up"):
@@ -55,20 +72,46 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	
+	if event.is_action_pressed("god_mode_debug"):
+		god_mode_enabled = !god_mode_enabled
+		print("map god mode enabled")
+		unlock_all_rooms(god_mode_enabled)
+	
 	if event.is_action_pressed("scroll_up"):
 		camera_2d.position.y -= SCROLL_SPEED
 	elif event.is_action_pressed("scroll_down"):
 		camera_2d.position.y += SCROLL_SPEED
 
 	camera_2d.position.y = clamp(camera_2d.position.y, -camera_edge_y, 0)
-		
+
+func _on_new_game_started():
+	# instantiate the map tut
+		var tut_scene = preload("res://Scenes/tutorial_interface.tscn")
+		var tut_instance = tut_scene.instantiate()
+		$MapBackground.add_child(tut_instance)
+
+func unlock_all_rooms(enable: bool) -> void:
+	for map_room: RoomBackend in rooms.get_children():
+		map_room.available = enable
+		if enable:
+			map_room.animation_player.play("Highlight")
+		else:
+			var key = map_room.room.get_key()
+			if GameState.room_states.has(key):
+				var state = GameState.room_states[key]
+				map_room.available = state["available"] and not state["selected"]
+				if map_room.available:
+					map_room.animation_player.play("Highlight")
+				else:
+					map_room.animation_player.stop()
+
 func generate_new_map() -> void:
 	floors_climbed = 0
 	map_data = map_generator.generate_map()
 	create_map()
 	last_room = map_data[0][0]
 	unlock_floor(0)
-	
+
 func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room) -> void:
 	floors_climbed = floors_completed
 	map_data = map
@@ -121,6 +164,10 @@ func create_map() -> void:
 	visuals.position.y = get_viewport_rect().size.y / 2
 
 func unlock_floor(which_floor: int = floors_climbed) -> void:
+	# make sure rooms arent stuck being locked after clearing a lvl in god mode
+	if god_mode_enabled:
+		return
+
 	for map_room: RoomBackend in rooms.get_children():
 		var key = map_room.room.get_key()
 		
@@ -136,7 +183,7 @@ func unlock_floor(which_floor: int = floors_climbed) -> void:
 					GameState.room_states[key]["available"] = true
 					continue
 					
-			elif not Global.newGame:
+			elif not Global.newGame and not GameState.player_died and Global.map_tutorial_has_run:
 				return
 
 		if GameState.room_states[key]["selected"]:
@@ -149,6 +196,10 @@ func unlock_floor(which_floor: int = floors_climbed) -> void:
 			map_room.animation_player.play("Highlight")
 
 func unlock_next_rooms(from_room: Room) -> void:
+	# make sure rooms arent stuck being locked after clearing a lvl in god mode
+	if god_mode_enabled:
+		return
+
 	for map_room: RoomBackend in rooms.get_children():
 		if last_room.next_rooms.has(map_room.room) || from_room.next_rooms.has(map_room.room):
 			map_room.available = true
@@ -200,10 +251,10 @@ func _on_map_room_clicked(room: Room) -> void:
 	if key in GameState.room_states:
 		GameState.room_states[key]["selected"] = true
 		
-	# campfire room stuff
-	if room.type == Room.Type.CAMPFIRE:
-		campfire_popup.show_popup()
-		print("campfire room clicked")
+	# campfire room stuff maybe delete
+	#if room.type == Room.Type.CAMPFIRE or room.type == Room.Type.SHOP:
+		#campfire_popup.show_popup()
+		#print("campfire room clicked")
 		
 	unlock_next_rooms(room)
 
@@ -216,7 +267,10 @@ func _on_map_room_selected(room: Room) -> void:
 
 func _on_campfire_selected() -> void:
 	print("campfire popup triggered from global signal")
-	campfire_popup.show_popup()
+	var campfire_popup_scene = preload("res://Scenes/CampfireRoom.tscn")
+	var popup_instance = campfire_popup_scene.instantiate()
+	popup_instance.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
+	popup_instance.show_popup()
 
 func _on_heal_accepted() -> void:
 	print("updating player health.")

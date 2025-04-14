@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="6_rvr8e"]
-[ext_resource type="Texture2D" uid="uid://bd4dead1pq5qc" path="res://Sprites/newWeaponUnlock.png" id="7_mk7n7"]
+[ext_resource type="Texture2D" uid="uid://c7y6kac0bsx8i" path="res://Sprites/Eisntr.png" id="7_t188t"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -91,7 +91,7 @@ wait_time = 8.0
 [node name="newWeaponNoti" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
 visible = false
 position = Vector2(165.128, -41.0256)
-texture = ExtResource("7_mk7n7")
+texture = ExtResource("7_t188t")
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("12_g3doo")

@@ -14,6 +14,7 @@ func _ready() -> void:
 	ending_index = text.length() - (cut_off_end + start_index + 1)
 
 func _process(delta: float) -> void:
+	print("D")
 	# Increment time
 	time += 1
 	if not reached_end:

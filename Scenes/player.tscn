@@ -164,11 +164,11 @@ melee_weapon = ExtResource("9_mr22e")
 script = ExtResource("10_8j6e3")
 
 [node name="Shockwave" type="Area2D" parent="."]
-collision_mask = 12
+collision_mask = 28
 script = ExtResource("11_4pwex")
 damage = 20.0
 shockwave_duration = 0.1
-shockwave_radius = 30.0
+shockwave_radius = 60.0
 shockwave_strength = 10000.0
 max_shockwaves = 2
 shockwave_cooldown = 1

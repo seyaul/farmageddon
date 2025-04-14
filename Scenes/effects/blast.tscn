@@ -21,7 +21,7 @@ script = ExtResource("1_botqp")
 
 [node name="BlastRadius" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 13
 
 [node name="BlastHitbox" type="CollisionShape2D" parent="BlastRadius"]
 scale = Vector2(2, 2)

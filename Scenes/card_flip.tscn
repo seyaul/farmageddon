@@ -1,0 +1,134 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7tcm6cu8cu3k"]
+
+[ext_resource type="Texture2D" uid="uid://kmawca13a3jh" path="res://Sprites/new cards/placeholder _.png" id="1_pggrj"]
+[ext_resource type="Texture2D" uid="uid://c27ryykyrfphy" path="res://Sprites/new cards/fire rate.png" id="2_l8dvt"]
+[ext_resource type="Texture2D" uid="uid://cq8pexvfnerh5" path="res://Sprites/new cards/heat rate.png" id="3_dxt5d"]
+[ext_resource type="Texture2D" uid="uid://dx6jcsq7aqyp2" path="res://Sprites/new cards/lifesteal card.png" id="4_ymxod"]
+[ext_resource type="Texture2D" uid="uid://c5v3monmqffkb" path="res://Sprites/new cards/max health.png" id="5_0aj5f"]
+[ext_resource type="Texture2D" uid="uid://c8nlw2c1j4p0c" path="res://Sprites/new cards/speed buff.png" id="6_aevq2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwpyq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l8dvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dxt5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ymxod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0aj5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_aevq2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_trxlf"]
+resource_name = "card_flip"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_back:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.941, 1), Vector2(0.1, 1), Vector2(0.847, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_front:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.000805815, 0.0991942, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-1, -1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_front:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.362127, 0.431506),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 1.83), Vector2(0.847, 1.83), Vector2(1.83, 1.83)]
+}
+
+[sub_resource type="Animation" id="Animation_yn3lg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_back:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_front:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_front:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.8, 1.83)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pej5i"]
+_data = {
+"RESET": SubResource("Animation_yn3lg"),
+"card_flip": SubResource("Animation_trxlf")
+}
+
+[node name="card_flip" type="Node2D"]
+
+[node name="card_back" type="Sprite2D" parent="."]
+texture = ExtResource("1_pggrj")
+
+[node name="card_front" type="AnimatedSprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(-1.00001, 1.49999)
+scale = Vector2(1.8, 1.83)
+sprite_frames = SubResource("SpriteFrames_gwpyq")
+frame_progress = 0.439502
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pej5i")
+}

@@ -58,7 +58,6 @@ func slide_in_cards():
 		tween.tween_property(card, "position:x", target_x, 0.5).set_delay(i * 0.2)
 		card_container.add_child(card)
 
-
 func apply_card_effect(effect_data: Dictionary):
 	if effect_data.keys().size() > 0:
 		for key in effect_data.keys():

@@ -528,12 +528,15 @@ frame_progress = 0.17868
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Shooter"]
 stream = ExtResource("83_b2p0b")
+bus = &"SFX"
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Shooter"]
 stream = ExtResource("84_7fodd")
+bus = &"SFX"
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Shooter"]
 stream = ExtResource("85_f7rhc")
+bus = &"SFX"
 
 [node name="ghostTimer" type="Timer" parent="EnemyPath/EnemyGuide/Shooter"]
 wait_time = 3.0

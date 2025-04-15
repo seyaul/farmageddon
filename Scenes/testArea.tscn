@@ -254,7 +254,6 @@ text = "Akorn47"
 horizontal_alignment = 1
 
 [node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
-z_index = 1
 layout_mode = 0
 offset_left = 844.0
 offset_top = 11.0
@@ -293,6 +292,7 @@ shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_iwkse")
+bus = &"Music"
 parameters/looping = true
 
 [node name="WaveManager" parent="." instance=ExtResource("14_cx7gw")]

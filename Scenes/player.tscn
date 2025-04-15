@@ -258,6 +258,7 @@ frame_progress = 0.544894
 
 [node name="DamagedAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_aa2t0")
+bus = &"SFX"
 
 [connection signal="character_died" from="Health" to="." method="_on_health_character_died"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]

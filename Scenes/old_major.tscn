@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=59 format=3 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="50_8xs56"]
 [ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="51_apcog"]
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
+[ext_resource type="AudioStream" uid="uid://blybar16e1bbu" path="res://audio/music/old major's theme.mp3" id="54_s00ov"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ivfr4"]
 vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 3.92188, 0.351563, -150.938, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64063, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
@@ -589,6 +590,7 @@ layout_mode = 2
 texture = ExtResource("40_rs7ol")
 
 [node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayaer/PlayerUI"]
+layout_mode = 0
 offset_left = 844.0
 offset_top = 11.0
 offset_right = 1100.0
@@ -639,3 +641,9 @@ wait_time = 8.0
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("3_4de51")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("54_s00ov")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

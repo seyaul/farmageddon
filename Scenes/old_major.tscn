@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=58 format=3 uid="uid://cfte2bglhtfoe"]
 
 [ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="44_iqqjc"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
+[ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
 [ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
 [ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
 [ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
@@ -586,6 +587,14 @@ texture = ExtResource("40_rs7ol")
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("40_rs7ol")
+
+[node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayaer/PlayerUI"]
+offset_left = 844.0
+offset_top = 11.0
+offset_right = 1100.0
+offset_bottom = 111.0
+alignment = 2
+script = ExtResource("47_0pag5")
 
 [node name="PauseMenu" parent="UserInterfaceLayaer" instance=ExtResource("41_rgave")]
 visible = false

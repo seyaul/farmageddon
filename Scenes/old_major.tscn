@@ -471,7 +471,7 @@ navigation_layers = 5
 
 [node name="Health" type="Node" parent="Boss"]
 script = ExtResource("32_v70m5")
-max_health = 300.0
+max_health = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Boss"]
 z_index = 50

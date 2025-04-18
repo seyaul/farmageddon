@@ -49,6 +49,8 @@ var discrete_shot_cd_fulfilled : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_parent().get_parent()
+	if name == "AKorn47":
+		bullets_per_fire += Global.all_gun_stats.akorn47_additional_bullets_per_fire
 	player.shoot.connect(handle_signal)
 	player.disable_shooting.connect(disable_shooting_handler)
 	player.enable_shooting.connect(enable_shooting_handler)

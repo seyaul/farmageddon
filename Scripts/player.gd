@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("switch_weapon"):
 		iterate_weapon()
 
-# _on_health_character_died() handles a character died signal from the
+# _on_health_character_xd() handles a character died signal from the
 # CharacterHealth child node in order to play the death animation
 func _on_health_character_died():
 	walk_state.modify_speed(0)

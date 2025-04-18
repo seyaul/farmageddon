@@ -128,6 +128,7 @@ z_index = 1
 scale = Vector2(0.5, 0.5)
 collision_mask = 257
 script = ExtResource("1_jvk8e")
+debug_use_all_guns = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_65iyo")
@@ -170,7 +171,6 @@ shockwave_duration = 0.1
 shockwave_radius = 45.0
 shockwave_strength = 10000.0
 max_shockwaves = 2
-shockwave_cooldown = 1
 
 [node name="Collider" type="CollisionShape2D" parent="Shockwave"]
 shape = SubResource("CircleShape2D_dqb8n")

@@ -15,3 +15,4 @@ base_heat_increase_rate = 30.0
 [node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource("4_beq6i")
 volume_db = -4.457
+bus = &"SFX"

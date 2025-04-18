@@ -17,7 +17,7 @@ var dash_timer: SceneTreeTimer
 func Enter():
 	character = get_parent().get_parent()
 	mc = get_parent()
-	actual_speed = ((speed + Global.player_stats.additional_speed) * Global.player_stats.speed_modifier)
+	actual_speed = ((speed + Global.player_stats.additional_speed_modifier) * Global.player_stats.speed_modifier)
 	
 func Update(_delta: float):
 	var direction = Vector2.ZERO

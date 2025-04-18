@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxagfnmji81iv"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_j1vxy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sdtdm"]
+load_path = "res://.godot/imported/fireRateBuff.png-1558d9639387fc1af4138dbf7a76030d.ctex"
+
+[node name="buffPlaceholder" instance=ExtResource("1_j1vxy")]
+texture = SubResource("CompressedTexture2D_sdtdm")
+Name = "fire_rate"
+Stat_type = "gun"

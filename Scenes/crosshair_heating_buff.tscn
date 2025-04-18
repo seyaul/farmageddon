@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://om6k45tvhmd2"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_g566v"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4epku"]
+load_path = "res://.godot/imported/crossHairCooling.png-2264956054408147ad131d4162e8ac43.ctex"
+
+[node name="buffPlaceholder" instance=ExtResource("1_g566v")]
+texture = SubResource("CompressedTexture2D_4epku")
+Name = "cooldown_speed"
+Stat_type = "gun"

@@ -16,3 +16,4 @@ automatic = true
 [node name="ShootingSound" type="AudioStreamPlayer2D" parent="." index="0"]
 stream = ExtResource("3_2xtba")
 volume_db = -16.0
+bus = &"SFX"

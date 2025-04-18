@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bok86balgy085"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_bfwrq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_13kgc"]
+load_path = "res://.godot/imported/speedBuff.png-f94c9d3f8ba6a5ac449c237ceb82f0a2.ctex"
+
+[node name="buffPlaceholder" instance=ExtResource("1_bfwrq")]
+texture = SubResource("CompressedTexture2D_13kgc")
+Name = "speed"
+Stat_type = "player"

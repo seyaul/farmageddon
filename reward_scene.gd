@@ -58,7 +58,6 @@ func slide_in_cards():
 		tween.tween_property(card, "position:x", target_x, 0.5).set_delay(i * 0.2)
 		card_container.add_child(card)
 
-
 func apply_card_effect(effect_data: Dictionary):
 	if effect_data.keys().size() > 0:
 		for key in effect_data.keys():
@@ -76,4 +75,6 @@ func apply_card_effect(effect_data: Dictionary):
 func _on_reward_selected(card: Card) -> void:
 	apply_card_effect(card.effect_data)
 	Global.adjust_weights_after_selection(card.card_name)
+	if card.card_name not in Global.chosen_buffs:
+		Global.chosen_buffs.append(card.card_name)
 	get_tree().change_scene_to_file("res://Scenes/map.tscn")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://caj8ikchansi6"]
+
+[ext_resource type="Script" path="res://Scripts/buff.gd" id="1_n7dfd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v3noo"]
+load_path = "res://.godot/imported/placeHolderBuff.png-f4c8e9378114486b0f9ec2fcc5f3b18f.ctex"
+
+[node name="buffPlaceholder" type="TextureRect"]
+texture_filter = 1
+offset_right = 82.0
+offset_bottom = 82.0
+size_flags_vertical = 0
+texture = SubResource("CompressedTexture2D_v3noo")
+script = ExtResource("1_n7dfd")

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var damage: int = 50  # Explosion damage
+@export var damage: int = 100  # Explosion damage
 @export var stuns: bool = true
 @onready var particles = $Particles
 @onready var explosion_area = $BlastRadius

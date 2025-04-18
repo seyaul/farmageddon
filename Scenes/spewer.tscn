@@ -1,9 +1,9 @@
-[gd_scene load_steps=104 format=3 uid="uid://bx0wohddjbk1x"]
+[gd_scene load_steps=102 format=3 uid="uid://b0l324ace02m3"]
 
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="1_wq1o6"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="2_7imw6"]
 [ext_resource type="Texture2D" uid="uid://dpu05j4wre5x1" path="res://Sprites/pig_sprites/barfing/pixil-frame-0.png" id="2_64qsb"]
-[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="3_6p46b"]
+[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="3_6p46b"]
 [ext_resource type="Texture2D" uid="uid://baoyqve6frsdc" path="res://Sprites/pig_sprites/barfing/pixil-frame-1.png" id="3_ngca0"]
 [ext_resource type="Texture2D" uid="uid://cgjo6n431a02n" path="res://Sprites/pig_sprites/barfing/pixil-frame-2.png" id="4_dcwkb"]
 [ext_resource type="Texture2D" uid="uid://d1gj7o6vepoji" path="res://Sprites/pig_sprites/barfing/pixil-frame-3.png" id="5_5mwfs"]
@@ -92,9 +92,8 @@
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="91_6bg61"]
 [ext_resource type="AudioStream" uid="uid://cd4x7j3x53nrv" path="res://audio/enemy sounds/chattack.mp3" id="92_c2sy1"]
 [ext_resource type="AudioStream" uid="uid://ddojeuv8d1834" path="res://audio/enemy sounds/chickenhurt.mp3" id="93_30e1k"]
-[ext_resource type="PackedScene" uid="uid://fraopvy37vo4" path="res://Scenes/bullets/vomit_bullet.tscn" id="94_f2r1e"]
+[ext_resource type="PackedScene" uid="uid://bqeyd1kuqwg1f" path="res://Scenes/bullets/vomit_bullet.tscn" id="94_f2r1e"]
 [ext_resource type="AudioStream" uid="uid://df3hk63v3hepl" path="res://audio/enemy sounds/chickendie.mp3" id="94_ipfda"]
-[ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="95_jk434"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2xo1"]
 _data = {
@@ -362,27 +361,20 @@ animations = [{
 "speed": 60.0
 }]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_uw70a"]
-vertices = PackedVector2Array(1141.93, 11.9063, 1138.06, 635.977, 15.1328, 634.008, 23.8594, 2.07813)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(14, -8, 5, 644, 1148, 646, 1152, 2)])
-
-[node name="Node2D" type="Node2D"]
+[node name="spewer" type="Node2D"]
 script = ExtResource("1_wq1o6")
 
-[node name="EnemyPath2" type="Path2D" parent="."]
-position = Vector2(459, 237)
+[node name="EnemyPath" type="Path2D" parent="."]
 scale = Vector2(0.3, 0.3)
 curve = SubResource("Curve2D_u2xo1")
 
-[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath2"]
+[node name="EnemyGuide" type="PathFollow2D" parent="EnemyPath"]
 position = Vector2(113, -257)
 rotation = 0.720474
 
-[node name="Shooter" type="CharacterBody2D" parent="EnemyPath2/EnemyGuide" groups=["mobs"]]
+[node name="Spewer" type="CharacterBody2D" parent="EnemyPath/EnemyGuide" groups=["mobs"]]
 z_index = 1
 z_as_relative = false
-position = Vector2(43.8487, 350.065)
 rotation = -0.720474
 collision_layer = 12
 collision_priority = 10.0
@@ -390,7 +382,7 @@ motion_mode = 1
 script = ExtResource("2_7imw6")
 corpse_scene = ExtResource("3_6p46b")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="EnemyPath/EnemyGuide/Spewer"]
 navigation_layers = 5
 radius = 111.01
 neighbor_distance = 10601.0
@@ -402,33 +394,32 @@ debug_path_custom_color = Color(0, 0, 1, 1)
 debug_path_custom_point_size = 10.0
 debug_path_custom_line_width = 5.0
 
-[node name="Collider" type="CollisionShape2D" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="Collider" type="CollisionShape2D" parent="EnemyPath/EnemyGuide/Spewer"]
 position = Vector2(-46.6664, 3.8147e-06)
 scale = Vector2(6.24, 6.24)
 shape = SubResource("RectangleShape2D_vexh5")
 
-[node name="Targeter" parent="EnemyPath2/EnemyGuide/Shooter" node_paths=PackedStringArray("target") instance=ExtResource("5_r7to8")]
-target = NodePath("../../../../Crosshairs")
+[node name="Targeter" parent="EnemyPath/EnemyGuide/Spewer" instance=ExtResource("5_r7to8")]
 
-[node name="Health" type="Node" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="Health" type="Node" parent="EnemyPath/EnemyGuide/Spewer"]
 script = ExtResource("8_040tp")
 max_health = 50.0
 
-[node name="EMovementController" type="Node" parent="EnemyPath2/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+[node name="EMovementController" type="Node" parent="EnemyPath/EnemyGuide/Spewer" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_03m5j")
 initial_state = NodePath("Follow")
 
-[node name="FollowPath" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("guide", "path")]
+[node name="FollowPath" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController" node_paths=PackedStringArray("guide", "path")]
 script = ExtResource("10_rix01")
 guide = NodePath("../../..")
 path = NodePath("../../../..")
 look_at_player = true
 
-[node name="Follow" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EMovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController" node_paths=PackedStringArray("follow_target")]
 physics_interpolation_mode = 2
 script = ExtResource("11_pwkyy")
 attack_style = "Cooldown"
-follow_target = NodePath("../../../../../Crosshairs")
+follow_target = NodePath("")
 speed = 5000.0
 look_at_player = true
 max_deviation_distance = 75.0
@@ -437,28 +428,28 @@ distance_til_attack = 200.0
 num_attacks = 1
 attack_cooldown = 200
 
-[node name="KnockedBack" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EMovementController"]
+[node name="KnockedBack" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController"]
 script = ExtResource("12_0bn7u")
 
-[node name="Lunge" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EMovementController"]
+[node name="Lunge" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController"]
 script = ExtResource("10_jj0of")
 timeout = 100
 
-[node name="EAttackController" type="Node" parent="EnemyPath2/EnemyGuide/Shooter" node_paths=PackedStringArray("initial_state")]
+[node name="EAttackController" type="Node" parent="EnemyPath/EnemyGuide/Spewer" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_03m5j")
 initial_state = NodePath("Neutral")
 
-[node name="Neutral" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EAttackController"]
+[node name="Neutral" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EAttackController"]
 script = ExtResource("11_w33eh")
 trigger_attack_with_state = {
 "Lunge": "Shoot"
 }
 
-[node name="Shoot" type="Node" parent="EnemyPath2/EnemyGuide/Shooter/EAttackController"]
+[node name="Shoot" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EAttackController"]
 script = ExtResource("14_ckny8")
 time_shooting = 100
 
-[node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="EnemySprite2" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Spewer"]
 rotation = -1.5708
 scale = Vector2(4.225, 4.225)
 sprite_frames = SubResource("SpriteFrames_jy04k")
@@ -467,12 +458,11 @@ frame = 7
 frame_progress = 1.0
 offset = Vector2(0, -25.47)
 
-[node name="ProgressBar" type="ProgressBar" parent="EnemyPath2/EnemyGuide/Shooter/EnemySprite2"]
-visible = false
-offset_left = -176.666
-offset_top = -36.6668
-offset_right = -60.6662
-offset_bottom = -9.66678
+[node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/Spewer/EnemySprite2"]
+offset_left = -36.0
+offset_top = 2.0
+offset_right = -11.0
+offset_bottom = 9.0
 scale = Vector2(3, 2.808)
 theme = SubResource("Theme_vr00u")
 theme_override_styles/background = SubResource("StyleBoxFlat_gmjhd")
@@ -480,7 +470,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ic1g1")
 show_percentage = false
 script = ExtResource("30_akbdd")
 
-[node name="Fire" type="AnimatedSprite2D" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="Fire" type="AnimatedSprite2D" parent="EnemyPath/EnemyGuide/Spewer"]
 visible = false
 z_index = 1
 position = Vector2(0.106325, -30.6991)
@@ -489,24 +479,16 @@ sprite_frames = SubResource("SpriteFrames_hrhgc")
 animation = &"on_fire"
 autoplay = "on_fire"
 
-[node name="attacking" type="AudioStreamPlayer" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
 stream = ExtResource("92_c2sy1")
 
-[node name="hurt" type="AudioStreamPlayer" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
 stream = ExtResource("93_30e1k")
 
-[node name="die" type="AudioStreamPlayer" parent="EnemyPath2/EnemyGuide/Shooter"]
+[node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
 stream = ExtResource("94_ipfda")
 
-[node name="Gun" parent="EnemyPath2/EnemyGuide/Shooter" instance=ExtResource("17_g0r6j")]
+[node name="Gun" parent="EnemyPath/EnemyGuide/Spewer" instance=ExtResource("17_g0r6j")]
 bullet = ExtResource("94_f2r1e")
 projectile_speed = 0.0
 fire_rate = 100
-
-[node name="Crosshairs" type="Node2D" parent="."]
-
-[node name="Node" type="Node" parent="Crosshairs"]
-script = ExtResource("95_jk434")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_uw70a")

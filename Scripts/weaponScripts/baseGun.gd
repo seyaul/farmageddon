@@ -40,6 +40,7 @@ var audio_player: AudioStreamPlayer2D
 var muzzle_particles: CPUParticles2D
 var player: CharacterBody2D
 var time_between_shots : float
+@onready var overheatSound: AudioStreamPlayer = $overheatSound
 
 # TODO: Replace with timer?
 var time: int = 0
@@ -77,10 +78,6 @@ func _physics_process(delta: float) -> void:
 		pass
 	
 func handle_signal(action: String, delta) -> void:
-	#if fire_type == "Discrete":
-	## Ensure discrete clicking respects the same fire rate as holding
-		#if !discrete_shot_cd_fulfilled:
-			#return  # Prevent shooting too fast when clicking
 	if not automatic and action == "tap":
 		#print("hello is this thing on")
 		if !discrete_shot_cd_fulfilled:
@@ -93,8 +90,6 @@ func handle_signal(action: String, delta) -> void:
 			return
 		discrete_shot_cd_fulfilled = false 
 		$discrGunTimer.start()
-		#if time % actual_fire_rate == 0 and is_instance_valid(bullet):
-			#fire(delta)
 		if is_instance_valid(bullet):
 			fire(delta)
 	elif automatic && action == "end":
@@ -107,6 +102,8 @@ func fire(delta: float) -> void:
 	muzzle_particles.emitting = true
 	#print(active_shooting, " ", automatic)
 	if !active_shooting:
+		overheatSound.stop()
+		overheatSound.play()
 		return
 	# Get the mouse position in global coordinates
 	var mouse_position = get_global_mouse_position()

@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://1xjlpsnbhg3r" path="res://Sprites/wasdinstr.png" id="7_1m3xf"]
 [ext_resource type="Texture2D" uid="uid://6xd3ruoiw3mu" path="res://Sprites/mouseInstr.png" id="8_rpht5"]
 [ext_resource type="Texture2D" uid="uid://16ibpi8kc131" path="res://Sprites/mouseandlclick.jpg" id="9_pll51"]
-[ext_resource type="Texture2D" uid="uid://ksa7v75iiffd" path="res://Sprites/t.png" id="10_uyt14"]
-[ext_resource type="Texture2D" uid="uid://crsabfxgi2b5h" path="res://Sprites/Tisntr.png" id="11_6gqw3"]
+[ext_resource type="Texture2D" uid="uid://bfre134fyjcbp" path="res://Sprites/e.png" id="10_f8u1v"]
+[ext_resource type="Texture2D" uid="uid://c7y6kac0bsx8i" path="res://Sprites/Eisntr.png" id="11_pjla7"]
 
 [node name="TutorialInterface" type="Control"]
 layout_mode = 3
@@ -76,13 +76,13 @@ texture = ExtResource("9_pll51")
 
 [node name="WeaponInstr" type="Node2D" parent="."]
 
-[node name="T" type="Sprite2D" parent="WeaponInstr"]
+[node name="E" type="Sprite2D" parent="WeaponInstr"]
 texture_filter = 1
 position = Vector2(635, 277)
 scale = Vector2(2, 2.037)
-texture = ExtResource("10_uyt14")
+texture = ExtResource("10_f8u1v")
 
-[node name="Tisntr" type="Sprite2D" parent="WeaponInstr"]
+[node name="SwitchWeaponInstr" type="Sprite2D" parent="WeaponInstr"]
 texture_filter = 1
 position = Vector2(792, 259)
-texture = ExtResource("11_6gqw3")
+texture = ExtResource("11_pjla7")

@@ -32,7 +32,7 @@ func Exit():
 		segment.emit_signal("shoot", 1, "end", 0)
 
 func _ready() -> void:
-	mfsm = get_parent().get_parent().get_node("MovementController")
+	mfsm = get_parent().get_parent().get_node("EMovementController")
 	snake = get_parent().get_parent()
 	guns = snake.get_node("Snake_Guns")
 	

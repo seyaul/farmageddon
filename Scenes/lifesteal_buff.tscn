@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://di6jxejjfigde"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_nkroq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_11ndx"]
+load_path = "res://.godot/imported/lifeSteal.png-c9c68b5255aafe1aa14a8628d88a7d48.ctex"
+
+[node name="buffPlaceholder" instance=ExtResource("1_nkroq")]
+texture = SubResource("CompressedTexture2D_11ndx")
+Name = "lifesteal_chance"
+Stat_type = "player"

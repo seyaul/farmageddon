@@ -200,6 +200,7 @@ scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_q7awh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 4.325, 0.426, 1)
 texture_filter = 1
 position = Vector2(1.995, -2.725)
 sprite_frames = SubResource("SpriteFrames_l6t53")

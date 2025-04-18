@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cm8wo5xr4ojbd" path="res://tileset/dirt_tileset.png" id="11_c8r2c"]
 [ext_resource type="Texture2D" uid="uid://bgwtnde2ss1qn" path="res://Sprites/grass edge (1).png" id="11_twfk1"]
 [ext_resource type="Texture2D" uid="uid://dpb44eqeqd1wl" path="res://tileset/grass_tileset.png" id="12_e116o"]
-[ext_resource type="Texture2D" uid="uid://br1a0yst3qqow" path="res://tileset/pixil-frame-0.png" id="12_hlqix"]
+[ext_resource type="Texture2D" uid="uid://cnapxdjhryrla" path="res://tileset/pixil-frame-0.png" id="12_hlqix"]
 [ext_resource type="Texture2D" uid="uid://7c3l538yrmfy" path="res://tileset/haunted tileset.jpg" id="16_ircv1"]
 [ext_resource type="Texture2D" uid="uid://b3fiyqg3xhlry" path="res://tileset/grass frame (1).png" id="17_5bxdg"]
 [ext_resource type="Texture2D" uid="uid://dd520pkykcj5c" path="res://tileset/tileset.jpg" id="17_m8twr"]

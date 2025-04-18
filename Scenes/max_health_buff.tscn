@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnuol2nd0i3ew"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_1im2e"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rvrcn"]
+load_path = "res://.godot/imported/maxHealth.png-8e7456125ceefdfcfd0598153d19b5a2.ctex"
+
+[node name="buffPlaceholder" instance=ExtResource("1_1im2e")]
+texture = SubResource("CompressedTexture2D_rvrcn")
+Name = "additional_max_health"
+Stat_type = "player"

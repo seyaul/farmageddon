@@ -7,16 +7,16 @@ var enemy: CharacterBody2D
 
 
 func Enter():
-    enemy = self.get_parent().get_parent()
-    if !enemy.isDead:
-        enemy.play_stun_animation()
-    seconds_left = stunned_seconds
+	enemy = self.get_parent().get_parent()
+	if !enemy.isDead:
+		enemy.play_stun_animation()
+	seconds_left = stunned_seconds
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func Update(delta: float) -> void:
-    seconds_left -= delta 
-    if seconds_left <= 0:
-        state_transition.emit(self, "Follow")
+	seconds_left -= delta 
+	if seconds_left <= 0:
+		state_transition.emit(self, "Follow")
 
 func Exit():
-    enemy.stop_stun_animation()
+	enemy.stop_stun_animation()

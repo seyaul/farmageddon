@@ -1,7 +1,6 @@
-[gd_scene load_steps=57 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=59 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
-
+[ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -47,12 +46,14 @@
 [ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="44_iqqjc"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
+[ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
 [ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
 [ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
 [ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
 [ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="50_8xs56"]
 [ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="51_apcog"]
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
+[ext_resource type="AudioStream" uid="uid://blybar16e1bbu" path="res://audio/music/old major's theme.mp3" id="54_s00ov"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ivfr4"]
 vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 3.92188, 0.351563, -150.938, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64063, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
@@ -306,11 +307,11 @@ texture = ExtResource("17_v88cp")
 segments_with_texture = "Odd"
 x_offset = 80.0
 
-[node name="MovementController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+[node name="EMovementController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("18_oun5g")
 initial_state = NodePath("Wander")
 
-[node name="Wander" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+[node name="Wander" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide", "path")]
 script = ExtResource("19_r1bva")
 next_state = "Random"
 return_state = "Wander Return"
@@ -319,7 +320,7 @@ path = NodePath("../../../Circle2")
 speed = 0.03
 time_following = 600
 
-[node name="Follow" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("follow_target")]
 script = ExtResource("20_wi5t2")
 attack_style = "Duration"
 follow_target = NodePath("../../../Crosshairs3")
@@ -331,7 +332,7 @@ distance_til_attack = 10000.0
 num_attacks = 1
 time_following = 800
 
-[node name="FollowPath" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide", "path")]
+[node name="FollowPath" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide", "path")]
 script = ExtResource("19_r1bva")
 next_state = "Wander"
 return_state = "FollowPath Return"
@@ -341,33 +342,33 @@ speed = 0.9
 time_following = 800
 slide_speed = 0.5
 
-[node name="Surround" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("target")]
+[node name="Surround" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("target")]
 script = ExtResource("21_nicn2")
 target = NodePath("../../../Crosshairs3")
 
-[node name="Wander Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+[node name="Wander Return" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide")]
 script = ExtResource("22_oe7j4")
 follow_path_state = "Wander"
 guide = NodePath("../../../Circle2/PathFollow2D")
 speed = 20000.0
 snap_distance = 10.0
 
-[node name="FollowPath Return" type="Node" parent="Boss/MovementController" node_paths=PackedStringArray("guide")]
+[node name="FollowPath Return" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide")]
 script = ExtResource("22_oe7j4")
 follow_path_state = "FollowPath"
 guide = NodePath("../../../Circle/PathFollow2D")
 speed = 20000.0
 snap_distance = 10.0
 
-[node name="Random" type="Node" parent="Boss/MovementController"]
+[node name="Random" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("23_6q85v")
 options = Array[String](["Surround", "FollowPath", "Follow"])
 
-[node name="AttackController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
+[node name="EAttackController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("18_oun5g")
 initial_state = NodePath("Neutral")
 
-[node name="Neutral" type="Node" parent="Boss/AttackController"]
+[node name="Neutral" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("24_mk54l")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -375,7 +376,7 @@ trigger_attack_with_state = {
 "Wander": "Neutral"
 }
 
-[node name="FireLeftGuns" type="Node" parent="Boss/AttackController"]
+[node name="FireLeftGuns" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("25_4so6p")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -384,7 +385,7 @@ trigger_attack_with_state = {
 }
 side_shooting = "Left"
 
-[node name="FireFrontGuns" type="Node" parent="Boss/AttackController"]
+[node name="FireFrontGuns" type="Node" parent="Boss/EAttackController"]
 script = ExtResource("25_4so6p")
 trigger_attack_with_state = {
 "Follow": "FireFrontGuns",
@@ -411,6 +412,7 @@ position = Vector2(1, -200)
 rotation = 0.0996687
 stream = ExtResource("27_sbsyh")
 volume_db = 2.0
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Oink2" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
@@ -427,6 +429,7 @@ position = Vector2(1, -200)
 rotation = 0.0996687
 stream = ExtResource("28_hp0ld")
 volume_db = 2.0
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Oink3" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
@@ -443,6 +446,7 @@ position = Vector2(1, -200)
 rotation = 0.0996687
 stream = ExtResource("29_f3658")
 volume_db = 2.0
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Oink4" type="Node" parent="Boss/AudioController" node_paths=PackedStringArray("audio")]
@@ -456,6 +460,7 @@ trigger_attack_with_state = {
 
 [node name="OinkFour" type="AudioStreamPlayer2D" parent="Boss/AudioController/Oink4"]
 stream = ExtResource("30_fhwva")
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Targeter" parent="Boss" node_paths=PackedStringArray("target") instance=ExtResource("31_jfh8n")]
@@ -483,24 +488,29 @@ volume_db = 18.0
 autoplay = true
 max_distance = 1000.0
 attenuation = 2.46228
+bus = &"SFX"
 parameters/looping = true
 
 [node name="Weird1" type="AudioStreamPlayer2D" parent="Boss"]
 stream = ExtResource("35_s38h0")
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 
 [node name="Weird2" type="AudioStreamPlayer2D" parent="Boss"]
 stream = ExtResource("36_aun44")
+bus = &"SFX"
 parameters/looping = true
 
 [node name="Weird3" type="AudioStreamPlayer2D" parent="Boss"]
 stream = ExtResource("37_b6t7k")
+bus = &"SFX"
 parameters/looping = true
 
 [node name="Attack" type="AudioStreamPlayer2D" parent="Boss"]
 stream = ExtResource("38_tv2og")
 pitch_scale = 0.55
+bus = &"SFX"
 parameters/looping = false
 
 [node name="Circle" type="Path2D" parent="."]
@@ -579,6 +589,15 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("40_rs7ol")
 
+[node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayaer/PlayerUI"]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 11.0
+offset_right = 1100.0
+offset_bottom = 111.0
+alignment = 2
+script = ExtResource("47_0pag5")
+
 [node name="PauseMenu" parent="UserInterfaceLayaer" instance=ExtResource("41_rgave")]
 visible = false
 
@@ -622,3 +641,9 @@ wait_time = 8.0
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("3_4de51")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("54_s00ov")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

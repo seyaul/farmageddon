@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dbrhfubmgwcq5"]
+[gd_scene load_steps=31 format=3 uid="uid://dbrhfubmgwcq5"]
 
 [ext_resource type="Script" path="res://Scripts/test_area.gd" id="1_36u1n"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="2_2hd24"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="3_gmgqf"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="4_b6lma"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="6_rvr8e"]
-[ext_resource type="Texture2D" uid="uid://bd4dead1pq5qc" path="res://Sprites/newWeaponUnlock.png" id="7_mk7n7"]
+[ext_resource type="Texture2D" uid="uid://c7y6kac0bsx8i" path="res://Sprites/Eisntr.png" id="7_t188t"]
 [ext_resource type="Texture2D" uid="uid://bx5cvgrwgsodl" path="res://Sprites/OIP.jpg" id="11_k0a88"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="12_g3doo"]
 [ext_resource type="Script" path="res://Scripts/heart_container.gd" id="12_o36nh"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="17_b1833"]
 [ext_resource type="PackedScene" uid="uid://g2uvb42yujb7" path="res://Scenes/tutorial_interface.tscn" id="17_q5r2r"]
 [ext_resource type="PackedScene" uid="uid://u2sln50fv6dn" path="res://Scenes/lifesteal_popup.tscn" id="20_0vkhg"]
+[ext_resource type="Script" path="res://Scripts/buff_container.gd" id="20_4d1kj"]
 [ext_resource type="PackedScene" uid="uid://ceo8mg3j6b6tw" path="res://Scenes/wave_progress_bar.tscn" id="20_31drj"]
 [ext_resource type="PackedScene" uid="uid://cywaib1kkxi6e" path="res://Scenes/tilesets/tileset1.tscn" id="23_atxwb"]
 [ext_resource type="Script" path="res://Scripts/enemy_indicator_manager.gd" id="23_qq6e7"]
@@ -93,7 +94,7 @@ wait_time = 8.0
 [node name="newWeaponNoti" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
 visible = false
 position = Vector2(165.128, -41.0256)
-texture = ExtResource("7_mk7n7")
+texture = ExtResource("7_t188t")
 
 [node name="MouseFollower" type="Node" parent="Crosshairs"]
 script = ExtResource("12_g3doo")
@@ -149,6 +150,10 @@ script = ExtResource("23_qq6e7")
 camera = NodePath("../../Camera2D")
 
 [node name="WaveNotifier" parent="UserInterfaceLayer" instance=ExtResource("15_j1wly")]
+
+[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
+
+[node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
 
 [node name="PlayerUI" type="Control" parent="UserInterfaceLayer"]
 layout_mode = 3
@@ -248,14 +253,19 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Akorn47"
 horizontal_alignment = 1
 
-[node name="TutorialInterface" parent="UserInterfaceLayer" instance=ExtResource("17_q5r2r")]
+[node name="buffContainer" type="HBoxContainer" parent="UserInterfaceLayer/PlayerUI"]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 11.0
+offset_right = 1100.0
+offset_bottom = 111.0
+alignment = 2
+script = ExtResource("20_4d1kj")
 
-[node name="WaveProgressBar" parent="UserInterfaceLayer" instance=ExtResource("20_31drj")]
+[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
 
 [node name="PauseMenu" parent="UserInterfaceLayer" instance=ExtResource("12_wli8w")]
 visible = false
-
-[node name="LifestealPopup" parent="UserInterfaceLayer" instance=ExtResource("20_0vkhg")]
 
 [node name="walls" type="Node2D" parent="."]
 
@@ -282,6 +292,7 @@ shape = SubResource("RectangleShape2D_pk34s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_iwkse")
+bus = &"Music"
 parameters/looping = true
 
 [node name="WaveManager" parent="." instance=ExtResource("14_cx7gw")]

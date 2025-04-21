@@ -2,6 +2,7 @@ extends State
 
 #TODO: Refactor or make a new state machine stuff.
 @export var trigger_attack_with_state: Dictionary
+@export var fire_rate: int = 1
 var mfsm: FiniteStateMachine
 
 @export_enum("Front", "Left", "Right")
@@ -9,14 +10,17 @@ var side_shooting: String
 
 var snake: Snake
 var guns: Node
+var time: int
 
 func Enter():
-	pass
+	time = 0
 
 func Update(delta: float):
+	time += 1
 	if guns.guns_connected:
 		shoot_guns(delta)
-		
+
+
 	if is_instance_valid(mfsm.current_state) and \
 	trigger_attack_with_state.has(mfsm.current_state.name) and \
 	trigger_attack_with_state[mfsm.current_state.name] != name:
@@ -38,7 +42,8 @@ func _ready() -> void:
 	
 # TODO: Maybe add parameter values for this?
 func shoot_guns(delta: float) -> void:
-	if side_shooting == "Front":
+	print(time % fire_rate, "  ",time, "   ", fire_rate)
+	if side_shooting == "Front" and time % fire_rate == 0:
 		var segment = snake.segments[0]
 		segment.emit_signal("shoot", 0, "hold", delta)
 		segment.emit_signal("shoot", 1, "hold", delta)

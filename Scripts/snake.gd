@@ -74,8 +74,8 @@ func segments_factory() -> void:
 		segments.append(segment)
 
 func make_segments_follow_each_other() -> void:
-	segments[0].position = segments[0].position.lerp(global_position, stiffness)
-	segments[0].look_at(global_position)
+	segments[0].global_position = segments[0].global_position.lerp(global_position, stiffness)
+	segments[0].global_rotation = global_rotation
 	# Each subsequent point follows the one before it
 	for i in range(1, segments.size()):
 		var current_node = segments[i]

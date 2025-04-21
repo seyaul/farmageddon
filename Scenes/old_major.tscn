@@ -98,8 +98,11 @@ _data = {
 }
 point_count = 138
 
-[node name="OldMajor" type="Node2D"]
+[node name="OldMajor" type="Node2D" node_paths=PackedStringArray("target_node_1", "target_node_2", "target_node_3")]
 script = ExtResource("1_yeg3i")
+target_node_1 = NodePath("Boss/EMovementController/Surround")
+target_node_2 = NodePath("Boss/EMovementController/Follow")
+target_node_3 = NodePath("Boss/Targeter")
 
 [node name="World" parent="." instance=ExtResource("37_qmmin")]
 
@@ -160,7 +163,6 @@ frame_progress = 0.497977
 
 [node name="BossHead" type="CollisionPolygon2D" parent="Boss"]
 z_index = 100
-position = Vector2(2, 0)
 polygon = PackedVector2Array(-20, -60, -20, 60, 80, 10, 80, -10)
 
 [node name="Legs" type="Node" parent="Boss"]
@@ -292,8 +294,8 @@ line_width = 9.0
 script = ExtResource("12_uu8lk")
 gun = ExtResource("13_qcdmj")
 bullet = ExtResource("14_36h7u")
-segments_with_gun = 2
-front_gun_projectile_speed = 80000.0
+segments_with_gun = 6
+front_gun_projectile_speed = 50000.0
 side_gun_projectile_speed = 20000.0
 
 [node name="Snake_Texture1" type="Node" parent="Boss"]
@@ -317,14 +319,13 @@ next_state = "Random"
 return_state = "Wander Return"
 guide = NodePath("../../../Circle2/PathFollow2D")
 path = NodePath("../../../Circle2")
-speed = 0.03
-time_following = 600
+speed = 0.02
+time_following = 400
 
-[node name="Follow" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("20_wi5t2")
 attack_style = "Duration"
-follow_target = NodePath("../../../Crosshairs3")
-speed = 20000.0
+speed = 15000.0
 look_at_player = true
 max_deviation_distance = 150.0
 action = "Wander"
@@ -342,9 +343,8 @@ speed = 0.9
 time_following = 800
 slide_speed = 0.5
 
-[node name="Surround" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("target")]
+[node name="Surround" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("21_nicn2")
-target = NodePath("../../../Crosshairs3")
 
 [node name="Wander Return" type="Node" parent="Boss/EMovementController" node_paths=PackedStringArray("guide")]
 script = ExtResource("22_oe7j4")
@@ -392,6 +392,7 @@ trigger_attack_with_state = {
 "FollowPath": "FireLeftGuns",
 "Wander": "Neutral"
 }
+fire_rate = 50
 side_shooting = "Front"
 
 [node name="AudioController" type="Node" parent="Boss" node_paths=PackedStringArray("initial_state")]
@@ -463,8 +464,7 @@ stream = ExtResource("30_fhwva")
 bus = &"SFX"
 parameters/looping = false
 
-[node name="Targeter" parent="Boss" node_paths=PackedStringArray("target") instance=ExtResource("31_jfh8n")]
-target = NodePath("../../Crosshairs3")
+[node name="Targeter" parent="Boss" instance=ExtResource("31_jfh8n")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Boss"]
 navigation_layers = 5
@@ -514,6 +514,7 @@ bus = &"SFX"
 parameters/looping = false
 
 [node name="Circle" type="Path2D" parent="."]
+scale = Vector2(2, 2)
 curve = SubResource("Curve2D_gyk8w")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Circle"]
@@ -533,7 +534,7 @@ drag_bottom_margin = 0.1
 
 [node name="Circle2" type="Path2D" parent="."]
 position = Vector2(-5.80701, -50.1781)
-scale = Vector2(1.17229, 1.18793)
+scale = Vector2(2.337, 2.759)
 curve = SubResource("Curve2D_hoh5i")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Circle2"]

@@ -45,6 +45,8 @@ animations = [{
 [node name="bossBullet" instance=ExtResource("1_5awf7")]
 collision_layer = 16
 collision_mask = 1
+life_span = 500
+max_range = 100000
 
 [node name="BulletHitbox" parent="." index="0"]
 scale = Vector2(1.655, 0.68)

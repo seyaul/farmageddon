@@ -2,11 +2,17 @@ extends Node2D
 
 var player_instance
 var health_node
+@export var target_node_1: Node
+@export var target_node_2: Node
+@export var target_node_3: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_instance = Global.playerInstance
 	add_child(player_instance)
+	target_node_1.target = player_instance
+	target_node_2.follow_target = player_instance
+	target_node_3.target = player_instance
 	health_node = $Boss/Health
 	print(health_node)
 	health_node.you_win.connect(handle_you_win)

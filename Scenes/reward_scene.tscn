@@ -23,43 +23,52 @@ color = Color(0, 0, 0, 0.360784)
 
 [node name="CardContainer" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 114.0
-offset_top = 232.0
-offset_right = 1094.0
+offset_left = -162.0
+offset_top = 113.0
+offset_right = 1122.0
+offset_bottom = 472.0
+
+[node name="Card1" parent="CardContainer" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 994.0
+offset_top = 121.0
+offset_right = 1104.0
+offset_bottom = 275.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Card2" parent="CardContainer" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 642.0
+offset_top = 120.0
+offset_right = 752.0
+offset_bottom = 274.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Card3" parent="CardContainer" instance=ExtResource("2_wxwtb")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 267.0
+offset_top = 118.0
+offset_right = 377.0
 offset_bottom = 272.0
-
-[node name="HealCard" type="TextureButton" parent="CardContainer"]
-layout_mode = 2
-offset_left = 140.0
-offset_right = 140.0
-offset_bottom = 40.0
-
-[node name="Card" parent="CardContainer/HealCard" instance=ExtResource("2_wxwtb")]
-layout_mode = 0
-offset_left = 0.0
-offset_right = 200.0
-
-[node name="GoldCard" type="TextureButton" parent="CardContainer"]
-layout_mode = 2
-offset_left = 490.0
-offset_right = 490.0
-offset_bottom = 40.0
-
-[node name="Card" parent="CardContainer/GoldCard" instance=ExtResource("2_wxwtb")]
-layout_mode = 0
-offset_left = 0.0
-offset_right = 200.0
-
-[node name="ExpCard" type="TextureButton" parent="CardContainer"]
-layout_mode = 2
-offset_left = 840.0
-offset_right = 840.0
-offset_bottom = 40.0
-
-[node name="Card" parent="CardContainer/ExpCard" instance=ExtResource("2_wxwtb")]
-layout_mode = 0
-offset_left = 0.0
-offset_right = 200.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

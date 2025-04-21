@@ -69,9 +69,14 @@ func apply_card_effect(effect_data: Dictionary):
 				print(key, " changed from ", old_value, " to ", new_value)
 			elif key in Global.all_gun_stats:
 				var old_value = Global.all_gun_stats.get(key)
-				var new_value = old_value * effect_data[key]  
-				Global.all_gun_stats.set(key, new_value)
-				print(key, " changed from ", old_value, " to ", new_value)
+				if key == "akorn47_additional_bullets_per_fire":
+					var new_value = old_value + effect_data[key]
+					Global.all_gun_stats.set(key, new_value)
+					print(key, " changed from ", old_value, " to ", new_value)
+				else:
+					var new_value = old_value * effect_data[key] 
+					Global.all_gun_stats.set(key, new_value)
+					print(key, " changed from ", old_value, " to ", new_value)
 
 func _on_reward_selected(card: Card) -> void:
 	apply_card_effect(card.effect_data)

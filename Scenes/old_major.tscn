@@ -370,7 +370,7 @@ guide = NodePath("../../../Circle/PathFollow2D")
 path = NodePath("../../../Circle")
 speed = 0.9
 time_following = 800
-slide_speed = 0.5
+slide_speed = 0.45
 
 [node name="Surround" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("21_nicn2")

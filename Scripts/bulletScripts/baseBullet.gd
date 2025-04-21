@@ -13,7 +13,7 @@ var collision_behavior: String = "Bouncy"
 @export var max_range: int = 300
 # WARNING: Slow moving objects won't be detected for collisions with a low safe margin.
 # NOTE: Higher safe margin is used for preventing multi-collisions and penetration for fast moving objects.
-@export var safe_margin: float = 1
+@export var safe_margin: float = 0
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_sound: AudioStreamPlayer = $HitSound
 var hit_animation: AnimatedSprite2D
@@ -36,8 +36,8 @@ func _ready() -> void:
 	if has_node("HitAnimation"):
 		hit_animation = $HitAnimation
 
-func init(damage: int):
-	self.damage = damage
+func init(new_damage: int):
+	self.damage = new_damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,7 +49,6 @@ func _physics_process(delta: float) -> void:
 		kill_bullet()
 	if initial_position.distance_to(position) >= max_range:
 		kill_bullet()
-		# constant_linear_velocity = Vector2.ZERO
 	var collision = move_and_collide(constant_linear_velocity * delta, false, safe_margin)
 	if collision:
 		_handle_collisions(collision)

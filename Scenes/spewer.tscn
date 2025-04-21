@@ -489,5 +489,5 @@ stream = ExtResource("94_ipfda")
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Spewer" instance=ExtResource("17_g0r6j")]
 bullet = ExtResource("94_f2r1e")
-projectile_speed = 0.0
+projectile_speed = 1.0
 fire_rate = 100

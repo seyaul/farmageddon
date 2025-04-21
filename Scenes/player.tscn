@@ -211,6 +211,7 @@ texture = ExtResource("21_wyjhk")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(110, 0)
+collision_layer = 0
 collision_mask = 5
 script = ExtResource("25_3v1om")
 

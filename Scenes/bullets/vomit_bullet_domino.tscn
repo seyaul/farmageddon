@@ -187,11 +187,15 @@ animations = [{
 
 [node name="Node2D" type="AnimatableBody2D"]
 scale = Vector2(4, 4)
-collision_layer = 16
+disable_mode = 1
+collision_layer = 0
 sync_to_physics = false
 script = ExtResource("1_ykovo")
 collision_behavior = "Simple"
+bounces_til_despawn = null
 life_span = 500
+max_range = null
+safe_margin = null
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 rotation = -1.5708

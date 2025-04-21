@@ -104,9 +104,9 @@ self_modulate = Color(1, 0.844234, 0.754239, 1)
 top_level = true
 process_callback = 0
 limit_left = -2680
-limit_top = -1870
+limit_top = -1920
 limit_right = 2680
-limit_bottom = 1870
+limit_bottom = 1920
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -296,8 +296,3 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="WaveManager" parent="." instance=ExtResource("14_cx7gw")]
-num_enemies = null
-tot_enemy_count = null
-stage_type = null
-stage_difficulty_cost = null
-num_waves = null

@@ -4,6 +4,7 @@ extends baseGun
 @export var damage_interval: float = 0.05  # Time between damage ticks
 @export var flame_damage: float = 3  # Damage per tick
 
+var actual_flame_damage: float
 var time_since_last_shot: float = 0
 var flames: CPUParticles2D
 var damage_timer: Timer
@@ -32,6 +33,7 @@ func _ready() -> void:
 	add_child(damage_timer)
 
 	# Customize weapon-specific properties
+	actual_flame_damage = flame_damage * Global.all_gun_stats.flame_damage_modifier
 	bullets_per_fire = 1
 	spread = 0
 	projectile_speed = 30000
@@ -92,4 +94,4 @@ func apply_damage() -> void:
 		if is_instance_valid(target):
 			if target.has_method("add_fire"):
 				target.add_fire(1)
-			target.take_damage(flame_damage)
+			target.take_damage(actual_flame_damage)

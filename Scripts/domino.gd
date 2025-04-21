@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 func spawn_domino():
 	if curr_domino < num_dominos:
 		var next_domino: AnimatableBody2D = domino.instantiate()
+		next_domino.init(1)
 		next_domino.rotation_degrees = parent.rotation_degrees
 		next_domino.global_position = parent.global_position + Vector2(-1, 0).rotated(parent.global_rotation) * gap * curr_domino
 		get_tree().current_scene.call_deferred("add_child", next_domino)

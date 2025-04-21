@@ -43,20 +43,21 @@ func generate_cards():
 		if not card.is_connected("reward_selected", Callable(self, "_on_reward_selected")):
 			card.connect("reward_selected", Callable(self, "_on_reward_selected"))
 
-		card.position = Vector2(-1000, 242)
+		card.position = Vector2(-1000, 300)
 		card_container.remove_child(card)  
 		add_child(card)  
 		cards.append(card)
 
 func slide_in_cards():
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	var final_x_positions = [120, 460, 800]  
+	var final_x_positions = [90, 470, 830]  
 
 	for i in range(cards.size()):
 		var card = cards[i]
 		var target_x = final_x_positions[i]  
 		tween.tween_property(card, "position:x", target_x, 0.5).set_delay(i * 0.2)
 		card_container.add_child(card)
+
 
 func apply_card_effect(effect_data: Dictionary):
 	if effect_data.keys().size() > 0:

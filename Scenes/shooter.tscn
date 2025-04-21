@@ -476,7 +476,7 @@ script = ExtResource("8_yayn1")
 [node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Shooter/EMovementController"]
 physics_interpolation_mode = 2
 script = ExtResource("9_2u5i6")
-speed = 5000.0
+speed = 7500.0
 look_at_player = true
 max_deviation_distance = 75.0
 distance_til_attack = 0.0

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var damage: int = 50  # Explosion damage
+@export var damage: int = 100  # Explosion damage
 @export var stuns: bool = true
 @onready var particles = $Particles
 @onready var explosion_area = $BlastRadius
@@ -19,3 +19,8 @@ func _on_blast_radius_body_entered(body: Node2D) -> void:
 		if stuns:
 			if body.has_method("stun"):
 				body.stun()
+	# else:
+	# 	print(body.name)
+	elif body.name == "Player":
+		print("take damage")
+		body.take_damage(1)

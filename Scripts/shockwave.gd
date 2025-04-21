@@ -8,7 +8,8 @@ extends Area2D
 #@export var max_shockwaves: int = 1
 #@export var shockwave_cooldown: int = 1
 @export var max_shockwaves: int = 100
-@export var shockwave_cooldown: int = 0.1
+@export var shockwave_cooldown: int = 1
+var on_cooldown: bool = false
 
 var collider: CollisionShape2D
 var shockwaves: int
@@ -40,6 +41,8 @@ func _physics_process(delta: float) -> void:
 		emit_signal("god_mode_debug")
 
 func create_shockwave() -> void:
+	if on_cooldown:
+		return
 	if shockwaves > 0:
 		monitoring = true
 		var tween = get_tree().create_tween()
@@ -49,7 +52,12 @@ func create_shockwave() -> void:
 		shockwave_duration)
 		tween_prop.set_trans(Tween.TRANS_LINEAR)
 		shockwaves -= 1
+		on_cooldown = true
+		get_tree().create_timer(shockwave_cooldown).timeout.connect(_reset_cooldown)
 	
+func _reset_cooldown():
+	on_cooldown = false
+
 func _on_body_entered(body) -> void:
 	apply_damage(body)
 		

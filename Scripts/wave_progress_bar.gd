@@ -42,5 +42,5 @@ func handle_signal():
 func handle_setup_complete_wp():
 	if !Global.tutorial:
 		self.visible = true
-		await get_tree().process_frame
+		#await get_tree().process_frame
 		total_enemies = wave_manager_node.tot_enemy_count

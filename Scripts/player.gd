@@ -25,6 +25,8 @@ var animation: AnimatedSprite2D
 var hitbox: Area2D
 var hitbox_shape: CollisionShape2D
 var gun: baseGun
+var immune_to_vomit: bool = false
+var vomit_immunity_timer: SceneTreeTimer
 var is_holding
 @onready var walk_state = $MoveController/Walk
 @onready var turret: Node2D = $Turret
@@ -74,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("switch_weapon"):
 		iterate_weapon()
 
-# _on_health_character_died() handles a character died signal from the
+# _on_health_character_xd() handles a character died signal from the
 # CharacterHealth child node in order to play the death animation
 func _on_health_character_died():
 	walk_state.modify_speed(0)
@@ -141,3 +143,16 @@ func _on_flash_timeout():
 
 func _on_death_animation_finished() -> void:
 	deathAnimation.visible = false
+
+func take_vomit_damage(damage):
+	if !immune_to_vomit:
+		take_damage(damage)
+
+func make_immune_to_vomit():
+	immune_to_vomit = true
+	vomit_immunity_timer = get_tree().create_timer(0.5)
+	vomit_immunity_timer.timeout.connect(handle_vomit_immunity_timer)
+	
+func handle_vomit_immunity_timer():
+	immune_to_vomit = false
+	

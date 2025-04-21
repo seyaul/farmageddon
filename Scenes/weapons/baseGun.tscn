@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://conr5ggj1qu7n"]
+[gd_scene load_steps=3 format=3 uid="uid://conr5ggj1qu7n"]
 
 [ext_resource type="Script" path="res://Scripts/weaponScripts/baseGun.gd" id="2_gphj1"]
+[ext_resource type="AudioStream" uid="uid://ct8sp3frk013a" path="res://audio/effects/gun_overheat.wav" id="2_kn67n"]
 
 [node name="baseGun" type="Sprite2D"]
 rotation = 1.5708
@@ -26,3 +27,6 @@ scale_amount_max = 8.0
 color = Color(0.811127, 0.811127, 0.811127, 1)
 
 [node name="discrGunTimer" type="Timer" parent="."]
+
+[node name="overheatSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kn67n")

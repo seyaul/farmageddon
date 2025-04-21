@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c55hntbdb67gm" path="res://Sprites/Boss-Projectile-1.png" id="7_tukkp"]
 [ext_resource type="AudioStream" uid="uid://beg60p8mo0srk" path="res://audio/effects/hitmarker_sound.wav" id="8_j14k6"]
 [ext_resource type="Script" path="res://Scripts/domino.gd" id="9_ol5i5"]
-[ext_resource type="PackedScene" path="res://Scenes/bullets/vomit_bullet_domino.tscn" id="10_fhrue"]
+[ext_resource type="PackedScene" uid="uid://d0nnsvijjq8cl" path="res://Scenes/bullets/vomit_bullet_domino.tscn" id="10_5h8vp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7awh"]
 radius = 24.0
@@ -189,7 +189,8 @@ animations = [{
 
 [node name="vomitBullet" type="AnimatableBody2D"]
 scale = Vector2(4, 4)
-collision_layer = 16
+collision_layer = 0
+sync_to_physics = false
 script = ExtResource("1_yfeg6")
 collision_behavior = "Simple"
 life_span = 500
@@ -209,9 +210,9 @@ animation = &"vomit"
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_j14k6")
 
-[node name="Domino" type="Node" parent="."]
+[node name="Domino" type="Node" parent="." groups=["vomit"]]
 script = ExtResource("9_ol5i5")
-domino = ExtResource("10_fhrue")
+domino = ExtResource("10_5h8vp")
 gap = 20.0
 num_dominos = 15
 cascade_rate = 5

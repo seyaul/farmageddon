@@ -185,10 +185,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="AnimatableBody2D"]
+[node name="vomitBulletDomino" type="AnimatableBody2D" groups=["vomit"]]
 scale = Vector2(4, 4)
-collision_layer = 16
+disable_mode = 1
+collision_layer = 0
+sync_to_physics = false
 script = ExtResource("1_ykovo")
+collision_behavior = "Simple"
 life_span = 500
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]

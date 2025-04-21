@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/spewer.gd" id="1_lxp07"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="2_7imw6"]
 [ext_resource type="Texture2D" uid="uid://dpu05j4wre5x1" path="res://Sprites/pig_sprites/barfing/pixil-frame-0.png" id="2_64qsb"]
-[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="3_6p46b"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="3_6p46b"]
 [ext_resource type="Texture2D" uid="uid://baoyqve6frsdc" path="res://Sprites/pig_sprites/barfing/pixil-frame-1.png" id="3_ngca0"]
 [ext_resource type="Texture2D" uid="uid://cgjo6n431a02n" path="res://Sprites/pig_sprites/barfing/pixil-frame-2.png" id="4_dcwkb"]
 [ext_resource type="Texture2D" uid="uid://d1gj7o6vepoji" path="res://Sprites/pig_sprites/barfing/pixil-frame-3.png" id="5_5mwfs"]
@@ -490,5 +490,5 @@ stream = ExtResource("94_ipfda")
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Spewer" instance=ExtResource("17_g0r6j")]
 bullet = ExtResource("94_f2r1e")
-projectile_speed = 0.0
+projectile_speed = 1.0
 fire_rate = 100

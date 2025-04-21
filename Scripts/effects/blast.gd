@@ -19,3 +19,8 @@ func _on_blast_radius_body_entered(body: Node2D) -> void:
 		if stuns:
 			if body.has_method("stun"):
 				body.stun()
+	# else:
+	# 	print(body.name)
+	elif body.name == "Player":
+		print("take damage")
+		body.take_damage(1)

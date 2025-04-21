@@ -193,10 +193,7 @@ collision_layer = 0
 sync_to_physics = false
 script = ExtResource("1_yfeg6")
 collision_behavior = "Simple"
-bounces_til_despawn = null
 life_span = 500
-max_range = null
-safe_margin = null
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -213,7 +210,7 @@ animation = &"vomit"
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_j14k6")
 
-[node name="Domino" type="Node" parent="."]
+[node name="Domino" type="Node" parent="." groups=["vomit"]]
 script = ExtResource("9_ol5i5")
 domino = ExtResource("10_5h8vp")
 gap = 20.0

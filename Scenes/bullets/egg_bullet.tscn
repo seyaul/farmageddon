@@ -25,8 +25,6 @@ animations = [{
 [node name="eggBullet" groups=["mob_bullet"] instance=ExtResource("1_0t837")]
 collision_layer = 16
 collision_mask = 1
-bounces_til_despawn = null
-safe_margin = null
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(-10, 0)

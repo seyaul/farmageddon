@@ -63,9 +63,17 @@ func _handle_collisions(collision: KinematicCollision2D) -> void:
 		kill_bullet()
 		return
 
+	print("name ", self.name)
 	if collider.has_method("take_damage"):
-		collider.take_damage(damage)  
-		hit_sound.play()
+		if self.is_in_group("vomit"):
+			print("in vomitBullet damager")
+			collider.take_vomit_damage(damage)
+			if collider.name == "Player":
+				collider.make_immune_to_vomit()
+		else:
+			print("in else")
+			collider.take_damage(damage)  
+			hit_sound.play()
 
 	if collision_behavior == "Sticky":
 		constant_linear_velocity = Vector2.ZERO

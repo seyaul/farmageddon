@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf72gnw5n5fyl"
-path="res://.godot/imported/pixil-frame-2.png-c3d093bfb8974d4c1faef8abfc446fe5.ctex"
+uid="uid://chi2qcipxdl4"
+path="res://.godot/imported/new-bull-windup13.png-3365e4d06e8956bbf1f21212d2ae9071.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_bull_sprites/bobbing_walk/pixil-frame-2.png"
-dest_files=["res://.godot/imported/pixil-frame-2.png-c3d093bfb8974d4c1faef8abfc446fe5.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/new-bull-windup13.png"
+dest_files=["res://.godot/imported/new-bull-windup13.png-3365e4d06e8956bbf1f21212d2ae9071.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1qr2gbp1ybeo"
-path="res://.godot/imported/pixil-frame-3.png-0ad8b11c35d5e56aa28b6f4196ec8fd2.ctex"
+uid="uid://b4lgtkdv1o1tb"
+path="res://.godot/imported/bull-new-color4.png-f583bbc01fbca67b02c9c9dbd0055854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_bull_sprites/bobbing_walk/pixil-frame-3.png"
-dest_files=["res://.godot/imported/pixil-frame-3.png-0ad8b11c35d5e56aa28b6f4196ec8fd2.ctex"]
+source_file="res://Sprites/new_bull_sprites/bobbing_walk/bull-new-color4.png"
+dest_files=["res://.godot/imported/bull-new-color4.png-f583bbc01fbca67b02c9c9dbd0055854.ctex"]
 
 [params]
 

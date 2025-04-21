@@ -58,7 +58,6 @@ func target_manager(targeterNode: Node, followNode: Node) -> void:
 	var t = targeterNode
 	var f = followNode
 	var rand_target_det = randi_range(0,4)
-	## TODO: Add a check to see if player has been instantiated.
 	if is_instance_valid(player_instance):
 		var waypoint1 = player_instance.get_node("wayPoint1")
 		var waypoint2 = player_instance.get_node("wayPoint2")
@@ -95,7 +94,7 @@ func spawn_on_timer(enemy_scene_type):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
 		enemy_node_name = enemy_instance.node_name
-		#print(enemy_node_name, " this is in wave_manager.gd")
+		print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -126,10 +125,13 @@ func spawn_on_timer(enemy_scene_type):
 			print("path_name: ", path_name)
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
+			print("targeter node: ", targeterNode)
+			print("follow node: ", followNode)
 			
-			if enemy_node_name == "Spewer" and is_instance_valid(targeterNode) and is_instance_valid(followNode):
+			if enemy_node_name == "Shooter" and is_instance_valid(targeterNode) and is_instance_valid(followNode):
 				print("targeterNode target: ", targeterNode.target, "follownode target: ", followNode.follow_target)
-			
+			else: 
+				print("One of the nodes were not valid.")
 			
 			if targeterNode and followNode:
 				target_manager(targeterNode, followNode)
@@ -204,7 +206,7 @@ func level_selector():
 	if Global.numLevelsComplete == 0:
 		num_enemies = 5
 		num_waves = 1
-		#spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_chicken_scene)
 		spawn_on_timer(enemy_bull_scene)
 		spawn_on_timer(enemy_pig_scene)
 		tot_enemy_count = num_enemies * num_waves

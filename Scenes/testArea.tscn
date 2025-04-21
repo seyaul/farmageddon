@@ -102,8 +102,11 @@ script = ExtResource("12_g3doo")
 [node name="Camera2D" type="Camera2D" parent="."]
 self_modulate = Color(1, 0.844234, 0.754239, 1)
 top_level = true
-zoom = Vector2(0.1, 0.1)
 process_callback = 0
+limit_left = -2680
+limit_top = -1920
+limit_right = 2680
+limit_bottom = 1920
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true

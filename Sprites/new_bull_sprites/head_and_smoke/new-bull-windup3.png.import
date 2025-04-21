@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fayo13be5j3l"
-path="res://.godot/imported/bull_corpse.png-3b56ee8d11d311ac265605c408143507.ctex"
+uid="uid://d1upvpv8ufp3v"
+path="res://.godot/imported/new-bull-windup3.png-2f5426814147a202f791a9dc3f18b7b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_bull_sprites/bull_corpse.png"
-dest_files=["res://.godot/imported/bull_corpse.png-3b56ee8d11d311ac265605c408143507.ctex"]
+source_file="res://Sprites/new_bull_sprites/head_and_smoke/new-bull-windup3.png"
+dest_files=["res://.godot/imported/new-bull-windup3.png-2f5426814147a202f791a9dc3f18b7b2.ctex"]
 
 [params]
 

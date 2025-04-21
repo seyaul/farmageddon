@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cig4sc3sy7mb4"
-path="res://.godot/imported/bull2.png-25ae240451876fbacaa5352574ee43f4.ctex"
+uid="uid://cn1pf1fgou452"
+path="res://.godot/imported/bull-new-color5.png-8f35f2358ecd3fe1703eb979acc93551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/new_bull_sprites/bull2.png"
-dest_files=["res://.godot/imported/bull2.png-25ae240451876fbacaa5352574ee43f4.ctex"]
+source_file="res://Sprites/new_bull_sprites/bobbing_walk/bull-new-color5.png"
+dest_files=["res://.godot/imported/bull-new-color5.png-8f35f2358ecd3fe1703eb979acc93551.ctex"]
 
 [params]
 

@@ -58,8 +58,6 @@ func _ready():
 	# Ensure signals are connected
 	if not is_connected("pressed", Callable(self, "_on_card_pressed")):
 		connect("pressed", Callable(self, "_on_card_pressed"))
-	#if not is_connected("input_event", Callable(self, "_on_hover_area_input_event")):
-		#connect("input_event", Callable(self, "_on_hover_area_input_event"))
 
 	if not is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
 		connect("mouse_entered", Callable(self, "_on_mouse_entered"))
@@ -90,27 +88,15 @@ func _on_hover_area_input_event(viewport, event, shape_idx):
 		_on_card_pressed()
 
 func _on_card_pressed() -> void:
-	#apply_card_effect(effect_data)
 	emit_signal("reward_selected", self)
 
 func set_card_texture(texture: Texture2D) -> void:
 	self.texture_normal = texture  
 
 func _on_mouse_entered() -> void:
-	print("mouse entered")
-	#if tween_hover and tween_hover.is_running():
-		#tween_hover.kill()
-	#tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	#tween_hover.tween_property(self, "scale", Vector2(2.8, 2.8), 0.5)
-
 	if animation_player.has_animation("flip_to_back"):
 		animation_player.play("flip_to_back")
 
 func _on_mouse_exited() -> void:
 	if animation_player.has_animation("flip_to_front"):
 		animation_player.play("flip_to_front")
-
-	#if tween_hover and tween_hover.is_running():
-		#tween_hover.kill()
-	#tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	#tween_hover.tween_property(self, "scale", Vector2(2.0, 2.0), 0.3)

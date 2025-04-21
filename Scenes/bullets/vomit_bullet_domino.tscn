@@ -188,7 +188,9 @@ animations = [{
 [node name="Node2D" type="AnimatableBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 16
+sync_to_physics = false
 script = ExtResource("1_ykovo")
+collision_behavior = "Simple"
 life_span = 500
 
 [node name="BulletHitbox" type="CollisionShape2D" parent="."]

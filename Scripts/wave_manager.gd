@@ -2,7 +2,9 @@ extends Node
 
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
+@export var enemy_pig_scene = preload("res://Scenes/spewer.tscn")
 var reward_scene = preload("res://Scenes/reward_scene.tscn")
+
 var player_instance
 @export var num_enemies : int # number of enemies to spawn, probably len(list_enemies)
 @export var tot_enemy_count : int  # did this so enemies do not decrement twice, not fully implemented yet
@@ -53,29 +55,35 @@ func _ready() -> void:
 
 
 func target_manager(targeterNode: Node, followNode: Node) -> void:
+	var t = targeterNode
+	var f = followNode
 	var rand_target_det = randi_range(0,4)
 	## TODO: Add a check to see if player has been instantiated.
-	var waypoint1 = player_instance.get_node("wayPoint1")
-	var waypoint2 = player_instance.get_node("wayPoint2")
-	var waypoint3 = player_instance.get_node("wayPoint3")
-	var waypoint4 = player_instance.get_node("wayPoint4")
-	var target
-	match rand_target_det:
-		0: 
-			targeterNode.target = player_instance
-			followNode.follow_target = player_instance 
-		1: 
-			targeterNode.target = waypoint1
-			followNode.follow_target = waypoint1
-		2: 
-			targeterNode.target = waypoint2
-			followNode.follow_target = waypoint2
-		3:
-			targeterNode.target = waypoint3
-			followNode.follow_target = waypoint3
-		4:
-			targeterNode.target = waypoint4
-			followNode.follow_target = waypoint4
+	if is_instance_valid(player_instance):
+		var waypoint1 = player_instance.get_node("wayPoint1")
+		var waypoint2 = player_instance.get_node("wayPoint2")
+		var waypoint3 = player_instance.get_node("wayPoint3")
+		var waypoint4 = player_instance.get_node("wayPoint4")
+		var target
+		match rand_target_det:
+			0: 
+				targeterNode.target = player_instance
+				followNode.follow_target = player_instance 
+			1: 
+				targeterNode.target = waypoint1
+				followNode.follow_target = waypoint1
+			2: 
+				targeterNode.target = waypoint2
+				followNode.follow_target = waypoint2
+			3:
+				targeterNode.target = waypoint3
+				followNode.follow_target = waypoint3
+			4:
+				targeterNode.target = waypoint4
+				followNode.follow_target = waypoint4
+	else:
+		await get_tree().process_frame
+		target_manager(t, f)
 	pass
 
 # Currently this function only works for the smartpather due to some niche
@@ -101,12 +109,9 @@ func spawn_on_timer(enemy_scene_type):
 				1: # top/bottom walls
 					enemy_instance.position = Vector2(randf_range(-1,1) * 2690, 
 					rand_orientation[randi() % rand_orientation.size()]  * 1920)
-			# Currently needing to figure out how to do this as a shared function for all types of scenes 
-			# that are passed in as an input
-			# I think I figured out how to do this. Make a string variable that keeps 
-			# track of the name of the node, maybe as an export variable, and then
-			# combine it together to get the full string name. Then, get the 
-			# node accordingly.
+			
+			print("enemy_instance: ", enemy_instance, "spawn location: ", enemy_instance.position)
+			
 			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
 			apply_elite_buff(enemy_instance, path_name)
 			
@@ -118,13 +123,24 @@ func spawn_on_timer(enemy_scene_type):
 			#var is_offscreen = enemy_screen_pos.x < 0 or enemy_screen_pos.x > screen_size.x or enemy_screen_pos.y < 0 or enemy_screen_pos.y > screen_size.y
 			#print(is_offscreen
 			
-			
+			print("path_name: ", path_name)
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
+			
+			if enemy_node_name == "Spewer" and is_instance_valid(targeterNode) and is_instance_valid(followNode):
+				print("targeterNode target: ", targeterNode.target, "follownode target: ", followNode.follow_target)
+			
+			
 			if targeterNode and followNode:
 				target_manager(targeterNode, followNode)
 			else:
 				print("Node not found")
+		
+		
+		
+		
+		
+		
 		
 		var enemy_health_path_name = "EnemyPath/EnemyGuide/" + enemy_node_name + "/Health" 
 		var enemy_health = enemy_instance.get_node_or_null(enemy_health_path_name) 
@@ -142,6 +158,8 @@ func spawn_on_timer(enemy_scene_type):
 				Global.enemyCount = Global.get_enemy_count()
 				await get_tree().create_timer(2).timeout
 		$Timer.start(spawn_timer)
+		
+		
 	all_enemies_spawned = true
 		
 
@@ -188,6 +206,7 @@ func level_selector():
 		num_waves = 1
 		#spawn_on_timer(enemy_chicken_scene)
 		spawn_on_timer(enemy_bull_scene)
+		spawn_on_timer(enemy_pig_scene)
 		tot_enemy_count = num_enemies * num_waves
 	elif Global.numLevelsComplete == 1:
 		#print("EAHJWKA")

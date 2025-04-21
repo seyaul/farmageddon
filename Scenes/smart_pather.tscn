@@ -523,9 +523,7 @@ script = ExtResource("8_yeokn")
 rotation = -1.5708
 scale = Vector2(2.4, 1.78618)
 sprite_frames = SubResource("SpriteFrames_pggo2")
-animation = &"pre_lunge"
-frame = 14
-frame_progress = 1.0
+animation = &"walk"
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyPath/EnemyGuide/SmartPather/EnemySprite2"]
 offset_left = -40.8098

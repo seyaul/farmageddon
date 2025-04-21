@@ -201,34 +201,64 @@ func handle_signal():
 
 	
 func level_selector():
-	# wave progress bar is incorrect rn
-	# bug with progress bar not updating across runs. Check room_backend
+	## wave progress bar is incorrect rn
+	## bug with progress bar not updating across runs. Check room_backend
+	#if Global.numLevelsComplete == 0:
+		#num_enemies = 5
+		#num_waves = 1
+		##spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_bull_scene)
+		##spawn_on_timer(enemy_pig_scene)
+		#tot_enemy_count = num_enemies * num_waves
+	#elif Global.numLevelsComplete == 1:
+		##print("EAHJWKA")
+		#num_enemies = 8
+		#num_waves = 2
+		##spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_bull_scene)
+		#tot_enemy_count = num_enemies * num_waves
+	#elif Global.numLevelsComplete == 2:
+		#num_enemies = 5
+		#num_waves = 2
+		#spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_bull_scene)
+		#tot_enemy_count = num_enemies * num_waves * 2
+	#elif Global.numLevelsComplete == 3:
+		#num_enemies = 8
+		#num_waves = 3
+		#spawn_on_timer(enemy_bull_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		#tot_enemy_count = num_enemies * num_waves * 2
+	#elif Global.numLevelsComplete == 4:
+		#num_enemies = 5
+		#num_waves = 3
+		#spawn_on_timer(enemy_bull_scene)
+		#spawn_on_timer(enemy_chicken_scene)
+		#spawn_on_timer(enemy_pig_scene)
+		#tot_enemy_count = num_enemies * num_waves * 3
+	#if waves_completed == 0:
+		#emit_signal("setup_complete_wn")
+		#emit_signal("setup_complete_wp")
+
+	# DEMO LEVELS
 	if Global.numLevelsComplete == 0:
 		num_enemies = 5
 		num_waves = 1
+		spawn_on_timer(enemy_bull_scene)
+		tot_enemy_count = num_enemies * num_waves
+	elif Global.numLevelsComplete == 1:
+		num_enemies = 4
+		num_waves = 2
+		spawn_on_timer(enemy_chicken_scene)
+		spawn_on_timer(enemy_bull_scene)
+		tot_enemy_count = num_enemies * num_waves * 2
+	elif Global.numLevelsComplete >= 2:
+		num_enemies = 3
+		num_waves = 2
 		spawn_on_timer(enemy_chicken_scene)
 		spawn_on_timer(enemy_bull_scene)
 		spawn_on_timer(enemy_pig_scene)
-		tot_enemy_count = num_enemies * num_waves
-	elif Global.numLevelsComplete == 1:
-		#print("EAHJWKA")
-		num_enemies = 8
-		num_waves = 2
-		#spawn_on_timer(enemy_chicken_scene)
-		spawn_on_timer(enemy_bull_scene)
-		tot_enemy_count = num_enemies * num_waves
-	elif Global.numLevelsComplete == 2:
-		num_enemies = 10
-		num_waves = 2
-		spawn_on_timer(enemy_chicken_scene)
-		spawn_on_timer(enemy_bull_scene)
-		tot_enemy_count = num_enemies * num_waves * 2
-	elif Global.numLevelsComplete >= 3:
-		num_enemies = 15
-		num_waves = 3
-		spawn_on_timer(enemy_bull_scene)
-		spawn_on_timer(enemy_chicken_scene)
-		tot_enemy_count = num_enemies * num_waves * 2
+		tot_enemy_count = num_enemies * num_waves * 3
 	if waves_completed == 0:
 		emit_signal("setup_complete_wn")
 		emit_signal("setup_complete_wp")

@@ -415,11 +415,10 @@ guide = NodePath("../../..")
 path = NodePath("../../../..")
 look_at_player = true
 
-[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController" node_paths=PackedStringArray("follow_target")]
+[node name="Follow" type="Node" parent="EnemyPath/EnemyGuide/Spewer/EMovementController"]
 physics_interpolation_mode = 2
 script = ExtResource("11_pwkyy")
 attack_style = "Cooldown"
-follow_target = NodePath("")
 speed = 5000.0
 look_at_player = true
 max_deviation_distance = 75.0

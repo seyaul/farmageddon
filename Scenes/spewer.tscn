@@ -1,6 +1,6 @@
 [gd_scene load_steps=102 format=3 uid="uid://b0l324ace02m3"]
 
-[ext_resource type="Script" path="res://Scripts/shooter.gd" id="1_wq1o6"]
+[ext_resource type="Script" path="res://Scenes/spewer.gd" id="1_lxp07"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="2_7imw6"]
 [ext_resource type="Texture2D" uid="uid://dpu05j4wre5x1" path="res://Sprites/pig_sprites/barfing/pixil-frame-0.png" id="2_64qsb"]
 [ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="3_6p46b"]
@@ -362,7 +362,7 @@ animations = [{
 }]
 
 [node name="spewer" type="Node2D"]
-script = ExtResource("1_wq1o6")
+script = ExtResource("1_lxp07")
 
 [node name="EnemyPath" type="Path2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -377,6 +377,7 @@ z_index = 1
 z_as_relative = false
 rotation = -0.720474
 collision_layer = 12
+collision_mask = 128
 collision_priority = 10.0
 motion_mode = 1
 script = ExtResource("2_7imw6")

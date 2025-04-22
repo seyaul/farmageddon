@@ -1,7 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://cbn4wmm11rwci"]
+[gd_scene load_steps=63 format=3 uid="uid://cbn4wmm11rwci"]
 
 [ext_resource type="Script" path="res://map_tutorial.gd" id="1_q52le"]
 [ext_resource type="Texture2D" uid="uid://i4cip2v38e1p" path="res://Sprites/campfire-pixilart (2) (1).png" id="2_4qkq8"]
+[ext_resource type="FontFile" uid="uid://h2jqhx6xxsxq" path="res://Fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" id="2_bkqke"]
 [ext_resource type="Texture2D" uid="uid://2bw7mfleqav" path="res://Sprites/chicken_high_res.png" id="2_mflf2"]
 [ext_resource type="Texture2D" uid="uid://c0ombn2kquclu" path="res://Sprites/bull icon.png" id="4_iwh6h"]
 [ext_resource type="Texture2D" uid="uid://booogbq2hbnmx" path="res://Sprites/treasure.PNG" id="5_58ks8"]
@@ -134,6 +135,7 @@ offset_right = 804.0
 offset_bottom = 410.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bkqke")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/focus = SubResource("StyleBoxEmpty_j1h4b")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_83u82")
@@ -158,6 +160,7 @@ offset_right = 1258.0
 offset_bottom = 588.0
 scale = Vector2(0.41, 0.41)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bkqke")
 theme_override_font_sizes/font_size = 31
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3xni6")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_q1reh")
@@ -183,6 +186,7 @@ offset_right = 1142.0
 offset_bottom = 525.0
 scale = Vector2(0.52, 0.52)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bkqke")
 theme_override_font_sizes/font_size = 31
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6drup")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_x5sek")
@@ -208,6 +212,7 @@ offset_top = 340.0
 offset_right = 788.0
 offset_bottom = 409.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bkqke")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mj5ag")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_yg8lg")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_i1i87")
@@ -232,6 +237,7 @@ offset_right = 941.0
 offset_bottom = 493.0
 scale = Vector2(0.58, 0.58)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bkqke")
 theme_override_font_sizes/font_size = 21
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gxdac")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_rtnqa")

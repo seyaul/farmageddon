@@ -186,7 +186,7 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer(3).timeout
 		
 		# Switch to the reward scene for now, change to scene that zooms in
-		if reward_scene != null:
+		if reward_scene != null and get_tree() != null:
 			get_tree().change_scene_to_packed(reward_scene)
 		else: 
 			pass

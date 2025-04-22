@@ -42,16 +42,16 @@
 [ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="40_rs7ol"]
 [ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="41_rgave"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="42_ko1wo"]
-[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="43_syxrl"]
-[ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="44_iqqjc"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
 [ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
 [ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
 [ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
 [ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
+[ext_resource type="Texture2D" uid="uid://nhw3railn1oe" path="res://Sprites/crosshairsWhite.png" id="50_1dbvi"]
 [ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="50_8xs56"]
 [ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="51_apcog"]
+[ext_resource type="Texture2D" uid="uid://cic0ab45i07ul" path="res://Sprites/editedHeatingCircle.png" id="51_qlxlk"]
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
 [ext_resource type="AudioStream" uid="uid://blybar16e1bbu" path="res://audio/music/old major's theme.mp3" id="54_s00ov"]
 
@@ -641,20 +641,21 @@ script = ExtResource("42_ko1wo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("43_syxrl")
+texture = ExtResource("50_1dbvi")
 
 [node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
 position = Vector2(-33.3334, 0)
 scale = Vector2(6.5, 6.5)
 
 [node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
-offset_left = -56.4102
-offset_top = -62.5641
-offset_right = 71.5898
-offset_bottom = 65.4359
+offset_left = -85.0
+offset_top = -90.0
+offset_right = 1115.0
+offset_bottom = 1110.0
+scale = Vector2(0.15, 0.15)
 fill_mode = 4
-texture_under = ExtResource("44_iqqjc")
-texture_progress = ExtResource("44_iqqjc")
+texture_under = ExtResource("51_qlxlk")
+texture_progress = ExtResource("51_qlxlk")
 tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("45_edu8u")
@@ -666,6 +667,7 @@ wait_time = 0.5
 wait_time = 5.0
 
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+visible = false
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
 texture = ExtResource("46_g85ut")

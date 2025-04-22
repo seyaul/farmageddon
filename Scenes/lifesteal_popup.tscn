@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://u2sln50fv6dn"]
+[gd_scene load_steps=3 format=3 uid="uid://u2sln50fv6dn"]
 
 [ext_resource type="Script" path="res://Scripts/lifesteal_popup.gd" id="1_fxhn6"]
+[ext_resource type="FontFile" uid="uid://h2jqhx6xxsxq" path="res://Fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" id="2_70e6l"]
 
 [node name="LifestealPopup" type="Control"]
 z_index = -1
@@ -24,5 +25,6 @@ offset_right = 57.0
 offset_bottom = -100.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_70e6l")
 theme_override_font_sizes/font_size = 24
 text = "Life Steal!"

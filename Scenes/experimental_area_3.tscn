@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/shooter.gd" id="5_rvo5a"]
 [ext_resource type="Script" path="res://Scripts/generic_leg.gd" id="6_v7hwf"]
 [ext_resource type="PackedScene" uid="uid://bu0m24y4wbto3" path="res://Scenes/gun.tscn" id="6_vcnb4"]
-[ext_resource type="PackedScene" uid="uid://fraopvy37vo4" path="res://Scenes/bullets/vomit_bullet.tscn" id="7_kwccw"]
+[ext_resource type="PackedScene" uid="uid://bqeyd1kuqwg1f" path="res://Scenes/bullets/vomit_bullet.tscn" id="7_kwccw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58xnx"]
 size = Vector2(1420, 121.125)
@@ -1121,7 +1121,7 @@ metadata/_local_pose_override_enabled_ = true
 position = Vector2(6.5, 7.5)
 rotation = 1.71269
 scale = Vector2(0.999996, 1.00251)
-skew = 0.0538071
+skew = 0.053807
 rest = Transform2D(-0.141421, 0.98995, -0.98995, -0.141421, 6.5, 7.5)
 auto_calculate_length_and_angle = false
 length = 2.0
@@ -2503,7 +2503,7 @@ metadata/_local_pose_override_enabled_ = true
 position = Vector2(18, 25)
 rotation = 1.68459
 scale = Vector2(0.999995, 1.00164)
-skew = 0.0434929
+skew = 0.0434928
 rest = Transform2D(-0.113549, 0.993532, -0.993532, -0.113549, 18, 25)
 auto_calculate_length_and_angle = false
 length = 2.0

@@ -15,6 +15,7 @@ var penalty_applied : bool
 
 @onready var time_till_start_cooldown_timer = $CooldownTimer
 @onready var penalty_timer = $PenaltyTimer
+@onready var crosshair_sprite = $"../.."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,6 +65,7 @@ func handle_signal(heating_rate):
 		is_overheated = true
 		penalty_timer.start()  # Overheat cooldown
 		gun_node.disable_shooting_handler()
+		crosshair_sprite.self_modulate = Color(1, 0, 0, 1)  
 	#if is_overheated:
 		#gun_node.disable_shooting_handler()
 		#return  # Prevent shooting if overheated
@@ -127,6 +129,7 @@ func check_and_connect_gun():
 func handle_penalty_timer_complete():
 	gun_node.enable_shooting_handler()
 	is_overheated = false
+	crosshair_sprite.self_modulate = Color(1, 1, 1, 1)  
 	penalty_timer.stop()
 	#print("penalty timer no longer stopped")
 	

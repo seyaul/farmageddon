@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://s67h2um6uoy4"]
+[gd_scene load_steps=3 format=3 uid="uid://s67h2um6uoy4"]
 
 [ext_resource type="Script" path="res://Sprites/campfire_room.gd" id="1_vekuw"]
+[ext_resource type="FontFile" uid="uid://h2jqhx6xxsxq" path="res://Fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" id="2_as66g"]
 
 [node name="CampfireRoom" type="Control"]
 layout_mode = 3
@@ -15,5 +16,6 @@ offset_right = 677.0
 offset_bottom = 321.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_as66g")
 theme_override_font_sizes/font_size = 62
 text = "Healed!"

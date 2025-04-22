@@ -18,5 +18,5 @@ func _process(delta: float) -> void:
 func setHealthBar():
 	self.value = $"../../Health".current_health
 	
-func handleSignal() -> void: 
+func handleSignal() -> void:  
 	setHealthBar()

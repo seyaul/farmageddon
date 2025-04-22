@@ -46,8 +46,8 @@ position = Vector2(956, 38)
 shape = SubResource("RectangleShape2D_75xbx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(985, 1110)
-zoom = Vector2(0.665, 0.665)
+position = Vector2(985, 800)
+zoom = Vector2(0.865, 0.865)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -57,9 +57,9 @@ drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 
 [node name="Octopus" type="Node2D" parent="."]
+position = Vector2(600, 600)
 
-[node name="Tentacle1" type="Node2D" parent="Octopus"]
-position = Vector2(671, 1028)
+[node name="Tentacle1" type="CharacterBody2D" parent="Octopus"]
 script = ExtResource("2_xy314")
 interact_with_environment = true
 num_segments = 10
@@ -68,8 +68,7 @@ distance = 5.0
 view_lines = true
 connect_head = true
 
-[node name="Tentacle2" type="Node2D" parent="Octopus"]
-position = Vector2(1271, 983)
+[node name="Tentacle2" type="CharacterBody2D" parent="Octopus"]
 script = ExtResource("2_xy314")
 interact_with_environment = true
 num_segments = 15
@@ -78,8 +77,7 @@ distance = 5.0
 view_lines = true
 connect_head = true
 
-[node name="Tentacle3" type="Node2D" parent="Octopus"]
-position = Vector2(1271, 983)
+[node name="Tentacle3" type="CharacterBody2D" parent="Octopus"]
 script = ExtResource("2_xy314")
 interact_with_environment = true
 num_segments = 10
@@ -88,8 +86,7 @@ distance = 5.0
 view_lines = true
 connect_head = true
 
-[node name="Tentacle4" type="Node2D" parent="Octopus"]
-position = Vector2(1271, 983)
+[node name="Tentacle4" type="CharacterBody2D" parent="Octopus"]
 script = ExtResource("2_xy314")
 interact_with_environment = true
 num_segments = 10
@@ -98,5 +95,5 @@ distance = 5.0
 view_lines = true
 connect_head = true
 
-[node name="FollowMouse" type="Node" parent="Octopus"]
+[node name="MouseFollower" type="Node" parent="Octopus"]
 script = ExtResource("3_o8dxa")

@@ -3,7 +3,7 @@ extends Node
 @export var enemy_bull_scene = preload("res://Scenes/smart_pather.tscn")
 @export var enemy_chicken_scene = preload("res://Scenes/shooter.tscn")
 @export var enemy_pig_scene = preload("res://Scenes/spewer.tscn")
-var reward_scene = preload("res://Scenes/reward_scene.tscn")
+@onready var reward_scene = preload("res://Scenes/reward_scene.tscn")
 
 var player_instance
 @export var num_enemies : int # number of enemies to spawn, probably len(list_enemies)
@@ -185,8 +185,11 @@ func _process(delta: float) -> void:
 		# replace this with a check that spawns in reward and waits for the player to choose their reward
 		await get_tree().create_timer(3).timeout
 		
-		# Switch to the reward scene for now, change to scene that zooms in 
-		get_tree().change_scene_to_packed(reward_scene)
+		# Switch to the reward scene for now, change to scene that zooms in
+		if reward_scene != null:
+			get_tree().change_scene_to_packed(reward_scene)
+		else: 
+			pass
 	elif Global.enemyCount <= 0 and waves_completed != num_waves - 1 and all_enemies_spawned:
 		#intervals_passed = 0
 		waves_completed += 1

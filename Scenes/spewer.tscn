@@ -89,8 +89,8 @@
 [ext_resource type="Texture2D" uid="uid://dc0jbfhy255lf" path="res://Sprites/effects/fire/bull_fire/1_57.png" id="88_jiqed"]
 [ext_resource type="Texture2D" uid="uid://hty2p5k32qht" path="res://Sprites/effects/fire/bull_fire/1_58.png" id="89_mwbbu"]
 [ext_resource type="Texture2D" uid="uid://dbx3vr7y8unjc" path="res://Sprites/effects/fire/bull_fire/1_59.png" id="90_dea7x"]
+[ext_resource type="AudioStream" uid="uid://dfo2y7fu0lbi6" path="res://audio/enemy sounds/pigattack.wav" id="90_eyjkh"]
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="91_6bg61"]
-[ext_resource type="AudioStream" uid="uid://cd4x7j3x53nrv" path="res://audio/enemy sounds/chattack.mp3" id="92_c2sy1"]
 [ext_resource type="AudioStream" uid="uid://ddojeuv8d1834" path="res://audio/enemy sounds/chickenhurt.mp3" id="93_30e1k"]
 [ext_resource type="PackedScene" uid="uid://bqeyd1kuqwg1f" path="res://Scenes/bullets/vomit_bullet.tscn" id="94_f2r1e"]
 [ext_resource type="AudioStream" uid="uid://df3hk63v3hepl" path="res://audio/enemy sounds/chickendie.mp3" id="94_ipfda"]
@@ -480,7 +480,7 @@ animation = &"on_fire"
 autoplay = "on_fire"
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
-stream = ExtResource("92_c2sy1")
+stream = ExtResource("90_eyjkh")
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
 stream = ExtResource("93_30e1k")

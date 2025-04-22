@@ -210,9 +210,9 @@ func _game_started():
 	map_tutorial = false
 	numLevelsComplete += 1
 	if numLevelsComplete == 1:
-		active_weapons.append("flamethrower")
+		active_weapons = ["flamethrower", "AKorn47"]
 	elif numLevelsComplete == 2:
-		active_weapons.append("rpg")
+		active_weapons = ["rpg", "flamethrower", "AKorn47"]
 	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")

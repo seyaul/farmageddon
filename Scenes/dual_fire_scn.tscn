@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://fa1kfal3t4r0"]
+
+[ext_resource type="PackedScene" uid="uid://caj8ikchansi6" path="res://Scenes/buff_placeholder.tscn" id="1_y6vb0"]
+[ext_resource type="Texture2D" uid="uid://clvtn4oeuflgy" path="res://Sprites/hud_buffs/dualfire.png" id="2_mujge"]
+
+[node name="buffPlaceholder" instance=ExtResource("1_y6vb0")]
+texture = ExtResource("2_mujge")

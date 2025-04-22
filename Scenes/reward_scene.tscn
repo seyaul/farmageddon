@@ -19,7 +19,7 @@ offset_right = 1113.0
 offset_bottom = 609.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.360784)
+color = Color(0.984918, 0.947017, 0.91296, 0.113725)
 
 [node name="CardContainer" type="Control" parent="."]
 anchors_preset = 0

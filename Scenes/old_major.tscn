@@ -1,6 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=61 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -55,6 +55,12 @@
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
 [ext_resource type="AudioStream" uid="uid://blybar16e1bbu" path="res://audio/music/old major's theme.mp3" id="54_s00ov"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6olb2"]
+size = Vector2(719.75, 3833.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3d8m"]
+size = Vector2(5393.25, 716.125)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ivfr4"]
 vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 3.92188, 0.351563, -150.938, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64063, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(6, 5, 1, 7), PackedInt32Array(0, 3, 8), PackedInt32Array(6, 7, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(14, 13, 9), PackedInt32Array(0, 8, 15), PackedInt32Array(9, 0, 15), PackedInt32Array(14, 9, 15)])
@@ -103,6 +109,29 @@ script = ExtResource("1_yeg3i")
 target_node_1 = NodePath("Boss/EMovementController/Surround")
 target_node_2 = NodePath("Boss/EMovementController/Follow")
 target_node_3 = NodePath("Boss/Targeter")
+
+[node name="walls" type="Node2D" parent="."]
+
+[node name="TestWall" type="StaticBody2D" parent="walls"]
+position = Vector2(1193, -418)
+collision_layer = 271
+collision_mask = 15
+
+[node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(1558.12, 420)
+shape = SubResource("RectangleShape2D_6olb2")
+
+[node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-3928, 409)
+shape = SubResource("RectangleShape2D_6olb2")
+
+[node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-1181, -1569.94)
+shape = SubResource("RectangleShape2D_h3d8m")
+
+[node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-1197, 2399)
+shape = SubResource("RectangleShape2D_h3d8m")
 
 [node name="World" parent="." instance=ExtResource("37_qmmin")]
 
@@ -524,6 +553,10 @@ rotation = 0.0996687
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.5, 0.5)
 zoom = Vector2(0.53, 0.53)
+limit_left = -2680
+limit_top = -1920
+limit_right = 2680
+limit_bottom = 1920
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true

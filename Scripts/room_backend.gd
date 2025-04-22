@@ -108,6 +108,10 @@ func _on_texture_button_pressed() -> void:
 		print("Boss room selected (roombackend)")
 		Global.elite_room = 1
 		GameState.save_map_state(map_data, floors_climbed, room)
+		if Global.newGame:
+			Global.emit_signal("newGameStarted")
+		else:
+			Global.emit_signal("gameStarted")
 		Global.emit_signal("bossLevelStarted")
 		get_tree().change_scene_to_file("res://Scenes/old_major.tscn")
 	else:

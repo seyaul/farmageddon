@@ -21,9 +21,10 @@ signal start_wave
 # Called when the node enters the scene tree for the firdst time.
 func _ready() -> void:
 	crosshairs_node = $"../../Crosshairs"
-	crosshairs_node.crosshair_tip_complete.connect(crosshair_handle)
-	self.weapon_switched.connect(weapon_handle)
-	hide_all()
+	if is_instance_valid(crosshairs_node):
+		crosshairs_node.crosshair_tip_complete.connect(crosshair_handle)
+		self.weapon_switched.connect(weapon_handle)
+		hide_all()
 	if Global.tutorial:
 		start_step(curr_tut_seg)
 		$KeyboardButtons/MovementInfo.visible = true

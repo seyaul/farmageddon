@@ -86,6 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_new_game_started():
 	# instantiate the map tut
+	if Global.numResets != 0:
 		var tut_scene = preload("res://Scenes/tutorial_interface.tscn")
 		var tut_instance = tut_scene.instantiate()
 		$MapBackground.add_child(tut_instance)

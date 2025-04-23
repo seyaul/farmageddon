@@ -1,9 +1,9 @@
-[gd_scene load_steps=102 format=3 uid="uid://b0l324ace02m3"]
+[gd_scene load_steps=101 format=3 uid="uid://b0l324ace02m3"]
 
 [ext_resource type="Script" path="res://Scenes/spewer.gd" id="1_lxp07"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="2_7imw6"]
 [ext_resource type="Texture2D" uid="uid://dpu05j4wre5x1" path="res://Sprites/pig_sprites/barfing/pixil-frame-0.png" id="2_64qsb"]
-[ext_resource type="PackedScene" path="res://Scenes/corpse.tscn" id="3_6p46b"]
+[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="3_6p46b"]
 [ext_resource type="Texture2D" uid="uid://baoyqve6frsdc" path="res://Sprites/pig_sprites/barfing/pixil-frame-1.png" id="3_ngca0"]
 [ext_resource type="Texture2D" uid="uid://cgjo6n431a02n" path="res://Sprites/pig_sprites/barfing/pixil-frame-2.png" id="4_dcwkb"]
 [ext_resource type="Texture2D" uid="uid://d1gj7o6vepoji" path="res://Sprites/pig_sprites/barfing/pixil-frame-3.png" id="5_5mwfs"]
@@ -89,11 +89,10 @@
 [ext_resource type="Texture2D" uid="uid://dc0jbfhy255lf" path="res://Sprites/effects/fire/bull_fire/1_57.png" id="88_jiqed"]
 [ext_resource type="Texture2D" uid="uid://hty2p5k32qht" path="res://Sprites/effects/fire/bull_fire/1_58.png" id="89_mwbbu"]
 [ext_resource type="Texture2D" uid="uid://dbx3vr7y8unjc" path="res://Sprites/effects/fire/bull_fire/1_59.png" id="90_dea7x"]
+[ext_resource type="AudioStream" uid="uid://dfo2y7fu0lbi6" path="res://audio/enemy sounds/pigattack.wav" id="90_eyjkh"]
 [ext_resource type="Texture2D" uid="uid://idky8vv8nxxf" path="res://Sprites/effects/fire/bull_fire/1_60.png" id="91_6bg61"]
-[ext_resource type="AudioStream" uid="uid://cd4x7j3x53nrv" path="res://audio/enemy sounds/chattack.mp3" id="92_c2sy1"]
-[ext_resource type="AudioStream" uid="uid://ddojeuv8d1834" path="res://audio/enemy sounds/chickenhurt.mp3" id="93_30e1k"]
+[ext_resource type="AudioStream" uid="uid://baqjh2mq4v814" path="res://audio/enemy sounds/pighurt.wav" id="91_e3y3j"]
 [ext_resource type="PackedScene" uid="uid://bqeyd1kuqwg1f" path="res://Scenes/bullets/vomit_bullet.tscn" id="94_f2r1e"]
-[ext_resource type="AudioStream" uid="uid://df3hk63v3hepl" path="res://audio/enemy sounds/chickendie.mp3" id="94_ipfda"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2xo1"]
 _data = {
@@ -480,13 +479,13 @@ animation = &"on_fire"
 autoplay = "on_fire"
 
 [node name="attacking" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
-stream = ExtResource("92_c2sy1")
+stream = ExtResource("90_eyjkh")
 
 [node name="hurt" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
-stream = ExtResource("93_30e1k")
+stream = ExtResource("91_e3y3j")
 
 [node name="die" type="AudioStreamPlayer" parent="EnemyPath/EnemyGuide/Spewer"]
-stream = ExtResource("94_ipfda")
+stream = ExtResource("91_e3y3j")
 
 [node name="Gun" parent="EnemyPath/EnemyGuide/Spewer" instance=ExtResource("17_g0r6j")]
 bullet = ExtResource("94_f2r1e")

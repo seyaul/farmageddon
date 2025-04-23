@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6hkocg0m1554"]
+[gd_scene load_steps=7 format=3 uid="uid://b0u1ppkultxr5"]
 
 [ext_resource type="Script" path="res://Scripts/corpse.gd" id="1_8cr8s"]
 [ext_resource type="Texture2D" uid="uid://ckriqkhq403wx" path="res://Sprites/blood_splatters/animation/largeblood1.png" id="2_vmcab"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/smart_pather.gd" id="1_1jr2g"]
 [ext_resource type="Script" path="res://Scripts/fsm/fsm.gd" id="1_f4cnc"]
 [ext_resource type="Script" path="res://Scripts/mob_script.gd" id="1_sxhn3"]
-[ext_resource type="PackedScene" uid="uid://c6hkocg0m1554" path="res://Scenes/corpse.tscn" id="2_sjynd"]
+[ext_resource type="PackedScene" uid="uid://b0u1ppkultxr5" path="res://Scenes/corpse.tscn" id="2_sjynd"]
 [ext_resource type="Script" path="res://Scripts/follow_path.gd" id="2_t0fbs"]
 [ext_resource type="Script" path="res://Scripts/fsm/followState.gd" id="3_51yba"]
 [ext_resource type="Script" path="res://Scripts/lungeState.gd" id="4_dqm7w"]

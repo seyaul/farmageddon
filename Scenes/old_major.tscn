@@ -324,7 +324,7 @@ script = ExtResource("12_uu8lk")
 gun = ExtResource("13_qcdmj")
 bullet = ExtResource("14_36h7u")
 segments_with_gun = 6
-front_gun_projectile_speed = 50000.0
+front_gun_projectile_speed = 90000.0
 side_gun_projectile_speed = 20000.0
 
 [node name="Snake_Texture1" type="Node" parent="Boss"]
@@ -370,7 +370,7 @@ guide = NodePath("../../../Circle/PathFollow2D")
 path = NodePath("../../../Circle")
 speed = 0.9
 time_following = 800
-slide_speed = 0.45
+slide_speed = 0.5
 
 [node name="Surround" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("21_nicn2")

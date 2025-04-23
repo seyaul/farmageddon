@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce0f0jktwwvhg"]
+[gd_scene load_steps=5 format=3 uid="uid://ce0f0jktwwvhg"]
 
 [ext_resource type="Script" path="res://reward_scene.gd" id="1_br57g"]
 [ext_resource type="PackedScene" uid="uid://b3swcbua2bkuv" path="res://Scenes/card.tscn" id="2_wxwtb"]
 [ext_resource type="FontFile" uid="uid://h2jqhx6xxsxq" path="res://Fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" id="3_3gho5"]
+[ext_resource type="AudioStream" uid="uid://bevj4c6uu4vp6" path="res://audio/music/rewardTheme.mp3" id="4_auar7"]
 
 [node name="RewardScene" type="Control"]
 layout_mode = 3
@@ -88,3 +89,9 @@ theme_override_font_sizes/font_size = 61
 text = "Choose your reward!
 (Hover to see details)
 "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_auar7")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"

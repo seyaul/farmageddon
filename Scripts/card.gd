@@ -3,7 +3,7 @@ class_name Card
 
 # basic bitch variables 
 @export var card_name: String
-@export var description: String
+@export var description: Texture2D
 @export var icon: Texture2D
 @export var rarity: String 
 @export var can_repeat: bool
@@ -16,6 +16,7 @@ class_name Card
 @export var effect_data: Dictionary = {} 
 
 var tween_hover: Tween
+@onready var description_sprite := $Desc
 signal reward_selected(reward_type: int)
 
 @onready var front := $Front
@@ -34,15 +35,16 @@ func _ready():
 
 	front.texture = icon
 	back.texture = preload("res://Sprites/new cards/card back with title and body.png")
-	
+	description_sprite.texture = description
+
 	$Front.position = Vector2.ZERO
 	$Back.position = Vector2.ZERO
 
 	front.visible = true
 	back.visible = false
-	
+	description_sprite.visible = false
 
-	self.tooltip_text = card_name + "\n" + description
+	#self.tooltip_text = card_name + "\n" + description
 	self.scale = Vector2(2.0, 2.0)
 
 	# please work
@@ -58,15 +60,12 @@ func _ready():
 	# Ensure signals are connected
 	if not is_connected("pressed", Callable(self, "_on_card_pressed")):
 		connect("pressed", Callable(self, "_on_card_pressed"))
-	#if not is_connected("input_event", Callable(self, "_on_hover_area_input_event")):
-		#connect("input_event", Callable(self, "_on_hover_area_input_event"))
 
 	if not is_connected("mouse_entered", Callable(self, "_on_mouse_entered")):
 		connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 
 	if not is_connected("mouse_exited", Callable(self, "_on_mouse_exited")):
 		connect("mouse_exited", Callable(self, "_on_mouse_exited"))
-
 
 # what da hell why is this function defined twice what im too scared to delete it tho
 #func apply_card_effect(effect_data: Dictionary):
@@ -90,27 +89,29 @@ func _on_hover_area_input_event(viewport, event, shape_idx):
 		_on_card_pressed()
 
 func _on_card_pressed() -> void:
-	#apply_card_effect(effect_data)
 	emit_signal("reward_selected", self)
 
 func set_card_texture(texture: Texture2D) -> void:
 	self.texture_normal = texture  
 
-func _on_mouse_entered() -> void:
-	print("mouse entered")
-	#if tween_hover and tween_hover.is_running():
-		#tween_hover.kill()
-	#tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	#tween_hover.tween_property(self, "scale", Vector2(2.8, 2.8), 0.5)
+#func show_description_sprite():
+	#if description and not description_sprite:
+		#description_sprite = Sprite2D.new()
+		#description_sprite.texture = description
+		#description_sprite.scale = Vector2(1, 1)  
+		#add_child(description_sprite)
+		#description_sprite.position = Vector2.ZERO  
+		#description_sprite.z_index = 1  
+#
+#func hide_description_sprite():
+	#if description_sprite:
+		#description_sprite.queue_free()
+		#description_sprite = null
 
+func _on_mouse_entered() -> void:
 	if animation_player.has_animation("flip_to_back"):
 		animation_player.play("flip_to_back")
 
 func _on_mouse_exited() -> void:
 	if animation_player.has_animation("flip_to_front"):
 		animation_player.play("flip_to_front")
-
-	#if tween_hover and tween_hover.is_running():
-		#tween_hover.kill()
-	#tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	#tween_hover.tween_property(self, "scale", Vector2(2.0, 2.0), 0.3)

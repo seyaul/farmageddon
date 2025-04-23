@@ -142,6 +142,8 @@ func die():
 			corpse_instance.init("res://Sprites/new_chicken_sprites/corpse + blood.png", 0.125)
 		elif name == "SmartPather":
 			corpse_instance.init("res://Sprites/new_bull_sprites/bull_corpse.png", 0.25)
+		elif name == "Spewer":
+			corpse_instance.init("res://Sprites/pig_sprites/pig_corpse.png", 1)
 		corpse_instance.global_position = global_position
 		# Need to figure out why this works
 		corpse_instance.rotation = global_rotation - deg_to_rad(90)

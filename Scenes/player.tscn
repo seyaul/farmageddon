@@ -145,6 +145,7 @@ script = ExtResource("3_vyege")
 
 [node name="Walk" type="Node" parent="MoveController"]
 script = ExtResource("4_kjumt")
+speed = 450.0
 
 [node name="Dash" type="Node" parent="MoveController"]
 script = ExtResource("6_cnlrr")

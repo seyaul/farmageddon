@@ -1,6 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=61 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -42,18 +42,24 @@
 [ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="40_rs7ol"]
 [ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="41_rgave"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="42_ko1wo"]
-[ext_resource type="Texture2D" uid="uid://c5sxs4tv84lub" path="res://Sprites/crosshairs.png" id="43_syxrl"]
-[ext_resource type="Texture2D" uid="uid://cwcxpl2rnb7ly" path="res://Sprites/progress-bar-circle.png" id="44_iqqjc"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
 [ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
 [ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
 [ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
 [ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
+[ext_resource type="Texture2D" uid="uid://nhw3railn1oe" path="res://Sprites/crosshairsWhite.png" id="50_1dbvi"]
 [ext_resource type="Texture2D" uid="uid://ckfgikygfvioj" path="res://Sprites/player_sprites/death_explosion/pixil-frame-7.png" id="50_8xs56"]
 [ext_resource type="Texture2D" uid="uid://b5opxuim7ltlv" path="res://Sprites/player_sprites/death_explosion/pixil-frame-8.png" id="51_apcog"]
+[ext_resource type="Texture2D" uid="uid://cic0ab45i07ul" path="res://Sprites/editedHeatingCircle.png" id="51_qlxlk"]
 [ext_resource type="Texture2D" uid="uid://ig7rmj81h4ck" path="res://Sprites/player_sprites/death_explosion/pixil-frame-9.png" id="52_bhusx"]
 [ext_resource type="AudioStream" uid="uid://blybar16e1bbu" path="res://audio/music/old major's theme.mp3" id="54_s00ov"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6olb2"]
+size = Vector2(719.75, 3833.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3d8m"]
+size = Vector2(5393.25, 716.125)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ivfr4"]
 vertices = PackedVector2Array(72.3828, -88.5391, 72.3828, 315.508, 11.0313, -22, 10.0781, -33.1797, 10.0781, -10.8203, 7.47656, -2.64063, 3.92188, 0.351563, -150.938, 319.469, 7.47656, -41.3594, -151.039, -86.1016, 0.367188, -2.64063, -2.23438, -10.8203, -3.1875, -22, -2.23438, -33.1797, 0.367188, -41.3594, 3.92188, -44.3516)
@@ -103,6 +109,29 @@ script = ExtResource("1_yeg3i")
 target_node_1 = NodePath("Boss/EMovementController/Surround")
 target_node_2 = NodePath("Boss/EMovementController/Follow")
 target_node_3 = NodePath("Boss/Targeter")
+
+[node name="walls" type="Node2D" parent="."]
+
+[node name="TestWall" type="StaticBody2D" parent="walls"]
+position = Vector2(1193, -418)
+collision_layer = 271
+collision_mask = 15
+
+[node name="rightwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(1558.12, 420)
+shape = SubResource("RectangleShape2D_6olb2")
+
+[node name="leftwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-3928, 409)
+shape = SubResource("RectangleShape2D_6olb2")
+
+[node name="topwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-1181, -1569.94)
+shape = SubResource("RectangleShape2D_h3d8m")
+
+[node name="bottomwall" type="CollisionShape2D" parent="walls/TestWall"]
+position = Vector2(-1197, 2399)
+shape = SubResource("RectangleShape2D_h3d8m")
 
 [node name="World" parent="." instance=ExtResource("37_qmmin")]
 
@@ -524,6 +553,10 @@ rotation = 0.0996687
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.5, 0.5)
 zoom = Vector2(0.53, 0.53)
+limit_left = -2680
+limit_top = -1920
+limit_right = 2680
+limit_bottom = 1920
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -608,20 +641,21 @@ script = ExtResource("42_ko1wo")
 
 [node name="CrosshairsSprite" type="Sprite2D" parent="Crosshairs"]
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("43_syxrl")
+texture = ExtResource("50_1dbvi")
 
 [node name="Node2D" type="Node2D" parent="Crosshairs/CrosshairsSprite"]
 position = Vector2(-33.3334, 0)
 scale = Vector2(6.5, 6.5)
 
 [node name="HeatingGauge" type="TextureProgressBar" parent="Crosshairs/CrosshairsSprite/Node2D"]
-offset_left = -56.4102
-offset_top = -62.5641
-offset_right = 71.5898
-offset_bottom = 65.4359
+offset_left = -85.0
+offset_top = -90.0
+offset_right = 1115.0
+offset_bottom = 1110.0
+scale = Vector2(0.15, 0.15)
 fill_mode = 4
-texture_under = ExtResource("44_iqqjc")
-texture_progress = ExtResource("44_iqqjc")
+texture_under = ExtResource("51_qlxlk")
+texture_progress = ExtResource("51_qlxlk")
 tint_under = Color(0.192556, 0.192556, 0.192556, 0.231373)
 tint_progress = Color(0.941176, 0, 0, 0.505882)
 script = ExtResource("45_edu8u")
@@ -633,6 +667,7 @@ wait_time = 0.5
 wait_time = 5.0
 
 [node name="Crosshairinstr" type="Sprite2D" parent="Crosshairs/CrosshairsSprite/Node2D"]
+visible = false
 position = Vector2(-195.897, 16.4103)
 scale = Vector2(1.02564, 1.02564)
 texture = ExtResource("46_g85ut")

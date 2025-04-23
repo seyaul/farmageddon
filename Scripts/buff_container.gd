@@ -6,6 +6,7 @@ extends HBoxContainer
 @onready var crosshair_heating_scn = preload("res://Scenes/crosshair_heating_buff.tscn")
 @onready var fire_rate_scn = preload("res://Scenes/fire_rate_buff.tscn")
 @onready var speed_scn = preload("res://Scenes/speed_buff.tscn")
+@onready var dual_fire_scn = preload("res://Scenes/dual_fire_scn.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,5 +43,8 @@ func spawn_buffs():
 			var hud_buff = lifesteal_scn.instantiate()
 			add_child(hud_buff)
 			print("added!")
+		elif buff == "Multi-Shot Upgrade":
+			var hud_buff = dual_fire_scn.instantiate()
+			add_child(hud_buff)
 		else:
 			print("Error error nothing of that name CHUZ")

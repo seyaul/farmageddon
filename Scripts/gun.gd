@@ -46,7 +46,7 @@ func handle_signal(gun_id: int, action: String, delta: float) -> void:
 
 func fire(delta: float) -> void:
 	if fire_type == "Discrete":
-		if character.name == "Shooter":
+		if character.name == "Shooter" or character.name == "Spewer":
 			$"../attacking".play()
 		for i in range(bullets_per_fire):
 			var projectile: AnimatableBody2D = bullet.instantiate()

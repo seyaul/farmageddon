@@ -44,19 +44,23 @@ theme_override_constants/v_separation = 14
 [node name="Label" type="Label" parent="PauseMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_oootk")
 theme_override_font_sizes/font_size = 32
 text = "Paused"
 
 [node name="Resume" type="Button" parent="PauseMenu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_oootk")
 text = "Resume Game"
 
 [node name="Settings" type="Button" parent="PauseMenu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_oootk")
 text = "Settings"
 
 [node name="StartNewRun" type="Button" parent="PauseMenu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_oootk")
 text = "Start New Run"
 
 [node name="Sound" type="GridContainer" parent="."]

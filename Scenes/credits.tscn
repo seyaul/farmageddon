@@ -16,7 +16,7 @@ script = ExtResource("1_eyudv")
 texture_filter = 1
 layout_mode = 0
 offset_right = 348.0
-offset_bottom = 90.0
+offset_bottom = 342.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 texture_filter = 1
@@ -37,7 +37,6 @@ Combat Design - Andrew Holzbach
 Art Design - Chloe Lim
 Enemy Design, Boss Design - Luciano Perez
 Team Lead, Sound Design, Assistant Art Design - Seyaul Kim
-
 
 "
 

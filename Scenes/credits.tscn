@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6kx30nrlhecm"]
+
+[ext_resource type="Script" path="res://Scripts/credits.gd" id="1_eyudv"]
+[ext_resource type="FontFile" uid="uid://wau38u7tygvb" path="res://Fonts/Merchant Copy copy.ttf" id="1_gvolg"]
+
+[sub_resource type="Theme" id="Theme_hahst"]
+default_font = ExtResource("1_gvolg")
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_hahst")
+script = ExtResource("1_eyudv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 348.0
+offset_bottom = 90.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+texture_filter = 1
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Thanks For Playing!
+
+"
+
+[node name="Developers" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Developers: 
+Level Design, Resource Generation - Alexa Seaton
+Combat Design - Andrew Holzbach
+Art Design - Chloe Lim
+Enemy Design, Boss Design - Luciano Perez
+Team Lead, Sound Design, Assistant Art Design - Seyaul Kim
+
+
+"
+
+[node name="Playtesters" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Special thanks to the following people for playtesting: 
+Sara Maupin, PJ Rawlins"

@@ -22,15 +22,26 @@ offset_bottom = 90.0
 texture_filter = 1
 layout_mode = 2
 
-[node name="Text" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Thanks For Playing!
+
+"
+
+[node name="Developers" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Developers: 
-Andrew
-Alexa
-Chloe
-Luciano
-extra
-extra
-extra
-extra
-Seyaul"
+Level Design, Resource Generation - Alexa Seaton
+Combat Design - Andrew Holzbach
+Art Design - Chloe Lim
+Enemy Design, Boss Design - Luciano Perez
+Team Lead, Sound Design, Assistant Art Design - Seyaul Kim
+
+
+"
+
+[node name="Playtesters" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Special thanks to the following people for playtesting: 
+Sara Maupin, PJ Rawlins"

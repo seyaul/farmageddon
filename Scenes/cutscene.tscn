@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsxc4vyehaou"]
+[gd_scene load_steps=10 format=3 uid="uid://clirs17yx4pd2"]
 
 [ext_resource type="VideoStream" path="res://static_farm_cutscene.ogv" id="1_i3xby"]
 [ext_resource type="Texture2D" uid="uid://cq5vvvwaryslu" path="res://cutscene_border.png" id="2_801x3"]
 [ext_resource type="Script" path="res://Scripts/typing.gd" id="3_1j64g"]
+[ext_resource type="Texture2D" uid="uid://c5rndvk7bjgwa" path="res://Sprites/textBox.png" id="4_oxpb4"]
+[ext_resource type="Script" path="res://Scripts/your_dialogue.gd" id="5_2qh5p"]
+[ext_resource type="FontFile" uid="uid://wau38u7tygvb" path="res://Fonts/Merchant Copy copy.ttf" id="5_exylb"]
+[ext_resource type="Script" path="res://Scripts/dialogue_controller.gd" id="7_pc0x0"]
+[ext_resource type="Texture2D" uid="uid://cobq3f53s4vwn" path="res://Sprites/comicbooktb.png" id="8_j6360"]
+[ext_resource type="AudioStream" uid="uid://ddgic2tf0dmck" path="res://audio/music/song tuah (paused).mp3" id="9_suk3a"]
 
 [node name="Cutscene" type="Node2D"]
 texture_filter = 3
@@ -12,27 +18,17 @@ anchor_mode = 0
 zoom = Vector2(0.3, 0.3)
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
 stream = ExtResource("1_i3xby")
 autoplay = true
 loop = true
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 3840.0
-offset_bottom = 2160.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Control"]
-z_index = 1
-scale = Vector2(16, 16)
-texture = ExtResource("2_801x3")
-centered = false
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 modulate = Color(0, 0.953163, 0, 1)
-z_index = 1
+z_index = 3
 offset_left = 2523.0
 offset_top = 316.0
 offset_right = 2823.0
@@ -41,7 +37,75 @@ scale = Vector2(3.36, 3.36)
 bbcode_enabled = true
 text = "[bgcolor=black]RAAAAA IM A FARMER GO KILL DEM MUTANT ANIMALS DANGNABIT!!!! GOSHDARNIT!!!!! DADGUMMIT!!!!!   JIMINEYCRICKET!!!! HOTDOG!!!!! HARUMPH!!!![/bgcolor]
 "
+scroll_active = false
 visible_characters = 0
 visible_ratio = 0.0
 script = ExtResource("3_1j64g")
-blinking_speed = 20
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+visible = false
+scale = Vector2(16, 16)
+texture = ExtResource("2_801x3")
+centered = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -90.0
+offset_top = 1642.0
+offset_right = 4910.0
+offset_bottom = 2284.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_oxpb4")
+
+[node name="YourDialogue" type="RichTextLabel" parent="TextureRect"]
+layout_mode = 0
+offset_left = 306.25
+offset_top = 175.0
+offset_right = 4306.25
+offset_bottom = 575.0
+theme_override_fonts/normal_font = ExtResource("5_exylb")
+theme_override_font_sizes/normal_font_size = 240
+bbcode_enabled = true
+text = "Gurt: Yo"
+scroll_active = false
+script = ExtResource("5_2qh5p")
+
+[node name="DialogueController" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_pc0x0")
+
+[node name="messageBox" type="TextureRect" parent="."]
+offset_left = 1722.0
+offset_top = 28.0
+offset_right = 3811.0
+offset_bottom = 1015.0
+texture = ExtResource("8_j6360")
+
+[node name="FarmerDialogue" type="RichTextLabel" parent="messageBox"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 304.0
+offset_top = 152.0
+offset_right = 1811.0
+offset_bottom = 1269.0
+theme_override_fonts/normal_font = ExtResource("5_exylb")
+theme_override_font_sizes/normal_font_size = 200
+script = ExtResource("5_2qh5p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0)
+offset_right = 3834.0
+offset_bottom = 2205.0
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_suk3a")
+autoplay = true

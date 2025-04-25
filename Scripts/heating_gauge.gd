@@ -93,7 +93,7 @@ func check_and_connect_gun():
 			if gun_node.bullet_fired.is_connected(handle_signal):
 				if !penalty_timer.is_stopped():
 					penalty_applied = true
-					print("When swithing, this should print. ", penalty_applied)
+					#print("When swithing, this should print. ", penalty_applied)
 				elif penalty_timer.is_stopped():
 					#print("This shouldn't be printing")
 					penalty_applied = false
@@ -122,7 +122,7 @@ func check_and_connect_gun():
 				gun_node.continuous_started.connect(handle_signal)
 			#print("successfully connected? heating_gauge.gd")
 	else:
-		print("not loaded yet, waiting")
+		#print("not loaded yet, waiting")
 		await get_tree().process_frame
 		check_and_connect_gun()
 

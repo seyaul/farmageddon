@@ -56,7 +56,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 	room.selected = true
 	clicked.emit(room)
-	print("clicked")
+	#print("clicked")
 	animation_player.play("Select")
 
 func _on_texture_button_pressed() -> void:
@@ -67,7 +67,7 @@ func _on_texture_button_pressed() -> void:
 	available = false  
   
 	clicked.emit(room)
-	print("clicked", room.get_key())
+	#print("clicked", room.get_key())
 	
 
 	var key = room.get_key()
@@ -105,7 +105,7 @@ func _on_texture_button_pressed() -> void:
 		else: 
 			Global.emit_signal("gameStarted")
 	elif room.type ==  Room.Type.BOSS:
-		print("Boss room selected (roombackend)")
+		#print("Boss room selected (roombackend)")
 		Global.elite_room = 1
 		GameState.save_map_state(map_data, floors_climbed, room)
 		if Global.newGame:

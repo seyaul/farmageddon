@@ -16,8 +16,9 @@ func _ready() -> void:
 	if character.name != "Player":  
 		current_health = max_health
 	else: 
-		print("player_max_health ", player_max_health)
-		print("global player health ", Global.playerHealth)
+		#print("player_max_health ", player_max_health)
+		#print("global player health ", Global.playerHealth)
+		pass
 	
 	
 func _physics_process(delta: float) -> void:
@@ -39,7 +40,7 @@ func take_damage(amount: float) -> void:
 			Global.playerHealth = 0
 			if has_node("../die"):
 				$"../die".play()
-			print("dying, global health ", Global.playerHealth)
+			#print("dying, global health ", Global.playerHealth)
 			die()
 	else:
 		if has_node("../hurt"):
@@ -69,7 +70,7 @@ func die() -> void:
 		if has_node("../die"):
 			await $"../die".finished
 		elif has_node("../DeathAnimation"):
-			print("Hello???")
+			#print("Hello???")
 			character.queue_free()
 			you_win.emit()
 		character.queue_free()

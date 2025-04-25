@@ -20,7 +20,7 @@ func _input(event: InputEvent):
 	if Global.map_tutorial and event.is_action_pressed("melee"):
 		advance_tutorial()
 	elif event.is_action_pressed("skip_tutorial"):
-		print("skipped lol")
+		#print("skipped lol")
 		skip_tutorial()
 
 func start_step(step_idx: int):

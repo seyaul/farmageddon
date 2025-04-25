@@ -22,7 +22,7 @@ var last_collision_time: int = 0
 func _ready() -> void:
 	initial_position = position
 	if name == "Fragment":
-		print("spawned")
+		#print("spawned")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

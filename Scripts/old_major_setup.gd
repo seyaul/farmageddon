@@ -16,7 +16,7 @@ func _ready() -> void:
 	target_node_2.follow_target = player_instance
 	target_node_3.target = player_instance
 	health_node = $Boss/Health
-	print(health_node)
+	#print(health_node)
 	health_node.you_win.connect(handle_you_win)
 
 
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	pass
 
 func handle_you_win():
-	print("Handled")
+	#print("Handled")
 	you_win_label.visible = true
 	var target_pos = Vector2(you_win_label.position.x, 122) # y=200 is just an example
 	

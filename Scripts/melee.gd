@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 			rotation_degrees = arc / 2
 		else:
 			rotate(deg_to_rad(arc_speed))
-	print(rotation_degrees)
+	#print(rotation_degrees)
 	'''
 	pass
 

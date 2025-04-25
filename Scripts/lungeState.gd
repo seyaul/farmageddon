@@ -79,7 +79,7 @@ func exit_prep_phase():
 	enemy.velocity = next_lunge_direction * lunge_speed
 
 func enter_prep_phase(direction: Vector2):
-	print("entering prep phase")
+	#print("entering prep phase")
 	emit_signal("play_pre_lunge_animation")
 	in_prep_phase = true
 	next_lunge_direction = direction

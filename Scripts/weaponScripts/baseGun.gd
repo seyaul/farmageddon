@@ -60,11 +60,11 @@ func _ready() -> void:
 	$discrGunTimer.timeout.connect(handle_dgcd)
 	# initialize actual gun stats using config
 	actual_fire_rate = int(base_fire_rate * Global.all_gun_stats.fire_rate_modifier)
-	print(actual_fire_rate, " actual fire rate")
+	#print(actual_fire_rate, " actual fire rate")
 	actual_heat_increase_rate = base_heat_increase_rate * Global.all_gun_stats.cooldown_speed_modifier
 	time_between_shots = 10.0 / actual_fire_rate
 	$discrGunTimer.wait_time = time_between_shots
-	print(time_between_shots, " time between shots")
+	#print(time_between_shots, " time between shots")
 	audio_player = $ShootingSound
 	muzzle_particles = $MuzzleParticles
 
@@ -151,11 +151,11 @@ func enable_shooting_handler():
 	
 func handle_continuous_start():
 	continuous_active = true
-	print("continuous shooting started, ", continuous_active)
+	#print("continuous shooting started, ", continuous_active)
 
 func handle_continuous_ended():
 	continuous_active = false
-	print("continuous shooting ended ", continuous_active)
+	#print("continuous shooting ended ", continuous_active)
 	
 func handle_dgcd():
 	discrete_shot_cd_fulfilled = true

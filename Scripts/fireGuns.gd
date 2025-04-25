@@ -42,7 +42,7 @@ func _ready() -> void:
 	
 # TODO: Maybe add parameter values for this?
 func shoot_guns(delta: float) -> void:
-	print(time % fire_rate, "  ",time, "   ", fire_rate)
+	#print(time % fire_rate, "  ",time, "   ", fire_rate)
 	if side_shooting == "Front" and time % fire_rate == 0:
 		var segment = snake.segments[0]
 		segment.emit_signal("shoot", 0, "hold", delta)

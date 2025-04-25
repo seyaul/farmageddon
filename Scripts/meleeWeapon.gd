@@ -29,5 +29,5 @@ func _on_body_entered(body) -> void:
 			body.take_damage(damage)	
 		
 func _on_enemy_god_mode():
-	print("enemy god mode activated")
+	#print("enemy god mode activated")
 	damage = 100

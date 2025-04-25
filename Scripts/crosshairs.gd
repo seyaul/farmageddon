@@ -44,7 +44,7 @@ func show_tip(mouse_tip_shown: bool):
 				start_timer.emit()
 				pass
 		times_clicked += 1
-		print(times_clicked)
+		#print(times_clicked)
 	elif !mouse_tip_shown:
 		hide_crosshair_instr()
 
@@ -62,7 +62,7 @@ func timer_handler():
 	crosshair_timer.start()
 
 func handle_new_weapon_unlocked():
-	print("Is this thing one")
+	#print("Is this thing one")
 	$CrosshairsSprite/Node2D/newWeaponNoti.visible = true
 	await get_tree().create_timer(5).timeout
 	$CrosshairsSprite/Node2D/newWeaponNoti.visible = false

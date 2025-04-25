@@ -94,7 +94,7 @@ func spawn_on_timer(enemy_scene_type):
 		spawn_timer = randf_range(0, 5)
 		var enemy_instance = enemy_scene_type.instantiate()
 		enemy_node_name = enemy_instance.node_name
-		print(enemy_node_name, " this is in wave_manager.gd")
+		#print(enemy_node_name, " this is in wave_manager.gd")
 		#var chicken_instance = enemy_chicken_scene.instantiate()
 		#var bull_instance = enemy_bull_scene.instantiate() 
 		#enemy_instance.print_tree() (GOATED FUNCTION)
@@ -109,24 +109,24 @@ func spawn_on_timer(enemy_scene_type):
 					enemy_instance.position = Vector2(randf_range(-1,1) * 2690, 
 					rand_orientation[randi() % rand_orientation.size()]  * 1920)
 			
-			print("enemy_instance: ", enemy_instance, "spawn location: ", enemy_instance.position)
+			#print("enemy_instance: ", enemy_instance, "spawn location: ", enemy_instance.position)
 			
 			var path_name = "EnemyPath/EnemyGuide/" +  enemy_node_name
 			apply_elite_buff(enemy_instance, path_name)
 			
 			
 			var enemy = enemy_instance.get_node(path_name)
-			print(enemy, " debugging for node")
+			#print(enemy, " debugging for node")
 			#var enemy_screen_pos = get_viewport().get_camera_2d().unproject_position(enemy.global_position)
 			#var screen_size = Vector2(1152, 648)
 			#var is_offscreen = enemy_screen_pos.x < 0 or enemy_screen_pos.x > screen_size.x or enemy_screen_pos.y < 0 or enemy_screen_pos.y > screen_size.y
 			#print(is_offscreen
 			
-			print("path_name: ", path_name)
+			#print("path_name: ", path_name)
 			var targeterNode = enemy_instance.get_node(path_name + "/Targeter")
 			var followNode = enemy_instance.get_node(path_name + "/EMovementController/Follow")
-			print("targeter node: ", targeterNode)
-			print("follow node: ", followNode)
+			#print("targeter node: ", targeterNode)
+			#print("follow node: ", followNode)
 			
 			if enemy_node_name == "Shooter" and is_instance_valid(targeterNode) and is_instance_valid(followNode):
 				print("targeterNode target: ", targeterNode.target, "follownode target: ", followNode.follow_target)
@@ -156,7 +156,7 @@ func spawn_on_timer(enemy_scene_type):
 		await $Timer.timeout
 		if Global.enemyCount == max_enemies_on_screen:
 			while !(Global.enemyCount < max_enemies_on_screen):
-				print("Checking if max cap fulfilled wavemanager.gd")
+				#print("Checking if max cap fulfilled wavemanager.gd")
 				Global.enemyCount = Global.get_enemy_count()
 				await get_tree().create_timer(2).timeout
 		$Timer.start(spawn_timer)
@@ -275,7 +275,7 @@ func apply_elite_buff(enemy_instance, enemy_path_name):
 	if enemy_node_name == "SmartPather":
 		var full_path = enemy_path_name + "/MeleeWeapon"
 		var meleeNode = enemy_instance.get_node(full_path)
-		print(meleeNode)
+		#print(meleeNode)
 		meleeNode.damage *= Global.elite_room
 	elif enemy_node_name == "Shooter":
 		#print("hello deer friend chicken")

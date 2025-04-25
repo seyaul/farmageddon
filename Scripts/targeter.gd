@@ -9,7 +9,7 @@ var dist: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	aimer = get_parent()
-	print(aimer, " debugging for big")
+	#print(aimer, " debugging for big")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:

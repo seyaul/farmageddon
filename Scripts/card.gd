@@ -51,7 +51,7 @@ func _ready():
 	await get_tree().process_frame
 	if front.texture:
 		var size = front.texture.get_size()
-		print("sizes:", size.x, size.y)
+		#print("sizes:", size.x, size.y)
 		var shape = RectangleShape2D.new()
 		shape.size = size
 		collision_shape.shape = shape

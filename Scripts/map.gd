@@ -40,7 +40,7 @@ func _ready() -> void:
 
 	# transition to this checking if it is within a Global group of rooms 
 	if GameState.returning_from_stage and !Global.newGame:
-		print("Returning to the same map...")
+		#print("Returning to the same map...")
 		load_map(GameState.map_data, GameState.floors_climbed, GameState.last_room)
 		Global.map_tutorial = false
 	else:
@@ -74,7 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("god_mode_debug"):
 		god_mode_enabled = !god_mode_enabled
-		print("map god mode enabled")
+		#print("map god mode enabled")
 		unlock_all_rooms(god_mode_enabled)
 	
 	if event.is_action_pressed("scroll_up"):
@@ -205,7 +205,7 @@ func unlock_next_rooms(from_room: Room) -> void:
 		if last_room.next_rooms.has(map_room.room) || from_room.next_rooms.has(map_room.room):
 			map_room.available = true
 			map_room.animation_player.play("Highlight")
-			print("new room unlocked!", map_room.room)
+			#print("new room unlocked!", map_room.room)
 		else:
 			map_room.available = false
 
@@ -267,13 +267,13 @@ func _on_map_room_selected(room: Room) -> void:
 
 
 func _on_campfire_selected() -> void:
-	print("campfire popup triggered from global signal")
+	#print("campfire popup triggered from global signal")
 	var campfire_popup_scene = preload("res://Scenes/CampfireRoom.tscn")
 	var popup_instance = campfire_popup_scene.instantiate()
 	popup_instance.connect("heal_accepted", Callable(self, "_on_heal_accepted"))
 	popup_instance.show_popup()
 
 func _on_heal_accepted() -> void:
-	print("updating player health.")
+	#print("updating player health.")
 	Global.player_health = Global.player_stats.base_max_health + Global.player_stats.additional_max_health_modifier
-	print("player health is now: ", Global.player_health)
+	#print("player health is now: ", Global.player_health)

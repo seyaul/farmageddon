@@ -22,7 +22,7 @@ var dialogue1 = [
 var current_index = 0
 
 func _ready():
-	print("Farmer label node: ", farmer_label)
+	#print("Farmer label node: ", farmer_label)
 	show_next_line()
 
 

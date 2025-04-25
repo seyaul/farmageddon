@@ -56,22 +56,22 @@ func _physics_process(delta: float) -> void:
 func _handle_collisions(collision: KinematicCollision2D) -> void:
 	
 	var collider = collision.get_collider()
-	print("COLLIDER:", collider.name)
+	#print("COLLIDER:", collider.name)
 	# this enables shooting eggs out of the air
 	if collider.is_in_group("mob_bullet"):
 		collider.kill_bullet()
 		kill_bullet()
 		return
 
-	print("name ", self.name)
+	#print("name ", self.name)
 	if collider.has_method("take_damage"):
 		if self.is_in_group("vomit"):
-			print("in vomitBullet damager")
+			#print("in vomitBullet damager")
 			collider.take_vomit_damage(damage)
 			if collider.name == "Player":
 				collider.make_immune_to_vomit()
 		else:
-			print("in else")
+			#print("in else")
 			collider.take_damage(damage)  
 			hit_sound.play()
 

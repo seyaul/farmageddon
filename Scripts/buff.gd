@@ -10,7 +10,7 @@ var modifier_name : String
 func _ready() -> void:
 	modifier_name = Name + "_modifier"
 	if Stat_type == "player":
-		print(Global.player_stats.get(modifier_name), " debugging buff.gd")
+		#print(Global.player_stats.get(modifier_name), " debugging buff.gd")
 		tooltip_text = Name + ": Current Bonus = " + Global.player_stats.get_data(modifier_name)
 	elif Stat_type == "gun":
 		tooltip_text = Name + ": Current Bonus = " + String.num(Global.all_gun_stats.get(modifier_name), 4)

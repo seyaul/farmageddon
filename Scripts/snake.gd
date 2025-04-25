@@ -59,7 +59,7 @@ func take_damage(damage: int) -> void:
 	if not can_take_damage:
 		return
 	can_take_damage = false
-	print("took damage ", 2)
+	#print("took damage ", 2)
 	$Health.take_damage(2)
 
 	# Start cooldown to prevent more damage

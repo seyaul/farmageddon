@@ -93,7 +93,7 @@ func _input(event):
 					if remaining_to_press.is_empty():
 						hide_all()
 						if curr_tut_seg < tutorial_segments.size() - 2:
-							print(curr_tut_seg, " ", tutorial_segments.size() - 2, " in tutint.gd")
+							#print(curr_tut_seg, " ", tutorial_segments.size() - 2, " in tutint.gd")
 							curr_tut_seg += 1
 							start_step(curr_tut_seg)
 						else:
@@ -103,7 +103,7 @@ func _input(event):
 # custom signal handling function that is need to just so that the screen isn't cluttered?
 func crosshair_handle():
 	if Global.tutorial:
-		print("checking crosshair handle, ", curr_tut_seg)
+		#print("checking crosshair handle, ", curr_tut_seg)
 		start_step(curr_tut_seg)
 
 func weapon_handle():

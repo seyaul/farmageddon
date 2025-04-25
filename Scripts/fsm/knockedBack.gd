@@ -6,7 +6,7 @@ var knockback_velocity: Vector2
 var enemy: CharacterBody2D
 
 func Enter():
-	print("in knockback state")
+	#print("in knockback state")
 	enemy = self.get_parent().get_parent()
 	var knockback_timer = get_tree().create_timer(knockback_decay)
 	knockback_timer.timeout.connect(_on_knockback_timeout)

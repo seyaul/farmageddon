@@ -65,7 +65,7 @@ func _ready() -> void:
 	
 	if not is_connected("campfire_selected", Callable(self, "_on_campfire_selected")):
 		connect("campfire_selected", Callable(self, "_on_campfire_selected"))
-		print("connected campfire_selected signal")
+		#print("connected campfire_selected signal")
 	
 	Global.connect("mob_died", Callable(self, "_on_mob_died"))
 	Global.connect("gameStarted", Callable(self, "_game_started"))
@@ -99,7 +99,7 @@ func show_campfire_heal_popup():
 	campfire_popup_instance.show_popup()
 
 func show_lifesteal_popup():
-	print("LIFESTEAL SHOWING AHHH")
+	#print("LIFESTEAL SHOWING AHHH")
 	if playerInstance:
 		var popup = lifesteal_popup_scene.instantiate()
 		var ui_layer = get_tree().root.get_node_or_null("UserInterfaceLayer")
@@ -120,9 +120,10 @@ func _on_mob_died() -> void:
 	if lifesteal_roll <= Global.player_stats.lifesteal_chance_modifier:
 		playerHealthNode.heal(1)
 		show_lifesteal_popup()
-		print("lifesteal activated yippee!")
+		#print("lifesteal activated yippee!")
 	else:
-		print("no lifesteal for u")
+		pass
+		#print("no lifesteal for u")
 
 func initialize_card_pool():
 	# weights/rarities subject to change
@@ -197,11 +198,11 @@ func _process(delta: float) -> void:
 
 func decrementEnemyCount():
 	enemyCount -= 1
-	print("Enemies Remaining: ", enemyCount)
+	#print("Enemies Remaining: ", enemyCount)
 
 func incrementEnemyCount():
 	enemyCount += 1
-	print("Enemies Remaining: ", enemyCount)
+	#print("Enemies Remaining: ", enemyCount)
 
 func _game_started():
 	enemyCount = 0
@@ -218,10 +219,10 @@ func _game_started():
 	num_enemies_defeated = 0
 	playerInstance = player_scene.instantiate()
 	playerHealthNode = playerInstance.get_node("./Health")
-	print(playerHealth, " playerHealth, Global ")
+	#print(playerHealth, " playerHealth, Global ")
 	
 func _new_game_started():
-	print("checking when newGameStarted is emitted, global")
+	#print("checking when newGameStarted is emitted, global")
 	chosen_buffs = []
 	player_stats.reset_to_defaults()
 	player_stats.print_all_stats()
@@ -244,7 +245,7 @@ func _boss_level_started():
 	playerHealthNode = playerInstance.get_node("./Health")
 	player_stats.print_all_stats()
 	all_gun_stats.print_all_stats()
-	print("player instantiated!")
+	#print("player instantiated!")
 	
 	
 func _input(event: InputEvent) -> void:

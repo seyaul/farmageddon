@@ -35,12 +35,12 @@ func _physics_process(delta: float) -> void:
 func change_state(source_state: State, new_state_name:String):
 	#print(source_state, new_state_name)
 	if source_state != current_state:
-		print("Invalid change_state trying from: " + source_state.name + " but currently in: " + current_state.name)
+		#print("Invalid change_state trying from: " + source_state.name + " but currently in: " + current_state.name)
 		return
 		
 	var new_state: State = states.get(new_state_name.to_lower())
 	if not new_state:
-		print("New state is empty")
+		#print("New state is empty")
 		return
 		
 	if current_state:
@@ -53,11 +53,11 @@ func change_state(source_state: State, new_state_name:String):
 func force_change_state(source_state: State, new_state_name:String):
 	var new_state: State = states.get(new_state_name.to_lower())
 	if not new_state:
-		print(new_state.name + " does not exist in the dictionary of current states")
+		#print(new_state.name + " does not exist in the dictionary of current states")
 		return
 		
 	if current_state == new_state:
-		print("State is same, aborting")
+		#print("State is same, aborting")
 		return
 	
 	# Used to prevent warnings
@@ -70,7 +70,7 @@ func force_change_state(source_state: State, new_state_name:String):
 
 func set_previous_move_vector(source_state: State, movement_vector: Vector2):
 	if source_state.name != "Walk":
-		print("error: set_previous_move_vector should only be called on signal from the walk state")
+		#print("error: set_previous_move_vector should only be called on signal from the walk state")
 		return
 	previous_move_vector = movement_vector
 

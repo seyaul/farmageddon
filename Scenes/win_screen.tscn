@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://djgc0a1agnebk"]
+[gd_scene load_steps=15 format=3 uid="uid://djgc0a1agnebk"]
 
 [ext_resource type="Texture2D" uid="uid://b7qlo5fb8cbol" path="res://Sprites/end_screen/pixil-frame-0.png" id="1_j5sbr"]
-[ext_resource type="PackedScene" uid="uid://c6kx30nrlhecm" path="res://Scenes/credits.tscn" id="1_kc2jj"]
+[ext_resource type="PackedScene" uid="uid://cm23f3uwvnosa" path="res://Scenes/credits.tscn" id="1_kc2jj"]
+[ext_resource type="Script" path="res://Scripts/win_screen.gd" id="1_n5anh"]
 [ext_resource type="Texture2D" uid="uid://dvnqsedeh5fnv" path="res://Sprites/end_screen/pixil-frame-1.png" id="2_8wvl0"]
 [ext_resource type="Texture2D" uid="uid://f21g652rdjuw" path="res://Sprites/end_screen/pixil-frame-2.png" id="3_j1t88"]
 [ext_resource type="Texture2D" uid="uid://df3c4xy7ed3vy" path="res://Sprites/end_screen/pixil-frame-3.png" id="4_avekx"]
@@ -11,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bf6ws4asiivi3" path="res://Sprites/end_screen/pixil-frame-7.png" id="8_rkptf"]
 [ext_resource type="Texture2D" uid="uid://bmpbs2eo3y3p4" path="res://Sprites/end_screen/pixil-frame-8.png" id="9_hxeid"]
 [ext_resource type="Texture2D" uid="uid://cis385ej60c5h" path="res://Sprites/end_screen/pixil-frame-9.png" id="10_jr732"]
+[ext_resource type="FontFile" uid="uid://wau38u7tygvb" path="res://Fonts/Merchant Copy copy.ttf" id="12_7i8nx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_37yad"]
 animations = [{
@@ -51,6 +53,7 @@ animations = [{
 }]
 
 [node name="winScreen" type="Node2D"]
+script = ExtResource("1_n5anh")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -80,3 +83,14 @@ offset_top = -2.0
 offset_right = 1149.0
 offset_bottom = 644.0
 color = Color(0.319716, 0.621913, 0.756023, 1)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 194.0
+offset_top = 546.0
+offset_right = 391.0
+offset_bottom = 623.0
+theme_override_fonts/font = ExtResource("12_7i8nx")
+theme_override_font_sizes/font_size = 50
+text = "Replay!!"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

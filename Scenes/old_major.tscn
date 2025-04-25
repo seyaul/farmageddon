@@ -1,6 +1,6 @@
-[gd_scene load_steps=63 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=64 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="PackedScene" uid="uid://i8yl66wbouso" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://cv3llh1t4rpi6" path="res://Sprites/heart_textures/fullHeart.png" id="40_rs7ol"]
 [ext_resource type="PackedScene" uid="uid://cpf1axxe7re1j" path="res://pause_menu.tscn" id="41_rgave"]
 [ext_resource type="Script" path="res://Scripts/crosshairs.gd" id="42_ko1wo"]
+[ext_resource type="FontFile" uid="uid://wau38u7tygvb" path="res://Fonts/Merchant Copy copy.ttf" id="44_rvc05"]
 [ext_resource type="Script" path="res://Scripts/heating_gauge.gd" id="45_edu8u"]
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
 [ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
@@ -591,6 +592,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 29.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -662,6 +665,20 @@ theme_override_colors/font_color = Color(0.918817, 0.918817, 0.918817, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Akorn47"
 horizontal_alignment = 1
+
+[node name="blackBox" type="ColorRect" parent="UserInterfaceLayaer"]
+modulate = Color(0, 0, 0, 0)
+offset_right = 1162.0
+offset_bottom = 653.0
+
+[node name="YouWinLabel" type="RichTextLabel" parent="UserInterfaceLayaer"]
+offset_left = 171.0
+offset_top = -204.0
+offset_right = 1057.0
+offset_bottom = -30.0
+theme_override_fonts/normal_font = ExtResource("44_rvc05")
+theme_override_font_sizes/normal_font_size = 250
+text = "YOU WIN!!!"
 
 [node name="PauseMenu" parent="UserInterfaceLayaer" instance=ExtResource("41_rgave")]
 visible = false

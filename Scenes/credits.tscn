@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6kx30nrlhecm"]
+[gd_scene load_steps=5 format=3 uid="uid://cm23f3uwvnosa"]
 
 [ext_resource type="Script" path="res://Scripts/credits.gd" id="1_eyudv"]
 [ext_resource type="FontFile" uid="uid://wau38u7tygvb" path="res://Fonts/Merchant Copy copy.ttf" id="1_gvolg"]
+[ext_resource type="AudioStream" uid="uid://dtuw4c3i0pksi" path="res://audio/music/shop (paused).mp3" id="3_waba4"]
 
 [sub_resource type="Theme" id="Theme_hahst"]
 default_font = ExtResource("1_gvolg")
@@ -42,5 +43,19 @@ Team Lead, Sound Design, Assistant Art Design - Seyaul Kim
 
 [node name="Playtesters" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-text = "Special thanks to the following people for playtesting: 
-Sara Maupin, PJ Rawlins"
+text = "Special thanks to the following people for their support!: 
+Sara Maupin
+PJ Rawlins 
+Emma Ting
+Joshua Kang
+Allison Yue
+Lauren Roosa
+Mateo DeVries
+Zach
+Changbin Hong
+Hana Jeong
+Adithya Satishkumar"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_waba4")
+autoplay = true

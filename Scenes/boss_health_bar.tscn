@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpvonu2brg8li"]
+[gd_scene load_steps=5 format=3 uid="uid://i8yl66wbouso"]
 
 [ext_resource type="Texture2D" uid="uid://cgvr5pl1ivcsg" path="res://Sprites/BHB-Background.png" id="1_40r63"]
 [ext_resource type="Texture2D" uid="uid://4chaw4tyl7ek" path="res://Sprites/BHB-Foreground.png" id="2_a64mb"]
@@ -28,7 +28,6 @@ script = ExtResource("4_g7c5s")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 light_mask = 0
-z_index = 51
 z_as_relative = false
 texture_filter = 1
 layout_mode = 1

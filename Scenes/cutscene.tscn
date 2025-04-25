@@ -91,6 +91,7 @@ texture = ExtResource("8_j6360")
 
 [node name="FarmerDialogue" type="RichTextLabel" parent="messageBox"]
 modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 304.0
 offset_top = 152.0
 offset_right = 1811.0

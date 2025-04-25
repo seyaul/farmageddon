@@ -1,6 +1,6 @@
-[gd_scene load_steps=61 format=3 uid="uid://cfte2bglhtfoe"]
+[gd_scene load_steps=63 format=3 uid="uid://cfte2bglhtfoe"]
 
-[ext_resource type="PackedScene" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
+[ext_resource type="PackedScene" uid="uid://dpvonu2brg8li" path="res://Scenes/boss_health_bar.tscn" id="1_5kkx1"]
 [ext_resource type="Script" path="res://Scripts/old_major_setup.gd" id="1_yeg3i"]
 [ext_resource type="Texture2D" uid="uid://c8ej4fqr51f46" path="res://Sprites/icon.svg" id="2_dfm6e"]
 [ext_resource type="Script" path="res://Scripts/mouseFollow.gd" id="3_4de51"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://brnrfgypt6dq8" path="res://Sprites/crosshairinstr.png" id="46_g85ut"]
 [ext_resource type="Script" path="res://Scripts/buff_container.gd" id="47_0pag5"]
 [ext_resource type="Texture2D" uid="uid://deumyiv71sv80" path="res://Sprites/player_sprites/death_explosion/pixil-frame-4.png" id="47_10l6h"]
+[ext_resource type="Script" path="res://Scripts/gun_icon.gd" id="48_2d7aq"]
 [ext_resource type="Texture2D" uid="uid://dwqrd337465yt" path="res://Sprites/player_sprites/death_explosion/pixil-frame-5.png" id="48_st8kg"]
 [ext_resource type="Texture2D" uid="uid://48wos8h4ch1s" path="res://Sprites/player_sprites/death_explosion/pixil-frame-6.png" id="49_5w6fv"]
 [ext_resource type="Texture2D" uid="uid://nhw3railn1oe" path="res://Sprites/crosshairsWhite.png" id="50_1dbvi"]
@@ -103,6 +104,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 15, -12, 0, 0, 0, 0, 15, -12, 0, 0, 0, 0, -73, -66, 0, 0, 0, 0, -73, -66, 0, 0, 0, 0, -146, -182, 0, 0, 0, 0, -172, -224, 0, 0, 0, 0, -172, -227, 0, 0, 0, 0, -197, -278, 0, 0, 0, 0, -220, -312, 0, 0, 0, 0, -225, -318, 0, 0, 0, 0, -245, -360, 0, 0, 0, 0, -245, -360, 0, 0, 0, 0, -310, -425, 0, 0, 0, 0, -356, -451, 0, 0, 0, 0, -358, -453, 0, 0, 0, 0, -469, -462, 0, 0, 0, 0, -554, -453, 0, 0, 0, 0, -630, -462, 0, 0, 0, 0, -718, -445, 0, 0, 0, 0, -800, -391, 0, 0, 0, 0, -842, -349, 0, 0, 0, 0, -845, -346, 0, 0, 0, 0, -907, -318, 0, 0, 0, 0, -924, -238, 0, 0, 0, 0, -924, -241, 0, 0, 0, 0, -839, -199, 0, 0, 0, 0, -749, -230, 0, 0, 0, 0, -613, -253, 0, 0, 0, 0, -613, -253, 0, 0, 0, 0, -440, -301, 0, 0, 0, 0, -347, -281, 0, 0, 0, 0, -291, -272, 0, 0, 0, 0, -347, -281, 0, 0, 0, 0, -192, -261, 0, 0, 0, 0, -98, -315, 0, 0, 0, 0, -22, -380, 0, 0, 0, 0, -22, -380, 0, 0, 0, 0, 105, -431, 0, 0, 0, 0, 185, -439, 0, 0, 0, 0, 289, -436, 0, 0, 0, 0, 351, -352, 0, 0, 0, 0, 272, -261, 0, 0, 0, 0, 190, -202, 0, 0, 0, 0, 162, -139, 0, 0, 0, 0, 190, -202, 0, 0, 0, 0, 250, -125, 0, 0, 0, 0, 385, -156, 0, 0, 0, 0, 450, -233, 0, 0, 0, 0, 448, -332, 0, 0, 0, 0, 499, -405, 0, 0, 0, 0, 612, -436, 0, 0, 0, 0, 719, -428, 0, 0, 0, 0, 830, -417, 0, 0, 0, 0, 906, -391, 0, 0, 0, 0, 974, -323, 0, 0, 0, 0, 880, -261, 0, 0, 0, 0, 784, -241, 0, 0, 0, 0, 640, -213, 0, 0, 0, 0, 504, -114, 0, 0, 0, 0, 479, -43, 0, 0, 0, 0, 479, -40, 0, 0, 0, 0, 496, 8, 0, 0, 0, 0, 586, 19, 0, 0, 0, 0, 705, -32, 0, 0, 0, 0, 830, -74, 0, 0, 0, 0, 917, -52, 0, 0, 0, 0, 951, 33, 0, 0, 0, 0, 945, 81, 0, 0, 0, 0, 943, 87, 0, 0, 0, 0, 883, 183, 0, 0, 0, 0, 742, 169, 0, 0, 0, 0, 583, 146, 0, 0, 0, 0, 484, 152, 0, 0, 0, 0, 507, 341, 0, 0, 0, 0, 682, 313, 0, 0, 0, 0, 815, 347, 0, 0, 0, 0, 830, 406, 0, 0, 0, 0, 815, 347, 0, 0, 0, 0, 844, 426, 0, 0, 0, 0, 880, 480, 0, 0, 0, 0, 872, 491, 0, 0, 0, 0, 764, 559, 0, 0, 0, 0, 617, 565, 0, 0, 0, 0, 521, 528, 0, 0, 0, 0, 434, 531, 0, 0, 0, 0, 349, 497, 0, 0, 0, 0, 323, 372, 0, 0, 0, 0, 343, 231, 0, 0, 0, 0, 332, 95, 0, 0, 0, 0, 272, 2, 0, 0, 0, 0, 165, 47, 0, 0, 0, 0, 134, 112, 0, 0, 0, 0, 131, 115, 0, 0, 0, 0, 131, 220, 0, 0, 0, 0, 168, 378, 0, 0, 0, 0, 108, 466, 0, 0, 0, 0, 4, 477, 0, 0, 0, 0, -112, 488, 0, 0, 0, 0, -214, 505, 0, 0, 0, 0, -183, 344, 0, 0, 0, 0, -67, 240, 0, 0, 0, 0, 69, 149, 0, 0, 0, 0, 74, -38, 0, 0, 0, 0, -16, -72, 0, 0, 0, 0, -149, -38, 0, 0, 0, 0, -254, 149, 0, 0, 0, 0, -288, 248, 0, 0, 0, 0, -333, 336, 0, 0, 0, 0, -347, 471, 0, 0, 0, 0, -457, 500, 0, 0, 0, 0, -605, 491, 0, 0, 0, 0, -698, 460, 0, 0, 0, 0, -783, 406, 0, 0, 0, 0, -870, 330, 0, 0, 0, 0, -814, 251, 0, 0, 0, 0, -633, 234, 0, 0, 0, 0, -486, 282, 0, 0, 0, 0, -248, 271, 0, 0, 0, 0, -118, 237, 0, 0, 0, 0, 1, 265, 0, 0, 0, 0, 105, 240, 0, 0, 0, 0, 159, 163, 0, 0, 0, 0, 74, 101, 0, 0, 0, 0, -93, 64, 0, 0, 0, 0, -339, 90, 0, 0, 0, 0, -551, 98, 0, 0, 0, 0, -672, 92, 0, 0, 0, 0, -771, -12, 0, 0, 0, 0, -735, -94, 0, 0, 0, 0, -607, -142, 0, 0, 0, 0, -506, -38, 0, 0, 0, 0, -497, 135, 0, 0, 0, 0, -489, 237, 0, 0, 0, 0, -308, 225, 0, 0, 0, 0, -265, 22, 0, 0, 0, 0, -189, -114, 0, 0, 0, 0, -70, -89, 0, 0, 0, 0, 15, -12)
 }
 point_count = 138
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_peqck"]
+load_path = "res://.godot/imported/AKorn47.png-c4d4d51e13c493c7735e534086d29e36.ctex"
 
 [node name="OldMajor" type="Node2D" node_paths=PackedStringArray("target_node_1", "target_node_2", "target_node_3")]
 script = ExtResource("1_yeg3i")
@@ -324,7 +328,7 @@ script = ExtResource("12_uu8lk")
 gun = ExtResource("13_qcdmj")
 bullet = ExtResource("14_36h7u")
 segments_with_gun = 6
-front_gun_projectile_speed = 50000.0
+front_gun_projectile_speed = 90000.0
 side_gun_projectile_speed = 20000.0
 
 [node name="Snake_Texture1" type="Node" parent="Boss"]
@@ -370,7 +374,7 @@ guide = NodePath("../../../Circle/PathFollow2D")
 path = NodePath("../../../Circle")
 speed = 0.9
 time_following = 800
-slide_speed = 0.45
+slide_speed = 0.5
 
 [node name="Surround" type="Node" parent="Boss/EMovementController"]
 script = ExtResource("21_nicn2")
@@ -631,6 +635,33 @@ offset_right = 1100.0
 offset_bottom = 111.0
 alignment = 2
 script = ExtResource("47_0pag5")
+
+[node name="gunIcon" type="VBoxContainer" parent="UserInterfaceLayaer/PlayerUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.913194
+anchor_top = 0.804012
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("48_2d7aq")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="TextureRect" parent="UserInterfaceLayaer/PlayerUI/gunIcon"]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_peqck")
+
+[node name="name" type="Label" parent="UserInterfaceLayaer/PlayerUI/gunIcon"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.918817, 0.918817, 0.918817, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Akorn47"
+horizontal_alignment = 1
 
 [node name="PauseMenu" parent="UserInterfaceLayaer" instance=ExtResource("41_rgave")]
 visible = false

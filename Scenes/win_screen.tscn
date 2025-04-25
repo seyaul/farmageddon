@@ -1,6 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://djgc0a1agnebk"]
+[gd_scene load_steps=13 format=3 uid="uid://djgc0a1agnebk"]
 
-[ext_resource type="Texture2D" uid="uid://dcpfhvfdrfemt" path="res://Sprites/Screenshot 2025-03-10 at 3.26.09 AM.png" id="1_7ta41"]
+[ext_resource type="Texture2D" uid="uid://b7qlo5fb8cbol" path="res://Sprites/end_screen/pixil-frame-0.png" id="1_j5sbr"]
+[ext_resource type="PackedScene" uid="uid://c6kx30nrlhecm" path="res://Scenes/credits.tscn" id="1_kc2jj"]
+[ext_resource type="Texture2D" uid="uid://dvnqsedeh5fnv" path="res://Sprites/end_screen/pixil-frame-1.png" id="2_8wvl0"]
+[ext_resource type="Texture2D" uid="uid://f21g652rdjuw" path="res://Sprites/end_screen/pixil-frame-2.png" id="3_j1t88"]
+[ext_resource type="Texture2D" uid="uid://df3c4xy7ed3vy" path="res://Sprites/end_screen/pixil-frame-3.png" id="4_avekx"]
+[ext_resource type="Texture2D" uid="uid://wllclnqdyo6v" path="res://Sprites/end_screen/pixil-frame-4.png" id="5_remde"]
+[ext_resource type="Texture2D" uid="uid://c0jeqedghdfcg" path="res://Sprites/end_screen/pixil-frame-5.png" id="6_gfef2"]
+[ext_resource type="Texture2D" uid="uid://bpne74soebwfq" path="res://Sprites/end_screen/pixil-frame-6.png" id="7_rwwiv"]
+[ext_resource type="Texture2D" uid="uid://bf6ws4asiivi3" path="res://Sprites/end_screen/pixil-frame-7.png" id="8_rkptf"]
+[ext_resource type="Texture2D" uid="uid://bmpbs2eo3y3p4" path="res://Sprites/end_screen/pixil-frame-8.png" id="9_hxeid"]
+[ext_resource type="Texture2D" uid="uid://cis385ej60c5h" path="res://Sprites/end_screen/pixil-frame-9.png" id="10_jr732"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37yad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j5sbr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8wvl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j1t88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_avekx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_remde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gfef2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rwwiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rkptf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hxeid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jr732")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="winScreen" type="Node2D"]
 
@@ -12,7 +60,23 @@ offset_top = 2.0
 offset_right = 42.0
 offset_bottom = 42.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Control"]
-position = Vector2(578, 354)
-scale = Vector2(0.765481, 0.512337)
-texture = ExtResource("1_7ta41")
+[node name="Credits" parent="Control" instance=ExtResource("1_kc2jj")]
+z_index = 1
+offset_left = 581.0
+offset_right = 581.0
+scale = Vector2(1.6, 1.6)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(286, 322)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_37yad")
+autoplay = "default"
+frame_progress = 0.440912
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = -2.0
+offset_right = 1149.0
+offset_bottom = 644.0
+color = Color(0.319716, 0.621913, 0.756023, 1)
